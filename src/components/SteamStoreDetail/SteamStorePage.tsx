@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { CanonicalGame } from '../../contracts/game';
 import { SteamEnrichedMetadata } from '../../contracts/steam';
 import { steamApi } from '../../services/steam/steamApi';
+import { steamMatcher } from '../../services/steam/steamMatcher';
+import { fallbackMetadataProvider } from '../../services/steam/fallbackMetadataProvider';
+import { loadCurrentCatalog, saveCurrentCatalog } from '../../services/integrations/integrationStorage';
 import { MediaGallery } from './MediaGallery';
 import { SteamHeroDetails } from './SteamHeroDetails';
 import { SteamLibraryActionBar } from './SteamLibraryActionBar';
@@ -41,7 +44,9 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
   const [metadata, setMetadata] = useState<SteamEnrichedMetadata | null>(
     game.enrichedMetadata || null
   );
-  const [isLoading, setIsLoading] = useState(!game.enrichedMetadata && !!game.steamAppId);
+  const [currentSteamAppId, setCurrentSteamAppId] = useState<number | undefined>(game.steamAppId);
+  const [isNonSteamExclusive, setIsNonSteamExclusive] = useState(false);
+  const [isLoading, setIsLoading] = useState(!game.enrichedMetadata);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const isCooldown = steamApi.isStoreRateLimited();
 
@@ -49,19 +54,57 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
     let isMounted = true;
 
     async function loadData() {
-      if (game.steamAppId) {
-        if (!game.enrichedMetadata) {
-          setIsLoading(true);
+      setIsLoading(true);
+      let targetAppId = game.steamAppId || currentSteamAppId;
+
+      // If no Steam App ID is set, intelligently search Steam Store for match
+      if (!targetAppId) {
+        try {
+          const matched = await steamMatcher.matchGameToSteam(game.title);
+          if (matched) {
+            targetAppId = matched;
+            if (isMounted) setCurrentSteamAppId(matched);
+
+            // Persist the matched Steam App ID to the catalog
+            try {
+              const catalog = loadCurrentCatalog();
+              const idx = catalog.findIndex(
+                (g) => g.id === game.id || g.title.toLowerCase().trim() === game.title.toLowerCase().trim()
+              );
+              if (idx >= 0 && !catalog[idx].steamAppId) {
+                catalog[idx].steamAppId = matched;
+                saveCurrentCatalog(catalog);
+              }
+            } catch {
+              // Ignore storage errors
+            }
+          }
+        } catch (e) {
+          console.warn('Steam matching failed:', e);
         }
-        const liveData = await steamApi.fetchGameMetadata(game.steamAppId);
+      }
+
+      // If matched to Steam, fetch full official Steam Store metadata & media
+      if (targetAppId) {
+        const liveData = await steamApi.fetchGameMetadata(targetAppId);
         if (isMounted && liveData) {
           setMetadata(liveData);
+          setIsNonSteamExclusive(false);
         }
-        if (isMounted) setIsLoading(false);
+      } else {
+        // Game does not exist on Steam (e.g. Alan Wake 2, SWAT 4, store exclusive)
+        if (isMounted) setIsNonSteamExclusive(true);
+        const fallbackData = await fallbackMetadataProvider.getEnrichedMetadataForNonSteamGame(game);
+        if (isMounted && fallbackData) {
+          setMetadata(fallbackData);
+        }
       }
+
+      if (isMounted) setIsLoading(false);
     }
 
     setMetadata(game.enrichedMetadata || null);
+    setCurrentSteamAppId(game.steamAppId);
     loadData();
 
     return () => {
@@ -70,9 +113,10 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
   }, [game]);
 
   const handleRefreshFromSteam = async () => {
-    if (!game.steamAppId || steamApi.isStoreRateLimited()) return;
+    const targetAppId = currentSteamAppId || game.steamAppId;
+    if (!targetAppId || steamApi.isStoreRateLimited()) return;
     setIsRefreshing(true);
-    const refreshed = await steamApi.fetchGameMetadata(game.steamAppId);
+    const refreshed = await steamApi.fetchGameMetadata(targetAppId);
     if (refreshed) {
       setMetadata(refreshed);
     }
@@ -126,7 +170,7 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
           </div>
 
           <div className="flex items-center gap-3">
-            {game.steamAppId && (
+            {(currentSteamAppId || game.steamAppId) && (
               <button
                 onClick={handleRefreshFromSteam}
                 disabled={isRefreshing}
@@ -138,9 +182,9 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
               </button>
             )}
 
-            {game.steamAppId && (
+            {(currentSteamAppId || game.steamAppId) ? (
               <a
-                href={`https://store.steampowered.com/app/${game.steamAppId}/`}
+                href={`https://store.steampowered.com/app/${currentSteamAppId || game.steamAppId}/`}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs text-steam-subtext hover:text-steam-accent bg-steam-card border border-steam-border rounded transition-colors"
@@ -148,6 +192,11 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
                 <span>View on Steam</span>
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
+            ) : (
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-medium text-amber-300 bg-amber-950/40 border border-amber-800/60 rounded">
+                <Sparkles className="w-3 h-3 text-amber-400" />
+                <span>{isNonSteamExclusive ? 'Store Exclusive (Direct Media)' : 'Direct Store Listing'}</span>
+              </span>
             )}
           </div>
         </div>

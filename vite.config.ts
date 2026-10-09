@@ -127,6 +127,21 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/epic-library/, ''),
       },
+      '/api/epic-catalog': {
+        target: 'https://catalog-public-service-prod06.ol.epicgames.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/epic-catalog/, ''),
+      },
+      '/api/epic-content': {
+        target: 'https://store-content.ak.epicgames.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/epic-content/, ''),
+      },
+      '/api/gog-product': {
+        target: 'https://api.gog.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/gog-product/, ''),
+      },
     },
   }
 });

@@ -20,6 +20,8 @@ import {
   connectXboxIntegration,
 } from './services/integrations/integrationStorage';
 import { steamIntegration } from './services/integrations/steamIntegration';
+import { steamMatcher } from './services/steam/steamMatcher';
+import { sanitizeGameCatalog } from './services/integrations/catalogSanitizer';
 import {
   CheckCircle2,
   Star,
@@ -279,6 +281,25 @@ export function App() {
           console.warn('Xbox sync warning:', e);
         }
       }
+
+      // 5. Intelligent Steam Match Pass for Non-Steam Titles
+      currentCatalog = currentCatalog.map((g) => {
+        if (g.steamAppId) return g;
+        const matched = steamMatcher.matchGameToSteamInstant(g.title);
+        if (matched) {
+          return {
+            ...g,
+            steamAppId: matched,
+            id: `steam-${matched}`,
+            headerImage: `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${matched}/header.jpg`,
+            capsuleImage: `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${matched}/library_600x900_2x.jpg`,
+          };
+        }
+        return g;
+      });
+
+      // 6. Final catalog sanitization (removes raw hex hashes & Fortnite DLC entries)
+      currentCatalog = sanitizeGameCatalog(currentCatalog);
 
       const newGamesDetected = Math.max(0, currentCatalog.length - initialCount);
       setGames(currentCatalog);

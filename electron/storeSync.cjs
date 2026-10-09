@@ -46,6 +46,143 @@ function saveTokens(storefrontId, tokenData) {
   }
 }
 
+const KNOWN_STEAM_MAPPINGS = {
+  'cyberpunk 2077': 1091500,
+  'the witcher 3: wild hunt': 292030,
+  'the witcher 2: assassins of kings enhanced edition': 20920,
+  'the witcher: enhanced edition': 20900,
+  'the witcher: enhanced edition director\'s cut': 20900,
+  'baldur\'s gate 3': 1086940,
+  'baldur\'s gate: enhanced edition': 228280,
+  'baldur\'s gate ii: enhanced edition': 257350,
+  'divinity: original sin 2': 435150,
+  'divinity: original sin 2 - definitive edition': 435150,
+  'fallout: new vegas': 22380,
+  'fallout 3': 22370,
+  'fallout 4': 377160,
+  'the elder scrolls v: skyrim': 72850,
+  'the elder scrolls v: skyrim special edition': 489830,
+  'doki doki literature club plus!': 1388880,
+  'control': 870780,
+  'control ultimate edition': 870780,
+  'death stranding': 1190460,
+  'death stranding director\'s cut': 1850570,
+  'hades': 1145360,
+  'hollow knight': 367520,
+  'disco elysium': 632470,
+  'disco elysium - the final cut': 632470,
+  'ghostrunner': 1225270,
+  'grand theft auto v': 271590,
+  'red dead redemption 2': 1174180,
+  'dishonored': 205100,
+  'dishonored 2': 403640,
+  'prey': 474960,
+  'doom': 379720,
+  'doom eternal': 782330,
+  'metro 2033 redux': 286690,
+  'metro: last light redux': 287390,
+  'metro exodus': 412020,
+  'bioshock remastered': 409710,
+  'bioshock infinite': 8870,
+  's.t.a.l.k.e.r.: shadow of chernobyl': 4500,
+  's.t.a.l.k.e.r.: clear sky': 20510,
+  's.t.a.l.k.e.r.: call of pripyat': 41700,
+  'heroes of might and magic 3 - hd edition': 297000,
+  'heroes of might & magic iii - hd edition': 297000,
+  'deus ex: human revolution - director\'s cut': 238010,
+  'deus ex: mankind divided': 337000,
+  'tomb raider': 203160,
+  'rise of the tomb raider': 391220,
+  'shadow of the tomb raider': 750920,
+  'batman: arkham knight': 208650,
+  'batman: arkham city': 200260,
+  'batman: arkham asylum': 35140,
+  'alien: isolation': 214490,
+  'amnesia: the dark descent': 57300,
+  'soma': 282140,
+  'subnautica': 264710,
+  'slay the spire': 646570,
+  'dead cells': 588650,
+  'celeste': 504230,
+  'stardew valley': 413150,
+  'terraria': 105600,
+  'system shock 2': 238210,
+  'system shock': 482400,
+  'vampire: the masquerade - bloodlines': 2600,
+};
+
+const steamMatchCache = new Map();
+
+/**
+ * Intelligent Steam App ID matcher for titles across all storefronts
+ */
+async function matchSteamAppId(rawTitle) {
+  if (!rawTitle) return undefined;
+  const clean = rawTitle.trim();
+  const lower = clean.toLowerCase();
+
+  if (steamMatchCache.has(lower)) {
+    return steamMatchCache.get(lower);
+  }
+
+  // 1. Curated dictionary check
+  if (KNOWN_STEAM_MAPPINGS[lower]) {
+    const id = KNOWN_STEAM_MAPPINGS[lower];
+    steamMatchCache.set(lower, id);
+    return id;
+  }
+
+  // 2. Normalized title check
+  const normalized = lower
+    .replace(/[™®©]/g, '')
+    .replace(/ - (digital deluxe|deluxe|enhanced|game of the year|goty|definitive|director's cut|complete|remastered|drm-free|standard) edition/i, '')
+    .replace(/ \((digital deluxe|deluxe|enhanced|game of the year|goty|definitive|director's cut|complete|remastered|drm-free|standard) edition\)/i, '')
+    .trim();
+
+  if (KNOWN_STEAM_MAPPINGS[normalized]) {
+    const id = KNOWN_STEAM_MAPPINGS[normalized];
+    steamMatchCache.set(lower, id);
+    return id;
+  }
+
+  // 3. Dynamic search against Steam Store Search API
+  try {
+    const searchUrl = `https://store.steampowered.com/api/storesearch/?term=${encodeURIComponent(normalized)}&l=english&cc=US`;
+    const res = await fetch(searchUrl, {
+      headers: { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)' },
+    });
+    if (res.ok) {
+      const data = await res.json();
+      const items = data.items || [];
+      for (const item of items) {
+        const itemName = (item.name || '').toLowerCase();
+        // Skip junk
+        if (
+          itemName.includes('soundtrack') ||
+          itemName.includes(' ost') ||
+          itemName.includes('bonus content') ||
+          itemName.includes('artbook') ||
+          itemName.includes('sdk') ||
+          itemName.endsWith(' demo')
+        ) {
+          continue;
+        }
+
+        // Check if name matches or has high overlap
+        if (itemName === normalized || itemName.includes(normalized) || normalized.includes(itemName)) {
+          steamMatchCache.set(lower, item.id);
+          return item.id;
+        }
+      }
+    }
+  } catch {
+    // Network or rate-limit error, continue without match
+  }
+
+  steamMatchCache.set(lower, undefined);
+  return undefined;
+}
+
 /**
  * Exchange GOG Authorization Code for Access & Refresh Tokens
  */
@@ -192,17 +329,15 @@ async function fetchGogOwnedGames(accessToken, username) {
           : 'https://images.gog-statics.com/avatars/default.png';
 
         const stats = playtimeMap.get(String(p.id)) || {};
+        const steamAppId = await matchSteamAppId(title);
 
-        let steamAppId;
-        const lower = title.toLowerCase();
-        if (lower.includes('cyberpunk 2077')) steamAppId = 1091500;
-        else if (lower.includes('witcher 3')) steamAppId = 292030;
-        else if (lower.includes("baldur's gate 3") || lower.includes("baldur's gate 3")) steamAppId = 1086940;
-        else if (lower.includes('disco elysium')) steamAppId = 632470;
-        else if (lower.includes('fallout: new vegas')) steamAppId = 22380;
-        else if (lower.includes('fallout 3')) steamAppId = 22370;
-        else if (lower.includes('divinity: original sin 2')) steamAppId = 435150;
-        else if (lower.includes('hollow knight')) steamAppId = 367520;
+        const headerImg = steamAppId
+          ? `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${steamAppId}/header.jpg`
+          : coverUrl;
+
+        const capsuleImg = steamAppId
+          ? `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${steamAppId}/library_600x900_2x.jpg`
+          : coverUrl;
 
         games.push({
           id: steamAppId ? `steam-${steamAppId}` : `gog-${p.id}`,
@@ -218,8 +353,8 @@ async function fetchGogOwnedGames(accessToken, username) {
               lastPlayed: stats.lastSession || undefined,
             },
           ],
-          headerImage: coverUrl,
-          capsuleImage: coverUrl,
+          headerImage: headerImg,
+          capsuleImage: capsuleImg,
           shortDescription: p.category ? `${p.category} on GOG.com (DRM-Free)` : 'GOG.com DRM-Free Title',
           releaseDate: '',
           developers: [],
@@ -337,8 +472,68 @@ async function fetchEpicOwnedGames(accessToken, accountId) {
       const records = data.records || [];
 
       for (const item of records) {
-        const title = item.metadata?.title || item.appName || item.catalogItemId;
-        if (!title) continue;
+        // 1. Skip non-game records & private sandboxes
+        if (!item.appName || item.appName === '1' || item.sandboxType === 'PRIVATE') continue;
+
+        // 2. Skip Unreal Engine Marketplace assets
+        if (
+          item.namespace === 'ue' ||
+          item.namespace === '89efe5924d3d467c839449ab6ab52e7f' ||
+          item.namespace?.startsWith('ue-')
+        ) {
+          continue;
+        }
+
+        // 3. Skip DLCs & add-ons identified by mainGameItem
+        if (item.metadata?.mainGameItem || item.mainGameItem) continue;
+
+        // 4. Skip non-application item types
+        const itemType = (item.metadata?.itemType || '').toUpperCase();
+        if (['ADD_ON', 'DLC', 'CONSUMABLE', 'WALLET', 'SUBSCRIPTION', 'PLUGIN', 'EXTRA', 'CURRENCY'].includes(itemType)) {
+          continue;
+        }
+
+        // 5. Skip non-game category paths
+        const categories = item.metadata?.categories || [];
+        const isAddonCategory = categories.some((c) =>
+          ['addons', 'dlc', 'mods', 'digitalextras', 'consumable', 'vault'].some((sub) =>
+            (c.path || '').toLowerCase().includes(sub)
+          )
+        );
+        if (isAddonCategory) continue;
+
+        // 6. Skip Fortnite microtransactions / item shop add-ons
+        if (item.appName?.startsWith('Fortnite_')) continue;
+
+        let title = (item.metadata?.title || '').trim();
+
+        // Resolve known Epic app IDs that lack top-level titles (e.g. Doki Doki Literature Club Plus!)
+        if (
+          item.appName === 'c5109bdceb3a453bb38c2fdc964ddee8' ||
+          item.catalogItemId === 'c5109bdceb3a453bb38c2fdc964ddee8' ||
+          title === 'c5109bdceb3a453bb38c2fdc964ddee8'
+        ) {
+          title = 'Doki Doki Literature Club Plus!';
+        }
+
+        // If title is missing, pure hex hash, or UUID, NEVER allow as a game entry
+        if (
+          !title ||
+          /^[0-9a-f]{20,}$/i.test(title) ||
+          /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(title)
+        ) {
+          continue;
+        }
+
+        // Filter out Fortnite cosmetic bundles / V-Bucks packs
+        const lower = title.toLowerCase();
+        if (lower.includes('fortnite') && lower !== 'fortnite') {
+          const isFortniteDlc = [
+            'pack', 'bundle', 'v-bucks', 'vbucks', 'skin', 'battle pass',
+            'outfit', 'drop', 'chapter', 'season', 'crew', 'starter', 'quest'
+          ].some((kw) => lower.includes(kw));
+          if (isFortniteDlc) continue;
+        }
 
         const keyImages = item.metadata?.keyImages || [];
         const tallCover = keyImages.find((img) => img.type === 'DieselGameBoxTall')?.url;
@@ -347,13 +542,15 @@ async function fetchEpicOwnedGames(accessToken, accountId) {
         const appId = item.catalogItemId || item.appName;
         const pt = playtimeMap.get(item.appName) || playtimeMap.get(item.catalogItemId) || {};
 
-        let steamAppId;
-        const lower = title.toLowerCase();
-        if (lower.includes('death stranding')) steamAppId = 1190460;
-        else if (lower.includes('cyberpunk 2077')) steamAppId = 1091500;
-        else if (lower.includes('alan wake 2')) steamAppId = undefined; // Epic exclusive
-        else if (lower.includes('control')) steamAppId = 870780;
-        else if (lower.includes('hades')) steamAppId = 1145360;
+        const steamAppId = await matchSteamAppId(title);
+
+        const headerImg = steamAppId
+          ? `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${steamAppId}/header.jpg`
+          : wideBanner || 'https://cdn2.unrealengine.com/egs-badge.png';
+
+        const capsuleImg = steamAppId
+          ? `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${steamAppId}/library_600x900_2x.jpg`
+          : tallCover || wideBanner || 'https://cdn2.unrealengine.com/egs-badge.png';
 
         games.push({
           id: steamAppId ? `steam-${steamAppId}` : `epic-${appId}`,
@@ -369,8 +566,8 @@ async function fetchEpicOwnedGames(accessToken, accountId) {
               lastPlayed: pt.lastPlayed || undefined,
             },
           ],
-          headerImage: wideBanner || 'https://cdn2.unrealengine.com/egs-badge.png',
-          capsuleImage: tallCover || wideBanner || 'https://cdn2.unrealengine.com/egs-badge.png',
+          headerImage: headerImg,
+          capsuleImage: capsuleImg,
           shortDescription: item.metadata?.description || 'Epic Games Store Title',
           releaseDate: item.metadata?.releaseDate || '',
           developers: item.metadata?.developer ? [item.metadata.developer] : [],

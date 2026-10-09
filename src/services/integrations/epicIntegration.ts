@@ -77,31 +77,111 @@ export class EpicIntegrationService {
 
         const records = response.data?.records || [];
         for (const item of records) {
-          const title = item.metadata?.title || item.appName || item.catalogItemId;
-          if (!title) continue;
+          // 1. Skip non-game records & private sandboxes
+          if (!item.appName || item.appName === '1' || item.sandboxType === 'PRIVATE') continue;
+
+          // 2. Skip Unreal Engine Marketplace assets & developer tools
+          if (
+            item.namespace === 'ue' ||
+            item.namespace === '89efe5924d3d467c839449ab6ab52e7f' ||
+            item.namespace?.startsWith('ue-')
+          ) {
+            continue;
+          }
+
+          // 3. Skip DLCs & add-ons identified by mainGameItem
+          if (item.metadata?.mainGameItem || item.mainGameItem) continue;
+
+          // 4. Skip non-application item types
+          const itemType = (item.metadata?.itemType || '').toUpperCase();
+          if (['ADD_ON', 'DLC', 'CONSUMABLE', 'WALLET', 'SUBSCRIPTION', 'PLUGIN', 'EXTRA', 'CURRENCY'].includes(itemType)) {
+            continue;
+          }
+
+          // 5. Skip non-game category paths
+          const categories = item.metadata?.categories || [];
+          const isAddonCategory = categories.some((c: any) =>
+            ['addons', 'dlc', 'mods', 'digitalextras', 'consumable', 'vault'].some((sub) =>
+              (c.path || '').toLowerCase().includes(sub)
+            )
+          );
+          if (isAddonCategory) continue;
+
+          // 6. Skip Fortnite microtransactions / item shop add-ons
+          if (item.appName?.startsWith('Fortnite_')) continue;
+
+          let title = (item.metadata?.title || '').trim();
+
+          // Resolve known Epic app IDs that lack top-level titles (e.g. Doki Doki Literature Club Plus!)
+          if (
+            item.appName === 'c5109bdceb3a453bb38c2fdc964ddee8' ||
+            item.catalogItemId === 'c5109bdceb3a453bb38c2fdc964ddee8' ||
+            title === 'c5109bdceb3a453bb38c2fdc964ddee8'
+          ) {
+            title = 'Doki Doki Literature Club Plus!';
+          }
+
+          // If title is missing, pure hex hash, or UUID, NEVER allow as a game entry
+          if (
+            !title ||
+            /^[0-9a-f]{20,}$/i.test(title) ||
+            /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(title)
+          ) {
+            continue;
+          }
+
+          // Filter out Fortnite cosmetic bundles / V-Bucks packs
+          const lower = title.toLowerCase();
+          if (lower.includes('fortnite') && lower !== 'fortnite') {
+            const isFortniteDlc = [
+              'pack', 'bundle', 'v-bucks', 'vbucks', 'skin', 'battle pass',
+              'outfit', 'drop', 'chapter', 'season', 'crew', 'starter', 'quest'
+            ].some((kw) => lower.includes(kw));
+            if (isFortniteDlc) continue;
+          }
 
           const keyImages = item.metadata?.keyImages || [];
           const tallCover = keyImages.find((img: any) => img.type === 'DieselGameBoxTall')?.url;
           const wideBanner = keyImages.find((img: any) => img.type === 'DieselGameBox')?.url || tallCover;
 
+          const appId = item.catalogItemId || item.appName;
+
+          // Match Steam App ID if available
+          let steamAppId: number | undefined;
+          if (lower.includes('doki doki literature club plus')) steamAppId = 1388880;
+          else if (lower.includes('death stranding')) steamAppId = 1190460;
+          else if (lower.includes('cyberpunk 2077')) steamAppId = 1091500;
+          else if (lower.includes('control')) steamAppId = 870780;
+          else if (lower.includes('hades')) steamAppId = 1145360;
+          else if (lower.includes('alan wake 2')) steamAppId = undefined; // Epic exclusive
+
+          const headerImg = steamAppId
+            ? `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${steamAppId}/header.jpg`
+            : wideBanner || 'https://cdn2.unrealengine.com/egs-badge.png';
+
+          const capsuleImg = steamAppId
+            ? `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${steamAppId}/library_600x900_2x.jpg`
+            : tallCover || wideBanner || 'https://cdn2.unrealengine.com/egs-badge.png';
+
           games.push({
-            id: `epic-${item.catalogItemId || item.appName}`,
+            id: steamAppId ? `steam-${steamAppId}` : `epic-${appId}`,
             title,
             sortTitle: title.replace(/^(The|A|An)\s+/i, ''),
+            steamAppId,
             platforms: [
               {
                 platformId: 'epic',
-                platformGameId: item.catalogItemId || item.appName,
+                platformGameId: appId,
                 installed: false,
                 playtimeMinutes: 0,
               },
             ],
-            headerImage: wideBanner || 'https://cdn2.unrealengine.com/egs-badge.png',
-            capsuleImage: tallCover || wideBanner || 'https://cdn2.unrealengine.com/egs-badge.png',
-            shortDescription: 'Epic Games Store Title',
-            releaseDate: '',
-            developers: [],
-            publishers: [],
+            headerImage: headerImg,
+            capsuleImage: capsuleImg,
+            shortDescription: item.metadata?.description || 'Epic Games Store Title',
+            releaseDate: item.metadata?.releaseDate || '',
+            developers: item.metadata?.developer ? [item.metadata.developer] : [],
+            publishers: item.metadata?.publisher ? [item.metadata.publisher] : [],
             genres: ['Action'],
             tags: ['Epic Games Store'],
           });

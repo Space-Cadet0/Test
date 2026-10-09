@@ -8,6 +8,7 @@ import { epicIntegration } from './epicIntegration';
 import { xboxIntegration } from './xboxIntegration';
 import { mergeScannedSteamGames } from '../storage/librarySync';
 import { GOG_USER_LIBRARY } from '../storage/storefrontLibraries';
+import { sanitizeGameCatalog } from './catalogSanitizer';
 
 const STORAGE_KEY_INTEGRATIONS = 'antigravity_storefront_integrations';
 const STORAGE_KEY_CUSTOM_GAMES = 'antigravity_synced_user_games';
@@ -114,20 +115,29 @@ export function saveIntegrations(integrations: StorefrontIntegration[]): void {
 }
 
 export function loadCurrentCatalog(): CanonicalGame[] {
-  const defaultBase = mergeStorefrontGames(mergeScannedSteamGames([]), GOG_USER_LIBRARY, 'gog');
+  const defaultBase = sanitizeGameCatalog(
+    mergeStorefrontGames(mergeScannedSteamGames([]), GOG_USER_LIBRARY, 'gog')
+  );
   if (typeof window === 'undefined') return defaultBase;
   try {
     const raw = localStorage.getItem(STORAGE_KEY_MAIN_CATALOG);
     if (raw) {
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed) && parsed.length > 0) {
-        const gogCount = parsed.filter((g: CanonicalGame) => g.platforms?.some((p) => p.platformId === 'gog')).length;
+        // Automatically sanitize stored catalog (purges hex hashes like c5109bdceb3a453bb38c2fdc964ddee8 and Fortnite DLCs)
+        let cleaned = sanitizeGameCatalog(parsed);
+
+        const gogCount = cleaned.filter((g: CanonicalGame) => g.platforms?.some((p) => p.platformId === 'gog')).length;
         if (gogCount < GOG_USER_LIBRARY.length) {
-          const merged = mergeStorefrontGames(parsed, GOG_USER_LIBRARY, 'gog');
-          saveCurrentCatalog(merged);
-          return merged;
+          cleaned = sanitizeGameCatalog(mergeStorefrontGames(cleaned, GOG_USER_LIBRARY, 'gog'));
+          saveCurrentCatalog(cleaned);
+          return cleaned;
         }
-        return parsed;
+
+        if (cleaned.length !== parsed.length) {
+          saveCurrentCatalog(cleaned);
+        }
+        return cleaned;
       }
     }
   } catch {
@@ -139,8 +149,9 @@ export function loadCurrentCatalog(): CanonicalGame[] {
 export function saveCurrentCatalog(games: CanonicalGame[]): void {
   if (typeof window === 'undefined') return;
   try {
-    localStorage.setItem(STORAGE_KEY_MAIN_CATALOG, JSON.stringify(games));
-    localStorage.setItem(STORAGE_KEY_CUSTOM_GAMES, JSON.stringify(games));
+    const cleaned = sanitizeGameCatalog(games);
+    localStorage.setItem(STORAGE_KEY_MAIN_CATALOG, JSON.stringify(cleaned));
+    localStorage.setItem(STORAGE_KEY_CUSTOM_GAMES, JSON.stringify(cleaned));
   } catch (err) {
     console.error('Failed to save universal catalog', err);
   }
@@ -151,9 +162,10 @@ export function mergeStorefrontGames(
   newGames: CanonicalGame[],
   storefrontId: StorefrontId
 ): CanonicalGame[] {
+  const sanitizedNew = sanitizeGameCatalog(newGames);
   const merged = [...currentCatalog];
 
-  for (const newGame of newGames) {
+  for (const newGame of sanitizedNew) {
     const existingIndex = merged.findIndex(
       (g) =>
         (g.steamAppId && newGame.steamAppId && g.steamAppId === newGame.steamAppId) ||
@@ -183,7 +195,8 @@ export function mergeStorefrontGames(
     }
   }
 
-  return merged.sort((a, b) => a.title.localeCompare(b.title, undefined, { sensitivity: 'base' }));
+  const finalCatalog = sanitizeGameCatalog(merged);
+  return finalCatalog.sort((a, b) => a.title.localeCompare(b.title, undefined, { sensitivity: 'base' }));
 }
 
 export function removeStorefrontGames(
