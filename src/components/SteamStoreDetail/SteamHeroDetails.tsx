@@ -1,5 +1,6 @@
 import React from 'react';
 import { SteamReviewSummary } from '../../contracts/steam';
+import { OpenCriticData, getTierColor } from '../../services/opencritic/openCritic';
 import { HelpCircle } from 'lucide-react';
 
 interface SteamHeroDetailsProps {
@@ -7,6 +8,7 @@ interface SteamHeroDetailsProps {
   title: string;
   shortDescription?: string;
   reviewSummary?: SteamReviewSummary;
+  openCritic?: OpenCriticData;
   releaseDate?: string;
   developers?: string[];
   publishers?: string[];
@@ -18,6 +20,7 @@ export const SteamHeroDetails: React.FC<SteamHeroDetailsProps> = ({
   title,
   shortDescription,
   reviewSummary,
+  openCritic,
   releaseDate = 'TBA',
   developers = [],
   publishers = [],
@@ -51,8 +54,8 @@ export const SteamHeroDetails: React.FC<SteamHeroDetailsProps> = ({
         {shortDescription || 'No overview available for this title.'}
       </div>
 
-      {/* Steam Reviews Summary Block */}
-      <div className="border-t border-b border-black/50 py-2 mb-2.5 space-y-1">
+      {/* Reviews Summary Block (Steam + OpenCritic) */}
+      <div className="border-t border-b border-black/50 py-2 mb-2.5 space-y-1.5">
         <div className="flex items-center">
           <span className="w-[94px] flex-shrink-0 text-[10px] uppercase text-[#556772] font-normal tracking-wider">
             All Reviews:
@@ -71,6 +74,34 @@ export const SteamHeroDetails: React.FC<SteamHeroDetailsProps> = ({
             <span className="text-[#8f98a0]">No user reviews</span>
           )}
         </div>
+
+        {/* OpenCritic Rating Row */}
+        {openCritic && (
+          <div className="flex items-center">
+            <span className="w-[94px] flex-shrink-0 text-[10px] uppercase text-[#556772] font-normal tracking-wider">
+              OpenCritic:
+            </span>
+            <div className="flex items-center gap-1.5">
+              <span
+                className={`px-1.5 py-0.2 rounded text-[10px] font-bold border ${getTierColor(openCritic.tier).badgeBg} ${getTierColor(openCritic.tier).badgeBorder} ${getTierColor(openCritic.tier).badgeText}`}
+              >
+                {openCritic.score}
+              </span>
+              <a
+                href={openCritic.url}
+                target="_blank"
+                rel="noreferrer"
+                className={`font-bold hover:underline cursor-pointer ${getTierColor(openCritic.tier).accentText}`}
+                title={`OpenCritic ${openCritic.tier} rating`}
+              >
+                {openCritic.tier}
+              </a>
+              <span className="text-[#556772] font-normal text-[11px]">
+                ({openCritic.percentRecommended}% rec)
+              </span>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Key Details Rows (Release Date, Developer, Publisher) */}

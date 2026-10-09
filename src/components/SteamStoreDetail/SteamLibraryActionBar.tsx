@@ -11,8 +11,10 @@ import {
   Trophy,
   CheckCircle2,
   Cloud,
-  Bookmark
+  Bookmark,
+  Award,
 } from 'lucide-react';
+import { getOpenCriticData, getTierColor } from '../../services/opencritic/openCritic';
 
 interface SteamLibraryActionBarProps {
   game: CanonicalGame;
@@ -154,6 +156,14 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
 
   const achievements = getAchievements();
 
+  // OpenCritic rating
+  const openCritic = getOpenCriticData(
+    game.steamAppId,
+    game.title,
+    metadata?.reviewSummary?.positivePercent || game.reviewSummary?.positivePercent
+  );
+  const ocColors = getTierColor(openCritic.tier);
+
   return (
     <div className="bg-[#101822] border border-[#2a475e] rounded p-4 shadow-xl text-steam-text select-none">
       <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
@@ -241,7 +251,7 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
         </div>
 
         {/* Right: Steam Library Stats Matrix */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 lg:gap-6 border-t lg:border-t-0 lg:border-l border-[#2a475e]/60 pt-3 lg:pt-0 lg:pl-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 lg:gap-5 border-t lg:border-t-0 lg:border-l border-[#2a475e]/60 pt-3 lg:pt-0 lg:pl-6">
           {/* Play Time */}
           <div className="flex flex-col">
             <span className="text-[10px] font-semibold uppercase tracking-wider text-[#8f98a0] flex items-center gap-1">
@@ -296,6 +306,31 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
                 style={{ width: `${achievements.percentage}%` }}
               />
             </div>
+          </div>
+
+          {/* OpenCritic Score */}
+          <div className="flex flex-col">
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-[#8f98a0] flex items-center gap-1">
+              <Award className="w-3 h-3 text-purple-400" />
+              OpenCritic
+            </span>
+            <div className="flex items-center gap-1.5 mt-0.5">
+              <span className={`text-sm font-black ${ocColors.accentText}`}>
+                {openCritic.score}
+              </span>
+              <a
+                href={openCritic.url}
+                target="_blank"
+                rel="noreferrer"
+                className={`text-[10px] font-bold px-1.5 py-0.2 rounded border hover:underline ${ocColors.badgeBg} ${ocColors.badgeBorder} ${ocColors.badgeText}`}
+                title={`OpenCritic: ${openCritic.score}/100 • ${openCritic.tier} (${openCritic.percentRecommended}% recommended)`}
+              >
+                {openCritic.tier}
+              </a>
+            </div>
+            <span className="text-[10px] text-[#8f98a0] mt-0.5 truncate">
+              {openCritic.percentRecommended}% Recommended
+            </span>
           </div>
         </div>
       </div>

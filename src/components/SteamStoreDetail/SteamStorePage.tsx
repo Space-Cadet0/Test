@@ -7,6 +7,8 @@ import { SteamHeroDetails } from './SteamHeroDetails';
 import { SteamLibraryActionBar } from './SteamLibraryActionBar';
 import { HowLongToBeatCard } from './HowLongToBeatCard';
 import { getHowLongToBeat } from '../../services/hltb/howLongToBeat';
+import { OpenCriticCard } from './OpenCriticCard';
+import { getOpenCriticData } from '../../services/opencritic/openCritic';
 import { SystemRequirements } from './SystemRequirements';
 import { PlatformBadges } from './PlatformBadges';
 import { SteamLanguagesTable } from './SteamLanguagesTable';
@@ -88,6 +90,12 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
     metadata?.detailedDescription ||
     game.enrichedMetadata?.aboutTheGame ||
     game.enrichedMetadata?.detailedDescription;
+
+  const openCriticData = getOpenCriticData(
+    game.steamAppId,
+    game.title,
+    reviewSummary?.positivePercent
+  );
 
   return (
     <div className="w-full min-h-full bg-[#0e141b] text-steam-text pb-24 overflow-y-auto relative">
@@ -199,6 +207,7 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
             title={game.title}
             shortDescription={shortDescription}
             reviewSummary={reviewSummary}
+            openCritic={openCriticData}
             releaseDate={releaseDate}
             developers={developers}
             publishers={publishers}
@@ -206,8 +215,11 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
           />
         </div>
 
-        {/* HowLongToBeat Stats Section */}
-        <HowLongToBeatCard hltb={getHowLongToBeat(game.steamAppId, game.genres, game.tags)} gameTitle={game.title} />
+        {/* Critical Consensus & Gameplay Completion Dashboards */}
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+          <OpenCriticCard openCritic={openCriticData} gameTitle={game.title} />
+          <HowLongToBeatCard hltb={getHowLongToBeat(game.steamAppId, game.genres, game.tags)} gameTitle={game.title} />
+        </div>
 
         {/* Content Section: Description & Technical Specs */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-4">

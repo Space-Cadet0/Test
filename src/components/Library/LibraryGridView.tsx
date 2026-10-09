@@ -11,6 +11,7 @@ import {
   Cloud,
   ArrowLeft,
 } from 'lucide-react';
+import { getOpenCriticData, getTierColor } from '../../services/opencritic/openCritic';
 
 interface LibraryGridViewProps {
   games: CanonicalGame[];
@@ -243,6 +244,25 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
                     </div>
                   )}
 
+                  {/* Top-Right: OpenCritic Score Pill */}
+                  {(() => {
+                    const oc = getOpenCriticData(
+                      game.steamAppId,
+                      game.title,
+                      game.reviewSummary?.positivePercent
+                    );
+                    const ocColors = getTierColor(oc.tier);
+                    return (
+                      <div
+                        className={`absolute top-2 right-2 flex items-center gap-1 text-[10px] font-extrabold px-1.5 py-0.5 rounded border shadow-md backdrop-blur-md ${ocColors.badgeBg} ${ocColors.badgeBorder} ${ocColors.badgeText}`}
+                        title={`OpenCritic: ${oc.score}/100 • ${oc.tier} (${oc.percentRecommended}% recommended)`}
+                      >
+                        <span className="text-[9px] opacity-75">OC</span>
+                        <span>{oc.score}</span>
+                      </div>
+                    );
+                  })()}
+
                   {/* Overlayed Bottom-Right: Storefront Icons Game is Owned On */}
                   <div
                     className="absolute bottom-2 right-2 flex items-center gap-1 bg-black/85 backdrop-blur-md px-2 py-1 rounded border border-white/20 shadow-lg pointer-events-none group-hover:border-steam-accent/60 transition-colors"
@@ -347,6 +367,37 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
                 </div>
               )}
             </div>
+
+            {/* OpenCritic Rating Row */}
+            {(() => {
+              const oc = getOpenCriticData(
+                hoveredGame.steamAppId,
+                hoveredGame.title,
+                hoveredGame.reviewSummary?.positivePercent
+              );
+              const ocColors = getTierColor(oc.tier);
+              return (
+                <div className="flex items-center justify-between bg-black/40 px-2.5 py-1.5 rounded border border-white/5">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[10px] font-bold text-white/70 uppercase tracking-wider flex items-center gap-1">
+                      <span className={`w-3.5 h-3.5 rounded text-[8px] font-black text-white flex items-center justify-center ${ocColors.scoreBg}`}>
+                        OC
+                      </span>
+                      OpenCritic
+                    </span>
+                    <span className={`px-1.5 py-0.2 rounded text-[10px] font-bold border ${ocColors.badgeBg} ${ocColors.badgeBorder} ${ocColors.badgeText}`}>
+                      {oc.score}
+                    </span>
+                    <span className={`text-[10px] font-bold ${ocColors.accentText}`}>
+                      {oc.tier}
+                    </span>
+                  </div>
+                  <span className="text-[10px] text-steam-subtext">
+                    {oc.percentRecommended}% Rec.
+                  </span>
+                </div>
+              );
+            })()}
 
             {/* Synopsis Snippet */}
             {hoveredGame.shortDescription && (
