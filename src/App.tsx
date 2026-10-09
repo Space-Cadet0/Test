@@ -14,7 +14,18 @@ import { ManageCollectionsModal } from './components/Library/ManageCollectionsMo
 import { IntegrationsModal } from './components/Navigation/IntegrationsModal';
 import { loadIntegrations } from './services/integrations/integrationStorage';
 import { steamIntegration } from './services/integrations/steamIntegration';
-import { Plus, Sparkles, X, CheckCircle2 } from 'lucide-react';
+import {
+  Plus,
+  Sparkles,
+  X,
+  CheckCircle2,
+  Star,
+  Play,
+  Clock,
+  Trophy,
+  Layers,
+  Bookmark,
+} from 'lucide-react';
 
 export function App() {
   const [games, setGames] = useState<CanonicalGame[]>(() => {
@@ -43,6 +54,7 @@ export function App() {
     return initialGames.find((g) => g.steamAppId === 1086940) || initialGames[0] || null;
   });
   const [isGridView, setIsGridView] = useState(false);
+  const [activeGroupId, setActiveGroupId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedPlatform, setSelectedPlatform] = useState<StorefrontId | 'all'>('all');
   const [installedOnly, setInstalledOnly] = useState(false);
@@ -164,6 +176,33 @@ export function App() {
       return true;
     });
   }, [games, selectedPlatform, installedOnly, searchQuery]);
+
+  // Active group data for grid view filtering
+  const activeGroupData = useMemo(() => {
+    if (!activeGroupId) return null;
+
+    if (activeGroupId === 'uncategorized') {
+      const categorizedIds = new Set(collections.flatMap((c) => c.gameIds));
+      const groupGames = filteredGames.filter((g) => !categorizedIds.has(g.id));
+      return {
+        id: 'uncategorized',
+        name: 'Uncategorized',
+        games: groupGames,
+        subtitle: 'Games that have not been assigned to any user collection',
+      };
+    }
+
+    const col = collections.find((c) => c.id === activeGroupId);
+    if (!col) return null;
+
+    const groupGames = filteredGames.filter((g) => col.gameIds.includes(g.id));
+    return {
+      id: col.id,
+      name: col.name,
+      games: groupGames,
+      subtitle: `Viewing titles in the ${col.name} collection`,
+    };
+  }, [activeGroupId, collections, filteredGames]);
 
   // Handle live Steam import by URL or App ID
   const handleImportSteamGame = async (e: React.FormEvent) => {
@@ -331,6 +370,7 @@ export function App() {
         onTriggerSync={handleTriggerSync}
         onOpenIntegrations={() => setIsIntegrationsModalOpen(true)}
         onHomeClick={() => {
+          setActiveGroupId(null);
           setIsGridView(true);
         }}
       />
@@ -363,24 +403,51 @@ export function App() {
           collections={collections}
           onOpenManageCollectionsModal={handleOpenManageCollections}
           onToggleGameInCollection={handleToggleGameInCollection}
-          onViewAllGamesGrid={() => setIsGridView(true)}
+          onViewAllGamesGrid={() => {
+            setActiveGroupId(null);
+            setIsGridView(true);
+          }}
+          onSelectGroupGrid={(groupId) => {
+            setActiveGroupId(groupId);
+            setIsGridView(true);
+          }}
+          activeGroupId={activeGroupId}
           isGridView={isGridView}
         />
 
-        {/* Right Main Pane: Steam Storefront Detail Layout OR Whole Library Grid View */}
+        {/* Right Main Pane: Steam Storefront Detail Layout OR Group/Whole Library Grid View */}
         <main className="flex-1 h-full overflow-y-auto bg-[#0b0f14] relative">
           {isGridView || !selectedGame ? (
             <LibraryGridView
-              games={filteredGames}
+              games={activeGroupData ? activeGroupData.games : filteredGames}
               onSelectGame={(game) => {
                 setSelectedGame(game);
                 setIsGridView(false);
               }}
               searchQuery={searchQuery}
+              title={activeGroupData ? activeGroupData.name : 'All Games'}
+              subtitle={activeGroupData ? activeGroupData.subtitle : undefined}
+              groupIcon={
+                activeGroupId === 'favorites' ? (
+                  <Star className="w-6 h-6 fill-amber-400 text-amber-400" />
+                ) : activeGroupId === 'currently-playing' ? (
+                  <Play className="w-6 h-6 fill-emerald-400 text-emerald-400" />
+                ) : activeGroupId === 'backlog' ? (
+                  <Clock className="w-6 h-6 text-sky-400" />
+                ) : activeGroupId === 'completed' ? (
+                  <Trophy className="w-6 h-6 text-yellow-400" />
+                ) : activeGroupId === 'uncategorized' ? (
+                  <Layers className="w-6 h-6 text-sky-400" />
+                ) : activeGroupId ? (
+                  <Bookmark className="w-6 h-6 text-steam-accent" />
+                ) : undefined
+              }
+              onClearGroupFilter={activeGroupId ? () => setActiveGroupId(null) : undefined}
             />
           ) : (
             <SteamStorePage
               game={selectedGame}
+              parentGroupName={activeGroupData ? activeGroupData.name : 'All Games'}
               onBackToLibrary={() => setIsGridView(true)}
               onManageCollections={() => handleOpenManageCollections(selectedGame)}
               onToggleInstallStatus={() => handleToggleInstallStatus(selectedGame)}

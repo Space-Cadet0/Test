@@ -9,18 +9,27 @@ import {
   Layers,
   CheckCircle2,
   Cloud,
+  ArrowLeft,
 } from 'lucide-react';
 
 interface LibraryGridViewProps {
   games: CanonicalGame[];
   onSelectGame: (game: CanonicalGame) => void;
   searchQuery?: string;
+  title?: string;
+  subtitle?: string;
+  groupIcon?: React.ReactNode;
+  onClearGroupFilter?: () => void;
 }
 
 export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
   games,
   onSelectGame,
   searchQuery,
+  title,
+  subtitle,
+  groupIcon,
+  onClearGroupFilter,
 }) => {
   const [hoveredGame, setHoveredGame] = useState<CanonicalGame | null>(null);
   const [previewPos, setPreviewPos] = useState<{ x: number; y: number; align: 'left' | 'right' }>({
@@ -92,18 +101,30 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
         {/* Header Bar */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-steam-border/60 pb-4">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded bg-steam-accent/15 border border-steam-accent/30 text-steam-accent shadow-sm">
-              <Gamepad2 className="w-6 h-6" />
+            <div className="p-2.5 rounded bg-steam-accent/15 border border-steam-accent/30 text-steam-accent shadow-sm flex items-center justify-center">
+              {groupIcon || <Gamepad2 className="w-6 h-6" />}
             </div>
             <div>
-              <h1 className="text-xl font-bold text-white tracking-wide flex items-center gap-2">
-                All Games
-                <span className="text-xs px-2 py-0.5 rounded-full bg-[#1b2838] border border-steam-border text-steam-accent font-semibold">
-                  {games.length}
-                </span>
-              </h1>
+              <div className="flex items-center gap-2.5">
+                <h1 className="text-xl font-bold text-white tracking-wide flex items-center gap-2">
+                  {title || 'All Games'}
+                  <span className="text-xs px-2 py-0.5 rounded-full bg-[#1b2838] border border-steam-border text-steam-accent font-semibold">
+                    {games.length}
+                  </span>
+                </h1>
+                {onClearGroupFilter && (
+                  <button
+                    onClick={onClearGroupFilter}
+                    className="inline-flex items-center gap-1 px-2.5 py-0.5 text-[11px] font-semibold text-steam-accent hover:text-white bg-[#16202d] hover:bg-[#202f42] border border-steam-border rounded transition-colors group cursor-pointer"
+                    title="Return to All Games library grid"
+                  >
+                    <ArrowLeft className="w-3 h-3 group-hover:-translate-x-0.5 transition-transform" />
+                    <span>All Games</span>
+                  </button>
+                )}
+              </div>
               <p className="text-xs text-steam-subtext mt-0.5">
-                Browse your universal game collection across all connected storefronts
+                {subtitle || 'Browse your universal game collection across all connected storefronts'}
               </p>
             </div>
           </div>
@@ -161,11 +182,22 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
         {games.length === 0 && (
           <div className="py-20 text-center flex flex-col items-center justify-center gap-3 bg-[#16202d]/50 rounded-lg border border-steam-border/60 p-8">
             <Layers className="w-12 h-12 text-steam-subtext/60" />
-            <h3 className="text-base font-bold text-white">No games found</h3>
+            <h3 className="text-base font-bold text-white">
+              {title ? `No games in "${title}"` : 'No games found'}
+            </h3>
             <p className="text-xs text-steam-subtext max-w-sm">
-              No titles match your current filter or search criteria. Try clearing search or
-              switching platforms.
+              {title
+                ? `You have not assigned any titles to the "${title}" collection yet. You can add games from the sidebar or any game detail page.`
+                : 'No titles match your current filter or search criteria. Try clearing search or switching platforms.'}
             </p>
+            {onClearGroupFilter && (
+              <button
+                onClick={onClearGroupFilter}
+                className="mt-2 inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-steam-accent text-black font-semibold text-xs hover:brightness-110 transition-all shadow"
+              >
+                <span>View All Games</span>
+              </button>
+            )}
           </div>
         )}
 

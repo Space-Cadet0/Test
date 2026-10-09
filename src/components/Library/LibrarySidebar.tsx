@@ -17,7 +17,13 @@ import {
   FolderTree,
   Bookmark,
   LayoutGrid,
+  Play,
+  Clock,
+  Trophy,
+  Layers,
 } from 'lucide-react';
+
+const COLLAPSED_STORAGE_KEY = 'antigravity_library_collapsed_groups';
 
 interface LibrarySidebarProps {
   games: CanonicalGame[];
@@ -34,6 +40,8 @@ interface LibrarySidebarProps {
   onOpenManageCollectionsModal: (game?: CanonicalGame) => void;
   onToggleGameInCollection: (collectionId: string, gameId: string) => void;
   onViewAllGamesGrid?: () => void;
+  onSelectGroupGrid?: (groupId: string | null) => void;
+  activeGroupId?: string | null;
   isGridView?: boolean;
 }
 
@@ -52,10 +60,22 @@ export const LibrarySidebar: React.FC<LibrarySidebarProps> = ({
   onOpenManageCollectionsModal,
   onToggleGameInCollection,
   onViewAllGamesGrid,
+  onSelectGroupGrid,
+  activeGroupId = null,
   isGridView = false,
 }) => {
   const [groupByCollections, setGroupByCollections] = useState(true);
-  const [collapsedCollections, setCollapsedCollections] = useState<Record<string, boolean>>({});
+  const [collapsedCollections, setCollapsedCollections] = useState<Record<string, boolean>>(() => {
+    try {
+      const saved = localStorage.getItem(COLLAPSED_STORAGE_KEY);
+      if (saved) {
+        return JSON.parse(saved);
+      }
+    } catch (e) {
+      console.error('Failed to load collapsed collections state:', e);
+    }
+    return {};
+  });
 
   const platforms: (StorefrontId | 'all')[] = [
     'all',
@@ -71,10 +91,18 @@ export const LibrarySidebar: React.FC<LibrarySidebarProps> = ({
   ];
 
   const toggleCollectionCollapse = (id: string) => {
-    setCollapsedCollections((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
+    setCollapsedCollections((prev) => {
+      const next = {
+        ...prev,
+        [id]: !prev[id],
+      };
+      try {
+        localStorage.setItem(COLLAPSED_STORAGE_KEY, JSON.stringify(next));
+      } catch (e) {
+        console.error('Failed to persist collapsed collections state:', e);
+      }
+      return next;
+    });
   };
 
   // Group games into collections + uncategorized
@@ -305,7 +333,7 @@ export const LibrarySidebar: React.FC<LibrarySidebarProps> = ({
           <button
             onClick={onViewAllGamesGrid}
             className={`w-full px-2.5 py-1.5 flex items-center justify-between text-xs font-semibold rounded border transition-all mb-2 ${
-              isGridView
+              isGridView && !activeGroupId
                 ? 'bg-[#223547] text-white border-steam-accent shadow-sm'
                 : 'bg-[#161a22] text-steam-text hover:text-white hover:bg-[#1a212b] border-steam-border/60'
             }`}
@@ -338,30 +366,69 @@ export const LibrarySidebar: React.FC<LibrarySidebarProps> = ({
                 <div key={col.id} className="mb-0.5">
                   {/* Collection Header */}
                   <div
-                    onClick={() => toggleCollectionCollapse(col.id)}
-                    className="px-3 py-1 bg-[#141a22] hover:bg-[#1b232e] text-[11px] font-bold uppercase tracking-wider text-steam-subtext hover:text-white flex items-center justify-between cursor-pointer border-t border-b border-black/30 transition-colors"
+                    onClick={() => {
+                      if (onSelectGroupGrid) {
+                        onSelectGroupGrid(col.id);
+                      }
+                    }}
+                    className={`px-2.5 py-1.5 text-[11px] font-bold uppercase tracking-wider flex items-center justify-between cursor-pointer border-t border-b transition-colors group select-none ${
+                      isGridView && activeGroupId === col.id
+                        ? 'bg-[#1e2d3d] text-white border-steam-accent shadow-inner'
+                        : 'bg-[#141a22] hover:bg-[#1b232e] text-steam-subtext hover:text-white border-black/30'
+                    }`}
+                    title={`View ${col.name} in Grid View`}
                   >
-                    <div className="flex items-center gap-1.5 truncate">
-                      {isCollapsed ? (
-                        <ChevronRight className="w-3 h-3 text-steam-accent flex-shrink-0" />
-                      ) : (
-                        <ChevronDown className="w-3 h-3 text-steam-accent flex-shrink-0" />
+                    <div className="flex items-center gap-1.5 truncate flex-1 min-w-0">
+                      {/* Chevron Button with its own click handler for expand/collapse */}
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleCollectionCollapse(col.id);
+                        }}
+                        className="p-1 -ml-1 text-steam-accent hover:text-white hover:bg-white/10 rounded transition-colors"
+                        title={isCollapsed ? `Expand ${col.name} in sidebar` : `Collapse ${col.name} in sidebar`}
+                      >
+                        {isCollapsed ? (
+                          <ChevronRight className="w-3.5 h-3.5" />
+                        ) : (
+                          <ChevronDown className="w-3.5 h-3.5" />
+                        )}
+                      </button>
+
+                      {col.id === 'favorites' && (
+                        <Star className="w-3 h-3 fill-amber-400 text-amber-400 flex-shrink-0" />
                       )}
-                      {col.id === 'favorites' && <Star className="w-3 h-3 fill-amber-400 text-amber-400 flex-shrink-0" />}
+                      {col.id === 'currently-playing' && (
+                        <Play className="w-3 h-3 fill-emerald-400 text-emerald-400 flex-shrink-0" />
+                      )}
+                      {col.id === 'backlog' && (
+                        <Clock className="w-3 h-3 text-sky-400 flex-shrink-0" />
+                      )}
+                      {col.id === 'completed' && (
+                        <Trophy className="w-3 h-3 text-yellow-400 flex-shrink-0" />
+                      )}
                       <span className="truncate">{col.name}</span>
                       <span className="text-[10px] text-[#677788] font-normal">({col.games.length})</span>
                     </div>
 
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onOpenManageCollectionsModal();
-                      }}
-                      className="p-0.5 text-[#556772] hover:text-white opacity-0 hover:opacity-100 group-hover:opacity-100"
-                      title="Manage Collection"
-                    >
-                      <Bookmark className="w-2.5 h-2.5" />
-                    </button>
+                    <div className="flex items-center gap-1">
+                      <span className="text-[10px] text-steam-accent opacity-0 group-hover:opacity-100 transition-opacity font-normal normal-case flex items-center gap-0.5 mr-0.5">
+                        <LayoutGrid className="w-3 h-3" />
+                        Grid
+                      </span>
+
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onOpenManageCollectionsModal();
+                        }}
+                        className="p-1 text-[#556772] hover:text-white rounded hover:bg-black/40 transition-colors opacity-0 group-hover:opacity-100"
+                        title="Manage Collection"
+                      >
+                        <Bookmark className="w-2.5 h-2.5" />
+                      </button>
+                    </div>
                   </div>
 
                   {/* Collection Games */}
@@ -384,20 +451,49 @@ export const LibrarySidebar: React.FC<LibrarySidebarProps> = ({
             {groupedData.uncategorized.length > 0 && (
               <div key="uncategorized" className="mb-0.5">
                 <div
-                  onClick={() => toggleCollectionCollapse('uncategorized')}
-                  className="px-3 py-1 bg-[#141a22] hover:bg-[#1b232e] text-[11px] font-bold uppercase tracking-wider text-steam-subtext hover:text-white flex items-center justify-between cursor-pointer border-t border-b border-black/30 transition-colors"
+                  onClick={() => {
+                    if (onSelectGroupGrid) {
+                      onSelectGroupGrid('uncategorized');
+                    }
+                  }}
+                  className={`px-2.5 py-1.5 text-[11px] font-bold uppercase tracking-wider flex items-center justify-between cursor-pointer border-t border-b transition-colors group select-none ${
+                    isGridView && activeGroupId === 'uncategorized'
+                      ? 'bg-[#1e2d3d] text-white border-steam-accent shadow-inner'
+                      : 'bg-[#141a22] hover:bg-[#1b232e] text-steam-subtext hover:text-white border-black/30'
+                  }`}
+                  title="View Uncategorized in Grid View"
                 >
-                  <div className="flex items-center gap-1.5 truncate">
-                    {collapsedCollections['uncategorized'] ? (
-                      <ChevronRight className="w-3 h-3 text-steam-accent flex-shrink-0" />
-                    ) : (
-                      <ChevronDown className="w-3 h-3 text-steam-accent flex-shrink-0" />
-                    )}
-                    <span>Uncategorized</span>
+                  <div className="flex items-center gap-1.5 truncate flex-1 min-w-0">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleCollectionCollapse('uncategorized');
+                      }}
+                      className="p-1 -ml-1 text-steam-accent hover:text-white hover:bg-white/10 rounded transition-colors"
+                      title={
+                        collapsedCollections['uncategorized']
+                          ? 'Expand Uncategorized in sidebar'
+                          : 'Collapse Uncategorized in sidebar'
+                      }
+                    >
+                      {collapsedCollections['uncategorized'] ? (
+                        <ChevronRight className="w-3.5 h-3.5" />
+                      ) : (
+                        <ChevronDown className="w-3.5 h-3.5" />
+                      )}
+                    </button>
+                    <Layers className="w-3.5 h-3.5 text-sky-400 flex-shrink-0" />
+                    <span className="truncate">Uncategorized</span>
                     <span className="text-[10px] text-[#677788] font-normal">
                       ({groupedData.uncategorized.length})
                     </span>
                   </div>
+
+                  <span className="text-[10px] text-steam-accent opacity-0 group-hover:opacity-100 transition-opacity font-normal normal-case flex items-center gap-0.5 mr-0.5">
+                    <LayoutGrid className="w-3 h-3" />
+                    Grid
+                  </span>
                 </div>
 
                 {!collapsedCollections['uncategorized'] && (
