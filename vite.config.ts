@@ -102,6 +102,26 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/gog-embed/, ''),
       },
+      '/api/gog-auth': {
+        target: 'https://auth.gog.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/gog-auth/, ''),
+      },
+      '/api/gog-profile': {
+        target: 'https://www.gog.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/gog-profile/, ''),
+      },
+      '/api/epic-oauth': {
+        target: 'https://account-public-service-prod03.ol.epicgames.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/epic-oauth/, ''),
+      },
+      '/api/epic-library': {
+        target: 'https://library-service.live.use1a.on.epicgames.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/epic-library/, ''),
+      },
     },
   }
 });
