@@ -3,6 +3,9 @@ export interface EpicCodenameMapping {
   steamAppId?: number;
   developer?: string;
   description?: string;
+  headerImage?: string;
+  capsuleImage?: string;
+  iconUrl?: string;
 }
 
 export const KNOWN_EPIC_APP_NAMES: Record<string, EpicCodenameMapping> = {
@@ -1135,7 +1138,10 @@ export const KNOWN_EPIC_APP_NAMES: Record<string, EpicCodenameMapping> = {
   "4fe75bbc5a674f4f9b356b5c90567da5": {
     "title": "Fortnite",
     "developer": "Epic Games",
-    "description": "Everything you love, all in Fortnite. \n\nDrop into the action you love or discover something new with your squad. Be the last player standing in Battle Royale. Get nostalgic in Fortnite OG. Go tactical in Reload. Headline Fortnite Festival. Explore the worlds of LEGO Fortnite. There is always something new for you and your friends.\n\nPlay thousands of games made by developers like deathruns, tycoons, racing, zombie survival and more! Or, build your own games with Unreal Editor for Fortnite (UEFN) or Fortnite Creative tools for everyone to play.  Each game has an individual age rating so you can find what?s right for you."
+    "description": "Everything you love, all in Fortnite. \n\nDrop into the action you love or discover something new with your squad. Be the last player standing in Battle Royale. Get nostalgic in Fortnite OG. Go tactical in Reload. Headline Fortnite Festival. Explore the worlds of LEGO Fortnite. There is always something new for you and your friends.\n\nPlay thousands of games made by developers like deathruns, tycoons, racing, zombie survival and more! Or, build your own games with Unreal Editor for Fortnite (UEFN) or Fortnite Creative tools for everyone to play.  Each game has an individual age rating so you can find what?s right for you.",
+    "headerImage": "https://cdn2.unrealengine.com/fnbr-42-00-c7s4-hacking-logo-egs-launcher-blade-2560x1440-2560x1440-00f5395fc1e7.jpg",
+    "capsuleImage": "https://cdn2.unrealengine.com/fnbr-42-00-c7s4-hacking-egs-launcher-blade-1200x1600-1200x1600-0138e7df7bb0.jpg",
+    "iconUrl": "https://cdn2.unrealengine.com/fnbr-42-00-c7s4-hacking-egs-launcher-blade-1200x1600-1200x1600-0138e7df7bb0.jpg"
   },
   "capsicum": {
     "title": "The Spectrum Retreat",

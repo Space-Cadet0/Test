@@ -751,11 +751,13 @@ async function fetchEpicOwnedGames(accessToken, accountId) {
 
         const headerImg = steamAppId
           ? `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${steamAppId}/header.jpg`
-          : wideBanner || 'https://cdn2.unrealengine.com/egs-badge.png';
+          : (codename && codename.headerImage) || wideBanner || 'https://cdn2.unrealengine.com/egs-badge.png';
 
         const capsuleImg = steamAppId
           ? `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${steamAppId}/library_600x900_2x.jpg`
-          : tallCover || wideBanner || 'https://cdn2.unrealengine.com/egs-badge.png';
+          : (codename && codename.capsuleImage) || tallCover || wideBanner || 'https://cdn2.unrealengine.com/egs-badge.png';
+
+        const iconImg = (codename && codename.iconUrl) ? codename.iconUrl : undefined;
 
         const developer = (codename && codename.developer)
           ? codename.developer
@@ -781,6 +783,7 @@ async function fetchEpicOwnedGames(accessToken, accountId) {
           ],
           headerImage: headerImg,
           capsuleImage: capsuleImg,
+          iconUrl: iconImg,
           shortDescription,
           releaseDate: item.metadata?.releaseDate || '',
           developers: developer ? [developer] : [],

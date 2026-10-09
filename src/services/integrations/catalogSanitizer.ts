@@ -295,6 +295,21 @@ export function sanitizeGameCatalog(catalog: CanonicalGame[]): CanonicalGame[] {
       };
     }
 
+    // Disambiguate / normalize Fortnite (Epic exclusive)
+    if (
+      currentTitleLower === 'fortnite' ||
+      normTitle === 'fortnite' ||
+      game.id === 'epic-4fe75bbc5a674f4f9b356b5c90567da5'
+    ) {
+      game = {
+        ...game,
+        id: 'epic-4fe75bbc5a674f4f9b356b5c90567da5',
+        headerImage: 'https://cdn2.unrealengine.com/fnbr-42-00-c7s4-hacking-logo-egs-launcher-blade-2560x1440-2560x1440-00f5395fc1e7.jpg',
+        capsuleImage: 'https://cdn2.unrealengine.com/fnbr-42-00-c7s4-hacking-egs-launcher-blade-1200x1600-1200x1600-0138e7df7bb0.jpg',
+        iconUrl: 'https://cdn2.unrealengine.com/fnbr-42-00-c7s4-hacking-egs-launcher-blade-1200x1600-1200x1600-0138e7df7bb0.jpg',
+      };
+    }
+
     // 5. Remove erroneous 'epic' platform presence from non-Epic titles
     if (currentTitleLower.includes('gwent') || currentTitleLower.includes('heroes of might and magic')) {
       game = {
@@ -378,9 +393,9 @@ export function sanitizeGameCatalog(catalog: CanonicalGame[]): CanonicalGame[] {
           ? `steam-${game.steamAppId}`
           : existing.id,
         platforms: mergedPlatforms,
-        headerImage: existing.headerImage || game.headerImage,
-        capsuleImage: existing.capsuleImage || game.capsuleImage,
-        iconUrl: existing.iconUrl || game.iconUrl,
+        headerImage: (existing.headerImage && !existing.headerImage.includes('egs-badge.png')) ? existing.headerImage : game.headerImage,
+        capsuleImage: (existing.capsuleImage && !existing.capsuleImage.includes('egs-badge.png')) ? existing.capsuleImage : game.capsuleImage,
+        iconUrl: (existing.iconUrl && !existing.iconUrl.includes('egs-badge.png')) ? existing.iconUrl : (game.iconUrl || game.capsuleImage),
         shortDescription: existing.shortDescription || game.shortDescription,
         developers: existing.developers && existing.developers.length > 0 ? existing.developers : game.developers,
         publishers: existing.publishers && existing.publishers.length > 0 ? existing.publishers : game.publishers,
