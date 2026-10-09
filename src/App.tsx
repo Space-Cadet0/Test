@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { CanonicalGame } from './contracts/game';
 import { StorefrontId } from './contracts/platform';
 import { INITIAL_LIBRARY_GAMES } from './services/storage/mockLibrary';
+import { mergeScannedSteamGames } from './services/storage/librarySync';
 import { steamApi } from './services/steam/steamApi';
 import { TopNavBar } from './components/Navigation/TopNavBar';
 import { LibrarySidebar } from './components/Library/LibrarySidebar';
@@ -9,7 +10,9 @@ import { SteamStorePage } from './components/SteamStoreDetail/SteamStorePage';
 import { Plus, Sparkles, X, CheckCircle2 } from 'lucide-react';
 
 export function App() {
-  const [games, setGames] = useState<CanonicalGame[]>(INITIAL_LIBRARY_GAMES);
+  const [games, setGames] = useState<CanonicalGame[]>(() =>
+    mergeScannedSteamGames(INITIAL_LIBRARY_GAMES)
+  );
   // Default to Gears of War: E-Day (first game in the catalog)
   const [selectedGame, setSelectedGame] = useState<CanonicalGame | null>(
     INITIAL_LIBRARY_GAMES[0] || null
@@ -134,13 +137,17 @@ export function App() {
   // Trigger library sync simulation
   const handleTriggerSync = () => {
     setIsSyncing(true);
-    setSyncNotice('Scanning local Steam manifests and sync endpoints...');
+    setSyncNotice('Scanning local Steam directory (~/Library/Application Support/Steam)...');
 
     setTimeout(() => {
+      const updated = mergeScannedSteamGames(games);
+      setGames(updated);
       setIsSyncing(false);
-      setSyncNotice('Library sync complete! 10 multi-platform titles indexed.');
+      setSyncNotice(
+        `Local sync complete! SpaceCadet Steam client synchronized (${updated.length} multi-platform titles indexed).`
+      );
       setTimeout(() => setSyncNotice(null), 4000);
-    }, 1500);
+    }, 1000);
   };
 
   return (
