@@ -21,7 +21,10 @@ import {
   Trophy,
   Layers,
   Bookmark,
+  Sliders,
 } from 'lucide-react';
+import { ActiveGameFilter } from './contracts/filter';
+import { matchesGameFilter } from './services/filter/gameFilterService';
 
 export function App() {
   const [games, setGames] = useState<CanonicalGame[]>(() => {
@@ -53,6 +56,7 @@ export function App() {
   });
   const [isGridView, setIsGridView] = useState(false);
   const [activeGroupId, setActiveGroupId] = useState<string | null>(null);
+  const [activeFilter, setActiveFilter] = useState<ActiveGameFilter | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedPlatform, setSelectedPlatform] = useState<StorefrontId | 'all'>('all');
   const [installedOnly, setInstalledOnly] = useState(false);
@@ -165,9 +169,14 @@ export function App() {
         if (!matchesTitle && !matchesDev && !matchesTags) return false;
       }
 
+      // Temporary Active Link Filter (Developer, Publisher, Feature like HDR available, Genre, Tag)
+      if (activeFilter) {
+        if (!matchesGameFilter(game, activeFilter)) return false;
+      }
+
       return true;
     });
-  }, [games, selectedPlatform, installedOnly, searchQuery]);
+  }, [games, selectedPlatform, installedOnly, searchQuery, activeFilter]);
 
   // Active group data for grid view filtering
   const activeGroupData = useMemo(() => {
@@ -285,6 +294,7 @@ export function App() {
         onTriggerSync={handleTriggerSync}
         onOpenIntegrations={() => setIsIntegrationsModalOpen(true)}
         onHomeClick={() => {
+          setActiveFilter(null);
           setActiveGroupId(null);
           setIsGridView(true);
         }}
@@ -318,15 +328,19 @@ export function App() {
           onOpenManageCollectionsModal={handleOpenManageCollections}
           onToggleGameInCollection={handleToggleGameInCollection}
           onViewAllGamesGrid={() => {
+            setActiveFilter(null);
             setActiveGroupId(null);
             setIsGridView(true);
           }}
           onSelectGroupGrid={(groupId) => {
+            setActiveFilter(null);
             setActiveGroupId(groupId);
             setIsGridView(true);
           }}
           activeGroupId={activeGroupId}
           isGridView={isGridView}
+          activeFilter={activeFilter}
+          onClearActiveFilter={() => setActiveFilter(null)}
         />
 
         {/* Right Main Pane: Steam Storefront Detail Layout OR Group/Whole Library Grid View */}
@@ -339,10 +353,24 @@ export function App() {
                 setIsGridView(false);
               }}
               searchQuery={searchQuery}
-              title={activeGroupData ? activeGroupData.name : 'All Games'}
-              subtitle={activeGroupData ? activeGroupData.subtitle : undefined}
+              title={
+                activeFilter
+                  ? `${activeFilter.label}: ${activeFilter.value}`
+                  : activeGroupData
+                  ? activeGroupData.name
+                  : 'All Games'
+              }
+              subtitle={
+                activeFilter
+                  ? `Showing all games matching "${activeFilter.value}"`
+                  : activeGroupData
+                  ? activeGroupData.subtitle
+                  : undefined
+              }
               groupIcon={
-                activeGroupId === 'favorites' ? (
+                activeFilter ? (
+                  <Sliders className="w-6 h-6 text-steam-accent" />
+                ) : activeGroupId === 'favorites' ? (
                   <Star className="w-6 h-6 fill-amber-400 text-amber-400" />
                 ) : activeGroupId === 'currently-playing' ? (
                   <Play className="w-6 h-6 fill-emerald-400 text-emerald-400" />
@@ -357,14 +385,26 @@ export function App() {
                 ) : undefined
               }
               onClearGroupFilter={activeGroupId ? () => setActiveGroupId(null) : undefined}
+              activeFilter={activeFilter}
+              onClearActiveFilter={() => setActiveFilter(null)}
             />
           ) : (
             <SteamStorePage
               game={selectedGame}
-              parentGroupName={activeGroupData ? activeGroupData.name : 'All Games'}
+              parentGroupName={
+                activeFilter
+                  ? `${activeFilter.label}: ${activeFilter.value}`
+                  : activeGroupData
+                  ? activeGroupData.name
+                  : 'All Games'
+              }
               onBackToLibrary={() => setIsGridView(true)}
               onManageCollections={() => handleOpenManageCollections(selectedGame)}
               onToggleInstallStatus={() => handleToggleInstallStatus(selectedGame)}
+              onApplyFilter={(filter) => {
+                setActiveFilter(filter);
+                setIsGridView(true);
+              }}
             />
           )}
         </main>

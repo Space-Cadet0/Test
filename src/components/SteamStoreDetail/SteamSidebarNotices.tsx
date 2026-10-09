@@ -1,5 +1,6 @@
 import React from 'react';
 import { ChevronRight, ExternalLink } from 'lucide-react';
+import { ActiveGameFilter } from '../../contracts/filter';
 
 interface SteamSidebarNoticesProps {
   title: string;
@@ -10,6 +11,7 @@ interface SteamSidebarNoticesProps {
   releaseDate?: string;
   franchise?: string;
   legalNotice?: string;
+  onApplyFilter?: (filter: ActiveGameFilter) => void;
 }
 
 export const SteamSidebarNotices: React.FC<SteamSidebarNoticesProps> = ({
@@ -21,6 +23,7 @@ export const SteamSidebarNotices: React.FC<SteamSidebarNoticesProps> = ({
   releaseDate,
   franchise,
   legalNotice,
+  onApplyFilter,
 }) => {
   return (
     <div className="space-y-4">
@@ -58,9 +61,14 @@ export const SteamSidebarNotices: React.FC<SteamSidebarNoticesProps> = ({
             <span className="space-x-1">
               {genres.map((g, idx) => (
                 <span key={idx}>
-                  <a href="#" onClick={(e) => e.preventDefault()} className="hover:underline">
+                  <button
+                    type="button"
+                    onClick={() => onApplyFilter?.({ type: 'genre', label: 'Genre', value: g })}
+                    className="hover:underline hover:text-white transition-colors cursor-pointer text-[#67c1f5]"
+                    title={`Filter library by genre "${g}"`}
+                  >
                     {g}
-                  </a>
+                  </button>
                   {idx < genres.length - 1 && ', '}
                 </span>
               ))}
@@ -71,9 +79,14 @@ export const SteamSidebarNotices: React.FC<SteamSidebarNoticesProps> = ({
             <b>Developer:</b>{' '}
             {developers.map((d, idx) => (
               <span key={idx}>
-                <a href="#" onClick={(e) => e.preventDefault()} className="hover:underline">
+                <button
+                  type="button"
+                  onClick={() => onApplyFilter?.({ type: 'developer', label: 'Developer', value: d })}
+                  className="hover:underline hover:text-white transition-colors cursor-pointer text-[#67c1f5]"
+                  title={`Filter library by developer "${d}"`}
+                >
                   {d}
-                </a>
+                </button>
                 {idx < developers.length - 1 && ', '}
               </span>
             ))}
@@ -83,9 +96,14 @@ export const SteamSidebarNotices: React.FC<SteamSidebarNoticesProps> = ({
             <b>Publisher:</b>{' '}
             {publishers.map((p, idx) => (
               <span key={idx}>
-                <a href="#" onClick={(e) => e.preventDefault()} className="hover:underline">
+                <button
+                  type="button"
+                  onClick={() => onApplyFilter?.({ type: 'publisher', label: 'Publisher', value: p })}
+                  className="hover:underline hover:text-white transition-colors cursor-pointer text-[#67c1f5]"
+                  title={`Filter library by publisher "${p}"`}
+                >
                   {p}
-                </a>
+                </button>
                 {idx < publishers.length - 1 && ', '}
               </span>
             ))}
@@ -94,9 +112,14 @@ export const SteamSidebarNotices: React.FC<SteamSidebarNoticesProps> = ({
           {franchise && (
             <div>
               <b>Franchise:</b>{' '}
-              <a href="#" onClick={(e) => e.preventDefault()} className="hover:underline">
+              <button
+                type="button"
+                onClick={() => onApplyFilter?.({ type: 'tag', label: 'Franchise', value: franchise })}
+                className="hover:underline hover:text-white transition-colors cursor-pointer text-[#67c1f5]"
+                title={`Filter library by franchise "${franchise}"`}
+              >
                 {franchise}
-              </a>
+              </button>
             </div>
           )}
 

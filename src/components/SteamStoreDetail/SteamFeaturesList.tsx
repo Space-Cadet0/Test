@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SteamCategory } from '../../contracts/steam';
 import { getSteamCategoryIconUrl } from '../../services/steam/steamApi';
+import { ActiveGameFilter } from '../../contracts/filter';
 import { ChevronDown, Sliders, CheckCircle2, Gamepad } from 'lucide-react';
 
 interface SteamFeaturesListProps {
@@ -9,6 +10,7 @@ interface SteamFeaturesListProps {
   hasAntiCheat?: boolean;
   antiCheatName?: string;
   hasEula?: boolean;
+  onApplyFilter?: (filter: ActiveGameFilter) => void;
 }
 
 // Category taxonomies according to Steam's official storefront specifications
@@ -24,6 +26,7 @@ export const SteamFeaturesList: React.FC<SteamFeaturesListProps> = ({
   hasAntiCheat = false,
   antiCheatName = 'Easy Anti-Cheat',
   hasEula = false,
+  onApplyFilter,
 }) => {
   const [showAccessibility, setShowAccessibility] = useState(false);
 
@@ -105,12 +108,12 @@ export const SteamFeaturesList: React.FC<SteamFeaturesListProps> = ({
       {/* 1:1 Steam Features List Specs Container */}
       <div className="space-y-[2px]">
         {specs.map((cat) => (
-          <a
+          <button
             key={cat.id}
-            className="steam-spec-row group"
-            title={cat.description}
-            href="#"
-            onClick={(e) => e.preventDefault()}
+            type="button"
+            className="steam-spec-row group w-full text-left cursor-pointer border-none"
+            title={`Filter library by ${cat.description}`}
+            onClick={() => onApplyFilter?.({ type: 'feature', label: 'Feature', value: cat.description })}
           >
             <div className="spec-icon">
               <img
@@ -120,9 +123,9 @@ export const SteamFeaturesList: React.FC<SteamFeaturesListProps> = ({
               />
             </div>
             <div className="spec-label">
-              <span>{cat.description}</span>
+              <span className="group-hover:text-white transition-colors">{cat.description}</span>
             </div>
-          </a>
+          </button>
         ))}
       </div>
 
@@ -152,13 +155,16 @@ export const SteamFeaturesList: React.FC<SteamFeaturesListProps> = ({
               </div>
               <div className="grid grid-cols-1 gap-1">
                 {accessibilityList.map((item) => (
-                  <div
+                  <button
                     key={item.id}
-                    className="flex items-center gap-2 text-[11px] text-[#c6d4df] py-0.5 px-1 rounded hover:bg-white/5"
+                    type="button"
+                    onClick={() => onApplyFilter?.({ type: 'feature', label: 'Accessibility', value: item.description })}
+                    className="flex items-center gap-2 text-[11px] text-[#c6d4df] hover:text-white py-0.5 px-1 rounded hover:bg-white/5 w-full text-left cursor-pointer transition-colors"
+                    title={`Filter library by accessibility feature "${item.description}"`}
                   >
                     <CheckCircle2 className="w-3 h-3 text-emerald-400 flex-shrink-0" />
                     <span>{item.description}</span>
-                  </div>
+                  </button>
                 ))}
               </div>
             </div>

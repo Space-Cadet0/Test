@@ -20,6 +20,7 @@ import {
   ArrowLeft,
   RefreshCw,
 } from 'lucide-react';
+import { ActiveGameFilter } from '../../contracts/filter';
 
 interface SteamStorePageProps {
   game: CanonicalGame;
@@ -27,6 +28,7 @@ interface SteamStorePageProps {
   onManageCollections?: () => void;
   onToggleInstallStatus?: () => void;
   parentGroupName?: string;
+  onApplyFilter?: (filter: ActiveGameFilter) => void;
 }
 
 export const SteamStorePage: React.FC<SteamStorePageProps> = ({
@@ -35,6 +37,7 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
   onManageCollections,
   onToggleInstallStatus,
   parentGroupName,
+  onApplyFilter,
 }) => {
   const [metadata, setMetadata] = useState<SteamEnrichedMetadata | null>(
     game.enrichedMetadata || null
@@ -212,6 +215,7 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
             developers={developers}
             publishers={publishers}
             tags={tags}
+            onApplyFilter={onApplyFilter}
           />
         </div>
 
@@ -259,6 +263,7 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
               hasAntiCheat={Boolean(metadata?.drmNotice?.toLowerCase().includes('anti-cheat'))}
               antiCheatName={metadata?.drmNotice?.includes('Easy') ? 'Easy Anti-Cheat' : 'Anti-Cheat Software'}
               hasEula={Boolean(metadata?.drmNotice?.toLowerCase().includes('eula') || metadata?.legalNotice?.toLowerCase().includes('eula'))}
+              onApplyFilter={onApplyFilter}
             />
 
             {/* Exact 1:1 Languages Matrix Table */}
@@ -273,6 +278,7 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
               publishers={publishers}
               releaseDate={releaseDate}
               legalNotice={metadata?.legalNotice}
+              onApplyFilter={onApplyFilter}
             />
           </div>
         </div>

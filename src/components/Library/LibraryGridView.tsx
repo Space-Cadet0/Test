@@ -10,8 +10,11 @@ import {
   CheckCircle2,
   Cloud,
   ArrowLeft,
+  X,
+  Sliders,
 } from 'lucide-react';
 import { getOpenCriticData, getTierColor } from '../../services/opencritic/openCritic';
+import { ActiveGameFilter } from '../../contracts/filter';
 
 interface LibraryGridViewProps {
   games: CanonicalGame[];
@@ -21,6 +24,8 @@ interface LibraryGridViewProps {
   subtitle?: string;
   groupIcon?: React.ReactNode;
   onClearGroupFilter?: () => void;
+  activeFilter?: ActiveGameFilter | null;
+  onClearActiveFilter?: () => void;
 }
 
 export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
@@ -31,6 +36,8 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
   subtitle,
   groupIcon,
   onClearGroupFilter,
+  activeFilter,
+  onClearActiveFilter,
 }) => {
   const [hoveredGame, setHoveredGame] = useState<CanonicalGame | null>(null);
   const [previewPos, setPreviewPos] = useState<{ x: number; y: number; align: 'left' | 'right' }>({
@@ -106,14 +113,31 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
               {groupIcon || <Gamepad2 className="w-6 h-6" />}
             </div>
             <div>
-              <div className="flex items-center gap-2.5">
+              <div className="flex flex-wrap items-center gap-2.5">
                 <h1 className="text-xl font-bold text-white tracking-wide flex items-center gap-2">
                   {title || 'All Games'}
                   <span className="text-xs px-2 py-0.5 rounded-full bg-[#1b2838] border border-steam-border text-steam-accent font-semibold">
                     {games.length}
                   </span>
                 </h1>
-                {onClearGroupFilter && (
+                {activeFilter && (
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-steam-accent/20 border border-steam-accent/40 text-steam-accent text-xs">
+                    <Sliders className="w-3 h-3" />
+                    <span>
+                      Filter: <strong className="text-white">{activeFilter.label}</strong>: {activeFilter.value}
+                    </span>
+                    {onClearActiveFilter && (
+                      <button
+                        onClick={onClearActiveFilter}
+                        className="p-0.5 rounded-full hover:bg-white/10 text-steam-accent hover:text-white transition-colors cursor-pointer"
+                        title="Clear filter"
+                      >
+                        <X className="w-3 h-3" />
+                      </button>
+                    )}
+                  </div>
+                )}
+                {onClearGroupFilter && !activeFilter && (
                   <button
                     onClick={onClearGroupFilter}
                     className="inline-flex items-center gap-1 px-2.5 py-0.5 text-[11px] font-semibold text-steam-accent hover:text-white bg-[#16202d] hover:bg-[#202f42] border border-steam-border rounded transition-colors group cursor-pointer"
@@ -191,14 +215,22 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
                 ? `You have not assigned any titles to the "${title}" collection yet. You can add games from the sidebar or any game detail page.`
                 : 'No titles match your current filter or search criteria. Try clearing search or switching platforms.'}
             </p>
-            {onClearGroupFilter && (
+            {activeFilter && onClearActiveFilter ? (
+              <button
+                onClick={onClearActiveFilter}
+                className="mt-2 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded bg-steam-accent text-black font-semibold text-xs hover:brightness-110 transition-all shadow"
+              >
+                <X className="w-3.5 h-3.5" />
+                <span>Clear Filter & View All Games</span>
+              </button>
+            ) : onClearGroupFilter ? (
               <button
                 onClick={onClearGroupFilter}
                 className="mt-2 inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-steam-accent text-black font-semibold text-xs hover:brightness-110 transition-all shadow"
               >
                 <span>View All Games</span>
               </button>
-            )}
+            ) : null}
           </div>
         )}
 

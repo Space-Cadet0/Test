@@ -21,7 +21,11 @@ import {
   Clock,
   Trophy,
   Layers,
+  Sliders,
+  X,
 } from 'lucide-react';
+
+import { ActiveGameFilter } from '../../contracts/filter';
 
 const COLLAPSED_STORAGE_KEY = 'antigravity_library_collapsed_groups';
 
@@ -42,6 +46,8 @@ interface LibrarySidebarProps {
   onSelectGroupGrid?: (groupId: string | null) => void;
   activeGroupId?: string | null;
   isGridView?: boolean;
+  activeFilter?: ActiveGameFilter | null;
+  onClearActiveFilter?: () => void;
 }
 
 export const LibrarySidebar: React.FC<LibrarySidebarProps> = ({
@@ -61,6 +67,8 @@ export const LibrarySidebar: React.FC<LibrarySidebarProps> = ({
   onSelectGroupGrid,
   activeGroupId = null,
   isGridView = false,
+  activeFilter,
+  onClearActiveFilter,
 }) => {
   const [groupByCollections, setGroupByCollections] = useState(true);
   const [collapsedCollections, setCollapsedCollections] = useState<Record<string, boolean>>(() => {
@@ -330,6 +338,28 @@ export const LibrarySidebar: React.FC<LibrarySidebarProps> = ({
             <span>Ready to Play</span>
           </button>
         </div>
+
+        {/* Active Temporary Filter Chip */}
+        {activeFilter && (
+          <div className="flex items-center justify-between px-2.5 py-1.5 bg-steam-accent/15 border border-steam-accent/30 rounded text-xs animate-in fade-in duration-150">
+            <div className="flex items-center gap-1.5 truncate">
+              <Sliders className="w-3 h-3 text-steam-accent flex-shrink-0" />
+              <span className="text-steam-accent font-semibold text-[11px] truncate">
+                {activeFilter.label}: <span className="text-white">{activeFilter.value}</span>
+              </span>
+            </div>
+            {onClearActiveFilter && (
+              <button
+                type="button"
+                onClick={onClearActiveFilter}
+                className="p-0.5 hover:bg-white/10 rounded text-steam-accent hover:text-white ml-1.5 transition-colors cursor-pointer"
+                title="Clear filter"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Category Section Header & Grouping Controls */}

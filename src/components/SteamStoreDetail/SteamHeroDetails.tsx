@@ -1,6 +1,7 @@
 import React from 'react';
 import { SteamReviewSummary } from '../../contracts/steam';
 import { OpenCriticData, getTierColor } from '../../services/opencritic/openCritic';
+import { ActiveGameFilter } from '../../contracts/filter';
 import { HelpCircle } from 'lucide-react';
 
 interface SteamHeroDetailsProps {
@@ -13,6 +14,7 @@ interface SteamHeroDetailsProps {
   developers?: string[];
   publishers?: string[];
   tags?: string[];
+  onApplyFilter?: (filter: ActiveGameFilter) => void;
 }
 
 export const SteamHeroDetails: React.FC<SteamHeroDetailsProps> = ({
@@ -25,6 +27,7 @@ export const SteamHeroDetails: React.FC<SteamHeroDetailsProps> = ({
   developers = [],
   publishers = [],
   tags = [],
+  onApplyFilter,
 }) => {
   // Determine Steam review text & color
   const getReviewColor = (desc?: string) => {
@@ -119,9 +122,22 @@ export const SteamHeroDetails: React.FC<SteamHeroDetailsProps> = ({
           <span className="w-[94px] flex-shrink-0 text-[10px] uppercase text-[#556772] font-normal tracking-wider">
             Developer:
           </span>
-          <span className="text-[#67c1f5] hover:underline cursor-pointer truncate">
-            {developers.length > 0 ? developers.join(', ') : 'Unknown'}
-          </span>
+          <div className="truncate space-x-1">
+            {developers.map((dev, idx) => (
+              <span key={idx}>
+                <button
+                  type="button"
+                  onClick={() => onApplyFilter?.({ type: 'developer', label: 'Developer', value: dev })}
+                  className="text-[#67c1f5] hover:underline cursor-pointer hover:text-white transition-colors"
+                  title={`Filter library by developer "${dev}"`}
+                >
+                  {dev}
+                </button>
+                {idx < developers.length - 1 && <span className="text-[#8f98a0]">, </span>}
+              </span>
+            ))}
+            {developers.length === 0 && <span className="text-[#8f98a0]">Unknown</span>}
+          </div>
         </div>
 
         {/* Publisher */}
@@ -129,9 +145,22 @@ export const SteamHeroDetails: React.FC<SteamHeroDetailsProps> = ({
           <span className="w-[94px] flex-shrink-0 text-[10px] uppercase text-[#556772] font-normal tracking-wider">
             Publisher:
           </span>
-          <span className="text-[#67c1f5] hover:underline cursor-pointer truncate">
-            {publishers.length > 0 ? publishers.join(', ') : 'Unknown'}
-          </span>
+          <div className="truncate space-x-1">
+            {publishers.map((pub, idx) => (
+              <span key={idx}>
+                <button
+                  type="button"
+                  onClick={() => onApplyFilter?.({ type: 'publisher', label: 'Publisher', value: pub })}
+                  className="text-[#67c1f5] hover:underline cursor-pointer hover:text-white transition-colors"
+                  title={`Filter library by publisher "${pub}"`}
+                >
+                  {pub}
+                </button>
+                {idx < publishers.length - 1 && <span className="text-[#8f98a0]">, </span>}
+              </span>
+            ))}
+            {publishers.length === 0 && <span className="text-[#8f98a0]">Unknown</span>}
+          </div>
         </div>
       </div>
 
@@ -142,12 +171,15 @@ export const SteamHeroDetails: React.FC<SteamHeroDetailsProps> = ({
         </div>
         <div className="flex flex-wrap gap-[3px] items-center">
           {displayTags.map((tag, i) => (
-            <a
+            <button
               key={i}
+              type="button"
+              onClick={() => onApplyFilter?.({ type: 'tag', label: 'Tag', value: tag })}
               className="inline-block px-[7px] h-[19px] leading-[19px] text-[11px] bg-[rgba(103,193,245,0.2)] hover:bg-[rgba(103,193,245,0.4)] text-[#67c1f5] hover:text-white rounded-[2px] transition-colors cursor-pointer"
+              title={`Filter library by tag "${tag}"`}
             >
               {tag}
-            </a>
+            </button>
           ))}
           {/* Steam Plus Tag Button */}
           <div

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   X,
   CheckCircle2,
@@ -93,6 +93,8 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
 
   // Active external authentication tracking
   const [authenticatingStore, setAuthenticatingStore] = useState<StorefrontId | null>(null);
+  const [authRedirectInput, setAuthRedirectInput] = useState('');
+  const popupRef = useRef<Window | null>(null);
 
   // Advanced manual inputs toggle
   const [showAdvancedInputs, setShowAdvancedInputs] = useState(false);
@@ -109,6 +111,21 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
+
+  const extractCodeFromInput = (input: string): string | null => {
+    if (!input) return null;
+    const trimmed = input.trim();
+    if (trimmed.includes('code=')) {
+      try {
+        const url = new URL(trimmed.startsWith('http') ? trimmed : `https://${trimmed}`);
+        return url.searchParams.get('code') || null;
+      } catch {
+        const match = trimmed.match(/code=([a-zA-Z0-9_\-]+)/);
+        return match ? match[1] : null;
+      }
+    }
+    return trimmed.length > 20 ? trimmed : null;
+  };
 
   useEffect(() => {
     // Sync integrations from storage when modal opens
@@ -142,6 +159,7 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
       config.title,
       `width=${config.width},height=${config.height},left=${left},top=${top},status=no,menubar=no,toolbar=no`
     );
+    popupRef.current = popup;
 
     // Watch for popup closure to complete authentication automatically
     if (popup) {
@@ -161,7 +179,16 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
   /**
    * Complete connection once user has signed in on the official store page
    */
-  const completeStoreAuthentication = async (storefrontId: StorefrontId) => {
+  const completeStoreAuthentication = async (storefrontId: StorefrontId, explicitCode?: string) => {
+    // Automatically close the popup window if open
+    if (popupRef.current && !popupRef.current.closed) {
+      try {
+        popupRef.current.close();
+      } catch {
+        // Safe cross-origin close catch
+      }
+    }
+
     setIsSubmitting(true);
     setErrorMsg(null);
     try {
@@ -169,12 +196,13 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
       let accountName = 'Verified User';
 
       if (storefrontId === 'gog') {
+        const tokenOrCode = explicitCode || extractCodeFromInput(authRedirectInput) || gogToken.trim() || undefined;
         const { integration, games } = await connectGogIntegration({
-          gogUsername: gogInput.trim() || 'GOG User',
-          gogToken: gogToken.trim() || undefined,
+          gogUsername: gogInput.trim() || 'SpaceCadet',
+          gogToken: tokenOrCode,
         });
         resultGames = games;
-        accountName = integration.accountName || 'GOG User';
+        accountName = integration.accountName || 'SpaceCadet';
       } else if (storefrontId === 'steam') {
         const { integration, games } = await connectSteamIntegration({
           steamId: steamInput.trim() || '76561198244849198',
@@ -343,15 +371,40 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
                   Official {STORE_AUTH_CONFIGS[selectedTab]?.storeName} Sign-In Window Open
                 </h3>
                 <p className="text-xs text-steam-subtext max-w-md mx-auto mt-1 leading-relaxed">
-                  Please log in on the official {STORE_AUTH_CONFIGS[selectedTab]?.storeName} sign-in page in the pop-up window.
-                  Once complete, this app will automatically connect and synchronize your owned titles.
+                  {selectedTab === 'gog' ? (
+                    <>
+                      Please log in on the official GOG sign-in window. Once you authenticate, GOG redirects to a success page (<code className="text-emerald-300 bg-black/40 px-1 py-0.5 rounded text-[11px]">embed.gog.com/on_login_success</code>).
+                      <br className="my-1" />
+                      When that page appears, your login was successful! Click <strong className="text-white">"I've Completed Sign In — Sync Now"</strong> below to close the pop-up and sync your library.
+                    </>
+                  ) : (
+                    `Please log in on the official ${STORE_AUTH_CONFIGS[selectedTab]?.storeName} sign-in page in the pop-up window. Once complete, this app will automatically connect and synchronize your owned titles.`
+                  )}
                 </p>
               </div>
+
+              {selectedTab === 'gog' && (
+                <div className="max-w-md mx-auto text-left space-y-1.5 bg-[#121922] p-3 rounded border border-steam-border/60">
+                  <label className="block text-[11px] font-semibold text-white">
+                    Optional: Paste Pop-Up Address Bar URL or Code
+                  </label>
+                  <input
+                    type="text"
+                    value={authRedirectInput}
+                    onChange={(e) => setAuthRedirectInput(e.target.value)}
+                    placeholder="e.g. https://embed.gog.com/on_login_success?origin=client&code=..."
+                    className="w-full px-2.5 py-1.5 bg-[#0d1218] border border-steam-border rounded text-xs text-white font-mono placeholder:text-steam-subtext/50 focus:outline-none focus:border-steam-accent"
+                  />
+                  <p className="text-[10px] text-steam-subtext">
+                    If GOG stops at the success page, you can paste the URL here or just click the button below.
+                  </p>
+                </div>
+              )}
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
                 <button
                   type="button"
-                  onClick={() => completeStoreAuthentication(selectedTab)}
+                  onClick={() => completeStoreAuthentication(selectedTab, extractCodeFromInput(authRedirectInput) || undefined)}
                   disabled={isSubmitting}
                   className="px-5 py-2.5 rounded bg-steam-accent hover:bg-steam-accent-hover text-white text-xs font-bold transition-all shadow-md flex items-center gap-2"
                 >
