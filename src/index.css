@@ -28,7 +28,9 @@
   }
 }
 
-/* Steam description typography & media styling */
+/* ========================================================
+   STEAM STORE DESCRIPTION CONTENT (1:1 PIXEL MATCH)
+   ======================================================== */
 .steam-description-content {
   color: #acb2b8;
   line-height: 1.6;
@@ -83,5 +85,197 @@
 }
 .steam-description-content strong,
 .steam-description-content b {
+  color: #ffffff;
+}
+
+/* ========================================================
+   STEAM STORE RIGHT COLUMN (1:1 PIXEL MATCH)
+   ======================================================== */
+
+.steam-block-title {
+  font-size: 12px;
+  color: #8f98a0;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+}
+
+/* Features Rows: Exact Steam game_area_details_specs_ctn layout */
+.steam-spec-row {
+  margin-bottom: 2px;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 1px;
+}
+
+.steam-spec-row .spec-icon {
+  padding: 0px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 28px;
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.steam-spec-row .spec-icon img {
+  max-width: 20px;
+  max-height: 20px;
+  display: block;
+  vertical-align: unset;
+}
+
+.steam-spec-row .spec-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px;
+  height: 28px;
+  background: rgba(103, 193, 245, 0.1);
+  width: 100%;
+  border-radius: 1px;
+  color: #66c0f4;
+  font-size: 12px;
+  line-height: 16px;
+  transition: background 0.1s ease, color 0.1s ease;
+}
+
+.steam-spec-row:hover .spec-label {
+  color: #ffffff;
+  background: linear-gradient(135deg, #67c1f5 0%, #417a9b 100%);
+}
+
+/* Steam Anti-Cheat Box: Exact .anticheat_nonkernel_notice */
+.steam-anticheat-box {
+  color: #66c0f4;
+  padding: 5px 8px;
+  line-height: 17px;
+  border-radius: 1px;
+  margin-top: 10px;
+  background: rgba(103, 193, 245, 0.1);
+  font-size: 12px;
+}
+
+.steam-anticheat-box .anticheat-title {
+  color: #66c0f4;
+  font-size: 11px;
+}
+
+.steam-anticheat-box .anticheat-name {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Steam DRM Notice Box: Exact .DRM_notice */
+.steam-drm-box {
+  color: #e1c48a;
+  padding: 5px 8px;
+  line-height: 17px;
+  border-radius: 1px;
+  margin-top: 8px;
+  background: linear-gradient(135deg, rgba(130, 114, 81, 0.5) 0%, rgba(226, 197, 139, 0.5) 100%);
+  font-size: 12px;
+}
+
+.steam-drm-box a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.steam-drm-box a:hover {
+  color: #66c0f4;
+}
+
+/* Steam Languages Table: Exact table.game_language_options */
+table.steam-lang-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 12px;
+}
+
+table.steam-lang-table tr {
+  border-bottom: 1px solid #4a4d52;
+}
+
+table.steam-lang-table th {
+  font-size: 11px;
+  color: #b0aeac;
+  font-weight: normal;
+  padding: 3px 0;
+}
+
+table.steam-lang-table th.checkcol {
+  width: 60px;
+  text-align: center;
+}
+
+table.steam-lang-table td {
+  color: #8f98a0;
+  padding: 3px 0px;
+  text-align: center;
+  font-size: 12px;
+}
+
+table.steam-lang-table td.lang-name {
+  text-align: left;
+  color: #8f98a0;
+  padding-left: 2px;
+}
+
+table.steam-lang-table td span.check {
+  font-weight: bold;
+  color: #67c1f5;
+  font-size: 13px;
+}
+
+/* Steam Linkbar Rows: Exact .block a.linkbar */
+.steam-linkbar-row {
+  min-height: 22px;
+  padding: 4px 8px;
+  line-height: 17px;
+  background: rgba(103, 193, 245, 0.1);
+  color: #67c1f5;
+  border-radius: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2px;
+  font-size: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.1s ease, color 0.1s ease;
+}
+
+.steam-linkbar-row:hover {
+  color: #ffffff;
+  background: linear-gradient(135deg, #67c1f5 0%, #417a9b 100%);
+}
+
+/* Details block: Exact .game_details */
+.steam-game-details {
+  color: #8f98a0;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.steam-game-details b {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #556772;
+  font-weight: normal;
+  text-transform: uppercase;
+  font-size: 11px;
+  margin-right: 4px;
+}
+
+.steam-game-details a {
+  color: #67c1f5;
+}
+
+.steam-game-details a:hover {
   color: #ffffff;
 }

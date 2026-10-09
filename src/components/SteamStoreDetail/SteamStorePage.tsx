@@ -290,7 +290,7 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({ game, onBackToLi
           {/* Right Sidebar Details (1:1 Steam Right Column) */}
           <div className="lg:col-span-4 space-y-4">
             {/* Features (Specifications & Categories with Official Steam Icons) */}
-            <SteamFeaturesList categories={metadata?.categories} />
+            <SteamFeaturesList categories={metadata?.categories} title={game.title} />
 
             {/* Exact 1:1 Languages Matrix Table */}
             <SteamLanguagesTable rawSupportedLanguagesHtml={metadata?.supportedLanguages} />
