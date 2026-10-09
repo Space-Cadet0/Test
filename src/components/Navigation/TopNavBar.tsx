@@ -1,6 +1,6 @@
 import React from 'react';
 import { StorefrontId, STOREFRONT_REGISTRY } from '../../contracts/platform';
-import { Search, RefreshCw, Layers, Gamepad, Cloud } from 'lucide-react';
+import { Search, RefreshCw, Layers, Gamepad, Cloud, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface TopNavBarProps {
   searchQuery: string;
@@ -15,6 +15,12 @@ interface TopNavBarProps {
   onTriggerSync: () => void;
   onHomeClick: () => void;
   onOpenIntegrations: () => void;
+  canGoBack?: boolean;
+  onGoBack?: () => void;
+  backTitle?: string | null;
+  canGoForward?: boolean;
+  onGoForward?: () => void;
+  forwardTitle?: string | null;
 }
 
 export const TopNavBar: React.FC<TopNavBarProps> = ({
@@ -30,6 +36,12 @@ export const TopNavBar: React.FC<TopNavBarProps> = ({
   onTriggerSync,
   onHomeClick,
   onOpenIntegrations,
+  canGoBack = false,
+  onGoBack,
+  backTitle,
+  canGoForward = false,
+  onGoForward,
+  forwardTitle,
 }) => {
   const platforms: (StorefrontId | 'all')[] = [
     'all',
@@ -47,8 +59,40 @@ export const TopNavBar: React.FC<TopNavBarProps> = ({
   return (
     <header className="sticky top-0 z-40 bg-[#171a21]/95 backdrop-blur-md border-b border-steam-border shadow-md">
       <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
-        {/* Left: Brand & Home Button */}
-        <div className="flex items-center gap-3 w-full md:w-auto justify-between md:justify-start">
+        {/* Left: History Nav + Brand & Home Button */}
+        <div className="flex items-center gap-2.5 w-full md:w-auto justify-between md:justify-start">
+          {/* Back & Forward History Controls */}
+          <div className="flex items-center bg-[#10141a] p-0.5 rounded border border-steam-border/80 shadow-inner">
+            <button
+              type="button"
+              onClick={onGoBack}
+              disabled={!canGoBack}
+              className={`p-1.5 rounded transition-all flex items-center justify-center ${
+                canGoBack
+                  ? 'text-white hover:text-steam-accent hover:bg-steam-card active:scale-95 cursor-pointer shadow-sm'
+                  : 'text-zinc-600 cursor-not-allowed opacity-35'
+              }`}
+              title={canGoBack ? `Back to ${backTitle || 'previous page'} (Alt + ←)` : 'Back'}
+              aria-label="Back"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <button
+              type="button"
+              onClick={onGoForward}
+              disabled={!canGoForward}
+              className={`p-1.5 rounded transition-all flex items-center justify-center ${
+                canGoForward
+                  ? 'text-white hover:text-steam-accent hover:bg-steam-card active:scale-95 cursor-pointer shadow-sm'
+                  : 'text-zinc-600 cursor-not-allowed opacity-35'
+              }`}
+              title={canGoForward ? `Forward to ${forwardTitle || 'next page'} (Alt + →)` : 'Forward'}
+              aria-label="Forward"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+
           <button
             onClick={onHomeClick}
             className="flex items-center gap-2.5 text-white hover:text-steam-accent transition-colors group"

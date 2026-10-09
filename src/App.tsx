@@ -35,6 +35,7 @@ import {
 } from 'lucide-react';
 import { ActiveGameFilter } from './contracts/filter';
 import { matchesGameFilter } from './services/filter/gameFilterService';
+import { useNavigationHistory } from './hooks/useNavigationHistory';
 
 export function App() {
   const [games, setGames] = useState<CanonicalGame[]>(() => {
@@ -84,14 +85,99 @@ export function App() {
     return defaultCatalog;
   });
 
-  // Default to Baldur's Gate 3 (or first verified owned title)
-  const [selectedGame, setSelectedGame] = useState<CanonicalGame | null>(() => {
+  // Navigation history & state stack
+  const initialGame = useMemo(() => {
     const initialGames = sanitizeGameCatalog(mergeScannedSteamGames([]));
     return initialGames.find((g) => g.steamAppId === 1086940) || initialGames[0] || null;
+  }, []);
+
+  const {
+    currentEntry,
+    canGoBack,
+    backTitle,
+    canGoForward,
+    forwardTitle,
+    pushEntry,
+    goBack,
+    goForward,
+  } = useNavigationHistory({
+    view: 'game',
+    selectedGameId: initialGame?.id || 'steam-1086940',
+    activeFilter: null,
+    activeGroupId: null,
+    title: initialGame?.title || "Baldur's Gate 3",
   });
-  const [isGridView, setIsGridView] = useState(false);
-  const [activeGroupId, setActiveGroupId] = useState<string | null>(null);
-  const [activeFilter, setActiveFilter] = useState<ActiveGameFilter | null>(null);
+
+  const isGridView = currentEntry.view === 'grid';
+  const activeGroupId = currentEntry.activeGroupId;
+  const activeFilter = currentEntry.activeFilter;
+
+  const selectedGame = useMemo(() => {
+    if (!currentEntry.selectedGameId) {
+      return games[0] || null;
+    }
+    return games.find((g) => g.id === currentEntry.selectedGameId) || games[0] || null;
+  }, [games, currentEntry.selectedGameId]);
+
+  const navigateSelectGame = (game: CanonicalGame) => {
+    pushEntry({
+      view: 'game',
+      selectedGameId: game.id,
+      activeFilter: null,
+      activeGroupId: null,
+      title: game.title,
+    });
+  };
+
+  const navigateApplyFilter = (filter: ActiveGameFilter) => {
+    pushEntry({
+      view: 'grid',
+      selectedGameId: selectedGame?.id || null,
+      activeFilter: filter,
+      activeGroupId: null,
+      title: `${filter.label}: ${filter.value}`,
+    });
+  };
+
+  const navigateHome = () => {
+    pushEntry({
+      view: 'grid',
+      selectedGameId: selectedGame?.id || null,
+      activeFilter: null,
+      activeGroupId: null,
+      title: 'All Games',
+    });
+  };
+
+  const navigateSelectGroup = (groupId: string | null) => {
+    if (!groupId) {
+      navigateHome();
+      return;
+    }
+    const colName =
+      groupId === 'uncategorized'
+        ? 'Uncategorized'
+        : collections.find((c) => c.id === groupId)?.name || 'Collection';
+    pushEntry({
+      view: 'grid',
+      selectedGameId: selectedGame?.id || null,
+      activeFilter: null,
+      activeGroupId: groupId,
+      title: colName,
+    });
+  };
+
+  const navigateClearFilter = () => {
+    pushEntry({
+      view: 'grid',
+      selectedGameId: selectedGame?.id || null,
+      activeFilter: null,
+      activeGroupId: activeGroupId,
+      title: activeGroupId
+        ? collections.find((c) => c.id === activeGroupId)?.name || 'Collection'
+        : 'All Games',
+    });
+  };
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedPlatform, setSelectedPlatform] = useState<StorefrontId | 'all'>('all');
   const [installedOnly, setInstalledOnly] = useState(false);
@@ -167,16 +253,6 @@ export function App() {
       });
       localStorage.setItem('universal_game_library_catalog', JSON.stringify(updated));
       return updated;
-    });
-
-    setSelectedGame((prev) => {
-      if (!prev || prev.id !== target.id) return prev;
-      const currentlyInstalled = prev.platforms.some((p) => p.installed);
-      const nextState = !currentlyInstalled;
-      return {
-        ...prev,
-        platforms: prev.platforms.map((p) => ({ ...p, installed: nextState })),
-      };
     });
   };
 
@@ -407,11 +483,13 @@ export function App() {
         isSyncing={isSyncing}
         onTriggerSync={handleTriggerSync}
         onOpenIntegrations={() => setIsIntegrationsModalOpen(true)}
-        onHomeClick={() => {
-          setActiveFilter(null);
-          setActiveGroupId(null);
-          setIsGridView(true);
-        }}
+        onHomeClick={navigateHome}
+        canGoBack={canGoBack}
+        onGoBack={goBack}
+        backTitle={backTitle}
+        canGoForward={canGoForward}
+        onGoForward={goForward}
+        forwardTitle={forwardTitle}
       />
 
       {/* Sync Status Banner */}
@@ -429,8 +507,7 @@ export function App() {
           games={filteredGames}
           selectedGameId={isGridView ? null : selectedGame?.id || null}
           onSelectGame={(game) => {
-            setSelectedGame(game);
-            setIsGridView(false);
+            navigateSelectGame(game);
           }}
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
@@ -441,20 +518,14 @@ export function App() {
           collections={collections}
           onOpenManageCollectionsModal={handleOpenManageCollections}
           onToggleGameInCollection={handleToggleGameInCollection}
-          onViewAllGamesGrid={() => {
-            setActiveFilter(null);
-            setActiveGroupId(null);
-            setIsGridView(true);
-          }}
+          onViewAllGamesGrid={navigateHome}
           onSelectGroupGrid={(groupId) => {
-            setActiveFilter(null);
-            setActiveGroupId(groupId);
-            setIsGridView(true);
+            navigateSelectGroup(groupId);
           }}
           activeGroupId={activeGroupId}
           isGridView={isGridView}
           activeFilter={activeFilter}
-          onClearActiveFilter={() => setActiveFilter(null)}
+          onClearActiveFilter={navigateClearFilter}
         />
 
         {/* Right Main Pane: Steam Storefront Detail Layout OR Group/Whole Library Grid View */}
@@ -463,8 +534,7 @@ export function App() {
             <LibraryGridView
               games={activeGroupData ? activeGroupData.games : filteredGames}
               onSelectGame={(game) => {
-                setSelectedGame(game);
-                setIsGridView(false);
+                navigateSelectGame(game);
               }}
               searchQuery={searchQuery}
               title={
@@ -498,9 +568,12 @@ export function App() {
                   <Bookmark className="w-6 h-6 text-steam-accent" />
                 ) : undefined
               }
-              onClearGroupFilter={activeGroupId ? () => setActiveGroupId(null) : undefined}
+              onClearGroupFilter={activeGroupId ? navigateHome : undefined}
               activeFilter={activeFilter}
-              onClearActiveFilter={() => setActiveFilter(null)}
+              onClearActiveFilter={navigateClearFilter}
+              canGoBack={canGoBack}
+              onGoBack={goBack}
+              backTitle={backTitle}
             />
           ) : (
             <SteamStorePage
@@ -513,12 +586,17 @@ export function App() {
                   ? activeGroupData.name
                   : 'All Games'
               }
-              onBackToLibrary={() => setIsGridView(true)}
+              onBackToLibrary={() => {
+                if (canGoBack) {
+                  goBack();
+                } else {
+                  navigateHome();
+                }
+              }}
               onManageCollections={() => handleOpenManageCollections(selectedGame)}
               onToggleInstallStatus={() => handleToggleInstallStatus(selectedGame)}
               onApplyFilter={(filter) => {
-                setActiveFilter(filter);
-                setIsGridView(true);
+                navigateApplyFilter(filter);
               }}
             />
           )}
@@ -545,7 +623,7 @@ export function App() {
           setGames(newGames);
           localStorage.setItem('universal_game_library_catalog', JSON.stringify(newGames));
           if (newGames.length > 0 && (!selectedGame || !newGames.some((g) => g.id === selectedGame.id))) {
-            setSelectedGame(newGames[0]);
+            navigateSelectGame(newGames[0]);
           }
         }}
       />
