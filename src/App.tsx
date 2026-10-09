@@ -1,10 +1,11 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { CanonicalGame } from './contracts/game';
 import { StorefrontId } from './contracts/platform';
 import { GameCollection } from './contracts/collection';
 import { mergeScannedSteamGames } from './services/storage/librarySync';
 import { loadCollections, saveCollections } from './services/storage/collectionStorage';
 import { steamApi } from './services/steam/steamApi';
+import { scanLocalInstalledGames } from './services/system/localSystemScanner';
 import { TopNavBar } from './components/Navigation/TopNavBar';
 import { LibrarySidebar } from './components/Library/LibrarySidebar';
 import { SteamStorePage } from './components/SteamStoreDetail/SteamStorePage';
@@ -16,9 +17,26 @@ import { steamIntegration } from './services/integrations/steamIntegration';
 import { Plus, Sparkles, X, CheckCircle2 } from 'lucide-react';
 
 export function App() {
-  const [games, setGames] = useState<CanonicalGame[]>(() =>
-    mergeScannedSteamGames([])
-  );
+  const [games, setGames] = useState<CanonicalGame[]>(() => {
+    // Clear any stale cached games with obsolete mock installed flags
+    const saved = localStorage.getItem('universal_game_library_catalog');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          const cleaned = parsed.map((g: CanonicalGame) => ({
+            ...g,
+            platforms: g.platforms.map((p) => ({ ...p, installed: false })),
+          }));
+          return mergeScannedSteamGames(cleaned);
+        }
+      } catch (e) {
+        console.error('Failed to parse cached games:', e);
+      }
+    }
+    return mergeScannedSteamGames([]);
+  });
+
   // Default to Baldur's Gate 3 (or first verified owned title)
   const [selectedGame, setSelectedGame] = useState<CanonicalGame | null>(() => {
     const initialGames = mergeScannedSteamGames([]);
@@ -44,6 +62,80 @@ export function App() {
   const [importInput, setImportInput] = useState('');
   const [isImporting, setIsImporting] = useState(false);
   const [importError, setImportError] = useState<string | null>(null);
+
+  // Synchronize installed game status against the workstation's actual file system
+  useEffect(() => {
+    async function syncLocalInstallations() {
+      const scanResult = await scanLocalInstalledGames();
+      if (!scanResult) return;
+      const installedSteamAppIds = new Set(scanResult.installedSteamAppIds);
+
+      setGames((prevGames) => {
+        let changed = false;
+        const updated = prevGames.map((game) => {
+          let gameChanged = false;
+          const updatedPlatforms = game.platforms.map((p) => {
+            if (p.platformId === 'steam') {
+              const shouldBeInstalled = game.steamAppId ? installedSteamAppIds.has(game.steamAppId) : false;
+              if (p.installed !== shouldBeInstalled) {
+                gameChanged = true;
+                return { ...p, installed: shouldBeInstalled };
+              }
+            } else if (p.installed) {
+              gameChanged = true;
+              return { ...p, installed: false };
+            }
+            return p;
+          });
+
+          if (gameChanged) {
+            changed = true;
+            return { ...game, platforms: updatedPlatforms };
+          }
+          return game;
+        });
+
+        if (changed) {
+          localStorage.setItem('universal_game_library_catalog', JSON.stringify(updated));
+          return updated;
+        }
+        return prevGames;
+      });
+    }
+
+    syncLocalInstallations();
+  }, []);
+
+  const handleToggleInstallStatus = (gameToToggle?: CanonicalGame | null) => {
+    const target = gameToToggle || selectedGame;
+    if (!target) return;
+
+    setGames((prev) => {
+      const updated = prev.map((g) => {
+        if (g.id === target.id) {
+          const currentlyInstalled = g.platforms.some((p) => p.installed);
+          const nextState = !currentlyInstalled;
+          return {
+            ...g,
+            platforms: g.platforms.map((p) => ({ ...p, installed: nextState })),
+          };
+        }
+        return g;
+      });
+      localStorage.setItem('universal_game_library_catalog', JSON.stringify(updated));
+      return updated;
+    });
+
+    setSelectedGame((prev) => {
+      if (!prev || prev.id !== target.id) return prev;
+      const currentlyInstalled = prev.platforms.some((p) => p.installed);
+      const nextState = !currentlyInstalled;
+      return {
+        ...prev,
+        platforms: prev.platforms.map((p) => ({ ...p, installed: nextState })),
+      };
+    });
+  };
 
   // Filtered games list for the sidebar
   const filteredGames = useMemo(() => {
@@ -291,6 +383,7 @@ export function App() {
               game={selectedGame}
               onBackToLibrary={() => setIsGridView(true)}
               onManageCollections={() => handleOpenManageCollections(selectedGame)}
+              onToggleInstallStatus={() => handleToggleInstallStatus(selectedGame)}
             />
           )}
         </main>

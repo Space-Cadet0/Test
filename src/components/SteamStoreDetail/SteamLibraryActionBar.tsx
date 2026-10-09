@@ -18,6 +18,7 @@ interface SteamLibraryActionBarProps {
   game: CanonicalGame;
   metadata?: SteamEnrichedMetadata | null;
   onManageCollections?: () => void;
+  onToggleInstallStatus?: () => void;
 }
 
 // User-specific known achievements from ~/Library/Application Support/Steam/userdata/284583470/config/librarycache/achievement_progress.json
@@ -77,9 +78,22 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
   game,
   metadata,
   onManageCollections,
+  onToggleInstallStatus,
 }) => {
   const isInstalled = game.platforms.some((p) => p.installed);
   const primaryPlatform = game.platforms.find((p) => p.platformId === 'steam') || game.platforms[0];
+
+  const handleInstallClick = () => {
+    if (game.steamAppId) {
+      window.location.href = `steam://install/${game.steamAppId}`;
+    }
+  };
+
+  const handlePlayClick = () => {
+    if (game.steamAppId) {
+      window.location.href = `steam://run/${game.steamAppId}`;
+    }
+  };
 
   // Playtime formatting
   const playtimeMinutes = primaryPlatform?.playtimeMinutes || 0;
@@ -146,30 +160,51 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
         {/* Left: Action Button & Library Status */}
         <div className="flex flex-wrap items-center gap-3">
           {/* Main Action Button (Play / Install) */}
-          {isInstalled ? (
-            <button
-              className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded font-bold text-sm text-white tracking-wider uppercase transition-all shadow-md hover:brightness-110 active:scale-[0.99]"
-              style={{
-                background: 'linear-gradient(to right, #75b022 5%, #588a1b 95%)',
-                boxShadow: '0 0 16px rgba(91, 163, 43, 0.45)',
-              }}
-            >
-              <Play className="w-4 h-4 fill-white" />
-              <span>Play</span>
-            </button>
-          ) : (
-            <button
-              className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded font-bold text-sm text-white tracking-wider uppercase transition-all shadow-md hover:brightness-110 active:scale-[0.99]"
-              style={{
-                background: 'linear-gradient(to right, #214b6b 0%, #123049 100%)',
-                border: '1px solid #3878a8',
-                boxShadow: '0 0 12px rgba(33, 75, 107, 0.4)',
-              }}
-            >
-              <Download className="w-4 h-4 text-sky-400" />
-              <span>Install</span>
-            </button>
-          )}
+          <div className="flex items-center gap-1.5">
+            {isInstalled ? (
+              <button
+                onClick={handlePlayClick}
+                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded font-bold text-sm text-white tracking-wider uppercase transition-all shadow-md hover:brightness-110 active:scale-[0.99]"
+                style={{
+                  background: 'linear-gradient(to right, #75b022 5%, #588a1b 95%)',
+                  boxShadow: '0 0 16px rgba(91, 163, 43, 0.45)',
+                }}
+                title={game.steamAppId ? `Launch game via steam://run/${game.steamAppId}` : 'Launch game'}
+              >
+                <Play className="w-4 h-4 fill-white" />
+                <span>Play</span>
+              </button>
+            ) : (
+              <button
+                onClick={handleInstallClick}
+                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded font-bold text-sm text-white tracking-wider uppercase transition-all shadow-md hover:brightness-110 active:scale-[0.99]"
+                style={{
+                  background: 'linear-gradient(to right, #214b6b 0%, #123049 100%)',
+                  border: '1px solid #3878a8',
+                  boxShadow: '0 0 12px rgba(33, 75, 107, 0.4)',
+                }}
+                title={game.steamAppId ? `Open Steam client to install (${game.steamAppId})` : 'Install game'}
+              >
+                <Download className="w-4 h-4 text-sky-400" />
+                <span>Install</span>
+              </button>
+            )}
+
+            {/* Quick manual installed toggle */}
+            {onToggleInstallStatus && (
+              <button
+                onClick={onToggleInstallStatus}
+                className="p-2.5 rounded text-steam-subtext hover:text-white bg-[#16202d] hover:bg-[#1f2c3d] border border-steam-border/80 transition-colors"
+                title={
+                  isInstalled
+                    ? 'Manually mark as uninstalled (cloud only)'
+                    : 'Manually mark as installed (locally available)'
+                }
+              >
+                <HardDrive className={`w-4 h-4 ${isInstalled ? 'text-emerald-400' : 'text-steam-subtext'}`} />
+              </button>
+            )}
+          </div>
 
           {/* Collections Shortcut Button */}
           {onManageCollections && (

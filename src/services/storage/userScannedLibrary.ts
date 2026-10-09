@@ -10,7 +10,7 @@ export const USER_SCANNED_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '1091500',
-        installed: true,
+        installed: false,
         playtimeMinutes: 12452,
       }
     ],
@@ -31,7 +31,7 @@ export const USER_SCANNED_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '292030',
-        installed: true,
+        installed: false,
         playtimeMinutes: 10449,
       }
     ],
@@ -52,7 +52,7 @@ export const USER_SCANNED_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '1771300',
-        installed: true,
+        installed: false,
         playtimeMinutes: 8891,
       }
     ],
@@ -73,7 +73,7 @@ export const USER_SCANNED_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '3280350',
-        installed: true,
+        installed: false,
         playtimeMinutes: 8570,
       }
     ],
@@ -94,7 +94,7 @@ export const USER_SCANNED_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '2909400',
-        installed: true,
+        installed: false,
         playtimeMinutes: 7634,
       }
     ],
@@ -115,7 +115,7 @@ export const USER_SCANNED_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '435150',
-        installed: true,
+        installed: false,
         playtimeMinutes: 6985,
       }
     ],
@@ -136,7 +136,7 @@ export const USER_SCANNED_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '1643320',
-        installed: true,
+        installed: false,
         playtimeMinutes: 6165,
       }
     ],
@@ -157,7 +157,7 @@ export const USER_SCANNED_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '287700',
-        installed: true,
+        installed: false,
         playtimeMinutes: 5788,
       }
     ],
@@ -178,7 +178,7 @@ export const USER_SCANNED_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '1190460',
-        installed: true,
+        installed: false,
         playtimeMinutes: 5596,
       }
     ],
@@ -199,7 +199,7 @@ export const USER_SCANNED_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '373420',
-        installed: true,
+        installed: false,
         playtimeMinutes: 5268,
       }
     ],
@@ -220,7 +220,7 @@ export const USER_SCANNED_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '3751260',
-        installed: true,
+        installed: false,
         playtimeMinutes: 4442,
       }
     ],
@@ -241,7 +241,7 @@ export const USER_SCANNED_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '1086940',
-        installed: true,
+        installed: false,
         playtimeMinutes: 3982,
       }
     ],
@@ -262,7 +262,7 @@ export const USER_SCANNED_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '1903340',
-        installed: true,
+        installed: false,
         playtimeMinutes: 3882,
       }
     ],
@@ -283,7 +283,7 @@ export const USER_SCANNED_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '275850',
-        installed: true,
+        installed: false,
         playtimeMinutes: 3672,
       }
     ],
@@ -304,7 +304,7 @@ export const USER_SCANNED_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '20920',
-        installed: true,
+        installed: false,
         playtimeMinutes: 2393,
       }
     ],
@@ -325,7 +325,7 @@ export const USER_SCANNED_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '1608070',
-        installed: true,
+        installed: false,
         playtimeMinutes: 2022,
       }
     ],
@@ -346,7 +346,7 @@ export const USER_SCANNED_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '362890',
-        installed: true,
+        installed: false,
         playtimeMinutes: 1769,
       }
     ],
@@ -367,7 +367,7 @@ export const USER_SCANNED_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '2050650',
-        installed: true,
+        installed: false,
         playtimeMinutes: 1675,
       }
     ],
@@ -388,7 +388,7 @@ export const USER_SCANNED_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '1449560',
-        installed: true,
+        installed: false,
         playtimeMinutes: 1643,
       }
     ],
@@ -409,7 +409,7 @@ export const USER_SCANNED_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '391220',
-        installed: true,
+        installed: false,
         playtimeMinutes: 1522,
       }
     ],

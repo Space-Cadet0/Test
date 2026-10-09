@@ -23,12 +23,14 @@ interface SteamStorePageProps {
   game: CanonicalGame;
   onBackToLibrary?: () => void;
   onManageCollections?: () => void;
+  onToggleInstallStatus?: () => void;
 }
 
 export const SteamStorePage: React.FC<SteamStorePageProps> = ({
   game,
   onBackToLibrary,
   onManageCollections,
+  onToggleInstallStatus,
 }) => {
   const [metadata, setMetadata] = useState<SteamEnrichedMetadata | null>(
     game.enrichedMetadata || null
@@ -168,6 +170,7 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
           game={game}
           metadata={metadata}
           onManageCollections={onManageCollections}
+          onToggleInstallStatus={onToggleInstallStatus}
         />
 
         {/* Main Steam Highlight Showcase (1:1 Steam 2-Column Split: Media Player + Details) */}

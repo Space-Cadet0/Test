@@ -1,8 +1,82 @@
-import { defineConfig } from 'vite';
+import { defineConfig, Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
+import fs from 'node:fs';
+import path from 'node:path';
+import os from 'node:os';
+
+function localSystemScannerPlugin(): Plugin {
+  return {
+    name: 'local-system-scanner',
+    configureServer(server) {
+      server.middlewares.use('/api/local-system/installed-games', (_req, res) => {
+        try {
+          const home = os.homedir();
+          const steamDirs = [
+            path.join(home, 'Library/Application Support/Steam/steamapps'),
+            path.join(home, '.local/share/Steam/steamapps'),
+            path.join(home, '.steam/steam/steamapps'),
+            'C:\\Program Files (x86)\\Steam\\steamapps',
+          ];
+
+          // Parse libraryfolders.vdf if present to discover extra drives/libraries
+          for (const base of [...steamDirs]) {
+            const vdfPath = path.join(base, 'libraryfolders.vdf');
+            if (fs.existsSync(vdfPath)) {
+              try {
+                const content = fs.readFileSync(vdfPath, 'utf8');
+                const pathMatches = content.matchAll(/"path"\s+"([^"]+)"/g);
+                for (const m of pathMatches) {
+                  const customSteamApps = path.join(m[1], 'steamapps');
+                  if (fs.existsSync(customSteamApps) && !steamDirs.includes(customSteamApps)) {
+                    steamDirs.push(customSteamApps);
+                  }
+                }
+              } catch {
+                // Ignore parse errors
+              }
+            }
+          }
+
+          const installedSteamAppIds: number[] = [];
+          for (const dir of steamDirs) {
+            if (fs.existsSync(dir)) {
+              try {
+                const files = fs.readdirSync(dir);
+                for (const file of files) {
+                  const match = file.match(/^appmanifest_(\d+)\.acf$/);
+                  if (match) {
+                    const appId = parseInt(match[1], 10);
+                    if (!installedSteamAppIds.includes(appId)) {
+                      installedSteamAppIds.push(appId);
+                    }
+                  }
+                }
+              } catch {
+                // Ignore read errors
+              }
+            }
+          }
+
+          res.setHeader('Content-Type', 'application/json');
+          res.end(
+            JSON.stringify({
+              success: true,
+              installedSteamAppIds,
+              scannedAt: new Date().toISOString(),
+            })
+          );
+        } catch (err: any) {
+          res.setHeader('Content-Type', 'application/json');
+          res.statusCode = 500;
+          res.end(JSON.stringify({ success: false, error: err.message, installedSteamAppIds: [] }));
+        }
+      });
+    },
+  };
+}
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), localSystemScannerPlugin()],
   server: {
     port: 3000,
     open: true,

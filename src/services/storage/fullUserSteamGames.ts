@@ -216,7 +216,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '1086940',
-        installed: true,
+        installed: false,
         playtimeMinutes: 3982,
         lastPlayed: '1694186888',
       }
@@ -446,7 +446,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '362890',
-        installed: true,
+        installed: false,
         playtimeMinutes: 1769,
         lastPlayed: '1722979295',
       }
@@ -537,7 +537,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '204360',
-        installed: true,
+        installed: false,
         playtimeMinutes: 276,
         lastPlayed: '1605383903',
       }
@@ -560,7 +560,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '1903340',
-        installed: true,
+        installed: false,
         playtimeMinutes: 3882,
         lastPlayed: '1752873381',
       }
@@ -697,7 +697,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '1608070',
-        installed: true,
+        installed: false,
         playtimeMinutes: 2022,
         lastPlayed: '1714591209',
       }
@@ -766,7 +766,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '2096600',
-        installed: true,
+        installed: false,
         playtimeMinutes: 113,
         lastPlayed: '1771279756',
       }
@@ -858,7 +858,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '1091500',
-        installed: true,
+        installed: false,
         playtimeMinutes: 12452,
         lastPlayed: '1770425699',
       }
@@ -881,7 +881,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '374320',
-        installed: true,
+        installed: false,
         playtimeMinutes: 393,
         lastPlayed: '1728595555',
       }
@@ -904,7 +904,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '211420',
-        installed: true,
+        installed: false,
         playtimeMinutes: 143,
         lastPlayed: '1515237603',
       }
@@ -1042,7 +1042,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '1190460',
-        installed: true,
+        installed: false,
         playtimeMinutes: 5596,
         lastPlayed: '1645393568',
       }
@@ -1065,7 +1065,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '3280350',
-        installed: true,
+        installed: false,
         playtimeMinutes: 8570,
         lastPlayed: '1783110612',
       }
@@ -1110,7 +1110,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '1085660',
-        installed: true,
+        installed: false,
         playtimeMinutes: 343,
         lastPlayed: '1617829493',
       }
@@ -1271,7 +1271,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '435150',
-        installed: true,
+        installed: false,
         playtimeMinutes: 6985,
         lastPlayed: '1704664144',
       }
@@ -1294,7 +1294,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '373420',
-        installed: true,
+        installed: false,
         playtimeMinutes: 5268,
         lastPlayed: '1776632475',
       }
@@ -1708,7 +1708,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '2909400',
-        installed: true,
+        installed: false,
         playtimeMinutes: 7634,
         lastPlayed: '1750715208',
       }
@@ -1822,7 +1822,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '683320',
-        installed: true,
+        installed: false,
         playtimeMinutes: 209,
         lastPlayed: '1773524874',
       }
@@ -2096,7 +2096,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '1151640',
-        installed: true,
+        installed: false,
         playtimeMinutes: 108,
         lastPlayed: '1714860545',
       }
@@ -2141,7 +2141,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '1373960',
-        installed: true,
+        installed: false,
         playtimeMinutes: 243,
         lastPlayed: '1769463325',
       }
@@ -2256,7 +2256,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '1771300',
-        installed: true,
+        installed: false,
         playtimeMinutes: 8891,
         lastPlayed: '1743885738',
       }
@@ -2553,7 +2553,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '287700',
-        installed: true,
+        installed: false,
         playtimeMinutes: 5788,
         lastPlayed: '1765750590',
       }
@@ -2576,7 +2576,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '2417610',
-        installed: true,
+        installed: false,
         playtimeMinutes: 1267,
         lastPlayed: '1771161237',
       }
@@ -2667,7 +2667,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '1449560',
-        installed: true,
+        installed: false,
         playtimeMinutes: 1643,
         lastPlayed: '1758566804',
       }
@@ -2712,7 +2712,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '287390',
-        installed: true,
+        installed: false,
         playtimeMinutes: 586,
         lastPlayed: '1783379016',
       }
@@ -2850,7 +2850,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '275850',
-        installed: true,
+        installed: false,
         playtimeMinutes: 3672,
         lastPlayed: '1602766424',
       }
@@ -3057,7 +3057,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '400',
-        installed: true,
+        installed: false,
         playtimeMinutes: 115,
         lastPlayed: '1585752810',
       }
@@ -3263,7 +3263,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '2320',
-        installed: true,
+        installed: false,
         playtimeMinutes: 468,
         lastPlayed: '1756501718',
       }
@@ -3309,7 +3309,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '1895880',
-        installed: true,
+        installed: false,
         playtimeMinutes: 1109,
         lastPlayed: '1745011760',
       }
@@ -3447,7 +3447,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '2050650',
-        installed: true,
+        installed: false,
         playtimeMinutes: 1675,
         lastPlayed: '1736542577',
       }
@@ -3470,7 +3470,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '3764200',
-        installed: true,
+        installed: false,
         playtimeMinutes: 376,
         lastPlayed: '1791493610',
       }
@@ -3516,7 +3516,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '391220',
-        installed: true,
+        installed: false,
         playtimeMinutes: 1522,
         lastPlayed: '1757535009',
       }
@@ -3539,7 +3539,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '1643320',
-        installed: true,
+        installed: false,
         playtimeMinutes: 6165,
         lastPlayed: '1787777717',
       }
@@ -3654,7 +3654,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '750920',
-        installed: true,
+        installed: false,
         playtimeMinutes: 1488,
         lastPlayed: '1769293214',
       }
@@ -3861,7 +3861,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '213670',
-        installed: true,
+        installed: false,
         playtimeMinutes: 934,
         lastPlayed: '1787605192',
       }
@@ -4204,7 +4204,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '3751260',
-        installed: true,
+        installed: false,
         playtimeMinutes: 4442,
         lastPlayed: '1790800391',
       }
@@ -4341,7 +4341,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '20920',
-        installed: true,
+        installed: false,
         playtimeMinutes: 2393,
         lastPlayed: '1591536414',
       }
@@ -4364,7 +4364,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '292030',
-        installed: true,
+        installed: false,
         playtimeMinutes: 10449,
         lastPlayed: '1606604017',
       }
@@ -4525,7 +4525,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '203160',
-        installed: true,
+        installed: false,
         playtimeMinutes: 111,
         lastPlayed: '1705422176',
       }
@@ -4798,7 +4798,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
       {
         platformId: 'steam',
         platformGameId: '217200',
-        installed: true,
+        installed: false,
         playtimeMinutes: 218,
         lastPlayed: '1735234244',
       }
