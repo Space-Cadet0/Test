@@ -4,25 +4,29 @@ import { StorefrontId } from './contracts/platform';
 import { INITIAL_LIBRARY_GAMES } from './services/storage/mockLibrary';
 import { steamApi } from './services/steam/steamApi';
 import { TopNavBar } from './components/Navigation/TopNavBar';
-import { GameGrid } from './components/Library/GameGrid';
+import { LibrarySidebar } from './components/Library/LibrarySidebar';
 import { SteamStorePage } from './components/SteamStoreDetail/SteamStorePage';
-import { Plus, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Plus, Sparkles, X, CheckCircle2 } from 'lucide-react';
 
 export function App() {
   const [games, setGames] = useState<CanonicalGame[]>(INITIAL_LIBRARY_GAMES);
-  const [selectedGame, setSelectedGame] = useState<CanonicalGame | null>(null);
+  // Default to Gears of War: E-Day (first game in the catalog)
+  const [selectedGame, setSelectedGame] = useState<CanonicalGame | null>(
+    INITIAL_LIBRARY_GAMES[0] || null
+  );
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedPlatform, setSelectedPlatform] = useState<StorefrontId | 'all'>('all');
   const [installedOnly, setInstalledOnly] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
   const [syncNotice, setSyncNotice] = useState<string | null>(null);
 
-  // Quick import state
+  // Quick import modal state
+  const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   const [importInput, setImportInput] = useState('');
   const [isImporting, setIsImporting] = useState(false);
   const [importError, setImportError] = useState<string | null>(null);
 
-  // Filtered games list
+  // Filtered games list for the sidebar
   const filteredGames = useMemo(() => {
     return games.filter((game) => {
       // Platform filter
@@ -59,7 +63,6 @@ export function App() {
     setIsImporting(true);
 
     try {
-      // Extract AppID from URL or raw number
       let appId: number | null = null;
       const match = importInput.match(/app\/(\d+)/i);
       if (match) {
@@ -67,12 +70,11 @@ export function App() {
       } else if (/^\d+$/.test(importInput.trim())) {
         appId = parseInt(importInput.trim(), 10);
       } else {
-        // Try searching by title
         appId = await steamApi.searchAppId(importInput.trim());
       }
 
       if (!appId) {
-        setImportError('Could not find Steam AppID for this input.');
+        setImportError('Could not find Steam AppID for this title or URL.');
         setIsImporting(false);
         return;
       }
@@ -89,6 +91,7 @@ export function App() {
       if (existing) {
         setSelectedGame(existing);
         setImportInput('');
+        setIsImportModalOpen(false);
         setIsImporting(false);
         return;
       }
@@ -120,6 +123,7 @@ export function App() {
       setGames((prev) => [newGame, ...prev]);
       setSelectedGame(newGame);
       setImportInput('');
+      setIsImportModalOpen(false);
     } catch (err: any) {
       setImportError(err.message || 'Error importing game.');
     } finally {
@@ -140,86 +144,132 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0e141b] text-steam-text flex flex-col font-steam">
-      {/* Top Custom Navigation Bar */}
+    <div className="h-screen w-screen bg-[#0e141b] text-steam-text flex flex-col font-steam overflow-hidden">
+      {/* Top Navigation Bar */}
       <TopNavBar
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
         selectedPlatform={selectedPlatform}
-        onSelectPlatform={(p) => {
-          setSelectedPlatform(p);
-          setSelectedGame(null); // return to grid when filtering
-        }}
+        onSelectPlatform={setSelectedPlatform}
         installedOnly={installedOnly}
         onToggleInstalledOnly={() => setInstalledOnly(!installedOnly)}
         totalGamesCount={games.length}
         filteredCount={filteredGames.length}
         isSyncing={isSyncing}
         onTriggerSync={handleTriggerSync}
-        onHomeClick={() => setSelectedGame(null)}
+        onHomeClick={() => {
+          if (filteredGames.length > 0) {
+            setSelectedGame(filteredGames[0]);
+          }
+        }}
       />
 
       {/* Sync Status Banner */}
       {syncNotice && (
-        <div className="bg-emerald-950/90 border-b border-emerald-600/50 py-2 px-4 text-center text-xs text-emerald-300 flex items-center justify-center gap-2 transition-all">
+        <div className="bg-emerald-950/90 border-b border-emerald-600/50 py-1.5 px-4 text-center text-xs text-emerald-300 flex items-center justify-center gap-2 flex-shrink-0 transition-all">
           <CheckCircle2 className="w-4 h-4 text-emerald-400" />
           {syncNotice}
         </div>
       )}
 
-      {/* Main View Area */}
-      <main className="flex-1 w-full">
-        {selectedGame ? (
-          /* Steam Store Detail Page Clone */
-          <SteamStorePage
-            game={selectedGame}
-            onBackToLibrary={() => setSelectedGame(null)}
-          />
-        ) : (
-          /* Unified Library Grid View */
-          <div className="max-w-7xl mx-auto px-4 py-8 space-y-6">
-            {/* Quick Add Game by Steam URL / App ID bar */}
-            <div className="bg-[#16202d] border border-steam-border p-4 rounded shadow-md flex flex-col md:flex-row items-center justify-between gap-4">
-              <div className="space-y-0.5">
-                <h2 className="text-sm font-bold text-white flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-steam-accent" />
-                  Live Steam Scraper & Importer
-                </h2>
-                <p className="text-xs text-steam-subtext">
-                  Paste any Steam store URL (e.g. Gears of War: E-Day) or AppID to scrape reviews, trailers, and media.
-                </p>
-              </div>
+      {/* Main Two-Column Layout */}
+      <div className="flex-1 flex overflow-hidden">
+        {/* Left Column: Steam Library Games List */}
+        <LibrarySidebar
+          games={filteredGames}
+          selectedGameId={selectedGame?.id || null}
+          onSelectGame={(game) => setSelectedGame(game)}
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+          selectedPlatform={selectedPlatform}
+          onSelectPlatform={setSelectedPlatform}
+          installedOnly={installedOnly}
+          onToggleInstalledOnly={() => setInstalledOnly(!installedOnly)}
+          onOpenImportModal={() => setIsImportModalOpen(true)}
+        />
 
-              <form onSubmit={handleImportSteamGame} className="flex items-center gap-2 w-full md:w-auto">
+        {/* Right Main Pane: Steam Storefront Detail Layout */}
+        <main className="flex-1 h-full overflow-y-auto bg-[#0b0f14] relative">
+          {selectedGame ? (
+            <SteamStorePage game={selectedGame} />
+          ) : (
+            <div className="h-full flex flex-col items-center justify-center text-center p-8 text-steam-subtext space-y-3">
+              <Sparkles className="w-12 h-12 text-steam-accent/40" />
+              <h2 className="text-lg font-bold text-white">Select a Game from the Library</h2>
+              <p className="text-xs max-w-sm">
+                Choose any game in the left column to view its Steam Store detail layout with media, trailers, and reviews.
+              </p>
+            </div>
+          )}
+        </main>
+      </div>
+
+      {/* Modal: Live Steam Scraper & URL Importer */}
+      {isImportModalOpen && (
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-[#16202d] border border-steam-border rounded-lg max-w-lg w-full p-6 shadow-2xl space-y-4">
+            <div className="flex items-center justify-between border-b border-steam-border/60 pb-3">
+              <div className="flex items-center gap-2 text-sm font-bold text-white">
+                <Sparkles className="w-4 h-4 text-steam-accent" />
+                <span>Live Steam Scraper & Importer</span>
+              </div>
+              <button
+                onClick={() => {
+                  setIsImportModalOpen(false);
+                  setImportError(null);
+                }}
+                className="text-steam-subtext hover:text-white"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <p className="text-xs text-steam-subtext leading-relaxed">
+              Enter any Steam Store page URL or numeric AppID to scrape live trailers, screenshots, reviews, and specifications directly into your library.
+            </p>
+
+            <form onSubmit={handleImportSteamGame} className="space-y-3">
+              <div className="space-y-1">
+                <label className="text-[11px] font-semibold text-steam-subtext uppercase">
+                  Steam URL or App ID
+                </label>
                 <input
                   type="text"
                   value={importInput}
                   onChange={(e) => setImportInput(e.target.value)}
-                  placeholder="https://store.steampowered.com/app/... or 3010850"
-                  className="px-3 py-1.5 text-xs bg-[#10141a] text-white placeholder-steam-subtext rounded border border-steam-border focus:border-steam-accent focus:outline-none w-full md:w-80"
+                  placeholder="https://store.steampowered.com/app/3010850/Gears_of_War_EDay/ or 3010850"
+                  className="w-full px-3 py-2 text-xs bg-[#0e141b] text-white rounded border border-steam-border focus:border-steam-accent focus:outline-none"
+                  autoFocus
                 />
+              </div>
+
+              {importError && (
+                <div className="p-2.5 bg-red-950/70 border border-red-700/60 rounded text-xs text-red-300">
+                  {importError}
+                </div>
+              )}
+
+              <div className="flex items-center justify-end gap-2 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setIsImportModalOpen(false)}
+                  className="px-3 py-1.5 text-xs text-steam-subtext hover:text-white bg-transparent rounded"
+                >
+                  Cancel
+                </button>
                 <button
                   type="submit"
                   disabled={isImporting}
-                  className="px-3.5 py-1.5 text-xs font-semibold bg-steam-btnGreen hover:bg-steam-btnGreenHover text-white rounded transition-colors flex items-center gap-1.5 whitespace-nowrap disabled:opacity-50"
+                  className="px-4 py-1.5 text-xs font-semibold bg-steam-btnGreen hover:bg-steam-btnGreenHover text-white rounded transition-colors flex items-center gap-1.5 disabled:opacity-50"
                 >
                   <Plus className="w-4 h-4" />
-                  {isImporting ? 'Scraping...' : 'Import'}
+                  {isImporting ? 'Scraping Steam...' : 'Scrape & Add'}
                 </button>
-              </form>
-            </div>
-
-            {importError && (
-              <div className="p-2.5 bg-red-950/60 border border-red-700/60 rounded text-xs text-red-300">
-                {importError}
               </div>
-            )}
-
-            {/* Catalog Grid */}
-            <GameGrid games={filteredGames} onSelectGame={setSelectedGame} />
+            </form>
           </div>
-        )}
-      </main>
+        </div>
+      )}
     </div>
   );
 }

@@ -20,7 +20,7 @@ import {
 
 interface SteamStorePageProps {
   game: CanonicalGame;
-  onBackToLibrary: () => void;
+  onBackToLibrary?: () => void;
 }
 
 export const SteamStorePage: React.FC<SteamStorePageProps> = ({ game, onBackToLibrary }) => {
@@ -77,7 +77,7 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({ game, onBackToLi
   const detailedDescription = metadata?.detailedDescription || metadata?.aboutTheGame;
 
   return (
-    <div className="w-full min-h-screen bg-[#0e141b] text-steam-text pb-20">
+    <div className="w-full min-h-full bg-[#0e141b] text-steam-text pb-24 overflow-y-auto relative">
       {/* Background Hero Ambient Glow */}
       <div
         className="absolute top-0 left-0 right-0 h-96 opacity-15 pointer-events-none bg-cover bg-center filter blur-3xl"
@@ -86,16 +86,23 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({ game, onBackToLi
         }}
       />
 
-      <div className="relative max-w-6xl mx-auto px-4 pt-6 space-y-6">
+      <div className="relative max-w-6xl mx-auto px-4 md:px-8 pt-6 space-y-6">
         {/* Navigation Breadcrumb & Actions Bar */}
         <div className="flex items-center justify-between border-b border-steam-border/40 pb-4">
-          <button
-            onClick={onBackToLibrary}
-            className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-steam-accent hover:text-white bg-steam-card hover:bg-steam-border border border-steam-border rounded transition-all"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Library
-          </button>
+          <div className="flex items-center gap-2 text-xs text-steam-subtext">
+            {onBackToLibrary && (
+              <button
+                onClick={onBackToLibrary}
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-steam-accent hover:text-white bg-steam-card hover:bg-steam-border border border-steam-border rounded transition-all mr-2"
+              >
+                <ArrowLeft className="w-3.5 h-3.5" />
+                Library
+              </button>
+            )}
+            <span className="hover:text-white cursor-pointer uppercase tracking-wider text-[11px] font-semibold">All Games</span>
+            <span>&gt;</span>
+            <span className="text-white font-semibold truncate max-w-xs">{game.title}</span>
+          </div>
 
           <div className="flex items-center gap-3">
             {game.steamAppId && (
