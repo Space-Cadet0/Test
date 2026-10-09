@@ -75,6 +75,31 @@ async function exchangeGogCode(code) {
 }
 
 /**
+ * Automatically renew GOG access token using refresh_token (matching Playnite / Heroic)
+ */
+async function renewGogTokens(refreshToken) {
+  const tokenUrl = `https://auth.gog.com/token?client_id=${GOG_CLIENT_ID}&client_secret=${GOG_CLIENT_SECRET}&grant_type=refresh_token&refresh_token=${encodeURIComponent(refreshToken)}`;
+  const res = await fetch(tokenUrl, {
+    method: 'GET',
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) GOGGalaxy/2.0',
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error(`Failed to renew GOG token (${res.status})`);
+  }
+
+  const data = await res.json();
+  if (!data.access_token) {
+    throw new Error('GOG refresh response missing access_token');
+  }
+
+  saveTokens('gog', data);
+  return data;
+}
+
+/**
  * Fetch GOG Account Details
  */
 async function fetchGogAccount(accessToken) {
@@ -366,11 +391,46 @@ async function fetchEpicOwnedGames(accessToken, accountId) {
   return games;
 }
 
+/**
+ * Automatically renew Epic Games access token using refresh_token
+ */
+async function renewEpicTokens(refreshToken) {
+  const body = new URLSearchParams({
+    grant_type: 'refresh_token',
+    refresh_token: refreshToken,
+    token_type: 'eg1',
+  });
+
+  const res = await fetch('https://account-public-service-prod03.ol.epicgames.com/account/api/oauth/token', {
+    method: 'POST',
+    headers: {
+      Authorization: `basic ${EPIC_CLIENT_AUTH}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) EpicGamesLauncher',
+    },
+    body: body.toString(),
+  });
+
+  if (!res.ok) {
+    throw new Error(`Failed to renew Epic token (${res.status})`);
+  }
+
+  const data = await res.json();
+  if (!data.access_token) {
+    throw new Error('Epic refresh response missing access_token');
+  }
+
+  saveTokens('epic', data);
+  return data;
+}
+
 module.exports = {
   exchangeGogCode,
+  renewGogTokens,
   fetchGogAccount,
   fetchGogOwnedGames,
   exchangeEpicCode,
+  renewEpicTokens,
   fetchEpicOwnedGames,
   loadSavedTokens,
   saveTokens,

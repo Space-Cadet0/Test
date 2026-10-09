@@ -267,7 +267,7 @@ ipcMain.handle('store:exchange-code', async (_event, { storefrontId, code }) => 
  */
 ipcMain.handle('store:sync', async (_event, storefrontId) => {
   const savedTokens = storeSync.loadSavedTokens();
-  const tokenData = savedTokens[storefrontId];
+  let tokenData = savedTokens[storefrontId];
   if (!tokenData || !tokenData.access_token) {
     return { success: false, error: `No saved credentials found for ${storefrontId}. Please connect in Settings.` };
   }
@@ -278,13 +278,43 @@ ipcMain.handle('store:sync', async (_event, storefrontId) => {
     let games = [];
 
     if (storefrontId === 'gog') {
-      const account = await storeSync.fetchGogAccount(tokenData.access_token);
-      accountName = account.username || 'mike.stokes85';
-      avatarUrl = account.avatarUrl;
-      games = await storeSync.fetchGogOwnedGames(tokenData.access_token, accountName);
+      let accessToken = tokenData.access_token;
+      try {
+        const account = await storeSync.fetchGogAccount(accessToken);
+        accountName = account.username || 'mike.stokes85';
+        avatarUrl = account.avatarUrl;
+        games = await storeSync.fetchGogOwnedGames(accessToken, accountName);
+      } catch (err) {
+        // Automatically renew token if expired
+        if (tokenData.refresh_token) {
+          const renewed = await storeSync.renewGogTokens(tokenData.refresh_token);
+          accessToken = renewed.access_token;
+          const account = await storeSync.fetchGogAccount(accessToken);
+          accountName = account.username || 'mike.stokes85';
+          avatarUrl = account.avatarUrl;
+          games = await storeSync.fetchGogOwnedGames(accessToken, accountName);
+        } else {
+          throw err;
+        }
+      }
     } else if (storefrontId === 'epic') {
-      accountName = tokenData.displayName || tokenData.account_id || 'Epic Games User';
-      games = await storeSync.fetchEpicOwnedGames(tokenData.access_token, tokenData.account_id);
+      let accessToken = tokenData.access_token;
+      let accountId = tokenData.account_id;
+      accountName = tokenData.displayName || accountId || 'Epic Games User';
+      try {
+        games = await storeSync.fetchEpicOwnedGames(accessToken, accountId);
+      } catch (err) {
+        // Automatically renew token if expired
+        if (tokenData.refresh_token) {
+          const renewed = await storeSync.renewEpicTokens(tokenData.refresh_token);
+          accessToken = renewed.access_token;
+          accountId = renewed.account_id || accountId;
+          accountName = renewed.displayName || accountName;
+          games = await storeSync.fetchEpicOwnedGames(accessToken, accountId);
+        } else {
+          throw err;
+        }
+      }
     }
 
     return { success: true, storefrontId, accountName, avatarUrl, games };

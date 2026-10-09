@@ -11,7 +11,14 @@ import { SteamStorePage } from './components/SteamStoreDetail/SteamStorePage';
 import { LibraryGridView } from './components/Library/LibraryGridView';
 import { ManageCollectionsModal } from './components/Library/ManageCollectionsModal';
 import { IntegrationsModal } from './components/Navigation/IntegrationsModal';
-import { loadIntegrations } from './services/integrations/integrationStorage';
+import {
+  loadIntegrations,
+  mergeStorefrontGames,
+  saveCurrentCatalog,
+  connectGogIntegration,
+  connectEpicIntegration,
+  connectXboxIntegration,
+} from './services/integrations/integrationStorage';
 import { steamIntegration } from './services/integrations/steamIntegration';
 import {
   CheckCircle2,
@@ -205,32 +212,92 @@ export function App() {
     };
   }, [activeGroupId, collections, filteredGames]);
 
-  // Trigger library cloud sync across connected storefronts
+  // Trigger library cloud sync across all connected storefronts (Steam, GOG, Epic, Xbox)
   const handleTriggerSync = async () => {
     setIsSyncing(true);
-    setSyncNotice('Syncing connected cloud storefront accounts...');
+    setSyncNotice('Syncing all connected storefront accounts & detecting new purchases...');
 
     try {
       const integrations = loadIntegrations();
-      const steamInteg = integrations.find((i) => i.storefrontId === 'steam' && i.isConnected);
+      let currentCatalog = games;
+      const initialCount = currentCatalog.length;
 
-      let syncedGames = games;
+      // 1. Steam sync
+      const steamInteg = integrations.find((i) => i.storefrontId === 'steam' && i.isConnected);
       if (steamInteg?.credentials?.steamId) {
-        const res = await steamIntegration.fetchOwnedGames(steamInteg.credentials);
-        syncedGames = res.games;
-      } else {
-        syncedGames = mergeScannedSteamGames([]);
+        try {
+          const res = await steamIntegration.fetchOwnedGames(steamInteg.credentials);
+          currentCatalog = mergeStorefrontGames(currentCatalog, res.games, 'steam');
+        } catch (e) {
+          console.warn('Steam sync warning:', e);
+        }
       }
 
-      setGames(syncedGames);
-      setSyncNotice(
-        `Cloud sync complete! ${syncedGames.length} verified owned titles synchronized from connected storefronts.`
-      );
+      // 2. GOG sync (via Electron native store:sync or web fallback)
+      const gogInteg = integrations.find((i) => i.storefrontId === 'gog' && i.isConnected);
+      if (gogInteg) {
+        try {
+          if (typeof window !== 'undefined' && (window as any).electronAPI?.syncStore) {
+            const gogRes = await (window as any).electronAPI.syncStore('gog');
+            if (gogRes?.success && gogRes.games?.length > 0) {
+              currentCatalog = mergeStorefrontGames(currentCatalog, gogRes.games, 'gog');
+            }
+          } else {
+            const { games: gogGames } = await connectGogIntegration(gogInteg.credentials || {});
+            currentCatalog = mergeStorefrontGames(currentCatalog, gogGames, 'gog');
+          }
+        } catch (e) {
+          console.warn('GOG sync warning:', e);
+        }
+      }
+
+      // 3. Epic Games Store sync (via Electron native store:sync or web fallback)
+      const epicInteg = integrations.find((i) => i.storefrontId === 'epic' && i.isConnected);
+      if (epicInteg) {
+        try {
+          if (typeof window !== 'undefined' && (window as any).electronAPI?.syncStore) {
+            const epicRes = await (window as any).electronAPI.syncStore('epic');
+            if (epicRes?.success && epicRes.games?.length > 0) {
+              currentCatalog = mergeStorefrontGames(currentCatalog, epicRes.games, 'epic');
+            }
+          } else {
+            const { games: epicGames } = await connectEpicIntegration(epicInteg.credentials || {});
+            currentCatalog = mergeStorefrontGames(currentCatalog, epicGames, 'epic');
+          }
+        } catch (e) {
+          console.warn('Epic sync warning:', e);
+        }
+      }
+
+      // 4. Xbox sync
+      const xboxInteg = integrations.find((i) => i.storefrontId === 'xbox' && i.isConnected);
+      if (xboxInteg) {
+        try {
+          const { games: xboxGames } = await connectXboxIntegration(xboxInteg.credentials || {});
+          currentCatalog = mergeStorefrontGames(currentCatalog, xboxGames, 'xbox');
+        } catch (e) {
+          console.warn('Xbox sync warning:', e);
+        }
+      }
+
+      const newGamesDetected = Math.max(0, currentCatalog.length - initialCount);
+      setGames(currentCatalog);
+      saveCurrentCatalog(currentCatalog);
+
+      if (newGamesDetected > 0) {
+        setSyncNotice(
+          `Sync complete! Detected ${newGamesDetected} newly added title${newGamesDetected === 1 ? '' : 's'} across your storefronts! (${currentCatalog.length} total titles)`
+        );
+      } else {
+        setSyncNotice(
+          `All connected libraries are up to date! (${currentCatalog.length} titles synchronized across Steam, GOG, Epic)`
+        );
+      }
     } catch (err: any) {
       setSyncNotice(`Sync notice: ${err?.message || 'Using cached verified catalog'}`);
     } finally {
       setIsSyncing(false);
-      setTimeout(() => setSyncNotice(null), 4000);
+      setTimeout(() => setSyncNotice(null), 5000);
     }
   };
 
