@@ -48,6 +48,21 @@ export const INITIAL_LIBRARY_GAMES: CanonicalGame[] = [
       releaseDate: 'Coming Soon (2026)',
       genres: ['Action', 'Shooter', 'Gore'],
       tags: ['Third-Person Shooter', 'Action', 'Gore', 'Story Rich', 'Unreal Engine 5', 'Atmospheric'],
+      categories: [
+        { id: 2, description: 'Single-player', icon: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_singlePlayer.png' },
+        { id: 1, description: 'Multi-player', icon: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_multiPlayer.png' },
+        { id: 49, description: 'PvP', icon: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_multiPlayer.png' },
+        { id: 36, description: 'Online PvP', icon: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_multiPlayer.png' },
+        { id: 9, description: 'Co-op', icon: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_coop.png' },
+        { id: 38, description: 'Online Co-op', icon: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_coop.png' },
+        { id: 27, description: 'Cross-Platform Multiplayer', icon: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_multiPlayer.png' },
+        { id: 22, description: 'Steam Achievements', icon: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_achievements.png' },
+        { id: 28, description: 'Full controller support', icon: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_controller.png' },
+        { id: 35, description: 'In-App Purchases', icon: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_cart.png' },
+        { id: 57, description: 'DualSense Controller Support', icon: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_controller.png' },
+        { id: 61, description: 'HDR available', icon: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_hdr.png' },
+        { id: 62, description: 'Family Sharing', icon: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_familysharing.png' },
+      ],
       screenshots: [
         {
           id: 0,
@@ -117,7 +132,9 @@ export const INITIAL_LIBRARY_GAMES: CanonicalGame[] = [
         totalReviews: 4193,
         positivePercent: 72,
       },
-      supportedLanguages: 'English<strong>*</strong>, French, Italian, German, Spanish - Spain, Japanese<br><strong>*</strong>languages with full audio support',
+      supportedLanguages: 'English<strong>*</strong>, French<strong>*</strong>, Italian<strong>*</strong>, German<strong>*</strong>, Spanish - Spain<strong>*</strong>, Arabic, Czech, Dutch, Hungarian, Japanese<strong>*</strong>, Korean<strong>*</strong>, Norwegian, Polish, Portuguese - Brazil<strong>*</strong>, Portuguese - Portugal, Russian, Simplified Chinese<strong>*</strong>, Spanish - Latin America<strong>*</strong>, Swedish, Traditional Chinese<strong>*</strong>, Turkish, Finnish<br><strong>*</strong>languages with full audio support',
+      legalNotice: '© Microsoft 2026. All Rights Reserved. Microsoft, The Coalition and The Coalition logo are trademarks of the Microsoft group of companies.',
+      controllerSupport: 'full',
     },
   },
   {

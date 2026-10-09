@@ -1,12 +1,38 @@
 import axios from 'axios';
-import { SteamEnrichedMetadata, SteamReviewSummary, SteamScreenshot, SteamMovie } from '../../contracts/steam';
+import {
+  SteamEnrichedMetadata,
+  SteamReviewSummary,
+  SteamScreenshot,
+  SteamMovie,
+  SteamCategory,
+} from '../../contracts/steam';
+
+export function getSteamCategoryIconUrl(id: number): string {
+  const map: Record<number, string> = {
+    2: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_singlePlayer.png',
+    1: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_multiPlayer.png',
+    49: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_multiPlayer.png',
+    36: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_multiPlayer.png',
+    9: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_coop.png',
+    38: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_coop.png',
+    27: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_multiPlayer.png',
+    22: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_achievements.png',
+    28: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_controller.png',
+    18: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_controller.png',
+    35: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_cart.png',
+    57: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_controller.png',
+    61: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_hdr.png',
+    62: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_familysharing.png',
+    23: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_cloud.png',
+    29: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_cards.png',
+  };
+  return map[id] || 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_singlePlayer.png';
+}
 
 export class SteamApiService {
   private cache = new Map<number, SteamEnrichedMetadata>();
 
   private getBaseUrl(): string {
-    // In browser/Vite dev, use the proxy route to avoid CORS.
-    // In production or Node/Electron, direct URL can be used.
     if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
       return '/api/steam-store';
     }
@@ -22,7 +48,7 @@ export class SteamApiService {
       const baseUrl = this.getBaseUrl();
       const [detailsRes, reviewsRes] = await Promise.all([
         axios.get(`${baseUrl}/api/appdetails?appids=${appId}&l=english`, { timeout: 8000 }),
-        axios.get(`${baseUrl}/appreviews/${appId}?json=1&language=all`, { timeout: 6000 }).catch(() => null)
+        axios.get(`${baseUrl}/appreviews/${appId}?json=1&language=all`, { timeout: 6000 }).catch(() => null),
       ]);
 
       const appData = detailsRes.data?.[appId];
@@ -81,6 +107,13 @@ export class SteamApiService {
         };
       }
 
+      // Extract categories (features)
+      const categories: SteamCategory[] = (data.categories || []).map((c: any) => ({
+        id: c.id,
+        description: c.description,
+        icon: getSteamCategoryIconUrl(c.id),
+      }));
+
       // Extract genres & tags
       const genres: string[] = (data.genres || []).map((g: any) => g.description);
       const tags: string[] = (data.categories || []).map((c: any) => c.description).slice(0, 10);
@@ -98,6 +131,7 @@ export class SteamApiService {
         releaseDate: data.release_date?.date || (data.release_date?.coming_soon ? 'Coming Soon' : 'TBA'),
         genres,
         tags,
+        categories,
         screenshots,
         movies,
         systemRequirements: {
@@ -106,6 +140,9 @@ export class SteamApiService {
         },
         reviewSummary,
         supportedLanguages: data.supported_languages,
+        legalNotice: data.legal_notice,
+        drmNotice: data.drm_notice,
+        controllerSupport: data.controller_support,
         pcRequirementsHtml: data.pc_requirements?.minimum || undefined,
       };
 

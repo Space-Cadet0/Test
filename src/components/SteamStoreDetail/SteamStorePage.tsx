@@ -6,6 +6,9 @@ import { MediaGallery } from './MediaGallery';
 import { ReviewSentimentBadge } from './ReviewSentimentBadge';
 import { SystemRequirements } from './SystemRequirements';
 import { PlatformBadges } from './PlatformBadges';
+import { SteamLanguagesTable } from './SteamLanguagesTable';
+import { SteamFeaturesList } from './SteamFeaturesList';
+import { SteamSidebarNotices } from './SteamSidebarNotices';
 import {
   ExternalLink,
   Calendar,
@@ -14,7 +17,6 @@ import {
   ArrowLeft,
   Check,
   RefreshCw,
-  Globe,
   Tag
 } from 'lucide-react';
 
@@ -285,46 +287,24 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({ game, onBackToLi
             <SystemRequirements requirements={metadata?.systemRequirements} />
           </div>
 
-          {/* Right Sidebar Details */}
-          <div className="lg:col-span-4 space-y-6">
-            {/* Languages Panel */}
-            {metadata?.supportedLanguages && (
-              <div className="bg-[#16202d] rounded border border-steam-border p-4 shadow-sm space-y-2">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-steam-accent flex items-center gap-1.5">
-                  <Globe className="w-3.5 h-3.5" />
-                  Languages
-                </h4>
-                <div
-                  className="text-xs text-steam-subtext leading-relaxed [&_strong]:text-white"
-                  dangerouslySetInnerHTML={{ __html: metadata.supportedLanguages }}
-                />
-              </div>
-            )}
+          {/* Right Sidebar Details (1:1 Steam Right Column) */}
+          <div className="lg:col-span-4 space-y-4">
+            {/* Features (Specifications & Categories with Official Steam Icons) */}
+            <SteamFeaturesList categories={metadata?.categories} />
 
-            {/* Steam Features / Badges Panel */}
-            <div className="bg-[#16202d] rounded border border-steam-border p-4 shadow-sm space-y-3 text-xs">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-steam-accent">
-                Specifications & Features
-              </h4>
-              <ul className="space-y-2 text-steam-subtext">
-                <li className="flex items-center gap-2 text-white">
-                  <span className="w-1.5 h-1.5 rounded-full bg-steam-accent" />
-                  Single-player & Co-op
-                </li>
-                <li className="flex items-center gap-2 text-white">
-                  <span className="w-1.5 h-1.5 rounded-full bg-steam-accent" />
-                  Full Controller Support
-                </li>
-                <li className="flex items-center gap-2 text-white">
-                  <span className="w-1.5 h-1.5 rounded-full bg-steam-accent" />
-                  Cloud Saves Enabled
-                </li>
-                <li className="flex items-center gap-2 text-white">
-                  <span className="w-1.5 h-1.5 rounded-full bg-steam-accent" />
-                  HDR & High Refresh Rate
-                </li>
-              </ul>
-            </div>
+            {/* Exact 1:1 Languages Matrix Table */}
+            <SteamLanguagesTable rawSupportedLanguagesHtml={metadata?.supportedLanguages} />
+
+            {/* Controller Support, Deck Verified, Anti-Cheat, EULA, and Details */}
+            <SteamSidebarNotices
+              title={game.title}
+              steamAppId={game.steamAppId}
+              genres={metadata?.genres || game.genres}
+              developers={developers}
+              publishers={publishers}
+              releaseDate={releaseDate}
+              legalNotice={metadata?.legalNotice}
+            />
           </div>
         </div>
       </div>

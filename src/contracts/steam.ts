@@ -20,7 +20,7 @@ export interface SteamMovie {
 
 export interface SteamReviewSummary {
   reviewScore: number;
-  reviewScoreDesc: string; // e.g. "Very Positive", "Overwhelmingly Positive"
+  reviewScoreDesc: string;
   totalPositive: number;
   totalNegative: number;
   totalReviews: number;
@@ -30,6 +30,19 @@ export interface SteamReviewSummary {
 export interface SteamSystemRequirements {
   minimum?: string;
   recommended?: string;
+}
+
+export interface SteamCategory {
+  id: number;
+  description: string;
+  icon?: string;
+}
+
+export interface SteamLanguageOption {
+  name: string;
+  hasInterface: boolean;
+  hasAudio: boolean;
+  hasSubtitles: boolean;
 }
 
 export interface SteamEnrichedMetadata {
@@ -45,10 +58,14 @@ export interface SteamEnrichedMetadata {
   releaseDate: string;
   genres: string[];
   tags: string[];
+  categories: SteamCategory[];
   screenshots: SteamScreenshot[];
   movies: SteamMovie[];
   systemRequirements: SteamSystemRequirements;
   reviewSummary: SteamReviewSummary;
   supportedLanguages?: string;
+  legalNotice?: string;
+  drmNotice?: string;
+  controllerSupport?: string;
   pcRequirementsHtml?: string;
 }
