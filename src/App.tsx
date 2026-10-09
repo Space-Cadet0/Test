@@ -4,7 +4,6 @@ import { StorefrontId } from './contracts/platform';
 import { GameCollection } from './contracts/collection';
 import { mergeScannedSteamGames } from './services/storage/librarySync';
 import { loadCollections, saveCollections } from './services/storage/collectionStorage';
-import { steamApi } from './services/steam/steamApi';
 import { scanLocalInstalledGames } from './services/system/localSystemScanner';
 import { TopNavBar } from './components/Navigation/TopNavBar';
 import { LibrarySidebar } from './components/Library/LibrarySidebar';
@@ -15,9 +14,6 @@ import { IntegrationsModal } from './components/Navigation/IntegrationsModal';
 import { loadIntegrations } from './services/integrations/integrationStorage';
 import { steamIntegration } from './services/integrations/steamIntegration';
 import {
-  Plus,
-  Sparkles,
-  X,
   CheckCircle2,
   Star,
   Play,
@@ -35,10 +31,12 @@ export function App() {
       try {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          const cleaned = parsed.map((g: CanonicalGame) => ({
-            ...g,
-            platforms: g.platforms.map((p) => ({ ...p, installed: false })),
-          }));
+          const cleaned = parsed
+            .filter((g: CanonicalGame) => g.steamAppId !== 3010850 && !g.title.toLowerCase().includes('e-day'))
+            .map((g: CanonicalGame) => ({
+              ...g,
+              platforms: g.platforms.map((p) => ({ ...p, installed: false })),
+            }));
           return mergeScannedSteamGames(cleaned);
         }
       } catch (e) {
@@ -68,12 +66,6 @@ export function App() {
 
   // Integrations modal state
   const [isIntegrationsModalOpen, setIsIntegrationsModalOpen] = useState(false);
-
-  // Quick import modal state
-  const [isImportModalOpen, setIsImportModalOpen] = useState(false);
-  const [importInput, setImportInput] = useState('');
-  const [isImporting, setIsImporting] = useState(false);
-  const [importError, setImportError] = useState<string | null>(null);
 
   // Synchronize installed game status against the workstation's actual file system
   useEffect(() => {
@@ -204,83 +196,6 @@ export function App() {
     };
   }, [activeGroupId, collections, filteredGames]);
 
-  // Handle live Steam import by URL or App ID
-  const handleImportSteamGame = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!importInput.trim()) return;
-
-    setImportError(null);
-    setIsImporting(true);
-
-    try {
-      let appId: number | null = null;
-      const match = importInput.match(/app\/(\d+)/i);
-      if (match) {
-        appId = parseInt(match[1], 10);
-      } else if (/^\d+$/.test(importInput.trim())) {
-        appId = parseInt(importInput.trim(), 10);
-      } else {
-        appId = await steamApi.searchAppId(importInput.trim());
-      }
-
-      if (!appId) {
-        setImportError('Could not find Steam AppID for this title or URL.');
-        setIsImporting(false);
-        return;
-      }
-
-      const meta = await steamApi.fetchGameMetadata(appId);
-      if (!meta) {
-        setImportError(`Failed to fetch metadata from Steam for AppID ${appId}.`);
-        setIsImporting(false);
-        return;
-      }
-
-      // Check if already in library
-      const existing = games.find((g) => g.steamAppId === appId);
-      if (existing) {
-        setSelectedGame(existing);
-        setImportInput('');
-        setIsImportModalOpen(false);
-        setIsImporting(false);
-        return;
-      }
-
-      // Construct new CanonicalGame
-      const newGame: CanonicalGame = {
-        id: `steam-${appId}`,
-        title: meta.name,
-        sortTitle: meta.name,
-        steamAppId: appId,
-        platforms: [
-          {
-            platformId: 'steam',
-            platformGameId: String(appId),
-            installed: false,
-          },
-        ],
-        headerImage: meta.headerImage,
-        shortDescription: meta.shortDescription,
-        releaseDate: meta.releaseDate,
-        developers: meta.developers,
-        publishers: meta.publishers,
-        genres: meta.genres,
-        tags: meta.tags,
-        reviewSummary: meta.reviewSummary,
-        enrichedMetadata: meta,
-      };
-
-      setGames((prev) => [newGame, ...prev]);
-      setSelectedGame(newGame);
-      setImportInput('');
-      setIsImportModalOpen(false);
-    } catch (err: any) {
-      setImportError(err.message || 'Error importing game.');
-    } finally {
-      setIsImporting(false);
-    }
-  };
-
   // Trigger library cloud sync across connected storefronts
   const handleTriggerSync = async () => {
     setIsSyncing(true);
@@ -399,7 +314,6 @@ export function App() {
           onSelectPlatform={setSelectedPlatform}
           installedOnly={installedOnly}
           onToggleInstalledOnly={() => setInstalledOnly(!installedOnly)}
-          onOpenImportModal={() => setIsImportModalOpen(true)}
           collections={collections}
           onOpenManageCollectionsModal={handleOpenManageCollections}
           onToggleGameInCollection={handleToggleGameInCollection}
@@ -455,73 +369,6 @@ export function App() {
           )}
         </main>
       </div>
-
-      {/* Modal: Live Steam Scraper & URL Importer */}
-      {isImportModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[#16202d] border border-steam-border rounded-lg max-w-lg w-full p-6 shadow-2xl space-y-4">
-            <div className="flex items-center justify-between border-b border-steam-border/60 pb-3">
-              <div className="flex items-center gap-2 text-sm font-bold text-white">
-                <Sparkles className="w-4 h-4 text-steam-accent" />
-                <span>Live Steam Scraper & Importer</span>
-              </div>
-              <button
-                onClick={() => {
-                  setIsImportModalOpen(false);
-                  setImportError(null);
-                }}
-                className="text-steam-subtext hover:text-white"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <p className="text-xs text-steam-subtext leading-relaxed">
-              Enter any Steam Store page URL or numeric AppID to scrape live trailers, screenshots, reviews, and specifications directly into your library.
-            </p>
-
-            <form onSubmit={handleImportSteamGame} className="space-y-3">
-              <div className="space-y-1">
-                <label className="text-[11px] font-semibold text-steam-subtext uppercase">
-                  Steam URL or App ID
-                </label>
-                <input
-                  type="text"
-                  value={importInput}
-                  onChange={(e) => setImportInput(e.target.value)}
-                  placeholder="https://store.steampowered.com/app/3010850/Gears_of_War_EDay/ or 3010850"
-                  className="w-full px-3 py-2 text-xs bg-[#0e141b] text-white rounded border border-steam-border focus:border-steam-accent focus:outline-none"
-                  autoFocus
-                />
-              </div>
-
-              {importError && (
-                <div className="p-2.5 bg-red-950/70 border border-red-700/60 rounded text-xs text-red-300">
-                  {importError}
-                </div>
-              )}
-
-              <div className="flex items-center justify-end gap-2 pt-2">
-                <button
-                  type="button"
-                  onClick={() => setIsImportModalOpen(false)}
-                  className="px-3 py-1.5 text-xs text-steam-subtext hover:text-white bg-transparent rounded"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={isImporting}
-                  className="px-4 py-1.5 text-xs font-semibold bg-steam-btnGreen hover:bg-steam-btnGreenHover text-white rounded transition-colors flex items-center gap-1.5 disabled:opacity-50"
-                >
-                  <Plus className="w-4 h-4" />
-                  {isImporting ? 'Scraping Steam...' : 'Scrape & Add'}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
 
       {/* Modal: Manage Collections */}
       <ManageCollectionsModal

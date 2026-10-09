@@ -8,7 +8,6 @@ import {
   CheckCircle2,
   Filter,
   Search,
-  Sparkles,
   ChevronDown,
   ChevronRight,
   FolderPlus,
@@ -36,7 +35,6 @@ interface LibrarySidebarProps {
   onSelectPlatform: (p: StorefrontId | 'all') => void;
   installedOnly: boolean;
   onToggleInstalledOnly: () => void;
-  onOpenImportModal: () => void;
   collections: GameCollection[];
   onOpenManageCollectionsModal: (game?: CanonicalGame) => void;
   onToggleGameInCollection: (collectionId: string, gameId: string) => void;
@@ -56,7 +54,6 @@ export const LibrarySidebar: React.FC<LibrarySidebarProps> = ({
   onSelectPlatform,
   installedOnly,
   onToggleInstalledOnly,
-  onOpenImportModal,
   collections,
   onOpenManageCollectionsModal,
   onToggleGameInCollection,
@@ -362,15 +359,6 @@ export const LibrarySidebar: React.FC<LibrarySidebarProps> = ({
           >
             <FolderPlus className="w-3 h-3 text-steam-accent" />
             <span className="hidden sm:inline">+ Group</span>
-          </button>
-
-          <button
-            onClick={onOpenImportModal}
-            className="text-steam-accent hover:text-white flex items-center gap-1 text-[11px] hover:underline"
-            title="Scrape and import a new game"
-          >
-            <Sparkles className="w-3 h-3" />
-            <span>+ Game</span>
           </button>
         </div>
       </div>
