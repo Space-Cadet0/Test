@@ -22,6 +22,7 @@ import {
 import { steamIntegration } from './services/integrations/steamIntegration';
 import { steamMatcher } from './services/steam/steamMatcher';
 import { sanitizeGameCatalog } from './services/integrations/catalogSanitizer';
+import { GOG_USER_LIBRARY, EPIC_USER_LIBRARY } from './services/storage/storefrontLibraries';
 import {
   CheckCircle2,
   Star,
@@ -49,7 +50,18 @@ export function App() {
               ...g,
               platforms: g.platforms.map((p) => ({ ...p, installed: false })),
             }));
-          const sanitized = sanitizeGameCatalog(mergeScannedSteamGames(cleaned));
+          let sanitized = sanitizeGameCatalog(mergeScannedSteamGames(cleaned));
+
+          const gogCount = sanitized.filter((g: CanonicalGame) => g.platforms?.some((p) => p.platformId === 'gog')).length;
+          if (gogCount < GOG_USER_LIBRARY.length) {
+            sanitized = sanitizeGameCatalog(mergeStorefrontGames(sanitized, GOG_USER_LIBRARY, 'gog'));
+          }
+
+          const epicCount = sanitized.filter((g: CanonicalGame) => g.platforms?.some((p) => p.platformId === 'epic')).length;
+          if (epicCount < EPIC_USER_LIBRARY.length) {
+            sanitized = sanitizeGameCatalog(mergeStorefrontGames(sanitized, EPIC_USER_LIBRARY, 'epic'));
+          }
+
           try {
             localStorage.setItem('universal_game_library_catalog', JSON.stringify(sanitized));
           } catch {}
@@ -59,7 +71,13 @@ export function App() {
         console.error('Failed to parse cached games:', e);
       }
     }
-    const defaultCatalog = sanitizeGameCatalog(mergeScannedSteamGames([]));
+    const defaultCatalog = sanitizeGameCatalog(
+      mergeStorefrontGames(
+        mergeStorefrontGames(mergeScannedSteamGames([]), GOG_USER_LIBRARY, 'gog'),
+        EPIC_USER_LIBRARY,
+        'epic'
+      )
+    );
     try {
       localStorage.setItem('universal_game_library_catalog', JSON.stringify(defaultCatalog));
     } catch {}

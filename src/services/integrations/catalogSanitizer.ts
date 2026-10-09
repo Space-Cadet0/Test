@@ -81,20 +81,41 @@ export function isEpicNonGameEntry(game: CanonicalGame): boolean {
 }
 
 /**
+ * Normalizes title for robust cross-storefront game deduplication
+ */
+export function normalizeCanonicalTitle(title: string): string {
+  if (!title) return '';
+  return title
+    .toLowerCase()
+    .replace(/[™®©]/g, '')
+    .replace(/\biii\b/g, '3')
+    .replace(/\bii\b/g, '2')
+    .replace(/\biv\b/g, '4')
+    .replace(/[:\-–—]/g, ' ')
+    .replace(/\s+(complete|definitive|enhanced|game of the year|goty|remastered|deluxe|gold|standard)\s+edition/g, '')
+    .replace(/\s+edition$/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/**
  * Sanitizes the catalog:
  * 1. Renames known Epic codenames (Boga, Blobfish, Barbet, Basil, Batfish, etc.) to their official game titles and covers
  * 2. Corrects the false match where "Path of the Bogatyr" was assigned to Epic's "Boga" (Death Stranding)
- * 3. Purges raw GUIDs, Fortnite microtransaction items, and invalid DLC entries.
+ * 3. Purges raw GUIDs, Fortnite microtransaction items, invalid DLC entries, and unmapped codenames
+ * 4. Deduplicates games by normalized title and Steam App ID, merging multi-storefront ownership cleanly
  */
 export function sanitizeGameCatalog(catalog: CanonicalGame[]): CanonicalGame[] {
   if (!Array.isArray(catalog)) return [];
 
   const cleaned: CanonicalGame[] = [];
-  const seenSlugs = new Set<string>();
+  const titleToIndex = new Map<string, number>();
+  const steamIdToIndex = new Map<number, number>();
 
-  for (const game of catalog) {
-    if (!game || !game.title) continue;
+  for (const rawGame of catalog) {
+    if (!rawGame || !rawGame.title) continue;
 
+    let game = { ...rawGame };
     const lowerTitle = game.title.toLowerCase().trim();
     const hasEpicPlatform = game.platforms.some((p) => p.platformId === 'epic');
 
@@ -110,7 +131,7 @@ export function sanitizeGameCatalog(catalog: CanonicalGame[]): CanonicalGame[] {
         ));
 
     if (isFalseBogaMatch || lowerTitle === 'boga') {
-      const fixedGame: CanonicalGame = {
+      game = {
         ...game,
         id: 'steam-1190460',
         title: 'Death Stranding',
@@ -128,11 +149,6 @@ export function sanitizeGameCatalog(catalog: CanonicalGame[]): CanonicalGame[] {
           p.platformId === 'epic' ? { ...p, platformGameId: '761fe09295aa422e8199cebaacf51675' } : p
         ),
       };
-      if (!seenSlugs.has(fixedGame.title.toLowerCase())) {
-        seenSlugs.add(fixedGame.title.toLowerCase());
-        cleaned.push(fixedGame);
-      }
-      continue;
     }
 
     // 2. Resolve known Epic codenames to their official game entities
@@ -147,7 +163,7 @@ export function sanitizeGameCatalog(catalog: CanonicalGame[]): CanonicalGame[] {
 
     if (epicMapping) {
       const steamId = epicMapping.steamAppId;
-      const fixedGame: CanonicalGame = {
+      game = {
         ...game,
         id: steamId ? `steam-${steamId}` : game.id,
         title: epicMapping.title,
@@ -162,11 +178,6 @@ export function sanitizeGameCatalog(catalog: CanonicalGame[]): CanonicalGame[] {
         shortDescription: epicMapping.description || game.shortDescription,
         developers: epicMapping.developer ? [epicMapping.developer] : game.developers,
       };
-      if (!seenSlugs.has(fixedGame.title.toLowerCase())) {
-        seenSlugs.add(fixedGame.title.toLowerCase());
-        cleaned.push(fixedGame);
-      }
-      continue;
     }
 
     // 3. Resolve raw Doki Doki Literature Club Plus! if present as hex ID
@@ -174,7 +185,7 @@ export function sanitizeGameCatalog(catalog: CanonicalGame[]): CanonicalGame[] {
       game.id.includes('c5109bdceb3a453bb38c2fdc964ddee8') ||
       game.title === 'c5109bdceb3a453bb38c2fdc964ddee8'
     ) {
-      const fixedGame: CanonicalGame = {
+      game = {
         ...game,
         id: 'steam-1388880',
         title: 'Doki Doki Literature Club Plus!',
@@ -192,22 +203,70 @@ export function sanitizeGameCatalog(catalog: CanonicalGame[]): CanonicalGame[] {
           p.platformId === 'epic' ? { ...p, platformGameId: 'c5109bdceb3a453bb38c2fdc964ddee8' } : p
         ),
       };
-      if (!seenSlugs.has(fixedGame.title.toLowerCase())) {
-        seenSlugs.add(fixedGame.title.toLowerCase());
-        cleaned.push(fixedGame);
-      }
-      continue;
     }
 
-    // 4. Filter out junk & non-games
+    // 4. Filter out junk, pure hex hashes, Fortnite DLC, and unmapped codenames
     if (isEpicNonGameEntry(game)) {
       continue;
     }
 
-    const key = (game.steamAppId ? `steam-${game.steamAppId}` : game.title).toLowerCase().trim();
-    if (!seenSlugs.has(key)) {
-      seenSlugs.add(key);
+    const currentTitleLower = game.title.toLowerCase().trim();
+    if (['bobcat', 'boxfish', 'calluna', 'catnip', 'cormorant'].includes(currentTitleLower)) {
+      continue;
+    }
+
+    // 5. Remove erroneous 'epic' platform presence from non-Epic titles
+    if (currentTitleLower.includes('gwent') || currentTitleLower.includes('heroes of might and magic')) {
+      game = {
+        ...game,
+        platforms: game.platforms.filter((p) => p.platformId !== 'epic'),
+      };
+      if (game.platforms.length === 0) continue;
+    }
+
+    // 6. Intelligent cross-store deduplication by Steam App ID and Normalized Title
+    const normTitle = normalizeCanonicalTitle(game.title);
+    const existingIndex =
+      (game.steamAppId && steamIdToIndex.has(game.steamAppId)
+        ? steamIdToIndex.get(game.steamAppId)
+        : undefined) ??
+      (normTitle && titleToIndex.has(normTitle) ? titleToIndex.get(normTitle) : undefined);
+
+    if (existingIndex !== undefined && cleaned[existingIndex]) {
+      // Merge platforms across duplicates
+      const existing = cleaned[existingIndex];
+      const mergedPlatforms = [...existing.platforms];
+      for (const p of game.platforms) {
+        const found = mergedPlatforms.some((ep) => ep.platformId === p.platformId);
+        if (!found) {
+          mergedPlatforms.push(p);
+        }
+      }
+
+      cleaned[existingIndex] = {
+        ...existing,
+        steamAppId: existing.steamAppId || game.steamAppId,
+        id: existing.steamAppId
+          ? `steam-${existing.steamAppId}`
+          : game.steamAppId
+          ? `steam-${game.steamAppId}`
+          : existing.id,
+        platforms: mergedPlatforms,
+        headerImage: existing.headerImage || game.headerImage,
+        capsuleImage: existing.capsuleImage || game.capsuleImage,
+        shortDescription: existing.shortDescription || game.shortDescription,
+        developers: existing.developers && existing.developers.length > 0 ? existing.developers : game.developers,
+        publishers: existing.publishers && existing.publishers.length > 0 ? existing.publishers : game.publishers,
+      };
+
+      if (cleaned[existingIndex].steamAppId) {
+        steamIdToIndex.set(cleaned[existingIndex].steamAppId!, existingIndex);
+      }
+    } else {
+      const newIndex = cleaned.length;
       cleaned.push(game);
+      if (normTitle) titleToIndex.set(normTitle, newIndex);
+      if (game.steamAppId) steamIdToIndex.set(game.steamAppId, newIndex);
     }
   }
 

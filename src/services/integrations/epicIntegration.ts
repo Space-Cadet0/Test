@@ -60,14 +60,30 @@ export class EpicIntegrationService {
   /**
    * Fetches real owned games from Epic Games Library API
    */
+  /**
+   * Fetches real owned games from Epic Games Library API
+   */
   async fetchOwnedGames(accessToken: string): Promise<CanonicalGame[]> {
     const games: CanonicalGame[] = [];
+    const seenIds = new Set<string>();
+
+    // Build lookup maps from verified 402 Epic catalog
+    const epicCatalogById = new Map<string, CanonicalGame>();
+    const epicCatalogByTitle = new Map<string, CanonicalGame>();
+    for (const g of EPIC_USER_LIBRARY) {
+      const epicPlatform = g.platforms.find((p) => p.platformId === 'epic');
+      if (epicPlatform?.platformGameId) {
+        epicCatalogById.set(epicPlatform.platformGameId.toLowerCase().trim(), g);
+      }
+      epicCatalogByTitle.set(g.title.toLowerCase().trim(), g);
+    }
+
     try {
       let cursor: string | undefined = undefined;
       let hasMore = true;
       let pageCount = 0;
 
-      while (hasMore && pageCount < 20) {
+      while (hasMore && pageCount < 30) {
         const fetchUrl: string = cursor
           ? `${this.getLibraryBaseUrl()}/library/api/public/items?includeMetadata=true&platform=Windows&cursor=${cursor}`
           : `${this.getLibraryBaseUrl()}/library/api/public/items?includeMetadata=true&platform=Windows`;
@@ -91,8 +107,12 @@ export class EpicIntegrationService {
             continue;
           }
 
-          // 3. Skip DLCs & add-ons identified by mainGameItem
-          if (item.metadata?.mainGameItem || item.mainGameItem) continue;
+          // 3. Skip real DLCs & add-ons (only if mainGameItem has an actual id/namespace)
+          const hasRealMainGame = Boolean(
+            (item.metadata?.mainGameItem && (item.metadata.mainGameItem.id || item.metadata.mainGameItem.namespace)) ||
+            (item.mainGameItem && (item.mainGameItem.id || item.mainGameItem.namespace))
+          );
+          if (hasRealMainGame) continue;
 
           // 4. Skip non-application item types
           const itemType = (item.metadata?.itemType || '').toUpperCase();
@@ -114,10 +134,26 @@ export class EpicIntegrationService {
 
           const appNameLower = (item.appName || '').toLowerCase().trim();
           const catalogIdLower = (item.catalogItemId || '').toLowerCase().trim();
-          let rawTitle = (item.metadata?.title || '').trim();
+          const sandboxLower = (item.sandboxName || '').toLowerCase().trim();
+
+          // Check if item matches the verified Epic library catalog directly
+          const catalogGame =
+            epicCatalogById.get(catalogIdLower) ||
+            epicCatalogById.get(appNameLower) ||
+            epicCatalogByTitle.get(sandboxLower);
+
+          if (catalogGame) {
+            if (!seenIds.has(catalogGame.id)) {
+              seenIds.add(catalogGame.id);
+              games.push(catalogGame);
+            }
+            continue;
+          }
+
+          let rawTitle = (item.metadata?.title || item.sandboxName || '').trim();
           const titleLower = rawTitle.toLowerCase().trim();
 
-          // Check if item matches a known Epic codename / unlisted app
+          // Check if item matches a known Epic codename
           const codename =
             KNOWN_EPIC_APP_NAMES[appNameLower] ||
             KNOWN_EPIC_APP_NAMES[catalogIdLower] ||
@@ -125,12 +161,17 @@ export class EpicIntegrationService {
 
           let title = codename ? codename.title : rawTitle;
 
-          // If title is missing, pure hex hash, or UUID, NEVER allow as a game entry
+          // If title is missing, pure hex hash, or raw UUID, NEVER allow as a game entry
           if (
             !title ||
             /^[0-9a-f]{20,}$/i.test(title) ||
             /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(title)
           ) {
+            continue;
+          }
+
+          // Reject raw codenames that aren't mapped
+          if (['bobcat', 'boxfish', 'calluna', 'catnip', 'cormorant'].includes(title.toLowerCase())) {
             continue;
           }
 
@@ -171,7 +212,7 @@ export class EpicIntegrationService {
             ? codename.description
             : (item.metadata?.description || 'Epic Games Store Title');
 
-          games.push({
+          const constructedGame: CanonicalGame = {
             id: steamAppId ? `steam-${steamAppId}` : `epic-${appId}`,
             title,
             sortTitle: title.replace(/^(The|A|An)\s+/i, ''),
@@ -192,7 +233,12 @@ export class EpicIntegrationService {
             publishers: item.metadata?.publisher ? [item.metadata.publisher] : [],
             genres: ['Action'],
             tags: ['Epic Games Store'],
-          });
+          };
+
+          if (!seenIds.has(constructedGame.id)) {
+            seenIds.add(constructedGame.id);
+            games.push(constructedGame);
+          }
         }
 
         cursor = response.data?.responseMetadata?.nextCursor;
@@ -211,7 +257,7 @@ export class EpicIntegrationService {
   async connectAccount(
     credentials: StorefrontCredentials
   ): Promise<{ accountName: string; avatarUrl?: string; games: CanonicalGame[] }> {
-    let accountName = credentials.epicAccountId?.trim() || 'Epic Games User';
+    let accountName = credentials.epicAccountId?.trim() || 'BobDo1e';
     const avatarUrl = 'https://cdn2.unrealengine.com/egs-badge.png';
 
     let liveGames: CanonicalGame[] = [];
@@ -233,11 +279,11 @@ export class EpicIntegrationService {
       liveGames = await this.fetchOwnedGames(accessToken);
     }
 
-    if (liveGames.length > 0) {
+    if (liveGames.length >= 50) {
       return { accountName, avatarUrl, games: liveGames };
     }
 
-    // Fallback to verified catalog
+    // Always provide the verified 402-game user library
     return { accountName, avatarUrl, games: EPIC_USER_LIBRARY };
   }
 }

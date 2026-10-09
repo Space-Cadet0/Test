@@ -160,6 +160,16 @@ const KNOWN_STEAM_MAPPINGS = {
   'buffalo': 40800,
   'brill': 381210,
   'sunbird': 230050,
+  'bobcat': 1222730,
+  'boxfish': 1556200,
+  'calluna': 870780,
+  'catnip': 397540,
+  'cormorant': 742420,
+  'star wars: squadrons': 1222730,
+  'star wars™: squadrons': 1222730,
+  'predator: hunting grounds': 1556200,
+  'borderlands 3': 397540,
+  'saints row': 742420,
 };
 
 const KNOWN_EPIC_APP_NAMES = {
@@ -169,6 +179,11 @@ const KNOWN_EPIC_APP_NAMES = {
   basil: { title: 'Human Resource Machine', steamAppId: 375820, developer: 'Tomorrow Corporation' },
   batfish: { title: 'Batman - The Telltale Series', steamAppId: 498240, developer: 'Telltale Games' },
   batfishs2: { title: 'Batman: The Enemy Within - The Telltale Series', steamAppId: 675260, developer: 'Telltale Games' },
+  bobcat: { title: 'STAR WARS™: Squadrons', steamAppId: 1222730, developer: 'Motive Studio' },
+  boxfish: { title: 'Predator: Hunting Grounds', steamAppId: 1556200, developer: 'IllFonic' },
+  calluna: { title: 'Control', steamAppId: 870780, developer: 'Remedy Entertainment' },
+  catnip: { title: 'Borderlands 3', steamAppId: 397540, developer: 'Gearbox Software' },
+  cormorant: { title: 'Saints Row', steamAppId: 742420, developer: 'Deep Silver Volition' },
   wombat: { title: 'World War Z', steamAppId: 699130, developer: 'Saber Interactive' },
   speedwell: { title: 'Metro Last Light Redux', steamAppId: 287390, developer: '4A Games' },
   sugar: { title: 'Rocket League', steamAppId: 252950, developer: 'Psyonix LLC' },
@@ -625,8 +640,12 @@ async function fetchEpicOwnedGames(accessToken, accountId) {
           continue;
         }
 
-        // 3. Skip DLCs & add-ons identified by mainGameItem
-        if (item.metadata?.mainGameItem || item.mainGameItem) continue;
+        // 3. Skip real DLCs & add-ons (only if mainGameItem has an actual id/namespace)
+        const hasRealMainGame = Boolean(
+          (item.metadata?.mainGameItem && (item.metadata.mainGameItem.id || item.metadata.mainGameItem.namespace)) ||
+          (item.mainGameItem && (item.mainGameItem.id || item.mainGameItem.namespace))
+        );
+        if (hasRealMainGame) continue;
 
         // 4. Skip non-application item types
         const itemType = (item.metadata?.itemType || '').toUpperCase();
@@ -648,7 +667,7 @@ async function fetchEpicOwnedGames(accessToken, accountId) {
 
         const appNameLower = (item.appName || '').toLowerCase().trim();
         const catalogIdLower = (item.catalogItemId || '').toLowerCase().trim();
-        let rawTitle = (item.metadata?.title || '').trim();
+        let rawTitle = (item.metadata?.title || item.sandboxName || '').trim();
         const titleLower = rawTitle.toLowerCase().trim();
 
         // Check if item matches a known Epic codename / unlisted app
@@ -665,6 +684,11 @@ async function fetchEpicOwnedGames(accessToken, accountId) {
           /^[0-9a-f]{20,}$/i.test(title) ||
           /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(title)
         ) {
+          continue;
+        }
+
+        // Reject raw codenames that aren't mapped
+        if (['bobcat', 'boxfish', 'calluna', 'catnip', 'cormorant'].includes(title.toLowerCase())) {
           continue;
         }
 

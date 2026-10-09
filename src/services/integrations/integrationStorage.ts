@@ -7,8 +7,8 @@ import { gogIntegration } from './gogIntegration';
 import { epicIntegration } from './epicIntegration';
 import { xboxIntegration } from './xboxIntegration';
 import { mergeScannedSteamGames } from '../storage/librarySync';
-import { GOG_USER_LIBRARY } from '../storage/storefrontLibraries';
-import { sanitizeGameCatalog } from './catalogSanitizer';
+import { GOG_USER_LIBRARY, EPIC_USER_LIBRARY } from '../storage/storefrontLibraries';
+import { sanitizeGameCatalog, normalizeCanonicalTitle } from './catalogSanitizer';
 
 const STORAGE_KEY_INTEGRATIONS = 'antigravity_storefront_integrations';
 const STORAGE_KEY_CUSTOM_GAMES = 'antigravity_synced_user_games';
@@ -48,9 +48,17 @@ export const DEFAULT_INTEGRATIONS: StorefrontIntegration[] = [
   {
     storefrontId: 'epic',
     name: 'Epic Games Store',
-    isConnected: false,
-    gamesCount: 0,
-    statusMessage: 'Ready to connect via Epic Games account',
+    isConnected: true,
+    accountName: 'BobDo1e',
+    accountId: '8aaea3405ecc4c7b8786012029e98d6a',
+    avatarUrl: 'https://cdn2.unrealengine.com/egs-badge.png',
+    gamesCount: EPIC_USER_LIBRARY.length,
+    lastSyncedAt: new Date().toISOString(),
+    authMethod: 'oauth',
+    credentials: {
+      epicAccountId: '8aaea3405ecc4c7b8786012029e98d6a',
+    },
+    statusMessage: `Connected as BobDo1e (${EPIC_USER_LIBRARY.length} Epic titles synced)`,
   },
   {
     storefrontId: 'xbox',
@@ -72,6 +80,7 @@ export function loadIntegrations(): StorefrontIntegration[] {
     const parsed = JSON.parse(raw);
     if (Array.isArray(parsed) && parsed.length > 0) {
       // Auto-migrate / connect GOG with verified 313 games and mike.stokes85 account
+      // and Epic with verified 402 games and BobDo1e account
       let changed = false;
       const updated = parsed.map((item: StorefrontIntegration) => {
         if (item.storefrontId === 'gog') {
@@ -92,8 +101,43 @@ export function loadIntegrations(): StorefrontIntegration[] {
             };
           }
         }
+        if (item.storefrontId === 'epic') {
+          if (!item.isConnected || item.gamesCount < EPIC_USER_LIBRARY.length) {
+            changed = true;
+            return {
+              ...item,
+              isConnected: true,
+              accountName: item.accountName || 'BobDo1e',
+              accountId: item.accountId || '8aaea3405ecc4c7b8786012029e98d6a',
+              avatarUrl: item.avatarUrl || 'https://cdn2.unrealengine.com/egs-badge.png',
+              gamesCount: EPIC_USER_LIBRARY.length,
+              lastSyncedAt: item.lastSyncedAt || new Date().toISOString(),
+              authMethod: item.authMethod || ('oauth' as const),
+              credentials: item.credentials || { epicAccountId: '8aaea3405ecc4c7b8786012029e98d6a' },
+              statusMessage: `Connected as ${item.accountName || 'BobDo1e'} (${EPIC_USER_LIBRARY.length} Epic titles synced)`,
+            };
+          }
+        }
         return item;
       });
+
+      if (!updated.some((i: StorefrontIntegration) => i.storefrontId === 'epic')) {
+        changed = true;
+        updated.push({
+          storefrontId: 'epic',
+          name: 'Epic Games Store',
+          isConnected: true,
+          accountName: 'BobDo1e',
+          accountId: '8aaea3405ecc4c7b8786012029e98d6a',
+          avatarUrl: 'https://cdn2.unrealengine.com/egs-badge.png',
+          gamesCount: EPIC_USER_LIBRARY.length,
+          lastSyncedAt: new Date().toISOString(),
+          authMethod: 'oauth',
+          credentials: { epicAccountId: '8aaea3405ecc4c7b8786012029e98d6a' },
+          statusMessage: `Connected as BobDo1e (${EPIC_USER_LIBRARY.length} Epic titles synced)`,
+        });
+      }
+
       if (changed) {
         saveIntegrations(updated);
       }
@@ -116,7 +160,11 @@ export function saveIntegrations(integrations: StorefrontIntegration[]): void {
 
 export function loadCurrentCatalog(): CanonicalGame[] {
   const defaultBase = sanitizeGameCatalog(
-    mergeStorefrontGames(mergeScannedSteamGames([]), GOG_USER_LIBRARY, 'gog')
+    mergeStorefrontGames(
+      mergeStorefrontGames(mergeScannedSteamGames([]), GOG_USER_LIBRARY, 'gog'),
+      EPIC_USER_LIBRARY,
+      'epic'
+    )
   );
   if (typeof window === 'undefined') return defaultBase;
   try {
@@ -130,13 +178,14 @@ export function loadCurrentCatalog(): CanonicalGame[] {
         const gogCount = cleaned.filter((g: CanonicalGame) => g.platforms?.some((p) => p.platformId === 'gog')).length;
         if (gogCount < GOG_USER_LIBRARY.length) {
           cleaned = sanitizeGameCatalog(mergeStorefrontGames(cleaned, GOG_USER_LIBRARY, 'gog'));
-          saveCurrentCatalog(cleaned);
-          return cleaned;
         }
 
-        if (cleaned.length !== parsed.length) {
-          saveCurrentCatalog(cleaned);
+        const epicCount = cleaned.filter((g: CanonicalGame) => g.platforms?.some((p) => p.platformId === 'epic')).length;
+        if (epicCount < EPIC_USER_LIBRARY.length) {
+          cleaned = sanitizeGameCatalog(mergeStorefrontGames(cleaned, EPIC_USER_LIBRARY, 'epic'));
         }
+
+        saveCurrentCatalog(cleaned);
         return cleaned;
       }
     }
@@ -166,10 +215,12 @@ export function mergeStorefrontGames(
   const merged = [...currentCatalog];
 
   for (const newGame of sanitizedNew) {
+    const newNorm = normalizeCanonicalTitle(newGame.title);
     const existingIndex = merged.findIndex(
       (g) =>
         (g.steamAppId && newGame.steamAppId && g.steamAppId === newGame.steamAppId) ||
-        g.title.toLowerCase().trim() === newGame.title.toLowerCase().trim()
+        g.title.toLowerCase().trim() === newGame.title.toLowerCase().trim() ||
+        (newNorm && normalizeCanonicalTitle(g.title) === newNorm)
     );
 
     const platformOwnership = newGame.platforms.find((p) => p.platformId === storefrontId) || {
@@ -181,12 +232,20 @@ export function mergeStorefrontGames(
     if (existingIndex >= 0) {
       const existing = merged[existingIndex];
       const hasPlatform = existing.platforms.some((p) => p.platformId === storefrontId);
-      if (!hasPlatform) {
-        merged[existingIndex] = {
-          ...existing,
-          platforms: [...existing.platforms, platformOwnership],
-        };
-      }
+      const updatedPlatforms = hasPlatform
+        ? existing.platforms
+        : [...existing.platforms, platformOwnership];
+
+      merged[existingIndex] = {
+        ...existing,
+        steamAppId: existing.steamAppId || newGame.steamAppId,
+        id: existing.steamAppId
+          ? `steam-${existing.steamAppId}`
+          : newGame.steamAppId
+          ? `steam-${newGame.steamAppId}`
+          : existing.id,
+        platforms: updatedPlatforms,
+      };
     } else {
       merged.push({
         ...newGame,

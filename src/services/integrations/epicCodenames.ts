@@ -42,6 +42,36 @@ export const KNOWN_EPIC_APP_NAMES: Record<string, EpicCodenameMapping> = {
     developer: 'Telltale Games',
     description: 'In this latest chapter from the award-winning studio behind Batman - The Telltale Series, both Bruce Wayne and Batman will be forced into precarious new roles.',
   },
+  bobcat: {
+    title: 'STAR WARS™: Squadrons',
+    steamAppId: 1222730,
+    developer: 'Motive Studio',
+    description: 'Master the art of starfighter combat in the authentic piloting experience STAR WARS™: Squadrons.',
+  },
+  boxfish: {
+    title: 'Predator: Hunting Grounds',
+    steamAppId: 1556200,
+    developer: 'IllFonic',
+    description: 'Hunt or be hunted in this asymmetrical multiplayer shooter that pits man against Predator.',
+  },
+  calluna: {
+    title: 'Control',
+    steamAppId: 870780,
+    developer: 'Remedy Entertainment',
+    description: 'After a secretive agency in New York is invaded by an otherworldly threat, you become the new Director struggling to regain Control.',
+  },
+  catnip: {
+    title: 'Borderlands 3',
+    steamAppId: 397540,
+    developer: 'Gearbox Software',
+    description: 'The original shooter-looter returns, packing bazillions of guns and a mayhem-fueled adventure!',
+  },
+  cormorant: {
+    title: 'Saints Row',
+    steamAppId: 742420,
+    developer: 'Deep Silver Volition',
+    description: 'Experience the biggest and best Saints Row playground ever created.',
+  },
   wombat: {
     title: 'World War Z',
     steamAppId: 699130,
