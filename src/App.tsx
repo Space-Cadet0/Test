@@ -8,6 +8,7 @@ import { steamApi } from './services/steam/steamApi';
 import { TopNavBar } from './components/Navigation/TopNavBar';
 import { LibrarySidebar } from './components/Library/LibrarySidebar';
 import { SteamStorePage } from './components/SteamStoreDetail/SteamStorePage';
+import { LibraryGridView } from './components/Library/LibraryGridView';
 import { ManageCollectionsModal } from './components/Library/ManageCollectionsModal';
 import { IntegrationsModal } from './components/Navigation/IntegrationsModal';
 import { loadIntegrations } from './services/integrations/integrationStorage';
@@ -23,6 +24,7 @@ export function App() {
     const initialGames = mergeScannedSteamGames([]);
     return initialGames.find((g) => g.steamAppId === 1086940) || initialGames[0] || null;
   });
+  const [isGridView, setIsGridView] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedPlatform, setSelectedPlatform] = useState<StorefrontId | 'all'>('all');
   const [installedOnly, setInstalledOnly] = useState(false);
@@ -237,9 +239,7 @@ export function App() {
         onTriggerSync={handleTriggerSync}
         onOpenIntegrations={() => setIsIntegrationsModalOpen(true)}
         onHomeClick={() => {
-          if (filteredGames.length > 0) {
-            setSelectedGame(filteredGames[0]);
-          }
+          setIsGridView(true);
         }}
       />
 
@@ -256,8 +256,11 @@ export function App() {
         {/* Left Column: Steam Library Games List */}
         <LibrarySidebar
           games={filteredGames}
-          selectedGameId={selectedGame?.id || null}
-          onSelectGame={(game) => setSelectedGame(game)}
+          selectedGameId={isGridView ? null : selectedGame?.id || null}
+          onSelectGame={(game) => {
+            setSelectedGame(game);
+            setIsGridView(false);
+          }}
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
           selectedPlatform={selectedPlatform}
@@ -268,23 +271,27 @@ export function App() {
           collections={collections}
           onOpenManageCollectionsModal={handleOpenManageCollections}
           onToggleGameInCollection={handleToggleGameInCollection}
+          onViewAllGamesGrid={() => setIsGridView(true)}
+          isGridView={isGridView}
         />
 
-        {/* Right Main Pane: Steam Storefront Detail Layout */}
+        {/* Right Main Pane: Steam Storefront Detail Layout OR Whole Library Grid View */}
         <main className="flex-1 h-full overflow-y-auto bg-[#0b0f14] relative">
-          {selectedGame ? (
-            <SteamStorePage
-              game={selectedGame}
-              onManageCollections={() => handleOpenManageCollections(selectedGame)}
+          {isGridView || !selectedGame ? (
+            <LibraryGridView
+              games={filteredGames}
+              onSelectGame={(game) => {
+                setSelectedGame(game);
+                setIsGridView(false);
+              }}
+              searchQuery={searchQuery}
             />
           ) : (
-            <div className="h-full flex flex-col items-center justify-center text-center p-8 text-steam-subtext space-y-3">
-              <Sparkles className="w-12 h-12 text-steam-accent/40" />
-              <h2 className="text-lg font-bold text-white">Select a Game from the Library</h2>
-              <p className="text-xs max-w-sm">
-                Choose any game in the left column to view its Steam Store detail layout with media, trailers, and reviews.
-              </p>
-            </div>
+            <SteamStorePage
+              game={selectedGame}
+              onBackToLibrary={() => setIsGridView(true)}
+              onManageCollections={() => handleOpenManageCollections(selectedGame)}
+            />
           )}
         </main>
       </div>

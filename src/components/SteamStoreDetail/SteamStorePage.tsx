@@ -99,18 +99,16 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
         {/* Navigation Breadcrumb & Actions Bar */}
         <div className="flex items-center justify-between border-b border-steam-border/40 pb-4">
           <div className="flex items-center gap-2 text-xs text-steam-subtext">
-            {onBackToLibrary && (
-              <button
-                onClick={onBackToLibrary}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-steam-accent hover:text-white bg-steam-card hover:bg-steam-border border border-steam-border rounded transition-all mr-2"
-              >
-                <ArrowLeft className="w-3.5 h-3.5" />
-                Library
-              </button>
-            )}
-            <span className="hover:text-white cursor-pointer uppercase tracking-wider text-[11px] font-semibold">All Games</span>
+            <button
+              onClick={onBackToLibrary}
+              className="inline-flex items-center gap-1.5 text-steam-accent hover:text-white hover:underline cursor-pointer uppercase tracking-wider text-[11px] font-bold transition-colors group"
+              title="Return to All Games library grid"
+            >
+              <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
+              <span>All Games</span>
+            </button>
             <span>&gt;</span>
-            <span className="text-white font-semibold truncate max-w-xs">{game.title}</span>
+            <span className="text-white font-semibold truncate max-w-md">{game.title}</span>
           </div>
 
           <div className="flex items-center gap-3">

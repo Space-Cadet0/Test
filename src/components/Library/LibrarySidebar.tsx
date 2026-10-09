@@ -15,7 +15,8 @@ import {
   MoreVertical,
   List,
   FolderTree,
-  Bookmark
+  Bookmark,
+  LayoutGrid,
 } from 'lucide-react';
 
 interface LibrarySidebarProps {
@@ -32,6 +33,8 @@ interface LibrarySidebarProps {
   collections: GameCollection[];
   onOpenManageCollectionsModal: (game?: CanonicalGame) => void;
   onToggleGameInCollection: (collectionId: string, gameId: string) => void;
+  onViewAllGamesGrid?: () => void;
+  isGridView?: boolean;
 }
 
 export const LibrarySidebar: React.FC<LibrarySidebarProps> = ({
@@ -48,6 +51,8 @@ export const LibrarySidebar: React.FC<LibrarySidebarProps> = ({
   collections,
   onOpenManageCollectionsModal,
   onToggleGameInCollection,
+  onViewAllGamesGrid,
+  isGridView = false,
 }) => {
   const [groupByCollections, setGroupByCollections] = useState(true);
   const [collapsedCollections, setCollapsedCollections] = useState<Record<string, boolean>>({});
@@ -294,7 +299,28 @@ export const LibrarySidebar: React.FC<LibrarySidebarProps> = ({
       </div>
 
       {/* Games List (Grouped or Flat) */}
-      <div className="flex-1 overflow-y-auto py-1">
+      <div className="flex-1 overflow-y-auto py-1.5 px-2">
+        {/* Quick Grid View Switcher */}
+        {onViewAllGamesGrid && (
+          <button
+            onClick={onViewAllGamesGrid}
+            className={`w-full px-2.5 py-1.5 flex items-center justify-between text-xs font-semibold rounded border transition-all mb-2 ${
+              isGridView
+                ? 'bg-[#223547] text-white border-steam-accent shadow-sm'
+                : 'bg-[#161a22] text-steam-text hover:text-white hover:bg-[#1a212b] border-steam-border/60'
+            }`}
+            title="Switch to full library cover art grid"
+          >
+            <div className="flex items-center gap-2">
+              <LayoutGrid className="w-3.5 h-3.5 text-steam-accent" />
+              <span>All Games (Grid)</span>
+            </div>
+            <span className="text-[10px] px-1.5 py-0.2 rounded bg-black/40 text-steam-subtext border border-white/5 font-mono">
+              {games.length}
+            </span>
+          </button>
+        )}
+
         {games.length === 0 ? (
           <div className="p-6 text-center text-xs text-steam-subtext space-y-2">
             <Gamepad2 className="w-8 h-8 text-steam-subtext/30 mx-auto" />

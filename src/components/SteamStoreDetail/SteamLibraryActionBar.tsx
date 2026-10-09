@@ -198,9 +198,9 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
                 </>
               )}
             </div>
-            <div className="flex items-center gap-1.5 mt-0.5">
-              <span className="text-[10px] uppercase tracking-wider text-[#8f98a0]">Owned on:</span>
-              <PlatformBadges platforms={game.platforms} size="sm" />
+            <div className="flex flex-col gap-1.5 mt-1.5">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[#8f98a0]">Owned on:</span>
+              <PlatformBadges platforms={game.platforms} layout="vertical-stacked" />
             </div>
           </div>
         </div>
