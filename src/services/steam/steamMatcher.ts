@@ -26,6 +26,9 @@ export const KNOWN_STORE_STEAM_MAPPINGS: Record<string, number> = {
   'divinity: original sin enhanced edition': 373420,
 
   // Bethesda / Obsidian / id
+  'fallout': 38400,
+  'fallout 2': 38410,
+  'fallout tactics': 38420,
   'fallout: new vegas': 22380,
   'fallout: new vegas ultimate edition': 22380,
   'fallout 3': 22370,
@@ -262,6 +265,40 @@ export function normalizeGameTitle(rawTitle: string): string {
   return title;
 }
 
+const ROMAN_NUMERALS: Record<string, string> = {
+  i: '1',
+  ii: '2',
+  iii: '3',
+  iv: '4',
+  v: '5',
+  vi: '6',
+  vii: '7',
+  viii: '8',
+  ix: '9',
+  x: '10',
+};
+
+export function extractSequelIdentifier(words: string[]): string | null {
+  for (const w of words) {
+    if (/^[2-9]$|^10$/.test(w)) return w;
+    if (ROMAN_NUMERALS[w] && w !== 'i') return ROMAN_NUMERALS[w];
+  }
+  return null;
+}
+
+/**
+ * Titles known to NOT exist on Steam (e.g. GOG / storefront exclusives)
+ */
+export const KNOWN_NON_STEAM_TITLES = new Set([
+  'blood omen legacy of kain',
+  'blood omen: legacy of kain',
+  'doom + doom ii',
+  'doom + doom 2',
+  'total annihilation kingdoms',
+  'total annihilation: kingdoms',
+  'total annihilation: kingdoms + iron plague',
+]);
+
 /**
  * Computes token similarity between two game names (Jaccard coefficient + phrase check)
  */
@@ -274,6 +311,15 @@ export function computeTitleSimilarity(source: string, candidate: string): numbe
 
   const words1 = s1.split(' ').filter(Boolean);
   const words2 = s2.split(' ').filter(Boolean);
+
+  // Strict sequel verification:
+  // If one title has a sequel number (e.g. "Blood Omen 2") and the other does not ("Blood Omen"),
+  // or they have different sequel numbers ("Doom" vs "Doom II", "Witcher 2" vs "Witcher 3"), THEY NEVER MATCH!
+  const seq1 = extractSequelIdentifier(words1);
+  const seq2 = extractSequelIdentifier(words2);
+  if (seq1 !== seq2) {
+    return 0;
+  }
 
   const tokens1 = new Set(words1);
   const tokens2 = new Set(words2);
@@ -331,6 +377,13 @@ export class SteamMatcherService {
           if (lk === 'barbet' && v !== 236870) continue;
           if (lk === 'basil' && v !== 375820) continue;
           if (lk === 'batfish' && v !== 498240) continue;
+          if (
+            (lk.includes('blood omen') && !lk.includes('2') && !lk.includes('ii') && v === 242960) ||
+            lk.includes('doom + doom ii') ||
+            lk.includes('total annihilation: kingdoms')
+          ) {
+            continue;
+          }
           this.cache.set(lk, typeof v === 'number' ? v : null);
         }
       }
@@ -367,11 +420,15 @@ export class SteamMatcherService {
     const cleanRaw = title.trim();
     const lowerKey = cleanRaw.toLowerCase();
 
+    const normalized = normalizeGameTitle(cleanRaw).toLowerCase();
+    if (KNOWN_NON_STEAM_TITLES.has(lowerKey) || KNOWN_NON_STEAM_TITLES.has(normalized)) {
+      return null;
+    }
+
     if (this.cache.has(lowerKey)) {
       return this.cache.get(lowerKey) || null;
     }
 
-    const normalized = normalizeGameTitle(cleanRaw).toLowerCase();
     if (KNOWN_STORE_STEAM_MAPPINGS[lowerKey]) {
       return KNOWN_STORE_STEAM_MAPPINGS[lowerKey];
     }
@@ -397,13 +454,19 @@ export class SteamMatcherService {
     const cleanRaw = title.trim();
     const lowerKey = cleanRaw.toLowerCase();
 
+    const normalized = normalizeGameTitle(cleanRaw).toLowerCase();
+    if (KNOWN_NON_STEAM_TITLES.has(lowerKey) || KNOWN_NON_STEAM_TITLES.has(normalized)) {
+      this.cache.set(lowerKey, null);
+      this.savePersistentCache();
+      return null;
+    }
+
     // 1. Check in-memory / persistent cache
     if (this.cache.has(lowerKey)) {
       return this.cache.get(lowerKey)!;
     }
 
     // 2. Check curated instant dictionary
-    const normalized = normalizeGameTitle(cleanRaw).toLowerCase();
     if (KNOWN_STORE_STEAM_MAPPINGS[lowerKey]) {
       const id = KNOWN_STORE_STEAM_MAPPINGS[lowerKey];
       this.cache.set(lowerKey, id);

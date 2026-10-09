@@ -57,6 +57,9 @@ const KNOWN_STEAM_MAPPINGS = {
   'baldur\'s gate ii: enhanced edition': 257350,
   'divinity: original sin 2': 435150,
   'divinity: original sin 2 - definitive edition': 435150,
+  'fallout': 38400,
+  'fallout 2': 38410,
+  'fallout tactics': 38420,
   'fallout: new vegas': 22380,
   'fallout 3': 22370,
   'fallout 4': 377160,
@@ -67,7 +70,6 @@ const KNOWN_STEAM_MAPPINGS = {
   'control ultimate edition': 870780,
   'death stranding': 1190460,
   'death stranding director\'s cut': 1850570,
-  'hades': 1145360,
   'hollow knight': 367520,
   'disco elysium': 632470,
   'disco elysium - the final cut': 632470,
@@ -573,6 +575,13 @@ async function exchangeEpicCode(code) {
   return data;
 }
 
+let EPIC_BASE_GAMES = [];
+try {
+  EPIC_BASE_GAMES = require('./epicBaseGames.json');
+} catch (e) {
+  // Ignore if not present
+}
+
 /**
  * Fetch Epic Games Owned Library & Playtime
  */
@@ -607,6 +616,27 @@ async function fetchEpicOwnedGames(accessToken, accountId) {
     } catch (err) {
       console.warn('Epic playtime fetch warning:', err.message);
     }
+  }
+
+  // If authoritative base games catalog is available, return verified base games with live playtime
+  if (EPIC_BASE_GAMES && EPIC_BASE_GAMES.length > 0) {
+    return EPIC_BASE_GAMES.map((baseGame) => {
+      const epicPlat = baseGame.platforms.find((p) => p.platformId === 'epic');
+      const gameId = epicPlat?.platformGameId;
+      const pt = (gameId ? (playtimeMap.get(gameId) || playtimeMap.get(gameId.toLowerCase())) : null) || {};
+      return {
+        ...baseGame,
+        platforms: baseGame.platforms.map((p) =>
+          p.platformId === 'epic'
+            ? {
+                ...p,
+                playtimeMinutes: pt.totalTime !== undefined ? pt.totalTime : p.playtimeMinutes,
+                lastPlayed: pt.lastPlayed || p.lastPlayed,
+              }
+            : p
+        ),
+      };
+    });
   }
 
   // 2. Fetch items from Library Service with cursor pagination

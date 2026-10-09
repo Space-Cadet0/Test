@@ -111,6 +111,7 @@ for (const g of GOG_USER_LIBRARY) {
   }
 }
 
+const validEpicBaseGameByCatalogId = new Map<string, CanonicalGame>();
 const validEpicCatalogIds = new Set<string>();
 const validEpicTitles = new Set<string>();
 const validEpicSteamAppIds = new Set<number>();
@@ -119,7 +120,9 @@ for (const g of EPIC_USER_LIBRARY) {
   if (g.steamAppId) validEpicSteamAppIds.add(g.steamAppId);
   for (const p of g.platforms) {
     if (p.platformId === 'epic' && p.platformGameId) {
-      validEpicCatalogIds.add(p.platformGameId.trim().toLowerCase());
+      const cleanId = p.platformGameId.trim().toLowerCase();
+      validEpicCatalogIds.add(cleanId);
+      validEpicBaseGameByCatalogId.set(cleanId, g);
     }
   }
 }
@@ -237,12 +240,45 @@ export function sanitizeGameCatalog(catalog: CanonicalGame[]): CanonicalGame[] {
     }
 
     const currentTitleLower = game.title.toLowerCase().trim();
+    let normTitle = normalizeCanonicalTitle(game.title);
     if ([
       'bobcat', 'boxfish', 'calluna', 'catnip', 'cormorant',
       'hazelnut', 'hazlenut', 'herring', 'boga', 'barbet', 'basil', 'batfish', 'batfishs2', 'blobfish',
       'speedwell', 'wombat'
     ].includes(currentTitleLower)) {
       continue;
+    }
+
+    // Disambiguate Blood Omen: Legacy of Kain (1996 original) from Blood Omen 2
+    if (
+      (normTitle === 'blood omen legacy of kain' || currentTitleLower.includes('blood omen')) &&
+      !currentTitleLower.includes('2') &&
+      !currentTitleLower.includes('ii') &&
+      game.steamAppId === 242960
+    ) {
+      game = {
+        ...game,
+        id: 'gog-1837805079',
+        steamAppId: undefined,
+        headerImage: 'https://images-2.gog-statics.com/5374e38e8d5ca1aaf331ab33ae048b9a6212f8c278003d5cad1ba9efde543639_product_card_v2_mobile_slider_639.jpg',
+        capsuleImage: 'https://images-2.gog-statics.com/5374e38e8d5ca1aaf331ab33ae048b9a6212f8c278003d5cad1ba9efde543639_glx_vertical_cover.jpg',
+        platforms: game.platforms.map((p) => p.platformId === 'gog' ? { ...p, platformGameId: '1837805079' } : p),
+      };
+    }
+
+    // Disambiguate DOOM + DOOM II (not on Steam)
+    if (
+      currentTitleLower === 'doom + doom ii' ||
+      currentTitleLower === 'doom + doom 2' ||
+      normTitle === 'doom + doom 2' ||
+      normTitle === 'doom doom 2'
+    ) {
+      game = {
+        ...game,
+        id: 'gog-1413291984',
+        steamAppId: undefined,
+        platforms: game.platforms.map((p) => p.platformId === 'gog' ? { ...p, platformGameId: '1413291984' } : p),
+      };
     }
 
     // 5. Remove erroneous 'epic' platform presence from non-Epic titles
@@ -253,8 +289,6 @@ export function sanitizeGameCatalog(catalog: CanonicalGame[]): CanonicalGame[] {
       };
       if (game.platforms.length === 0) continue;
     }
-
-    const normTitle = normalizeCanonicalTitle(game.title);
 
     // 6. Purge false GOG platform presence from unowned GOG titles (e.g. old bestselling catalog items like Anno 1404)
     if (game.platforms.some((p) => p.platformId === 'gog')) {
@@ -272,14 +306,25 @@ export function sanitizeGameCatalog(catalog: CanonicalGame[]): CanonicalGame[] {
       }
     }
 
-    // 7. Purge false Epic platform presence from unowned Epic titles (e.g. unowned mock entries like Hades, loose DLC assets, or mismatched titles)
+    // 7. Purge false Epic platform presence from unowned Epic titles, DLCs, codenames, and non-games
     if (game.platforms.some((p) => p.platformId === 'epic')) {
       const epicPlatform = game.platforms.find((p) => p.platformId === 'epic');
       const epicGameId = (epicPlatform?.platformGameId || '').trim().toLowerCase();
-      const isRealEpicGame =
-        (epicGameId && validEpicCatalogIds.has(epicGameId)) ||
-        (game.steamAppId && validEpicSteamAppIds.has(game.steamAppId)) ||
-        validEpicTitles.has(normTitle);
+
+      // If title is not recognized, but catalog ID matches a verified base game, re-assign to real base game
+      if (!validEpicTitles.has(normTitle) && validEpicBaseGameByCatalogId.has(epicGameId)) {
+        const baseGame = validEpicBaseGameByCatalogId.get(epicGameId)!;
+        game = {
+          ...baseGame,
+          platforms: game.platforms.map((p) =>
+            p.platformId === 'epic' ? { ...p, platformGameId: epicGameId } : p
+          ),
+        };
+      }
+
+      const updatedNormTitle = normalizeCanonicalTitle(game.title);
+      // Whitelist: every authentic Epic game must match one of the 402 verified titles
+      const isRealEpicGame = validEpicTitles.has(updatedNormTitle);
 
       if (!isRealEpicGame) {
         game = {
@@ -289,6 +334,8 @@ export function sanitizeGameCatalog(catalog: CanonicalGame[]): CanonicalGame[] {
         if (game.platforms.length === 0) continue;
       }
     }
+
+    normTitle = normalizeCanonicalTitle(game.title);
 
     // 8. Intelligent cross-store deduplication by Steam App ID and Normalized Title
     const existingIndex =

@@ -2450,14 +2450,26 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     ],
     "headerImage": "https://images-2.gog-statics.com/eaad5d1fce93e36d33b9983fba7edc623e23793e138667aafff6b7a305717c84_product_card_v2_mobile_slider_639.jpg",
     "capsuleImage": "https://images-2.gog-statics.com/eaad5d1fce93e36d33b9983fba7edc623e23793e138667aafff6b7a305717c84_glx_vertical_cover.jpg",
-    "shortDescription": "Shooter on GOG.com (DRM-Free)",
-    "releaseDate": "",
-    "developers": [],
-    "publishers": [],
+    "shortDescription": "Developed by id Software, DOOM pioneered and popularized the first-person shooter. Now the definitive, newly enhanced versions of DOOM + DOOM II are available as a combined product.",
+    "releaseDate": "2024-08-08",
+    "developers": [
+      "id Software",
+      "Nightdive Studios"
+    ],
+    "publishers": [
+      "Bethesda Softworks"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "Action",
+      "FPS"
     ],
     "tags": [
+      "FPS",
+      "Classic",
+      "Action",
+      "Retro",
+      "Shooter",
       "GOG",
       "DRM-Free"
     ],
@@ -3064,9 +3076,10 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     }
   },
   {
-    "id": "gog-1440148836",
+    "id": "steam-38400",
     "title": "Fallout",
     "sortTitle": "Fallout",
+    "steamAppId": 38400,
     "platforms": [
       {
         "platformId": "gog",
@@ -3098,9 +3111,10 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     }
   },
   {
-    "id": "gog-1440151285",
+    "id": "steam-38410",
     "title": "Fallout 2",
     "sortTitle": "Fallout 2",
+    "steamAppId": 38410,
     "platforms": [
       {
         "platformId": "gog",
@@ -3167,9 +3181,10 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     }
   },
   {
-    "id": "gog-1440152063",
+    "id": "steam-38420",
     "title": "Fallout Tactics",
     "sortTitle": "Fallout Tactics",
+    "steamAppId": 38420,
     "platforms": [
       {
         "platformId": "gog",

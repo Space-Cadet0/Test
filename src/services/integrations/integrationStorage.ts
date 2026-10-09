@@ -102,7 +102,7 @@ export function loadIntegrations(): StorefrontIntegration[] {
           }
         }
         if (item.storefrontId === 'epic') {
-          if (!item.isConnected || item.gamesCount < EPIC_USER_LIBRARY.length) {
+          if (!item.isConnected || item.gamesCount !== EPIC_USER_LIBRARY.length) {
             changed = true;
             return {
               ...item,

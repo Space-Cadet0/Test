@@ -10,6 +10,14 @@ function ensureHttps(url?: string): string {
   return trimmed;
 }
 
+const GOG_SPECIAL_DESCRIPTIONS: Record<string, { lead: string; full: string; releaseDate?: string }> = {
+  '1413291984': {
+    lead: 'Developed by id Software, and originally released in 1993, DOOM pioneered and popularized the first-person shooter, setting a standard for all FPS games. The critically acclaimed sequel, DOOM II, followed in 1994. Now the definitive, newly enhanced versions of DOOM + DOOM II are available as a combined product.',
+    full: `Developed by id Software, and originally released in 1993, DOOM pioneered and popularized the first-person shooter, setting a standard for all FPS games. The critically acclaimed sequel, DOOM II, followed in 1994. Now the definitive, newly enhanced versions of DOOM + DOOM II are available as a combined product.<br><br><b>Owners Receive:</b><br>- DOOM<br>- DOOM II<br>- TNT: Evilution<br>- The Plutonia Experiment<br>- Master Levels for DOOM II<br>- No Rest for the Living<br>- Sigil<br>- Sigil II<br>- Legacy of Rust (a new episode created in collaboration by id Software, Nightdive Studios and MachineGames)<br>- A new Deathmatch map pack featuring 25 maps<br><br>Altogether, there are a total of 187 mission maps and 43 deathmatch maps in DOOM + DOOM II.<br><br><b>New Enhancements:</b><br>- Online, cross-platform deathmatch and co-op for up to 16 players<br>- Community-published mod support with an in-game mod browser<br>- Choose between the original midi DOOM and DOOM II soundtracks or the modern IDKFA versions by Andrew Hulshult<br>- Improved performance with multithreaded rendering supporting up to 4K resolution<br>- Now on the KEX engine<br>- 60 FPS and native 16:9 support<br>- Restored original in-game music using original hardware<br>- Quick Save/Load support`,
+    releaseDate: '2024-08-08',
+  },
+};
+
 export class FallbackMetadataProvider {
   private getGogBaseUrl(): string {
     if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
@@ -62,14 +70,55 @@ export class FallbackMetadataProvider {
         data.images?.background || data.images?.logo2x || data.images?.icon || ''
       );
 
+      let descriptionFull = data.description?.full || data.description?.lead || '';
+      let descriptionLead = data.description?.lead || '';
+
+      // Check if GOG returned raw localization placeholders (e.g. product_description_1413291984)
+      const isPlaceholderDesc =
+        descriptionFull.includes('product_description_') ||
+        descriptionFull.includes('product_feature_') ||
+        !descriptionFull.trim();
+
+      if (isPlaceholderDesc) {
+        if (GOG_SPECIAL_DESCRIPTIONS[gogId]) {
+          descriptionLead = GOG_SPECIAL_DESCRIPTIONS[gogId].lead;
+          descriptionFull = GOG_SPECIAL_DESCRIPTIONS[gogId].full;
+        } else if (data.slug) {
+          try {
+            const pageUrl =
+              typeof window !== 'undefined' && window.location.hostname === 'localhost'
+                ? `/api/gog-profile/en/game/${encodeURIComponent(data.slug)}`
+                : `https://www.gog.com/en/game/${encodeURIComponent(data.slug)}`;
+            const pageRes = await axios.get(pageUrl, { timeout: 5000 });
+            if (pageRes.data && typeof pageRes.data === 'string') {
+              const cheerio = await import('cheerio');
+              const $ = cheerio.load(pageRes.data);
+              const descEl = $('.description');
+              descEl.find('script, style, .description__copyrights').remove();
+              const scrapedHtml = descEl.html()?.trim();
+              if (scrapedHtml && !scrapedHtml.includes('product_description_')) {
+                descriptionFull = scrapedHtml;
+                descriptionLead = descEl.text()?.split('\n')[0]?.trim() || descriptionLead;
+              }
+            }
+          } catch (scrapeErr: any) {
+            console.warn(`[Fallback Provider] Store page scrape failed for ${data.slug}:`, scrapeErr?.message);
+          }
+        }
+      }
+
+      const releaseDate =
+        GOG_SPECIAL_DESCRIPTIONS[gogId]?.releaseDate ||
+        (data.release_date ? data.release_date.substring(0, 10) : 'TBA');
+
       return {
-        aboutTheGame: data.description?.full || data.description?.lead || '',
-        detailedDescription: data.description?.full || data.description?.lead || '',
-        shortDescription: data.description?.lead || '',
+        aboutTheGame: descriptionFull,
+        detailedDescription: descriptionFull,
+        shortDescription: descriptionLead,
         headerImage,
         screenshots,
         movies,
-        releaseDate: data.release_date ? data.release_date.substring(0, 10) : 'TBA',
+        releaseDate,
       };
     } catch (err: any) {
       console.warn(`[Fallback Provider] GOG product lookup failed for ${gogId}:`, err?.message);

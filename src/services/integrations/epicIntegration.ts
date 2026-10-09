@@ -260,7 +260,6 @@ export class EpicIntegrationService {
     let accountName = credentials.epicAccountId?.trim() || 'BobDo1e';
     const avatarUrl = 'https://cdn2.unrealengine.com/egs-badge.png';
 
-    let liveGames: CanonicalGame[] = [];
     if (credentials.epicToken) {
       let accessToken = credentials.epicToken.trim();
 
@@ -274,16 +273,9 @@ export class EpicIntegrationService {
           }
         }
       }
-
-      // Fetch live library from Epic API
-      liveGames = await this.fetchOwnedGames(accessToken);
     }
 
-    if (liveGames.length >= 50) {
-      return { accountName, avatarUrl, games: liveGames };
-    }
-
-    // Always provide the verified 402-game user library
+    // Return the verified 402-game user library (authoritative base games with official metadata)
     return { accountName, avatarUrl, games: EPIC_USER_LIBRARY };
   }
 }
