@@ -31,6 +31,15 @@ export function getSteamCategoryIconUrl(id: number): string {
 
 export class SteamApiService {
   private cache = new Map<number, SteamEnrichedMetadata>();
+  private rateLimitedUntil = 0;
+
+  isStoreRateLimited(): boolean {
+    return Date.now() < this.rateLimitedUntil;
+  }
+
+  getCooldownRemainingSeconds(): number {
+    return Math.max(0, Math.ceil((this.rateLimitedUntil - Date.now()) / 1000));
+  }
 
   private getBaseUrl(): string {
     if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
@@ -42,6 +51,10 @@ export class SteamApiService {
   async fetchGameMetadata(appId: number): Promise<SteamEnrichedMetadata | null> {
     if (this.cache.has(appId)) {
       return this.cache.get(appId)!;
+    }
+
+    if (this.isStoreRateLimited()) {
+      return null;
     }
 
     try {
@@ -148,13 +161,20 @@ export class SteamApiService {
 
       this.cache.set(appId, metadata);
       return metadata;
-    } catch (err) {
-      console.warn(`Failed to fetch Steam metadata for appId ${appId}:`, err);
+    } catch (err: any) {
+      if (err?.response?.status === 403 || err?.response?.status === 429) {
+        // Akamai CDN edge rate limit: pause storefront web requests for 15 minutes to let the cooldown reset cleanly
+        this.rateLimitedUntil = Date.now() + 15 * 60 * 1000;
+        console.warn(`[Steam API] Akamai edge cooldown encountered (${err.response.status}). Pausing web requests to store.steampowered.com for 15 minutes to allow IP cooldown to clear.`);
+      } else {
+        console.warn(`Failed to fetch Steam metadata for appId ${appId}:`, err);
+      }
       return null;
     }
   }
 
   async searchAppId(term: string): Promise<number | null> {
+    if (this.isStoreRateLimited()) return null;
     try {
       const baseUrl = this.getBaseUrl();
       const res = await axios.get(`${baseUrl}/api/storesearch/?term=${encodeURIComponent(term)}&l=english&cc=US`);

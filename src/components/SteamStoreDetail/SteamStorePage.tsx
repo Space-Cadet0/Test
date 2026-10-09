@@ -31,6 +31,7 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({ game, onBackToLi
   );
   const [isLoading, setIsLoading] = useState(!game.enrichedMetadata && !!game.steamAppId);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const isCooldown = steamApi.isStoreRateLimited();
 
   useEffect(() => {
     let isMounted = true;
@@ -57,7 +58,7 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({ game, onBackToLi
   }, [game]);
 
   const handleRefreshFromSteam = async () => {
-    if (!game.steamAppId) return;
+    if (!game.steamAppId || steamApi.isStoreRateLimited()) return;
     setIsRefreshing(true);
     const refreshed = await steamApi.fetchGameMetadata(game.steamAppId);
     if (refreshed) {
@@ -134,6 +135,16 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({ game, onBackToLi
             )}
           </div>
         </div>
+
+        {/* Akamai Edge Cooldown Notice */}
+        {isCooldown && (
+          <div className="bg-[#1b2838]/90 border border-[#2a475e] text-xs text-steam-subtext rounded px-3.5 py-2.5 flex items-center justify-between shadow-sm">
+            <span>
+              <strong className="text-steam-accent">Local Library Mode:</strong> Live store web requests paused while Akamai CDN edge cooldown clears. Showing official local assets & artwork.
+            </span>
+            <span className="text-[11px] text-[#acb2b8] font-mono">Auto-resumes in ~15m</span>
+          </div>
+        )}
 
         {/* Game Title & Platform Badges Header */}
         <div className="space-y-2">
@@ -276,9 +287,13 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({ game, onBackToLi
                   className="steam-description-content text-sm space-y-3 leading-relaxed"
                   dangerouslySetInnerHTML={{ __html: detailedDescription }}
                 />
+              ) : shortDescription ? (
+                <div className="steam-description-content text-sm space-y-3 leading-relaxed text-[#acb2b8]">
+                  <p className="bb_paragraph">{shortDescription}</p>
+                </div>
               ) : (
                 <div className="text-sm text-steam-subtext italic">
-                  No extended overview available.
+                  Standard Steam catalog title. Full store page overview will synchronize automatically once the CDN cooldown resets.
                 </div>
               )}
             </div>

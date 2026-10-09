@@ -1,10 +1,14 @@
 import { CanonicalGame } from '../../contracts/game';
+import { FULL_USER_STEAM_GAMES } from './fullUserSteamGames';
 import { USER_SCANNED_STEAM_GAMES } from './userScannedLibrary';
 
 export function mergeScannedSteamGames(existingGames: CanonicalGame[]): CanonicalGame[] {
   const merged = [...existingGames];
 
-  for (const scanned of USER_SCANNED_STEAM_GAMES) {
+  // Merge full local Steam library of 251 games
+  const allSteamGames = [...USER_SCANNED_STEAM_GAMES, ...FULL_USER_STEAM_GAMES];
+
+  for (const scanned of allSteamGames) {
     const existingIndex = merged.findIndex(
       (g) =>
         (g.steamAppId && g.steamAppId === scanned.steamAppId) ||
@@ -26,5 +30,6 @@ export function mergeScannedSteamGames(existingGames: CanonicalGame[]): Canonica
     }
   }
 
-  return merged;
+  // Sort alphabetically by canonical title (ignoring leading articles if desired)
+  return merged.sort((a, b) => a.title.localeCompare(b.title, undefined, { sensitivity: 'base' }));
 }

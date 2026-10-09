@@ -1,0 +1,3318 @@
+[
+  {
+    "appId": 223850,
+    "title": "3DMark",
+    "type": "application",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/223850/0107a1ed9c5bebb1430b5d68368349ffa81ba842/header.jpg",
+    "genres": [
+      "Utilities"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "3DMark is for gamers, overclockers and system builders who want to get more out of their hardware. With its wide range of benchmark tests, 3DMark has everything you need to test your PC or Mac's performance.",
+    "playtimeMinutes": 353,
+    "lastPlayed": 1790275276,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 231350,
+    "title": "3DMark Demo",
+    "type": "demo",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/231350/e499441ece83883376ae5e8c1e6934f3c06e7c32/header.jpg",
+    "genres": [
+      "Utilities"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Test your PC with the world's most popular benchmarking app. The 3DMark demo includes the Steel Nomad, Steel Nomad Light, Time Spy, and Fire Strike benchmarks. Test your PC then compare scores with your friends on Steam.",
+    "playtimeMinutes": 686,
+    "lastPlayed": 1769254398,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1222700,
+    "title": "A Way Out",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1222700/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 17510,
+    "title": "Age of Chivalry",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/17510/header.jpg",
+    "genres": [
+      "Indie"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Age of Chivalry is a total conversion for Half-Life 2 from Team Chivalry, a close group of friends dedicated to creating a fun, story-driven multiplayer experience set in a fantasy world in the medieval ages. Age of Chivalry features a fast paced first person melee combat system that will take the player to a new level of immersion.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 813780,
+    "title": "Age of Empires II: Definitive Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/813780/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 226840,
+    "title": "Age of Wonders III",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/226840/header.jpg",
+    "genres": [
+      "RPG",
+      "Strategy"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Age of Wonders III is the long anticipated sequel to the award-winning strategy series. Delivering a unique mix of Empire Building, Role Playing and Warfare, Age of Wonders III offers the ultimate in turn-based fantasy strategy for veterans of the series and new players alike!",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 630,
+    "title": "Alien Swarm",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/630/header.jpg",
+    "genres": [
+      "Action",
+      "Free To Play"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Co-operative multiplayer game and complete code base available for free.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 504390,
+    "title": "Along the Edge",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/504390/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 34010,
+    "title": "Alpha Protocol",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/34010/header.jpg",
+    "genres": [
+      "Action",
+      "RPG"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Loyalty carries a price and no one knows this more than agent Michael Thorton. A talented young agent cast out by his government, Thorton is the only one with the information needed to stop an impending international catastrophe.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 239200,
+    "title": "Amnesia: A Machine for Pigs",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/239200/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Indie"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "From the creators of Amnesia: The Dark Descent and Dear Esther comes a new first-person horrorgame that will drag you to the depths of greed, power and madness. It will bury its snout into your ribs and it will eat your heart.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 57300,
+    "title": "Amnesia: The Dark Descent",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/57300/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Indie"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Amnesia: The Dark Descent, a first person survival horror. A game about immersion, discovery and living through a nightmare. An experience that will chill you to the core.",
+    "playtimeMinutes": 16,
+    "lastPlayed": 1500118662,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 945360,
+    "title": "Among Us",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/945360/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1385510,
+    "title": "Back 4 Blood Beta",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1385510/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1086940,
+    "title": "Baldur's Gate 3",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/48a2fcbda8565bb45025e98fd8ebde8a7203f6a0/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 3982,
+    "lastPlayed": 1694186888,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 257350,
+    "title": "Baldur's Gate II: Enhanced Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/257350/486ef7ce52fdb1ee5d2909ac97f26d4e26da18d3/header.jpg",
+    "genres": [
+      "Adventure",
+      "RPG"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Return to a timeless RPG masterpiece. Baldur\u2019s Gate II: Enhanced Edition brings the classic 2000 adventure back to life with thoughtful modern refinements, letting you gather your party and dive once more into a rich, choice\u2011driven fantasy epic.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 1730666199,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 228280,
+    "title": "Baldur's Gate: Enhanced Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/228280/9761e1ed90324b2102ffc3dac295eeabf03bea55/header.jpg",
+    "genres": [
+      "Adventure",
+      "RPG"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "The classic returns! Baldur\u2019s Gate: Enhanced Edition restores the full original adventure and Tales of the Sword Coast, now polished with quality\u2011of\u2011life upgrades for a smoother timeless Dungeons &amp; Dragons journey.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 1726344413,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1238820,
+    "title": "Battlefield 3\u2122 ",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1238820/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1238860,
+    "title": "Battlefield 4\u2122 ",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1238860/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1238840,
+    "title": "Battlefield\u2122 1",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1238840/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1238880,
+    "title": "Battlefield\u2122 Hardline",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1238880/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 960990,
+    "title": "Beyond: Two Souls",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/960990/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 203750,
+    "title": "Binary Domain",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/203750/header.jpg",
+    "genres": [
+      "Action"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Set in futuristic Tokyo, take control of the robotic community before they control everything!",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 582660,
+    "title": "Black Desert",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/582660/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 362890,
+    "title": "Black Mesa",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/362890/674b9a0e7b31996efd5032dc15e695dbf457d71d/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Indie"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Relive Half-Life.",
+    "playtimeMinutes": 1769,
+    "lastPlayed": 1722979295,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 49520,
+    "title": "Borderlands 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/49520/header.jpg",
+    "genres": [
+      "Action",
+      "RPG"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "The Ultimate Vault Hunter\u2019s Upgrade lets you get the most out of the Borderlands 2 experience.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 738520,
+    "title": "Breathedge",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/738520/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 368900,
+    "title": "Brilliant Bob",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/368900/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 204360,
+    "title": "Castle Crashers",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/204360/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Casual",
+      "Indie",
+      "RPG"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Hack, slash, and smash your way to victory in this award winning 2D arcade adventure from The Behemoth!",
+    "playtimeMinutes": 276,
+    "lastPlayed": 1605383903,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1903340,
+    "title": "Clair Obscur: Expedition 33",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1903340/be3305b02d4db0dffa3458537118423bf2792d7e/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 3882,
+    "lastPlayed": 1752873381,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2398450,
+    "title": "Classic Marathon",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2398450/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 92,
+    "title": "Codename Gordon",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/92/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1213210,
+    "title": "Command & Conquer\u2122 Remastered Collection",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1213210/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 228200,
+    "title": "Company of Heroes ",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/228200/header.jpg",
+    "genres": [
+      "Action",
+      "Strategy"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Delivering a visceral WWII gaming experience, Company of Heroes redefines RTS by bringing the sacrifice of heroic soldiers, war-ravaged environments, and dynamic battlefields to life. Please visit the &quot;Company of Heroes - Legacy Edition&quot; page for additional user reviews.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 4560,
+    "title": "Company of Heroes - Legacy Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4560/header.jpg",
+    "genres": [
+      "Action",
+      "Strategy"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Delivering a visceral WWII gaming experience, Company of Heroes redefines RTS by bringing the sacrifice of heroic soldiers, war-ravaged environments, and dynamic battlefields to life. This legacy version also grants access to the latest version of COH, just called &quot;Company of Heroes&quot;.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 231430,
+    "title": "Company of Heroes 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/231430/header.jpg",
+    "genres": [
+      "Strategy"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Experience the ultimate WWII RTS platform with COH2 and its standalone expansions. This package includes the base game, which you can then upgrade by purchasing The Western Front Armies, Ardennes Assault and/or The British Forces. More info in the &quot;About This Game&quot; section below.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1608070,
+    "title": "CRISIS CORE \u2013FINAL FANTASY VII\u2013 REUNION",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1608070/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 2022,
+    "lastPlayed": 1714591209,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 17300,
+    "title": "Crysis",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/17300/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 108800,
+    "title": "Crysis 2 Maximum Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/108800/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 2096600,
+    "title": "Crysis 2 Remastered",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2096600/c31e1907d3e05b05578d1dc928826b70cde66e6f/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 113,
+    "lastPlayed": 1771279756,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2096610,
+    "title": "Crysis 3 Remastered",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2096610/ca8cc5ee7d4ce7a8fda5b050a9827aa117768b86/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1715130,
+    "title": "Crysis Remastered",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1715130/0c28c46e93f734d31b035e13057472b51b377936/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1282690,
+    "title": "Crysis\u00ae 3 ",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1282690/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1091500,
+    "title": "Cyberpunk 2077",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/e9047d8ec47ae3d94bb8b464fb0fc9e9972b4ac7/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 12452,
+    "lastPlayed": 1770425699,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 17530,
+    "title": "D.I.P.R.I.P. Warm Up",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/17530/header.jpg",
+    "genres": [
+      "Action",
+      "Indie",
+      "Racing"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "D.I.P.R.I.P. is a Half-Life 2 multiplayer total conversion. Gameplay is based on vehicle combat in various post-war environments. Vehicles use multiple weapon mounts which are activated by finding weapons scattered around the battlegrounds. Key locations in the post-war world are rich in uncontaminated water and fuel.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 374320,
+    "title": "DARK SOULS\u2122 III",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/374320/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 393,
+    "lastPlayed": 1728595555,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 211420,
+    "title": "DARK SOULS\u2122: Prepare To Die Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/211420/header.jpg",
+    "genres": [
+      "Action",
+      "RPG"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Dark Souls will be the most deeply challenging game you play this year. Can you live through a million deaths and earn your legacy?",
+    "playtimeMinutes": 143,
+    "lastPlayed": 1515237603,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 383180,
+    "title": "Dead Island Riptide Definitive Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/383180/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 17470,
+    "title": "Dead Space (2008)",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/17470/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 47780,
+    "title": "Dead Space 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/47780/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1238060,
+    "title": "Dead Space\u2122 3",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1238060/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 520720,
+    "title": "Dear Esther: Landmark Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/520720/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1190460,
+    "title": "DEATH STRANDING",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1190460/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 5596,
+    "lastPlayed": 1645393568,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 3280350,
+    "title": "DEATH STRANDING 2: ON THE BEACH",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3280350/6270c77b0729e2df0a17d660286eeddfd9169386/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 8570,
+    "lastPlayed": 1783110612,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 226620,
+    "title": "Desktop Dungeons",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/226620/header.jpg",
+    "genres": [
+      "Adventure",
+      "Casual",
+      "Indie",
+      "RPG",
+      "Strategy"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Each step into the unknown heals you and reveals new obstacles as you guide fresh heros to glorious retirement or ignominious death. Master tactical spells, appease ancient gods and get rich through taxidermy in this award-winning quick-play puzzle-roguelike.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1085660,
+    "title": "Destiny 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1085660/0ccf0dc0a8c4ec078db7ab99ddc820b2fa884441/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 343,
+    "lastPlayed": 1617829493,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1872550,
+    "title": "Destroy All Humans! \u2013 Clone Carnage",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1872550/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1222140,
+    "title": "Detroit: Become Human",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1222140/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 337000,
+    "title": "Deus Ex: Mankind Divided\u2122",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/337000/39cf848b5d93541865bdf81e1f415cc615de5d80/header.jpg",
+    "genres": [
+      "Action",
+      "RPG"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "You play as Adam Jensen, an experienced covert operative operating in a world that despises his kind: augmented humans. Choose from an arsenal of state-of-the-art weapons and augmentations to build your playstyle, and decide who you'll trust, to unravel a vast worldwide conspiracy.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 632470,
+    "title": "Disco Elysium",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/632470/816ea59d6d8ac525f79a07c3a7afa94eddb3437c/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 395170,
+    "title": "DISTRAINT: Deluxe Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/395170/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 230230,
+    "title": "Divinity: Original Sin (Classic)",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/230230/header.jpg",
+    "genres": [
+      "Adventure",
+      "Indie",
+      "RPG",
+      "Strategy"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Gather your party and get ready for a new, back-to-the-roots RPG adventure! Discuss your decisions with companions; fight foes in turn-based combat; explore an open world and interact with everything and everyone you see. Join up with a friend to play online in co-op and make your own adventures with the powerful RPG toolkit.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 435150,
+    "title": "Divinity: Original Sin 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/435150/3f6ee788cb01bd65097c52399d536eb424b4876f/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 6985,
+    "lastPlayed": 1704664144,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 373420,
+    "title": "Divinity: Original Sin Enhanced Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/373420/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 5268,
+    "lastPlayed": 1776632475,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 379720,
+    "title": "DOOM",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/379720/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 9050,
+    "title": "DOOM 3",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/9050/header.jpg",
+    "genres": [
+      "Action"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "A massive demonic invasion has overwhelmed the Union Aerospace Corporation's (UAC) Mars Research Facility, leaving only chaos and horror in its wake. As one of only a few survivors, you must fight your way to hell and back against a horde of evil monsters.",
+    "playtimeMinutes": 1,
+    "lastPlayed": 1442536519,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 208200,
+    "title": "DOOM 3: BFG Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/208200/header.jpg",
+    "genres": [
+      "Action"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "A demonic invasion has overwhelmed the Union Aerospace Corporation's Mars research facility. As one of only a few survivors, you must fight your way to hell and back against a horde of demons in this award-winning horror/action FPS and reimagining of the original DOOM.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 9070,
+    "title": "DOOM 3: Resurrection of Evil",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/9070/header.jpg",
+    "genres": [
+      "Action"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "The gripping expansion pack for DOOM 3 takes your even further into the the DOOM universe. Two years following the unexplained disaster on Mars, the UAC returns to the abandoned facility to investigate a mysterious beacon buried deep in the ruins of the ancient civilization.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 782330,
+    "title": "DOOM Eternal",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/782330/feaf8293bcd2d078422faa547bc0d707c08f606e/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 570,
+    "title": "Dota 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/570/header.jpg",
+    "genres": [
+      "Action",
+      "Strategy",
+      "Free To Play"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Every day, millions of players worldwide enter battle as one of over a hundred Dota heroes. And no matter if it's their 10th hour of play or 1,000th, there's always something new to discover. With regular updates that ensure a constant evolution of gameplay, features, and heroes, Dota 2 has taken on a life of its own.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1238040,
+    "title": "Dragon Age II: Ultimate Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1238040/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 47810,
+    "title": "Dragon Age: Origins - Ultimate Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/47810/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 24920,
+    "title": "Dragon Age: Origins Character Creator",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/24920/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1222690,
+    "title": "Dragon Age\u2122 Inquisition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1222690/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 249050,
+    "title": "Dungeon of the ENDLESS\u2122",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/249050/header.jpg",
+    "genres": [
+      "Adventure",
+      "Indie",
+      "RPG",
+      "Strategy"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Dungeon of the ENDLESS\u2122 is a Rogue-Like Dungeon-Defense game, in which the player and their team of heroes must protect the generator of their crashed ship while exploring an ever-expanding dungeon, all while facing waves of monsters and special events as they try to find their way out...",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 261820,
+    "title": "Estranged: Act I",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/261820/7ee127cd3bfa95f6f787adc711dedb03f459871c/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Indie",
+      "Free To Play"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Estranged tells the story of a lone fisherman, whose ship is stranded on a mysterious island during a violent storm. Explore the rich environments and meet the curious inhabitants of the island as you find a way back to the mainland.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 17550,
+    "title": "Eternal Silence",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/17550/header.jpg",
+    "genres": [
+      "Action",
+      "Free To Play"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Eternal Silence is a science fiction mod that pits two capital ships against each other in a seamless blend of space warfare and tactical infantry combat. Pilots coordinate strikes with invading infantry in order to take down the behemoth capital ships from both the inside and out.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 25800,
+    "title": "Europa Universalis III",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/25800/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 22150,
+    "title": "Europa Universalis III Demo",
+    "type": "demo",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/22150/header.jpg",
+    "genres": [
+      "Strategy"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 288470,
+    "title": "Fable Anniversary",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/288470/header.jpg",
+    "genres": [
+      "RPG"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "FOR EVERY CHOICE, A CONSEQUENCE.Fully re-mastered with HD visuals and audio, Fable Anniversary is a stunning rendition of the original game that will delight faithful fans and new players alike! The all new Heroic difficulty setting will test the mettle of even the most hardcore Fable fan.",
+    "playtimeMinutes": 30,
+    "lastPlayed": 1661594182,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 38400,
+    "title": "Fallout",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/38400/header.jpg",
+    "genres": [
+      "RPG"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "You've just unearthed the classic post-apocalyptic role-playing game that revitalized the entire CRPG genre. The Fallout\u00ae SPECIAL system allows drastically different types of characters, meaningful decisions and development that puts you in complete control. Explore the devastated ruins of a golden age civilization.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 377160,
+    "title": "Fallout 4",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/377160/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 14,
+    "lastPlayed": 1520363921,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 22380,
+    "title": "Fallout: New Vegas",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/22380/header.jpg",
+    "genres": [
+      "Action",
+      "RPG"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Welcome to Vegas. New Vegas. Enjoy your stay!",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 298110,
+    "title": "Far Cry 4",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/298110/731cff7e53820cb83436f93bfa86e493f6a0af45/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Fight to liberate a war-torn Himalayan region in this open world FPS. Wield a deadly arsenal, dominate land and sky with gyrocopters and war elephants, and take on enemy territory solo or in co-op.",
+    "playtimeMinutes": 37,
+    "lastPlayed": 1700257105,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1225580,
+    "title": "Fe",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1225580/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 660160,
+    "title": "Field of Glory II",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/660160/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2909400,
+    "title": "FINAL FANTASY VII REBIRTH",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2909400/64a1006a85342c7d3e4b1e1b8e562fee2dc86578/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 7634,
+    "lastPlayed": 1750715208,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 383870,
+    "title": "Firewatch",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/383870/41a7d0ff4c2dab4ed69c53c9a29c931e6f62948d/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2676230,
+    "title": "FiveM",
+    "type": "application",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2676230/9e8a2df18bfdd24267aefa6d3e14778c2ecb1708/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 223390,
+    "title": "Forge",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/223390/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 397620,
+    "title": "GooCubelets",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/397620/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 599140,
+    "title": "Graveyard Keeper",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/599140/07a4abf278d3029bec1bf7dcff9b2852bdde5250/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 858710,
+    "title": "Gravity Circuit",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/858710/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 683320,
+    "title": "GRIS",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/683320/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 209,
+    "lastPlayed": 1773524874,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 275390,
+    "title": "Guacamelee! Super Turbo Championship Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/275390/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Indie"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "The definitive version of the smash-hit Metroidvania-style action-platformer, Guacamelee! STCE adds new levels, powers, challenges, and refinements to the sprawling, ridiculous, Mexican-inspired adventure of the original Guacamelee! Gold Edition.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 70,
+    "title": "Half-Life",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/70/header.jpg",
+    "genres": [
+      "Action"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Named Game of the Year by over 50 publications, Valve's debut title blends action and adventure with award-winning technology to create a frighteningly realistic world where players must think to survive. Also includes an exciting multiplayer mode that allows you to play against friends and enemies around the world.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 220,
+    "title": "Half-Life 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/220/header.jpg",
+    "genres": [
+      "Action"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Reawakened from stasis in the occupied metropolis of City 17, Gordon Freeman is joined by Alyx Vance as he leads a desperate human resistance. Experience the landmark first-person shooter packed with immersive world-building, boundary-pushing physics, and exhilarating combat.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2477290,
+    "title": "Half-Life 2 RTX",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2477290/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 320,
+    "title": "Half-Life 2: Deathmatch",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/320/header.jpg",
+    "genres": [
+      "Action"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Fast multiplayer action set in the Half-Life 2 universe! HL2's physics adds a new dimension to deathmatch play. Play straight deathmatch or try Combine vs. Resistance teamplay. Toss a toilet at your friend today!",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 219,
+    "title": "Half-Life 2: Demo",
+    "type": "demo",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/219/header.jpg",
+    "genres": [
+      "Action"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Half-Life 2 defines a new benchmark in gaming with startling realism and responsiveness. Powered by Source&trade; technology, Half-Life 2 features the most sophisticated in-game characters ever witnessed, advanced AI, stunning graphics and physical gameplay.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 360,
+    "title": "Half-Life Deathmatch: Source",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/360/header.jpg",
+    "genres": [
+      "Action"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Half-Life Deathmatch: Source is a recreation of the first multiplayer game set in the Half-Life universe. Features all the classic weapons and most-played maps, now running on the Source engine.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 261980,
+    "title": "Half-Life: Before",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/261980/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Indie",
+      "Free To Play"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Half-Life: Before \u2013 is a modification for Half-Life with new levels and story. Mod is based on Spirit of Half-Life 1.8 technology, that increases visual and functional component of the mod.You're playing as a Black Mesa scientist Andrew Winner.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 924750,
+    "title": "Harold Halibut",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/924750/134b570c094231cc381a0b00a44476817ce40052/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 2738590,
+    "title": "Harold Halibut Demo",
+    "type": "demo",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2738590/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 3286930,
+    "title": "Heretic + Hexen",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3286930/af11a57f074bf3f1b901bb96f9ea519a0928c80c/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2390,
+    "title": "Heretic: Shadow of the Serpent Riders",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2390/header.jpg",
+    "genres": [
+      "Action"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "In a realm corrupted by the evil magic of three brothers known as the Serpent Riders, you are a heretic. As one of the last Sidhe elves, and a capable mage, you embark on a quest for vengeance against those who slaughtered your friends, family, and entire race.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 9060,
+    "title": "HeXen II",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/9060/header.jpg",
+    "genres": [
+      "Action"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "The Four Horsemen of the Apocalypse lurk in the shadows before you. They are Death, Pestilence, Famine, and War. They are the root of all that is evil, but the least of your worries. The last of the three Serpent Riders yet lives.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2360,
+    "title": "Hexen: Beyond Heretic",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2360/header.jpg",
+    "genres": [
+      "Action"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "While the Sidhe elf Corvus battled the evil forces of D'Sparil, the remaining Serpent Riders were busy corrupting other dimensions. As a Warrior, Mage, or Cleric, you must defend your realm of Cronos from the second Serpent Rider known as Korax.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2370,
+    "title": "Hexen: Deathkings of the Dark Citadel",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2370/header.jpg",
+    "genres": [
+      "Action"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Hexen: Deathkings of the Dark Citadel is a dark fantasy first-person shooter and expansion to Hexen: Beyond Heretic. After discovering the Chaos Sphere, you have been transported to the Realm of the Dead. Now, your only way home is blocked by the Dark Citadel.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1151640,
+    "title": "Horizon Zero Dawn\u2122 Complete Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1151640/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 108,
+    "lastPlayed": 1714860545,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2561580,
+    "title": "Horizon Zero Dawn\u2122 Remastered",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2561580/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1373960,
+    "title": "INDIKA",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1373960/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 243,
+    "lastPlayed": 1769463325,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 242700,
+    "title": "Injustice: Gods Among Us Ultimate Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/242700/header.jpg",
+    "genres": [
+      "Action"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Injustice: Gods Among Us Ultimate Edition enhances the bold new franchise to the fighting game genre from NetherRealm Studios. Featuring six new playable characters, over 30 new skins, and 60 new S.T.A.R. Labs missions, this edition packs a punch.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 17700,
+    "title": "Insurgency: Modern Infantry Combat",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/17700/header.jpg",
+    "genres": [
+      "Action"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Grab your rifle, join your team mates, and enter the fight. Take to the modern battlefield and engage in intense, realistic battles. Choose your side between a highly organized conventional army or the partisan insurgents.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 7110,
+    "title": "Jade Empire: Special Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/7110/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 323580,
+    "title": "Jotun: Valhalla Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/323580/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Indie"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Jotun is a hand-drawn action-exploration game set in Norse mythology. In Jotun, you play Thora, a Viking warrior who died an inglorious death and must prove herself to the Gods to enter Valhalla. Impress the Gods!",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 259080,
+    "title": "Just Cause 2: Multiplayer Mod",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/259080/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "JC2-MP is a project to bring multiplayer to Just Cause 2 in all of its magnificent glory. Imagine the chaos of normal Just Cause 2, then extending it out to dozens, hundreds, and even thousands of players.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1250,
+    "title": "Killing Floor",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1250/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 379430,
+    "title": "Kingdom Come: Deliverance",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/379430/43b72106345687f4a2bf94d5f98335e52c1cd598/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1771300,
+    "title": "Kingdom Come: Deliverance II",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1771300/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 8891,
+    "lastPlayed": 1743885738,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 368230,
+    "title": "Kingdom: Classic",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/368230/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 35130,
+    "title": "Lara Croft and the Guardian of Light",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/35130/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Take control of Lara and her new partner Totec, a Mayan tribesman, and uncover the ancient artifact known as the &quot;Mirror of Smoke&quot; in this all new action adventure game.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 289690,
+    "title": "Lara Croft and the Temple of Osiris",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/289690/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Lara Croft and the Temple of Osiris is the sequel to the critically-acclaimed Lara Croft and the Guardian of Light, and the first-ever four-player co-op experience with Lara Croft.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 424840,
+    "title": "Little Nightmares",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/424840/facf9a7a675c6d7f210d96d6b111caffe0386cd5/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2149010,
+    "title": "Little Nightmares Enhanced Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2149010/8f1da102713653906647c5024843479395be3394/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1507190,
+    "title": "Machinika Museum",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1507190/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 40990,
+    "title": "Mafia",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/40990/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "It\u2019s 1930. After an inadvertent brush with the mafia, cabdriver Tommy Angelo is reluctantly thrust into the world of organized crime. Initially, he is uneasy about falling in with the Salieri family, but soon the rewards become too big to ignore.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 17460,
+    "title": "Mass Effect (2007)",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/17460/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 24980,
+    "title": "Mass Effect 2 (2010)",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/24980/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 2362420,
+    "title": "Mass Effect 2 (2010) Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2362420/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1238020,
+    "title": "Mass Effect 3 (2012)",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1238020/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1238000,
+    "title": "Mass Effect\u2122: Andromeda",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1238000/8c7ff2de01854469c5202e522d8f8c00ab6ad052/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 287700,
+    "title": "METAL GEAR SOLID V: THE PHANTOM PAIN",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/287700/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Ushering in a new era for the METAL GEAR franchise with cutting-edge technology powered by the Fox Engine, METAL GEAR SOLID V: The Phantom Pain, will provide players a first-rate gaming experience as they are offered tactical freedom to carry out open-world missions.",
+    "playtimeMinutes": 5788,
+    "lastPlayed": 1765750590,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2417610,
+    "title": "METAL GEAR SOLID \u0394: SNAKE EATER",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2417610/05c97cbcd0cfc27c8ed6c7fc6d81e0995aa2a7d4/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 1267,
+    "lastPlayed": 1771161237,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 43110,
+    "title": "Metro 2033",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/43110/header.jpg",
+    "genres": [
+      "Action"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Set in the shattered subway of a post apocalyptic Moscow, Metro 2033 is a story of intensive underground survival where the fate of mankind rests in your hands. In 2013 the world was devastated by an apocalyptic event, annihilating almost all mankind and turning the earth\u2019s surface into a poisonous wasteland.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 286690,
+    "title": "Metro 2033 Redux",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/286690/header.jpg",
+    "genres": [
+      "Action"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "In 2013 the world was devastated by an apocalyptic event, annihilating almost all mankind and turning the Earth's surface into a poisonous wasteland. A handful of survivors took refuge in the depths of the Moscow underground, and human civilization entered a new Dark Age. The year is 2033.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 412020,
+    "title": "Metro Exodus",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/412020/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1449560,
+    "title": "Metro Exodus Enhanced Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1449560/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 1643,
+    "lastPlayed": 1758566804,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 43160,
+    "title": "Metro: Last Light Complete Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/43160/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 287390,
+    "title": "Metro: Last Light Redux",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/287390/header.jpg",
+    "genres": [
+      "Action"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "It is the year 2034. Beneath the ruins of post-apocalyptic Moscow, in the tunnels of the Metro, the remnants of mankind are besieged by deadly threats from outside \u2013 and within. Mutants stalk the catacombs beneath the desolate surface, and hunt amidst the poisoned skies above.",
+    "playtimeMinutes": 586,
+    "lastPlayed": 1783379016,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 235780,
+    "title": "MINERVA: Metastasis",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/235780/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Pervasive. Literary. Brutal. Experimental.MINERVA, by Adam Foster, takes you to a remote island under the control of Combine forces. Something is going on here. Your goal is to uncover what that is and destroy it. Oh, yes-- and try to survive.This is the newly released 2013 edition of the famous Half Life 2: Episode One mod.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 17410,
+    "title": "Mirror's Edge",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/17410/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1233570,
+    "title": "Mirror's Edge\u2122 Catalyst",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1233570/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 606150,
+    "title": "Moonlighter",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/606150/b6b0789b397ed98c8c5871dd2f99945a8fea0332/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1222680,
+    "title": "Need for Speed\u2122 Heat ",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1222680/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 219950,
+    "title": "NiGHTS into Dreams...",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/219950/header.jpg",
+    "genres": [
+      "Adventure"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Slip off into the dream world and go on an aerial adventure as NiGHTS in this classic Saturn remake. Collect Ideya (colored orbs), rack up points, and battle bosses to help Elliot and Claris save Nightopia from Wizeman the Wicked.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 275850,
+    "title": "No Man's Sky",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/275850/84d0df065c36eb8ded7bdf0d8fccd19d43b6c005/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "No Man's Sky is a game about exploration and survival in an infinite procedurally generated universe.",
+    "playtimeMinutes": 3672,
+    "lastPlayed": 1602766424,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 15700,
+    "title": "Oddworld: Abe's Oddysee",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/15700/header.jpg",
+    "genres": [
+      "Adventure"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Selected by the fickle finger of fate, Abe\u2122, floor-waxer first class for RuptureFarms, was catapulted into a life of adventure when he overheard plans by his boss, Molluck the Glukkon\u2122, to turn Abe and his fellow Mudokons into Tasty Treats as part of a last-ditch effort to rescue Molluck's failing meat-packing empire.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 18000,
+    "title": "On the Rain-Slick Precipice of Darkness, Episode One",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/18000/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 18020,
+    "title": "On the Rain-Slick Precipice of Darkness, Episode Two",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/18020/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 238320,
+    "title": "Outlast",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/238320/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Indie"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Hell is an experiment you can't survive in Outlast, a first-person survival horror game developed by veterans of some of the biggest game franchises in history. As investigative journalist Miles Upshur, explore Mount Massive Asylum and try to survive long enough to discover its terrible secret... if you dare.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 293180,
+    "title": "Overcast - Walden and the Werewolf",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/293180/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Indie"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "A mysterious creature has destroyed a village located near Walden's cabin, killing every person residing on the premises. Now, Walden wants revenge. This is the story of an old hunter who has nothing to lose.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 640820,
+    "title": "Pathfinder: Kingmaker",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/640820/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1184370,
+    "title": "Pathfinder: Wrath of the Righteous - Enhanced Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1184370/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 92500,
+    "title": "PC Gamer",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/92500/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 18010,
+    "title": "Penny Arcade Adventures: On the Rain-Slick Precipice of Darkness, Episode One Demo",
+    "type": "demo",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/18010/header.jpg",
+    "genres": [
+      "Adventure",
+      "RPG"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Try the tutorial level and sneak peek of the full game in this demo of Episode One in the RPG-Adventure series based on Penny Arcade.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 18030,
+    "title": "Penny Arcade Adventures: On the Rain-Slick Precipice of Darkness, Episode Two Demo",
+    "type": "demo",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/18030/header.jpg",
+    "genres": [
+      "Adventure",
+      "RPG"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1687950,
+    "title": "Persona 5 Royal",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1687950/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 291650,
+    "title": "Pillars of Eternity",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/291650/header.jpg",
+    "genres": [
+      "RPG"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Prepare to be enchanted by a world where the choices you make and the paths you choose shape your destiny. Obsidian Entertainment, the developer of Fallout: New Vegas\u2122 and South Park: The Stick of Truth\u2122, together with Paradox Interactive is proud to present Pillars of Eternity.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 560130,
+    "title": "Pillars of Eternity II: Deadfire",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/560130/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 400,
+    "title": "Portal",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/400/header.jpg",
+    "genres": [
+      "Action"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Portal\u2122 is a new single player game from Valve. Set in the mysterious Aperture Science Laboratories, Portal has been called one of the most innovative new games on the horizon and will offer gamers hours of unique gameplay.",
+    "playtimeMinutes": 115,
+    "lastPlayed": 1585752810,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 620,
+    "title": "Portal 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/faffc0f560786e2f05104a8d2fac837c6969bf13/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "The &quot;Perpetual Testing Initiative&quot; has been expanded to allow you to design co-op puzzles for you and your friends!",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 410,
+    "title": "Portal: First Slice",
+    "type": "demo",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/410/header.jpg",
+    "genres": [
+      "Action"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Help yourself to a generous, 11-level serving of Portal: First Slice, the official demo for the game that challenges you to think with portals. The winner of numerous Game of the Year awards introduces you to the test chambers at the Aperture Science Enrichment Center, where you'll learn to solve physical puzzles by opening portals to...",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 232770,
+    "title": "POSTAL",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/232770/header.jpg",
+    "genres": [
+      "Action",
+      "Indie"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Take control of The POSTAL Dude in his infamous first outing as he battles to survive in a world gone mad! POSTAL is a classic isometric shooter filled to the brim with fast-paced explosive action.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1448030,
+    "title": "Press Any Button",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1448030/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 480490,
+    "title": "Prey",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/480490/9ed715575a2205350e937e5e6d25b3e8a494605e/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2215490,
+    "title": "Project Borealis: Prologue",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2215490/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 3830,
+    "title": "Psychonauts",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3830/header.jpg",
+    "genres": [
+      "Action"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "A Psychic Odyssey Through the Minds of Misfits, Monsters, and Madmen. This classic action/adventure platformer from acclaimed developers Double Fine Productions follows the story of a young psychic named Razputin.",
+    "playtimeMinutes": 35,
+    "lastPlayed": 1515495423,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2310,
+    "title": "Quake",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2310/433ed70abc2743386b152cded8d7d0cbc6b26a2c/header.jpg",
+    "genres": [
+      "Action"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Developed by the award-winning id Software, Quake\u00ae is the ground-breaking, original dark fantasy first-person shooter that inspires today\u2019s retro-style FPS games. With Quake (Enhanced), experience the authentic, updated, and visually enhanced version of the original.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 611500,
+    "title": "Quake Champions",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/611500/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2320,
+    "title": "Quake II",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2320/header.jpg",
+    "genres": [
+      "Action"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "You are humanity\u2019s last hope to stop the Strogg, a hostile alien race waging war against Earth. Play this military sci-fi FPS, now upgraded for modern platforms with improved visuals, new campaign content, online multiplayer/co-op, and more.",
+    "playtimeMinutes": 468,
+    "lastPlayed": 1756501718,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1089130,
+    "title": "Quake II RTX",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1089130/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 46,
+    "lastPlayed": 1605968889,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1895880,
+    "title": "Ratchet & Clank: Rift Apart",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1895880/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 1109,
+    "lastPlayed": 1745011760,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1174180,
+    "title": "Red Dead Redemption 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1174180/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1200,
+    "title": "Red Orchestra: Ostfront 41-45",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1200/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 4333400,
+    "title": "RedM",
+    "type": "application",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4333400/de99dbf0c1e5996a0ab67b429e5056b3ed0cb18e/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 633360,
+    "title": "Remothered: Tormented Fathers",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/633360/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 99300,
+    "title": "Renegade Ops",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/99300/header.jpg",
+    "genres": [
+      "Action"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Blast your way through enemy lines to defeat Inferno, a madman intent on global domination. Destruction just got awesome.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 883710,
+    "title": "Resident Evil 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/883710/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 952060,
+    "title": "Resident Evil 3",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/952060/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2050650,
+    "title": "Resident Evil 4",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2050650/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 1675,
+    "lastPlayed": 1736542577,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 3764200,
+    "title": "Resident Evil Requiem",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3764200/ce5437442768e38eb575f205ab9397d0264017b0/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 376,
+    "lastPlayed": 1791493610,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 952070,
+    "title": "RESIDENT EVIL RESISTANCE",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/952070/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 391220,
+    "title": "Rise of the Tomb Raider",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/391220/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 1522,
+    "lastPlayed": 1757535009,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 235900,
+    "title": "RPG Maker XP",
+    "type": "application",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/235900/header.jpg",
+    "genres": [
+      "RPG",
+      "Design & Illustration",
+      "Education",
+      "Web Publishing",
+      "Game Development"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "RPG MAKER lets you create an original role-playing game without any prior specialized knowledge or training. RPG MAKER XP is full of the functions you've been asking for, including game data encryption and a scripting feature that lets you change the very heart of the RPG MAKER engine.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1643320,
+    "title": "S.T.A.L.K.E.R. 2: Heart of Chornobyl",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1643320/9c8da5440ab033af46b9c7fecfd37166479d2ea6/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 6165,
+    "lastPlayed": 1787777717,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 8230,
+    "title": "Sam & Max 104: Abe Lincoln Must Die!",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/8230/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Sam &amp; Max Episode 4 - Abe Lincoln Must Die - The president's lost it. Federally mandated group hugs, a pudding embargo... what's next, gun control? Sam &amp; Max are off to Washington to take care of this bozo, but the political climate will only get stormier... and a new power will rise...",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 268870,
+    "title": "Satellite Reign",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/268870/header.jpg",
+    "genres": [
+      "Action",
+      "Indie",
+      "Strategy"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Satellite Reign is a real-time, class-based strategy game, set in an open-world cyberpunk city. You command a group of 4 agents through rain-soaked, neon-lit streets, where the law is the will of mega-corporations.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1225590,
+    "title": "Sea of Solitude",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1225590/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 34270,
+    "title": "SEGA Mega Drive & Genesis Classics",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/34270/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Casual",
+      "RPG"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "SEGA\u2019s collection of Mega Drive &amp; Genesis Classics comes to a new generation, now updated with even more features: online multiplayer, achievements, mirror mode, rewind, save states, VR and more! Over 50 classic games in one great package. Get into the classics!",
+    "playtimeMinutes": 44,
+    "lastPlayed": 1518635332,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 814380,
+    "title": "Sekiro\u2122: Shadows Die Twice",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/814380/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 36,
+    "lastPlayed": 1715964588,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 750920,
+    "title": "Shadow of the Tomb Raider",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/750920/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 1488,
+    "lastPlayed": 1769293214,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 234650,
+    "title": "Shadowrun Returns",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/234650/header.jpg",
+    "genres": [
+      "Adventure",
+      "Indie",
+      "RPG",
+      "Strategy"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "The unique cyberpunk-meets-fantasy world of Shadowrun has gained a huge cult following since its creation nearly 25 years ago. Now, creator Jordan Weisman returns to the world of Shadowrun, modernizing this classic game setting as a single player, turn-based tactical RPG.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 758330,
+    "title": "Shenmue I & II",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/758330/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 878670,
+    "title": "Shenmue III",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/878670/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1313,
+    "title": "SiN Gold",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1313/header.jpg",
+    "genres": [
+      "Action"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "SiN: Gold (1998) has returned! Free update for original owners!",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1309,
+    "title": "SiN Multiplayer",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1309/header.jpg",
+    "genres": [
+      "Action"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "You are John Blade, commander of HardCorps, an elite security force dedicated to protecting the people of Freeport City. Four years have passed since your first battle with Elexis Sinclaire, a beautiful, brilliant, and ruthless scientist who is out to remake humanity according to her own twisted vision.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1144770,
+    "title": "SLUDGE LIFE",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1144770/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 17730,
+    "title": "Smashball",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/17730/header.jpg",
+    "genres": [
+      "Action",
+      "Sports"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Smashball is a fast-paced, ultra violent first-person sports shooter. Two teams use super-human maneuvers, a real-physics grappling hook and high-powered weaponry to try to get a single ball into their opponent's goal. On the league web site, players can see match stats, create teams and participate in our cash tournaments!",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1096530,
+    "title": "Solasta: Crown of the Magister",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1096530/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1840,
+    "title": "Source Filmmaker",
+    "type": "application",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1840/header.jpg",
+    "genres": [
+      "Animation & Modeling",
+      "Video Production"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "The Source Filmmaker (SFM) is the movie-making tool built and used by us here at Valve to make movies inside the Source game engine. Because the SFM uses the same assets as the game, anything that exists in the game can be used in the movie, and vice versa.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 488790,
+    "title": "South Park The Fractured But Whole",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/488790/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 213670,
+    "title": "South Park\u2122: The Stick of Truth\u2122",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/213670/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "RPG"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "From the perilous battlefields of the fourth-grade playground, a young hero will rise, destined to be South Park\u2019s savior. From the creators of South Park, Trey Parker and Matt Stone, comes an epic quest to become\u2026 cool. Introducing South Park\u2122: The Stick of Truth\u2122.For a thousand years, the battle has been waged.",
+    "playtimeMinutes": 934,
+    "lastPlayed": 1787605192,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 480,
+    "title": "Spacewar",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/480/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 17390,
+    "title": "Spore",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/17390/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1172380,
+    "title": "STAR WARS Jedi: Fallen Order\u2122 ",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1172380/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1237980,
+    "title": "STAR WARS\u2122 Battlefront\u2122",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1237980/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 2292260,
+    "title": "STAR WARS\u2122: Dark Forces Remaster",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2292260/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 252410,
+    "title": "SteamWorld Dig",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/252410/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Indie"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "SteamWorld Dig is an action-adventure puzzler with strong Metroidvanian influences set in the SteamWorld Universe. You\u2019ll need to dig deep into the earth, gather resources to upgrade your tools and abilities, take on enemies, solve challenging puzzles and uncover the secrets to save a dying town.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 439190,
+    "title": "Stories: The Path of Destinies",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/439190/5ba5737785c6f9e537a7f0c68b37cf01fec2ee65/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 464920,
+    "title": "Surviving Mars",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/464920/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 46500,
+    "title": "Syberia",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/46500/header.jpg",
+    "genres": [
+      "Adventure",
+      "Casual"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Join Kate Walker as she travels to remote locations and time periods in this timeless voyage to discover her true destiny.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 46510,
+    "title": "Syberia 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/46510/header.jpg",
+    "genres": [
+      "Adventure"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Having searched Eastern and Western Europe for a missing heir, Kate Walker finally completed her long and arduous journey, obtaining the signature of Hans Voralberg and closing the automaton factory buyout.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 17520,
+    "title": "Synergy",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/17520/header.jpg",
+    "genres": [
+      "Action",
+      "Free To Play"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Synergy enables you to play through the Half-Life 2 series and many other singleplayer Source Mods cooperatively with friends.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 482400,
+    "title": "System Shock",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/482400/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 440,
+    "title": "Team Fortress 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/440/header.jpg",
+    "genres": [
+      "Action",
+      "Free To Play"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Nine distinct classes provide a broad range of tactical abilities and personalities. Constantly updated with new game modes, maps, equipment and, most importantly, hats!",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1180660,
+    "title": "Tell Me Why",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1180660/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 979690,
+    "title": "The Ascent",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/979690/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 3751260,
+    "title": "The Blood of Dawnwalker",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3751260/a7062f3b59d491c2678e3fd7ce2672858e480641/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 4442,
+    "lastPlayed": 1790800391,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 298180,
+    "title": "The Desolate Hope",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/298180/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Indie",
+      "RPG"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "On a distant edge of an unknown planet, an abandoned structure sits in silence. Constructed by an unmanned research vessel sent from Earth, the Lun Infinus station was designed to run simulations for a five year period, exploring possibilities of human colonization in the case that Earth became uninhabitable.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 94300,
+    "title": "The Dream Machine",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/94300/header.jpg",
+    "genres": [
+      "Adventure",
+      "Casual",
+      "Indie"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "The Dream Machine is an award-winning point &amp; click adventure game about exploring other people's dreams. It's built by hand using materials such as clay, cardboard and broccoli.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 318600,
+    "title": "The Flame in the Flood",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/318600/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Indie"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "A rogue-like river journey through the backwaters of a forgotten post-societal America. Forage, craft, evade predators.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 27040,
+    "title": "The Path - Prologue",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/27040/header.jpg",
+    "genres": [
+      "Indie",
+      "Adventure"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Instead of extracting part of The Path and releasing it as a free trial, this is a brand new chapter, similar to parts of the game, but not the same. It gives you a free taste of the atmosphere of The Path. In The Path &mdash; Prologue, you control the mysterious Girl in White. There's a not a lot of gameplay in this demo.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1053710,
+    "title": "The Red Lantern",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1053710/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 207610,
+    "title": "The Walking Dead",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/207610/header.jpg",
+    "genres": [
+      "Adventure"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "A five-part adventure horror series set in the same universe as Robert Kirkman\u2019s award-winning comic book series.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 20920,
+    "title": "The Witcher 2: Assassins of Kings Enhanced Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/20920/header.jpg",
+    "genres": [
+      "RPG"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "A time of untold chaos has come. Mighty forces clash behind the scenes in a struggle for power and influence. The Northern Kingdoms mobilize for war. But armies on the march are not enough to stop a bloody conspiracy...",
+    "playtimeMinutes": 2393,
+    "lastPlayed": 1591536414,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 292030,
+    "title": "The Witcher 3: Wild Hunt \u2014 Remastered",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/292030/4b5b1ba5061b8a992cc69ac58b4245434edb4296/header.jpg",
+    "genres": [
+      "RPG"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "The Witcher 3: Wild Hunt \u2014 Remastered modernizes the acclaimed role-playing game with a range of upgrades and enhancements. Become monster slayer for hire Geralt of Rivia and journey across a dark fantasy open world in an epic quest to find your adopted daughter Ciri.",
+    "playtimeMinutes": 10449,
+    "lastPlayed": 1606604017,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 20900,
+    "title": "The Witcher: Enhanced Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/20900/header.jpg",
+    "genres": [
+      "Action",
+      "RPG"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Become The Witcher, Geralt of Rivia, a legendary monster slayer caught in a web of intrigue woven by forces vying for control of the world. Make difficult decisions and live with the consequences in a game that will immerse you in an extraordinary tale like no other.",
+    "playtimeMinutes": 52,
+    "lastPlayed": 1517941420,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1712840,
+    "title": "Tiny Tina's Assault on Dragon Keep: A Wonderlands One-shot Adventure",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1712840/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 475150,
+    "title": "Titan Quest Anniversary Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/475150/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 297130,
+    "title": "Titan Souls",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/297130/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Indie"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Between our world and the world beyond lie the Titan Souls, the spiritual source of all living things. Scattered amongst the ruins and guarded by the idle titans charged with their care, a solitary hero armed with a single arrow is assembling shards of the Titan Soul in a quest for truth and power.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1237970,
+    "title": "Titanfall\u00ae 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1237970/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1454890,
+    "title": "Titanfall\u2122",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1454890/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 203160,
+    "title": "Tomb Raider",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/203160/9e67774e97cdd155f287146e62611eb445514ac6/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Tomb Raider explores the intense origin story of Lara Croft and her ascent from a young woman to a hardened survivor.",
+    "playtimeMinutes": 111,
+    "lastPlayed": 1705422176,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 364360,
+    "title": "Total War: WARHAMMER",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/364360/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 594570,
+    "title": "Total War: WARHAMMER II",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/594570/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1142710,
+    "title": "Total War: WARHAMMER III",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1142710/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 362960,
+    "title": "Tyranny",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/362960/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 321270,
+    "title": "UNLOVED",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/321270/header.jpg",
+    "genres": [
+      "Action"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Based on the community award-winning Doom2 mod with the same name by the same creator, UNLOVED is reimagined in the Unreal Engine 4 to bring forth the unspeakable terror in new ways. Play coop with your friends, increase your skills, mod your weapons and face the horror that this unearthly place holds...",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1225560,
+    "title": "Unravel",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1225560/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1225570,
+    "title": "Unravel Two",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1225570/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 211160,
+    "title": "Viking: Battle for Asgard",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/211160/header.jpg",
+    "genres": [
+      "Action",
+      "Adventure"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "A fierce struggle is taking place within Asgard, the realm of the Norse Gods.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1021770,
+    "title": "Wanba Warriors",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1021770/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 56400,
+    "title": "Warhammer 40,000: Dawn of War II - Retribution",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/56400/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 489630,
+    "title": "Warhammer 40,000: Gladius - Relics of War",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/489630/3222d08a9992bd35d64d51cb308270af3c276428/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2186680,
+    "title": "Warhammer 40,000: Rogue Trader",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2186680/c7b0bd6f233f6c03fa68eee2fd1108a183329230/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 552500,
+    "title": "Warhammer: Vermintide 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/552500/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 331710,
+    "title": "Why So Evil",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/331710/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 354850,
+    "title": "Why So Evil 2: Dystopia",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/354850/header.jpg",
+    "genres": [],
+    "releaseDate": "TBA",
+    "shortDescription": "",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 217200,
+    "title": "Worms Armageddon",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/217200/header.jpg",
+    "genres": [
+      "Strategy"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "The iconic intrepid invertebrates return with a vengeance in the fan-favourite classic Worms\u2122 Armageddon. Relive their glory days once again as you blast your way into enemy territory, sweep their fields and remain the last worm standing.",
+    "playtimeMinutes": 218,
+    "lastPlayed": 1735234244,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 327030,
+    "title": "Worms W.M.D",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/327030/3c9070049ed6dd542d327727093a74a413e733c8/header.jpg",
+    "genres": [
+      "Action",
+      "Strategy"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "Join the fight and command your worm warriors into battle in the iconic 2D arcade artillery shooter where serious strategy and silly weaponry decide who swims or sinks.",
+    "playtimeMinutes": 23,
+    "lastPlayed": 1735148134,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 268500,
+    "title": "XCOM 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/268500/header.jpg",
+    "genres": [
+      "Strategy"
+    ],
+    "releaseDate": "TBA",
+    "shortDescription": "XCOM 2 is the sequel to XCOM: Enemy Unknown, the 2012 award-winning strategy game of the year. Earth has changed and is now under alien rule. Facing impossible odds you must rebuild XCOM, and ignite a global resistance to reclaim our world and save humanity.",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  }
+]

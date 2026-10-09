@@ -1,0 +1,2261 @@
+[
+  {
+    "appId": 223850,
+    "title": "3DMark",
+    "type": "application",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/223850/0107a1ed9c5bebb1430b5d68368349ffa81ba842/header.jpg",
+    "playtimeMinutes": 353,
+    "lastPlayed": 1790275276,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 231350,
+    "title": "3DMark Demo",
+    "type": "demo",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/231350/e499441ece83883376ae5e8c1e6934f3c06e7c32/header.jpg",
+    "playtimeMinutes": 686,
+    "lastPlayed": 1769254398,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1222700,
+    "title": "A Way Out",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1222700/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 17510,
+    "title": "Age of Chivalry",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/17510/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 813780,
+    "title": "Age of Empires II: Definitive Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/813780/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 226840,
+    "title": "Age of Wonders III",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/226840/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 630,
+    "title": "Alien Swarm",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/630/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 504390,
+    "title": "Along the Edge",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/504390/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 34010,
+    "title": "Alpha Protocol",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/34010/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 239200,
+    "title": "Amnesia: A Machine for Pigs",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/239200/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 57300,
+    "title": "Amnesia: The Dark Descent",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/57300/header.jpg",
+    "playtimeMinutes": 16,
+    "lastPlayed": 1500118662,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 945360,
+    "title": "Among Us",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/945360/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1385510,
+    "title": "Back 4 Blood Beta",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1385510/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1086940,
+    "title": "Baldur's Gate 3",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/48a2fcbda8565bb45025e98fd8ebde8a7203f6a0/header.jpg",
+    "playtimeMinutes": 3982,
+    "lastPlayed": 1694186888,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 257350,
+    "title": "Baldur's Gate II: Enhanced Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/257350/486ef7ce52fdb1ee5d2909ac97f26d4e26da18d3/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 1730666199,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 228280,
+    "title": "Baldur's Gate: Enhanced Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/228280/9761e1ed90324b2102ffc3dac295eeabf03bea55/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 1726344413,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1238820,
+    "title": "Battlefield 3\u2122 ",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1238820/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1238860,
+    "title": "Battlefield 4\u2122 ",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1238860/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1238840,
+    "title": "Battlefield\u2122 1",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1238840/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1238880,
+    "title": "Battlefield\u2122 Hardline",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1238880/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 960990,
+    "title": "Beyond: Two Souls",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/960990/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 203750,
+    "title": "Binary Domain",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/203750/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 582660,
+    "title": "Black Desert",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/582660/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 362890,
+    "title": "Black Mesa",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/362890/674b9a0e7b31996efd5032dc15e695dbf457d71d/header.jpg",
+    "playtimeMinutes": 1769,
+    "lastPlayed": 1722979295,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 49520,
+    "title": "Borderlands 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/49520/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 738520,
+    "title": "Breathedge",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/738520/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 368900,
+    "title": "Brilliant Bob",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/368900/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 204360,
+    "title": "Castle Crashers",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/204360/header.jpg",
+    "playtimeMinutes": 276,
+    "lastPlayed": 1605383903,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1903340,
+    "title": "Clair Obscur: Expedition 33",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1903340/be3305b02d4db0dffa3458537118423bf2792d7e/header.jpg",
+    "playtimeMinutes": 3882,
+    "lastPlayed": 1752873381,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2398450,
+    "title": "Classic Marathon",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2398450/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 92,
+    "title": "Codename Gordon",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/92/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1213210,
+    "title": "Command & Conquer\u2122 Remastered Collection",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1213210/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 228200,
+    "title": "Company of Heroes ",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/228200/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 4560,
+    "title": "Company of Heroes - Legacy Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4560/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 231430,
+    "title": "Company of Heroes 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/231430/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1608070,
+    "title": "CRISIS CORE \u2013FINAL FANTASY VII\u2013 REUNION",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1608070/header.jpg",
+    "playtimeMinutes": 2022,
+    "lastPlayed": 1714591209,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 17300,
+    "title": "Crysis",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/17300/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 108800,
+    "title": "Crysis 2 Maximum Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/108800/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 2096600,
+    "title": "Crysis 2 Remastered",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2096600/c31e1907d3e05b05578d1dc928826b70cde66e6f/header.jpg",
+    "playtimeMinutes": 113,
+    "lastPlayed": 1771279756,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2096610,
+    "title": "Crysis 3 Remastered",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2096610/ca8cc5ee7d4ce7a8fda5b050a9827aa117768b86/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1715130,
+    "title": "Crysis Remastered",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1715130/0c28c46e93f734d31b035e13057472b51b377936/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1282690,
+    "title": "Crysis\u00ae 3 ",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1282690/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1091500,
+    "title": "Cyberpunk 2077",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/e9047d8ec47ae3d94bb8b464fb0fc9e9972b4ac7/header.jpg",
+    "playtimeMinutes": 12452,
+    "lastPlayed": 1770425699,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 17530,
+    "title": "D.I.P.R.I.P. Warm Up",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/17530/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 374320,
+    "title": "DARK SOULS\u2122 III",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/374320/header.jpg",
+    "playtimeMinutes": 393,
+    "lastPlayed": 1728595555,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 211420,
+    "title": "DARK SOULS\u2122: Prepare To Die Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/211420/header.jpg",
+    "playtimeMinutes": 143,
+    "lastPlayed": 1515237603,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 383180,
+    "title": "Dead Island Riptide Definitive Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/383180/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 17470,
+    "title": "Dead Space (2008)",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/17470/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 47780,
+    "title": "Dead Space 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/47780/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1238060,
+    "title": "Dead Space\u2122 3",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1238060/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 520720,
+    "title": "Dear Esther: Landmark Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/520720/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1190460,
+    "title": "DEATH STRANDING",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1190460/header.jpg",
+    "playtimeMinutes": 5596,
+    "lastPlayed": 1645393568,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 3280350,
+    "title": "DEATH STRANDING 2: ON THE BEACH",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3280350/6270c77b0729e2df0a17d660286eeddfd9169386/header.jpg",
+    "playtimeMinutes": 8570,
+    "lastPlayed": 1783110612,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 226620,
+    "title": "Desktop Dungeons",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/226620/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1085660,
+    "title": "Destiny 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1085660/0ccf0dc0a8c4ec078db7ab99ddc820b2fa884441/header.jpg",
+    "playtimeMinutes": 343,
+    "lastPlayed": 1617829493,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1872550,
+    "title": "Destroy All Humans! \u2013 Clone Carnage",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1872550/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1222140,
+    "title": "Detroit: Become Human",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1222140/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 337000,
+    "title": "Deus Ex: Mankind Divided\u2122",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/337000/39cf848b5d93541865bdf81e1f415cc615de5d80/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 632470,
+    "title": "Disco Elysium",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/632470/816ea59d6d8ac525f79a07c3a7afa94eddb3437c/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 395170,
+    "title": "DISTRAINT: Deluxe Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/395170/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 230230,
+    "title": "Divinity: Original Sin (Classic)",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/230230/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 435150,
+    "title": "Divinity: Original Sin 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/435150/3f6ee788cb01bd65097c52399d536eb424b4876f/header.jpg",
+    "playtimeMinutes": 6985,
+    "lastPlayed": 1704664144,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 373420,
+    "title": "Divinity: Original Sin Enhanced Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/373420/header.jpg",
+    "playtimeMinutes": 5268,
+    "lastPlayed": 1776632475,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 379720,
+    "title": "DOOM",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/379720/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 9050,
+    "title": "DOOM 3",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/9050/header.jpg",
+    "playtimeMinutes": 1,
+    "lastPlayed": 1442536519,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 208200,
+    "title": "DOOM 3: BFG Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/208200/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 9070,
+    "title": "DOOM 3: Resurrection of Evil",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/9070/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 782330,
+    "title": "DOOM Eternal",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/782330/feaf8293bcd2d078422faa547bc0d707c08f606e/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 570,
+    "title": "Dota 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/570/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1238040,
+    "title": "Dragon Age II: Ultimate Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1238040/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 47810,
+    "title": "Dragon Age: Origins - Ultimate Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/47810/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 24920,
+    "title": "Dragon Age: Origins Character Creator",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/24920/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1222690,
+    "title": "Dragon Age\u2122 Inquisition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1222690/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 249050,
+    "title": "Dungeon of the ENDLESS\u2122",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/249050/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 261820,
+    "title": "Estranged: Act I",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/261820/7ee127cd3bfa95f6f787adc711dedb03f459871c/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 17550,
+    "title": "Eternal Silence",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/17550/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 25800,
+    "title": "Europa Universalis III",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/25800/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 22150,
+    "title": "Europa Universalis III Demo",
+    "type": "demo",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/22150/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 288470,
+    "title": "Fable Anniversary",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/288470/header.jpg",
+    "playtimeMinutes": 30,
+    "lastPlayed": 1661594182,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 38400,
+    "title": "Fallout",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/38400/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 377160,
+    "title": "Fallout 4",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/377160/header.jpg",
+    "playtimeMinutes": 14,
+    "lastPlayed": 1520363921,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 22380,
+    "title": "Fallout: New Vegas",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/22380/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 298110,
+    "title": "Far Cry 4",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/298110/731cff7e53820cb83436f93bfa86e493f6a0af45/header.jpg",
+    "playtimeMinutes": 37,
+    "lastPlayed": 1700257105,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1225580,
+    "title": "Fe",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1225580/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 660160,
+    "title": "Field of Glory II",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/660160/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2909400,
+    "title": "FINAL FANTASY VII REBIRTH",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2909400/64a1006a85342c7d3e4b1e1b8e562fee2dc86578/header.jpg",
+    "playtimeMinutes": 7634,
+    "lastPlayed": 1750715208,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 383870,
+    "title": "Firewatch",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/383870/41a7d0ff4c2dab4ed69c53c9a29c931e6f62948d/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2676230,
+    "title": "FiveM",
+    "type": "application",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2676230/9e8a2df18bfdd24267aefa6d3e14778c2ecb1708/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 223390,
+    "title": "Forge",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/223390/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 397620,
+    "title": "GooCubelets",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/397620/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 599140,
+    "title": "Graveyard Keeper",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/599140/07a4abf278d3029bec1bf7dcff9b2852bdde5250/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 858710,
+    "title": "Gravity Circuit",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/858710/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 683320,
+    "title": "GRIS",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/683320/header.jpg",
+    "playtimeMinutes": 209,
+    "lastPlayed": 1773524874,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 275390,
+    "title": "Guacamelee! Super Turbo Championship Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/275390/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 70,
+    "title": "Half-Life",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/70/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 220,
+    "title": "Half-Life 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/220/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2477290,
+    "title": "Half-Life 2 RTX",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2477290/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 320,
+    "title": "Half-Life 2: Deathmatch",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/320/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 219,
+    "title": "Half-Life 2: Demo",
+    "type": "demo",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/219/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 360,
+    "title": "Half-Life Deathmatch: Source",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/360/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 261980,
+    "title": "Half-Life: Before",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/261980/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 924750,
+    "title": "Harold Halibut",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/924750/134b570c094231cc381a0b00a44476817ce40052/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 2738590,
+    "title": "Harold Halibut Demo",
+    "type": "demo",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2738590/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 3286930,
+    "title": "Heretic + Hexen",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3286930/af11a57f074bf3f1b901bb96f9ea519a0928c80c/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2390,
+    "title": "Heretic: Shadow of the Serpent Riders",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2390/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 9060,
+    "title": "HeXen II",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/9060/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2360,
+    "title": "Hexen: Beyond Heretic",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2360/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2370,
+    "title": "Hexen: Deathkings of the Dark Citadel",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2370/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1151640,
+    "title": "Horizon Zero Dawn\u2122 Complete Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1151640/header.jpg",
+    "playtimeMinutes": 108,
+    "lastPlayed": 1714860545,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2561580,
+    "title": "Horizon Zero Dawn\u2122 Remastered",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2561580/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1373960,
+    "title": "INDIKA",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1373960/header.jpg",
+    "playtimeMinutes": 243,
+    "lastPlayed": 1769463325,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 242700,
+    "title": "Injustice: Gods Among Us Ultimate Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/242700/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 17700,
+    "title": "Insurgency: Modern Infantry Combat",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/17700/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 7110,
+    "title": "Jade Empire: Special Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/7110/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 323580,
+    "title": "Jotun: Valhalla Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/323580/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 259080,
+    "title": "Just Cause 2: Multiplayer Mod",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/259080/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1250,
+    "title": "Killing Floor",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1250/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 379430,
+    "title": "Kingdom Come: Deliverance",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/379430/43b72106345687f4a2bf94d5f98335e52c1cd598/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1771300,
+    "title": "Kingdom Come: Deliverance II",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1771300/header.jpg",
+    "playtimeMinutes": 8891,
+    "lastPlayed": 1743885738,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 368230,
+    "title": "Kingdom: Classic",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/368230/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 35130,
+    "title": "Lara Croft and the Guardian of Light",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/35130/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 289690,
+    "title": "Lara Croft and the Temple of Osiris",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/289690/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 424840,
+    "title": "Little Nightmares",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/424840/facf9a7a675c6d7f210d96d6b111caffe0386cd5/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2149010,
+    "title": "Little Nightmares Enhanced Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2149010/8f1da102713653906647c5024843479395be3394/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1507190,
+    "title": "Machinika Museum",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1507190/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 40990,
+    "title": "Mafia",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/40990/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 17460,
+    "title": "Mass Effect (2007)",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/17460/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 24980,
+    "title": "Mass Effect 2 (2010)",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/24980/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 2362420,
+    "title": "Mass Effect 2 (2010) Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2362420/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1238020,
+    "title": "Mass Effect 3 (2012)",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1238020/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1238000,
+    "title": "Mass Effect\u2122: Andromeda",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1238000/8c7ff2de01854469c5202e522d8f8c00ab6ad052/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 287700,
+    "title": "METAL GEAR SOLID V: THE PHANTOM PAIN",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/287700/header.jpg",
+    "playtimeMinutes": 5788,
+    "lastPlayed": 1765750590,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2417610,
+    "title": "METAL GEAR SOLID \u0394: SNAKE EATER",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2417610/05c97cbcd0cfc27c8ed6c7fc6d81e0995aa2a7d4/header.jpg",
+    "playtimeMinutes": 1267,
+    "lastPlayed": 1771161237,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 43110,
+    "title": "Metro 2033",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/43110/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 286690,
+    "title": "Metro 2033 Redux",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/286690/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 412020,
+    "title": "Metro Exodus",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/412020/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1449560,
+    "title": "Metro Exodus Enhanced Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1449560/header.jpg",
+    "playtimeMinutes": 1643,
+    "lastPlayed": 1758566804,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 43160,
+    "title": "Metro: Last Light Complete Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/43160/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 287390,
+    "title": "Metro: Last Light Redux",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/287390/header.jpg",
+    "playtimeMinutes": 586,
+    "lastPlayed": 1783379016,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 235780,
+    "title": "MINERVA: Metastasis",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/235780/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 17410,
+    "title": "Mirror's Edge",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/17410/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1233570,
+    "title": "Mirror's Edge\u2122 Catalyst",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1233570/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 606150,
+    "title": "Moonlighter",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/606150/b6b0789b397ed98c8c5871dd2f99945a8fea0332/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1222680,
+    "title": "Need for Speed\u2122 Heat ",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1222680/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 219950,
+    "title": "NiGHTS into Dreams...",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/219950/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 275850,
+    "title": "No Man's Sky",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/275850/84d0df065c36eb8ded7bdf0d8fccd19d43b6c005/header.jpg",
+    "playtimeMinutes": 3672,
+    "lastPlayed": 1602766424,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 15700,
+    "title": "Oddworld: Abe's Oddysee",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/15700/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 18000,
+    "title": "On the Rain-Slick Precipice of Darkness, Episode One",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/18000/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 18020,
+    "title": "On the Rain-Slick Precipice of Darkness, Episode Two",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/18020/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 238320,
+    "title": "Outlast",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/238320/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 293180,
+    "title": "Overcast - Walden and the Werewolf",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/293180/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 640820,
+    "title": "Pathfinder: Kingmaker",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/640820/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1184370,
+    "title": "Pathfinder: Wrath of the Righteous - Enhanced Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1184370/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 92500,
+    "title": "PC Gamer",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/92500/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 18010,
+    "title": "Penny Arcade Adventures: On the Rain-Slick Precipice of Darkness, Episode One Demo",
+    "type": "demo",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/18010/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 18030,
+    "title": "Penny Arcade Adventures: On the Rain-Slick Precipice of Darkness, Episode Two Demo",
+    "type": "demo",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/18030/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1687950,
+    "title": "Persona 5 Royal",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1687950/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 291650,
+    "title": "Pillars of Eternity",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/291650/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 560130,
+    "title": "Pillars of Eternity II: Deadfire",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/560130/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 400,
+    "title": "Portal",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/400/header.jpg",
+    "playtimeMinutes": 115,
+    "lastPlayed": 1585752810,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 620,
+    "title": "Portal 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/faffc0f560786e2f05104a8d2fac837c6969bf13/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 410,
+    "title": "Portal: First Slice",
+    "type": "demo",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/410/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 232770,
+    "title": "POSTAL",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/232770/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1448030,
+    "title": "Press Any Button",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1448030/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 480490,
+    "title": "Prey",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/480490/9ed715575a2205350e937e5e6d25b3e8a494605e/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2215490,
+    "title": "Project Borealis: Prologue",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2215490/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 3830,
+    "title": "Psychonauts",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3830/header.jpg",
+    "playtimeMinutes": 35,
+    "lastPlayed": 1515495423,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2310,
+    "title": "Quake",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2310/433ed70abc2743386b152cded8d7d0cbc6b26a2c/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 611500,
+    "title": "Quake Champions",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/611500/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2320,
+    "title": "Quake II",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2320/header.jpg",
+    "playtimeMinutes": 468,
+    "lastPlayed": 1756501718,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1089130,
+    "title": "Quake II RTX",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1089130/header.jpg",
+    "playtimeMinutes": 46,
+    "lastPlayed": 1605968889,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1895880,
+    "title": "Ratchet & Clank: Rift Apart",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1895880/header.jpg",
+    "playtimeMinutes": 1109,
+    "lastPlayed": 1745011760,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1174180,
+    "title": "Red Dead Redemption 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1174180/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1200,
+    "title": "Red Orchestra: Ostfront 41-45",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1200/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 4333400,
+    "title": "RedM",
+    "type": "application",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4333400/de99dbf0c1e5996a0ab67b429e5056b3ed0cb18e/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 633360,
+    "title": "Remothered: Tormented Fathers",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/633360/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 99300,
+    "title": "Renegade Ops",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/99300/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 883710,
+    "title": "Resident Evil 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/883710/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 952060,
+    "title": "Resident Evil 3",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/952060/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2050650,
+    "title": "Resident Evil 4",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2050650/header.jpg",
+    "playtimeMinutes": 1675,
+    "lastPlayed": 1736542577,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 3764200,
+    "title": "Resident Evil Requiem",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3764200/ce5437442768e38eb575f205ab9397d0264017b0/header.jpg",
+    "playtimeMinutes": 376,
+    "lastPlayed": 1791493610,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 952070,
+    "title": "RESIDENT EVIL RESISTANCE",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/952070/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 391220,
+    "title": "Rise of the Tomb Raider",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/391220/header.jpg",
+    "playtimeMinutes": 1522,
+    "lastPlayed": 1757535009,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 235900,
+    "title": "RPG Maker XP",
+    "type": "application",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/235900/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1643320,
+    "title": "S.T.A.L.K.E.R. 2: Heart of Chornobyl",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1643320/9c8da5440ab033af46b9c7fecfd37166479d2ea6/header.jpg",
+    "playtimeMinutes": 6165,
+    "lastPlayed": 1787777717,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 8230,
+    "title": "Sam & Max 104: Abe Lincoln Must Die!",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/8230/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 268870,
+    "title": "Satellite Reign",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/268870/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1225590,
+    "title": "Sea of Solitude",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1225590/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 34270,
+    "title": "SEGA Mega Drive & Genesis Classics",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/34270/header.jpg",
+    "playtimeMinutes": 44,
+    "lastPlayed": 1518635332,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 814380,
+    "title": "Sekiro\u2122: Shadows Die Twice",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/814380/header.jpg",
+    "playtimeMinutes": 36,
+    "lastPlayed": 1715964588,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 750920,
+    "title": "Shadow of the Tomb Raider",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/750920/header.jpg",
+    "playtimeMinutes": 1488,
+    "lastPlayed": 1769293214,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 234650,
+    "title": "Shadowrun Returns",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/234650/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 758330,
+    "title": "Shenmue I & II",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/758330/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 878670,
+    "title": "Shenmue III",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/878670/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1313,
+    "title": "SiN Gold",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1313/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1309,
+    "title": "SiN Multiplayer",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1309/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1144770,
+    "title": "SLUDGE LIFE",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1144770/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 17730,
+    "title": "Smashball",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/17730/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1096530,
+    "title": "Solasta: Crown of the Magister",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1096530/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1840,
+    "title": "Source Filmmaker",
+    "type": "application",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1840/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 488790,
+    "title": "South Park The Fractured But Whole",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/488790/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 213670,
+    "title": "South Park\u2122: The Stick of Truth\u2122",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/213670/header.jpg",
+    "playtimeMinutes": 934,
+    "lastPlayed": 1787605192,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 480,
+    "title": "Spacewar",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/480/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 17390,
+    "title": "Spore",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/17390/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1172380,
+    "title": "STAR WARS Jedi: Fallen Order\u2122 ",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1172380/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1237980,
+    "title": "STAR WARS\u2122 Battlefront\u2122",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1237980/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 2292260,
+    "title": "STAR WARS\u2122: Dark Forces Remaster",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2292260/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 252410,
+    "title": "SteamWorld Dig",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/252410/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 439190,
+    "title": "Stories: The Path of Destinies",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/439190/5ba5737785c6f9e537a7f0c68b37cf01fec2ee65/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 464920,
+    "title": "Surviving Mars",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/464920/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 46500,
+    "title": "Syberia",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/46500/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 46510,
+    "title": "Syberia 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/46510/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 17520,
+    "title": "Synergy",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/17520/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 482400,
+    "title": "System Shock",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/482400/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 440,
+    "title": "Team Fortress 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/440/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1180660,
+    "title": "Tell Me Why",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1180660/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 979690,
+    "title": "The Ascent",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/979690/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 3751260,
+    "title": "The Blood of Dawnwalker",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3751260/a7062f3b59d491c2678e3fd7ce2672858e480641/header.jpg",
+    "playtimeMinutes": 4442,
+    "lastPlayed": 1790800391,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 298180,
+    "title": "The Desolate Hope",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/298180/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 94300,
+    "title": "The Dream Machine",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/94300/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 318600,
+    "title": "The Flame in the Flood",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/318600/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 27040,
+    "title": "The Path - Prologue",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/27040/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1053710,
+    "title": "The Red Lantern",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1053710/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 207610,
+    "title": "The Walking Dead",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/207610/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 20920,
+    "title": "The Witcher 2: Assassins of Kings Enhanced Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/20920/header.jpg",
+    "playtimeMinutes": 2393,
+    "lastPlayed": 1591536414,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 292030,
+    "title": "The Witcher 3: Wild Hunt \u2014 Remastered",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/292030/4b5b1ba5061b8a992cc69ac58b4245434edb4296/header.jpg",
+    "playtimeMinutes": 10449,
+    "lastPlayed": 1606604017,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 20900,
+    "title": "The Witcher: Enhanced Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/20900/header.jpg",
+    "playtimeMinutes": 52,
+    "lastPlayed": 1517941420,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1712840,
+    "title": "Tiny Tina's Assault on Dragon Keep: A Wonderlands One-shot Adventure",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1712840/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 475150,
+    "title": "Titan Quest Anniversary Edition",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/475150/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 297130,
+    "title": "Titan Souls",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/297130/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1237970,
+    "title": "Titanfall\u00ae 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1237970/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1454890,
+    "title": "Titanfall\u2122",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1454890/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 203160,
+    "title": "Tomb Raider",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/203160/9e67774e97cdd155f287146e62611eb445514ac6/header.jpg",
+    "playtimeMinutes": 111,
+    "lastPlayed": 1705422176,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 364360,
+    "title": "Total War: WARHAMMER",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/364360/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 594570,
+    "title": "Total War: WARHAMMER II",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/594570/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1142710,
+    "title": "Total War: WARHAMMER III",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1142710/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 362960,
+    "title": "Tyranny",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/362960/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 321270,
+    "title": "UNLOVED",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/321270/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1225560,
+    "title": "Unravel",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1225560/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 1225570,
+    "title": "Unravel Two",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1225570/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 211160,
+    "title": "Viking: Battle for Asgard",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/211160/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 1021770,
+    "title": "Wanba Warriors",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1021770/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 56400,
+    "title": "Warhammer 40,000: Dawn of War II - Retribution",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/56400/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": false
+  },
+  {
+    "appId": 489630,
+    "title": "Warhammer 40,000: Gladius - Relics of War",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/489630/3222d08a9992bd35d64d51cb308270af3c276428/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 2186680,
+    "title": "Warhammer 40,000: Rogue Trader",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2186680/c7b0bd6f233f6c03fa68eee2fd1108a183329230/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 552500,
+    "title": "Warhammer: Vermintide 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/552500/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 331710,
+    "title": "Why So Evil",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/331710/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 354850,
+    "title": "Why So Evil 2: Dystopia",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/354850/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 217200,
+    "title": "Worms Armageddon",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/217200/header.jpg",
+    "playtimeMinutes": 218,
+    "lastPlayed": 1735234244,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 327030,
+    "title": "Worms W.M.D",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/327030/3c9070049ed6dd542d327727093a74a413e733c8/header.jpg",
+    "playtimeMinutes": 23,
+    "lastPlayed": 1735148134,
+    "hasLocalArt": true
+  },
+  {
+    "appId": 268500,
+    "title": "XCOM 2",
+    "type": "game",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/268500/header.jpg",
+    "playtimeMinutes": 0,
+    "lastPlayed": 0,
+    "hasLocalArt": true
+  }
+]
