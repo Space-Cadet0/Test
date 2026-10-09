@@ -55,7 +55,7 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
 
     async function loadData() {
       setIsLoading(true);
-      let targetAppId = game.steamAppId || currentSteamAppId;
+      let targetAppId = game.steamAppId;
 
       // If no Steam App ID is set, intelligently search Steam Store for match
       if (!targetAppId) {
@@ -87,12 +87,17 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
       // If matched to Steam, fetch full official Steam Store metadata & media
       if (targetAppId) {
         const liveData = await steamApi.fetchGameMetadata(targetAppId);
-        if (isMounted && liveData) {
-          setMetadata(liveData);
-          setIsNonSteamExclusive(false);
+        if (isMounted) {
+          if (liveData) {
+            setMetadata(liveData);
+            setIsNonSteamExclusive(false);
+          } else {
+            const fallbackData = await fallbackMetadataProvider.getEnrichedMetadataForNonSteamGame(game);
+            if (isMounted) setMetadata(fallbackData);
+          }
         }
       } else {
-        // Game does not exist on Steam (e.g. Alan Wake 2, SWAT 4, store exclusive)
+        // Game does not exist on Steam (e.g. Total Annihilation: Kingdoms, Alan Wake 2, store exclusive)
         if (isMounted) setIsNonSteamExclusive(true);
         const fallbackData = await fallbackMetadataProvider.getEnrichedMetadataForNonSteamGame(game);
         if (isMounted && fallbackData) {
@@ -105,6 +110,7 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
 
     setMetadata(game.enrichedMetadata || null);
     setCurrentSteamAppId(game.steamAppId);
+    setIsNonSteamExclusive(!game.steamAppId);
     loadData();
 
     return () => {
@@ -190,6 +196,21 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs text-steam-subtext hover:text-steam-accent bg-steam-card border border-steam-border rounded transition-colors"
               >
                 <span>View on Steam</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            ) : game.platforms.some((p) => p.platformId === 'gog') ? (
+              <a
+                href={
+                  game.platforms.find((p) => p.platformId === 'gog')?.platformGameId
+                    ? `https://www.gog.com/en/game/${game.title.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '')}`
+                    : 'https://www.gog.com'
+                }
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs text-purple-300 hover:text-white bg-purple-950/40 border border-purple-800/60 rounded transition-colors"
+                title="View on GOG.com storefront"
+              >
+                <span>View on GOG.com</span>
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
             ) : (

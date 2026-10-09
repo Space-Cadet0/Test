@@ -486,6 +486,7 @@ export function App() {
             />
           ) : (
             <SteamStorePage
+              key={selectedGame.id}
               game={selectedGame}
               parentGroupName={
                 activeFilter

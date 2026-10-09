@@ -3,6 +3,13 @@ import { CanonicalGame } from '../../contracts/game';
 import { SteamEnrichedMetadata, SteamScreenshot, SteamMovie, SteamReviewSummary } from '../../contracts/steam';
 import { getOpenCriticData } from '../opencritic/openCritic';
 
+function ensureHttps(url?: string): string {
+  if (!url) return '';
+  const trimmed = url.trim();
+  if (trimmed.startsWith('//')) return 'https:' + trimmed;
+  return trimmed;
+}
+
 export class FallbackMetadataProvider {
   private getGogBaseUrl(): string {
     if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
@@ -38,24 +45,28 @@ export class FallbackMetadataProvider {
 
         return {
           id: idx,
-          pathThumbnail: thumbImg,
-          pathFull: fullImg,
+          pathThumbnail: ensureHttps(thumbImg),
+          pathFull: ensureHttps(fullImg),
         };
       });
 
       const movies: SteamMovie[] = (data.videos || []).map((v: any, idx: number) => ({
         id: idx,
         name: `Trailer ${idx + 1}`,
-        thumbnail: v.thumbnail_url || '',
+        thumbnail: ensureHttps(v.thumbnail_url || ''),
         webm: { 480: '', max: '' },
-        mp4: { 480: v.video_url || '', max: v.video_url || '' },
+        mp4: { 480: ensureHttps(v.video_url || ''), max: ensureHttps(v.video_url || '') },
       }));
 
+      const headerImage = ensureHttps(
+        data.images?.background || data.images?.logo2x || data.images?.icon || ''
+      );
+
       return {
-        aboutTheGame: data.description?.full || '',
-        detailedDescription: data.description?.full || '',
+        aboutTheGame: data.description?.full || data.description?.lead || '',
+        detailedDescription: data.description?.full || data.description?.lead || '',
         shortDescription: data.description?.lead || '',
-        headerImage: data.images?.background || data.images?.logo2x || '',
+        headerImage,
         screenshots,
         movies,
         releaseDate: data.release_date ? data.release_date.substring(0, 10) : 'TBA',
@@ -156,8 +167,8 @@ export class FallbackMetadataProvider {
       shortDescription: storeMetadata?.shortDescription || game.shortDescription || 'DRM-Free / Store Exclusive Title',
       detailedDescription: storeMetadata?.detailedDescription || storeMetadata?.aboutTheGame || game.shortDescription || '',
       aboutTheGame: storeMetadata?.aboutTheGame || storeMetadata?.detailedDescription || game.shortDescription || '',
-      headerImage: storeMetadata?.headerImage || game.headerImage,
-      capsuleImage: game.capsuleImage || storeMetadata?.headerImage,
+      headerImage: ensureHttps(storeMetadata?.headerImage || game.headerImage),
+      capsuleImage: ensureHttps(game.capsuleImage || storeMetadata?.headerImage || game.headerImage),
       developers: game.developers || [],
       publishers: game.publishers || [],
       releaseDate: storeMetadata?.releaseDate || game.releaseDate || 'TBA',
@@ -170,7 +181,12 @@ export class FallbackMetadataProvider {
           icon: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_singlePlayer.png',
         },
       ],
-      screenshots: storeMetadata?.screenshots || [],
+      screenshots:
+        storeMetadata?.screenshots && storeMetadata.screenshots.length > 0
+          ? storeMetadata.screenshots
+          : game.headerImage
+          ? [{ id: 0, pathThumbnail: ensureHttps(game.headerImage), pathFull: ensureHttps(game.headerImage) }]
+          : [],
       movies: storeMetadata?.movies || [],
       systemRequirements: storeMetadata?.systemRequirements || {},
       reviewSummary,

@@ -191,6 +191,10 @@ export const MediaGallery: React.FC<MediaGalleryProps> = ({
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const thumbStripRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    setActiveIndex(0);
+  }, [screenshots, movies]);
+
   const activeItem = items[activeIndex] || (items.length > 0 ? items[0] : null);
 
   const selectItem = (index: number) => {
