@@ -76,6 +76,7 @@ function localSystemScannerPlugin(): Plugin {
 }
 
 export default defineConfig({
+  base: './',
   plugins: [react(), localSystemScannerPlugin()],
   server: {
     port: 3000,

@@ -19,16 +19,26 @@ function createMainWindow() {
       nodeIntegration: false,
       contextIsolation: true,
       sandbox: false,
+      webSecurity: false, // Allows cross-origin store APIs in native app without browser CORS blocking
     },
   });
 
-  const devUrl = 'http://localhost:3000';
-  mainWindow.loadURL(devUrl).catch(() => {
-    // If dev server isn't ready immediately, retry after 1s
-    setTimeout(() => {
-      mainWindow.loadURL(devUrl);
-    }, 1000);
-  });
+  const distHtml = path.join(__dirname, '../dist/index.html');
+  if (app.isPackaged || process.env.NODE_ENV === 'production' || !process.env.ELECTRON_START_URL) {
+    if (fs.existsSync(distHtml)) {
+      mainWindow.loadFile(distHtml);
+    } else {
+      mainWindow.loadURL('http://localhost:3000').catch(() => {
+        setTimeout(() => mainWindow.loadURL('http://localhost:3000'), 1000);
+      });
+    }
+  } else {
+    mainWindow.loadURL('http://localhost:3000').catch(() => {
+      if (fs.existsSync(distHtml)) {
+        mainWindow.loadFile(distHtml);
+      }
+    });
+  }
 
   mainWindow.on('closed', () => {
     mainWindow = null;
