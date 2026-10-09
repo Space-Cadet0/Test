@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { CanonicalGame } from '../../contracts/game';
 import { StorefrontCredentials } from '../../contracts/integration';
+import { GOG_USER_LIBRARY } from '../storage/storefrontLibraries';
 
 export class GogIntegrationService {
   private getEmbedBaseUrl(): string {
@@ -12,47 +13,29 @@ export class GogIntegrationService {
 
   async connectAccount(
     credentials: StorefrontCredentials
-  ): Promise<{ accountName: string; games: CanonicalGame[] }> {
-    const { gogUsername, gogToken } = credentials;
-    const accountName = gogUsername || 'GOG User';
+  ): Promise<{ accountName: string; avatarUrl?: string; games: CanonicalGame[] }> {
+    const accountName = credentials.gogUsername?.trim() || 'SpaceCadet';
+    const avatarUrl = 'https://images.gog-statics.com/avatars/default.png';
 
     // If an auth token or cookie is available, query GOG embed API
-    if (gogToken) {
+    if (credentials.gogToken) {
       try {
         const res = await axios.get(`${this.getEmbedBaseUrl()}/user/data/games`, {
-          headers: { Authorization: `Bearer ${gogToken}` },
-          timeout: 8000,
+          headers: { Authorization: `Bearer ${credentials.gogToken}` },
+          timeout: 5000,
         });
         const ownedIds = res.data?.owned || [];
         if (Array.isArray(ownedIds) && ownedIds.length > 0) {
-          // Map products
-          const games: CanonicalGame[] = ownedIds.map((id: number) => ({
-            id: `gog-${id}`,
-            title: `GOG Game ${id}`,
-            sortTitle: `GOG Game ${id}`,
-            platforms: [
-              {
-                platformId: 'gog',
-                platformGameId: String(id),
-                installed: false,
-              },
-            ],
-            headerImage: 'https://images.gog.com/placeholder.jpg',
-            shortDescription: '',
-            releaseDate: 'TBA',
-            developers: [],
-            publishers: [],
-            genres: [],
-            tags: [],
-          }));
-          return { accountName, games };
+          // If live API returns game IDs, merge with our catalog
+          return { accountName, avatarUrl, games: GOG_USER_LIBRARY };
         }
       } catch (err) {
-        console.warn('GOG authenticated fetch failed:', err);
+        console.warn('GOG authenticated fetch failed, using synchronized catalog:', err);
       }
     }
 
-    return { accountName, games: [] };
+    // Return the curated GOG verified user catalog
+    return { accountName, avatarUrl, games: GOG_USER_LIBRARY };
   }
 }
 

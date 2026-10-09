@@ -3,9 +3,14 @@ import { StorefrontIntegration, StorefrontCredentials } from '../../contracts/in
 import { CanonicalGame } from '../../contracts/game';
 import { FULL_USER_STEAM_GAMES } from '../storage/fullUserSteamGames';
 import { steamIntegration } from './steamIntegration';
+import { gogIntegration } from './gogIntegration';
+import { epicIntegration } from './epicIntegration';
+import { xboxIntegration } from './xboxIntegration';
+import { mergeScannedSteamGames } from '../storage/librarySync';
 
 const STORAGE_KEY_INTEGRATIONS = 'antigravity_storefront_integrations';
 const STORAGE_KEY_CUSTOM_GAMES = 'antigravity_synced_user_games';
+const STORAGE_KEY_MAIN_CATALOG = 'universal_game_library_catalog';
 
 export const DEFAULT_INTEGRATIONS: StorefrontIntegration[] = [
   {
@@ -73,34 +78,98 @@ export function saveIntegrations(integrations: StorefrontIntegration[]): void {
   }
 }
 
-export function loadCustomSyncedGames(): CanonicalGame[] {
-  if (typeof window === 'undefined') return [];
+export function loadCurrentCatalog(): CanonicalGame[] {
+  if (typeof window === 'undefined') return mergeScannedSteamGames([]);
   try {
-    const raw = localStorage.getItem(STORAGE_KEY_CUSTOM_GAMES);
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
+    const raw = localStorage.getItem(STORAGE_KEY_MAIN_CATALOG);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed;
+      }
+    }
   } catch {
-    return [];
+    // Ignore read errors
+  }
+  return mergeScannedSteamGames([]);
+}
+
+export function saveCurrentCatalog(games: CanonicalGame[]): void {
+  if (typeof window === 'undefined') return;
+  try {
+    localStorage.setItem(STORAGE_KEY_MAIN_CATALOG, JSON.stringify(games));
+    localStorage.setItem(STORAGE_KEY_CUSTOM_GAMES, JSON.stringify(games));
+  } catch (err) {
+    console.error('Failed to save universal catalog', err);
   }
 }
 
-export function saveCustomSyncedGames(games: CanonicalGame[]): void {
-  if (typeof window === 'undefined') return;
-  try {
-    localStorage.setItem(STORAGE_KEY_CUSTOM_GAMES, JSON.stringify(games));
-  } catch (err) {
-    console.error('Failed to save custom synced games', err);
+export function mergeStorefrontGames(
+  currentCatalog: CanonicalGame[],
+  newGames: CanonicalGame[],
+  storefrontId: StorefrontId
+): CanonicalGame[] {
+  const merged = [...currentCatalog];
+
+  for (const newGame of newGames) {
+    const existingIndex = merged.findIndex(
+      (g) =>
+        (g.steamAppId && newGame.steamAppId && g.steamAppId === newGame.steamAppId) ||
+        g.title.toLowerCase().trim() === newGame.title.toLowerCase().trim()
+    );
+
+    const platformOwnership = newGame.platforms.find((p) => p.platformId === storefrontId) || {
+      platformId: storefrontId,
+      platformGameId: newGame.id,
+      installed: false,
+    };
+
+    if (existingIndex >= 0) {
+      const existing = merged[existingIndex];
+      const hasPlatform = existing.platforms.some((p) => p.platformId === storefrontId);
+      if (!hasPlatform) {
+        merged[existingIndex] = {
+          ...existing,
+          platforms: [...existing.platforms, platformOwnership],
+        };
+      }
+    } else {
+      merged.push({
+        ...newGame,
+        platforms: [platformOwnership],
+      });
+    }
   }
+
+  return merged.sort((a, b) => a.title.localeCompare(b.title, undefined, { sensitivity: 'base' }));
+}
+
+export function removeStorefrontGames(
+  currentCatalog: CanonicalGame[],
+  storefrontId: StorefrontId
+): CanonicalGame[] {
+  const remaining: CanonicalGame[] = [];
+
+  for (const game of currentCatalog) {
+    const updatedPlatforms = game.platforms.filter((p) => p.platformId !== storefrontId);
+    if (updatedPlatforms.length > 0) {
+      remaining.push({
+        ...game,
+        platforms: updatedPlatforms,
+      });
+    }
+  }
+
+  return remaining.sort((a, b) => a.title.localeCompare(b.title, undefined, { sensitivity: 'base' }));
 }
 
 /**
- * Connect a Steam account via Web API / ID / Profile URL without requiring any installed Steam client
+ * Connect Steam account via Web API / ID / Profile URL without requiring any installed Steam client
  */
 export async function connectSteamIntegration(
   credentials: StorefrontCredentials
 ): Promise<{ integration: StorefrontIntegration; games: CanonicalGame[] }> {
-  const { profile, games } = await steamIntegration.fetchOwnedGames(credentials);
+  const { profile, games: steamGames } = await steamIntegration.fetchOwnedGames(credentials);
 
   const integration: StorefrontIntegration = {
     storefrontId: 'steam',
@@ -109,26 +178,130 @@ export async function connectSteamIntegration(
     accountName: profile.personaName,
     accountId: profile.steamId,
     avatarUrl: profile.avatarUrl,
-    gamesCount: games.length,
+    gamesCount: steamGames.length,
     lastSyncedAt: new Date().toISOString(),
     authMethod: credentials.apiKey ? 'web_api' : 'public_profile',
     credentials,
-    statusMessage: `Connected as ${profile.personaName} (${games.length} games synced)`,
+    statusMessage: `Connected as ${profile.personaName} (${steamGames.length} games synced)`,
   };
+
+  const current = loadCurrentCatalog();
+  const merged = mergeStorefrontGames(current, steamGames, 'steam');
 
   const integrations = loadIntegrations().map((i) =>
     i.storefrontId === 'steam' ? integration : i
   );
   saveIntegrations(integrations);
-  saveCustomSyncedGames(games);
+  saveCurrentCatalog(merged);
 
-  return { integration, games };
+  return { integration, games: merged };
 }
 
 /**
- * Disconnect an integration
+ * Connect GOG account via OAuth / Token / Username
  */
-export function disconnectIntegration(storefrontId: StorefrontId): StorefrontIntegration[] {
+export async function connectGogIntegration(
+  credentials: StorefrontCredentials
+): Promise<{ integration: StorefrontIntegration; games: CanonicalGame[] }> {
+  const { accountName, avatarUrl, games: gogGames } = await gogIntegration.connectAccount(credentials);
+
+  const integration: StorefrontIntegration = {
+    storefrontId: 'gog',
+    name: 'GOG.com',
+    isConnected: true,
+    accountName,
+    avatarUrl,
+    gamesCount: gogGames.length,
+    lastSyncedAt: new Date().toISOString(),
+    authMethod: credentials.gogToken ? 'oauth' : 'public_profile',
+    credentials,
+    statusMessage: `Connected as ${accountName} (${gogGames.length} GOG titles synced)`,
+  };
+
+  const current = loadCurrentCatalog();
+  const merged = mergeStorefrontGames(current, gogGames, 'gog');
+
+  const integrations = loadIntegrations().map((i) =>
+    i.storefrontId === 'gog' ? integration : i
+  );
+  saveIntegrations(integrations);
+  saveCurrentCatalog(merged);
+
+  return { integration, games: merged };
+}
+
+/**
+ * Connect Epic Games Store account
+ */
+export async function connectEpicIntegration(
+  credentials: StorefrontCredentials
+): Promise<{ integration: StorefrontIntegration; games: CanonicalGame[] }> {
+  const { accountName, avatarUrl, games: epicGames } = await epicIntegration.connectAccount(credentials);
+
+  const integration: StorefrontIntegration = {
+    storefrontId: 'epic',
+    name: 'Epic Games Store',
+    isConnected: true,
+    accountName,
+    avatarUrl,
+    gamesCount: epicGames.length,
+    lastSyncedAt: new Date().toISOString(),
+    authMethod: credentials.epicToken ? 'oauth' : 'public_profile',
+    credentials,
+    statusMessage: `Connected as ${accountName} (${epicGames.length} Epic titles synced)`,
+  };
+
+  const current = loadCurrentCatalog();
+  const merged = mergeStorefrontGames(current, epicGames, 'epic');
+
+  const integrations = loadIntegrations().map((i) =>
+    i.storefrontId === 'epic' ? integration : i
+  );
+  saveIntegrations(integrations);
+  saveCurrentCatalog(merged);
+
+  return { integration, games: merged };
+}
+
+/**
+ * Connect Xbox / Microsoft Store account
+ */
+export async function connectXboxIntegration(
+  credentials: StorefrontCredentials
+): Promise<{ integration: StorefrontIntegration; games: CanonicalGame[] }> {
+  const { accountName, avatarUrl, games: xboxGames } = await xboxIntegration.connectAccount(credentials);
+
+  const integration: StorefrontIntegration = {
+    storefrontId: 'xbox',
+    name: 'Xbox',
+    isConnected: true,
+    accountName,
+    avatarUrl,
+    gamesCount: xboxGames.length,
+    lastSyncedAt: new Date().toISOString(),
+    authMethod: 'web_api',
+    credentials,
+    statusMessage: `Connected as ${accountName} (${xboxGames.length} Xbox titles synced)`,
+  };
+
+  const current = loadCurrentCatalog();
+  const merged = mergeStorefrontGames(current, xboxGames, 'xbox');
+
+  const integrations = loadIntegrations().map((i) =>
+    i.storefrontId === 'xbox' ? integration : i
+  );
+  saveIntegrations(integrations);
+  saveCurrentCatalog(merged);
+
+  return { integration, games: merged };
+}
+
+/**
+ * Disconnect an integration and remove its platform presence from the library
+ */
+export function disconnectIntegration(
+  storefrontId: StorefrontId
+): { integrations: StorefrontIntegration[]; games: CanonicalGame[] } {
   const integrations = loadIntegrations().map((i) => {
     if (i.storefrontId === storefrontId) {
       return {
@@ -146,6 +319,11 @@ export function disconnectIntegration(storefrontId: StorefrontId): StorefrontInt
     return i;
   });
 
+  const current = loadCurrentCatalog();
+  const updatedGames = removeStorefrontGames(current, storefrontId);
+
   saveIntegrations(integrations);
-  return integrations;
+  saveCurrentCatalog(updatedGames);
+
+  return { integrations, games: updatedGames };
 }

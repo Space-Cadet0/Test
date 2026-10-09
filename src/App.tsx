@@ -541,6 +541,7 @@ export function App() {
         onClose={() => setIsIntegrationsModalOpen(false)}
         onLibraryUpdated={(newGames) => {
           setGames(newGames);
+          localStorage.setItem('universal_game_library_catalog', JSON.stringify(newGames));
           if (newGames.length > 0 && (!selectedGame || !newGames.some((g) => g.id === selectedGame.id))) {
             setSelectedGame(newGames[0]);
           }

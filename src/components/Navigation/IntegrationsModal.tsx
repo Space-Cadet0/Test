@@ -3,7 +3,6 @@ import {
   X,
   CheckCircle2,
   AlertCircle,
-  ExternalLink,
   RefreshCw,
   Unlink,
   Key,
@@ -18,6 +17,9 @@ import { StorefrontIntegration } from '../../contracts/integration';
 import {
   loadIntegrations,
   connectSteamIntegration,
+  connectGogIntegration,
+  connectEpicIntegration,
+  connectXboxIntegration,
   disconnectIntegration,
 } from '../../services/integrations/integrationStorage';
 import { CanonicalGame } from '../../contracts/game';
@@ -41,6 +43,18 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
   // Steam Form State
   const [steamInput, setSteamInput] = useState('76561198244849198');
   const [steamApiKey, setSteamApiKey] = useState('');
+
+  // GOG Form State
+  const [gogInput, setGogInput] = useState('SpaceCadet');
+  const [gogToken, setGogToken] = useState('');
+
+  // Epic Form State
+  const [epicInput, setEpicInput] = useState('SpaceCadet (Epic)');
+  const [epicToken, setEpicToken] = useState('');
+
+  // Xbox Form State
+  const [xboxInput, setXboxInput] = useState('SpaceCadet85');
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
@@ -101,10 +115,136 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
     }
   };
 
+  const handleConnectGog = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    setErrorMsg(null);
+    setSuccessMsg(null);
+    setIsSubmitting(true);
+
+    try {
+      const { integration, games } = await connectGogIntegration({
+        gogUsername: gogInput.trim() || 'SpaceCadet',
+        gogToken: gogToken.trim() || undefined,
+      });
+
+      setIntegrations(loadIntegrations());
+      setSuccessMsg(`Successfully connected to GOG! ${integration.gamesCount} titles synced.`);
+      onLibraryUpdated(games);
+    } catch (err: any) {
+      setErrorMsg(err?.message || 'Failed to connect to GOG.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleQuickConnectGog = async () => {
+    setGogInput('SpaceCadet');
+    setErrorMsg(null);
+    setSuccessMsg(null);
+    setIsSubmitting(true);
+
+    try {
+      const { integration, games } = await connectGogIntegration({
+        gogUsername: 'SpaceCadet',
+      });
+      setIntegrations(loadIntegrations());
+      setSuccessMsg(`Connected as ${integration.accountName}! ${integration.gamesCount} GOG titles synced.`);
+      onLibraryUpdated(games);
+    } catch (err: any) {
+      setErrorMsg(err?.message || 'Failed to connect to GOG.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleConnectEpic = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    setErrorMsg(null);
+    setSuccessMsg(null);
+    setIsSubmitting(true);
+
+    try {
+      const { integration, games } = await connectEpicIntegration({
+        epicAccountId: epicInput.trim() || 'SpaceCadet (Epic)',
+        epicToken: epicToken.trim() || undefined,
+      });
+
+      setIntegrations(loadIntegrations());
+      setSuccessMsg(`Successfully connected to Epic Games! ${integration.gamesCount} titles synced.`);
+      onLibraryUpdated(games);
+    } catch (err: any) {
+      setErrorMsg(err?.message || 'Failed to connect to Epic Games.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleQuickConnectEpic = async () => {
+    setEpicInput('SpaceCadet (Epic)');
+    setErrorMsg(null);
+    setSuccessMsg(null);
+    setIsSubmitting(true);
+
+    try {
+      const { integration, games } = await connectEpicIntegration({
+        epicAccountId: 'SpaceCadet (Epic)',
+      });
+      setIntegrations(loadIntegrations());
+      setSuccessMsg(`Connected as ${integration.accountName}! ${integration.gamesCount} Epic titles synced.`);
+      onLibraryUpdated(games);
+    } catch (err: any) {
+      setErrorMsg(err?.message || 'Failed to connect to Epic Games.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleConnectXbox = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    setErrorMsg(null);
+    setSuccessMsg(null);
+    setIsSubmitting(true);
+
+    try {
+      const { integration, games } = await connectXboxIntegration({
+        webToken: xboxInput.trim() || 'SpaceCadet85',
+      });
+
+      setIntegrations(loadIntegrations());
+      setSuccessMsg(`Successfully connected to Xbox! ${integration.gamesCount} titles synced.`);
+      onLibraryUpdated(games);
+    } catch (err: any) {
+      setErrorMsg(err?.message || 'Failed to connect to Xbox.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleQuickConnectXbox = async () => {
+    setXboxInput('SpaceCadet85');
+    setErrorMsg(null);
+    setSuccessMsg(null);
+    setIsSubmitting(true);
+
+    try {
+      const { integration, games } = await connectXboxIntegration({
+        webToken: 'SpaceCadet85',
+      });
+      setIntegrations(loadIntegrations());
+      setSuccessMsg(`Connected as ${integration.accountName}! ${integration.gamesCount} Xbox titles synced.`);
+      onLibraryUpdated(games);
+    } catch (err: any) {
+      setErrorMsg(err?.message || 'Failed to connect to Xbox.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const handleDisconnect = (storefrontId: StorefrontId) => {
-    const updated = disconnectIntegration(storefrontId);
+    const { integrations: updated, games: remaining } = disconnectIntegration(storefrontId);
     setIntegrations(updated);
     setSuccessMsg(`Disconnected ${storefrontId.toUpperCase()} integration.`);
+    onLibraryUpdated(remaining);
   };
 
   return (
@@ -248,56 +388,47 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
                     <Cloud className="w-5 h-5 text-sky-400 flex-shrink-0 mt-0.5" />
                     <div>
                       <strong className="text-white block mb-1">
-                        Direct Steam Cloud Web Sync
+                        Zero-Client Web Synchronization
                       </strong>
-                      You do not need to install the Steam client. Enter your 64-bit Steam ID or
-                      Profile URL to sync your library directly via Steam's public cloud services.
+                      You don't need Steam installed on this computer. Enter your public Steam ID or
+                      Profile URL to query your owned games and play statistics directly from the
+                      Steam Cloud.
                     </div>
                   </div>
 
                   <form onSubmit={handleConnectSteam} className="space-y-4">
                     <div>
-                      <label className="block text-xs font-semibold text-steam-text mb-1.5">
-                        Steam ID, Profile URL, or Custom Username
+                      <label className="block text-xs font-semibold text-white mb-1.5">
+                        Steam ID or Custom Profile URL
                       </label>
                       <div className="relative">
                         <input
                           type="text"
                           value={steamInput}
                           onChange={(e) => setSteamInput(e.target.value)}
-                          placeholder="e.g. 76561198244849198 or mikestokes85"
-                          className="w-full bg-[#101822] border border-steam-border rounded px-3.5 py-2.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-steam-accent transition-colors"
+                          placeholder="e.g. 76561198244849198 or https://steamcommunity.com/id/spacecadet"
+                          className="w-full px-3 py-2 bg-[#121922] border border-steam-border rounded text-sm text-white placeholder-steam-subtext/60 focus:outline-none focus:border-steam-accent pr-10 font-mono text-xs"
                         />
-                        <Globe className="w-4 h-4 text-steam-subtext absolute right-3 top-3 pointer-events-none" />
+                        <Globe className="w-4 h-4 text-steam-subtext absolute right-3 top-2.5 pointer-events-none" />
                       </div>
-                      <p className="text-[11px] text-steam-subtext mt-1">
-                        Find your 17-digit Steam ID in Steam Community or your profile URL.
-                      </p>
                     </div>
 
                     <div>
                       <div className="flex items-center justify-between mb-1.5">
-                        <label className="text-xs font-semibold text-steam-text">
-                          Steam Web API Key (Optional for public profiles, required for private)
+                        <label className="text-xs font-semibold text-white">
+                          Steam Web API Key{' '}
+                          <span className="text-steam-subtext font-normal">(Optional)</span>
                         </label>
-                        <a
-                          href="https://steamcommunity.com/dev/apikey"
-                          target="_blank"
-                          rel="noreferrer"
-                          className="text-[11px] text-steam-accent hover:underline flex items-center gap-1"
-                        >
-                          Get API Key <ExternalLink className="w-2.5 h-2.5" />
-                        </a>
                       </div>
                       <div className="relative">
                         <input
                           type="password"
                           value={steamApiKey}
                           onChange={(e) => setSteamApiKey(e.target.value)}
-                          placeholder="32-character hexadecimal key (optional)"
-                          className="w-full bg-[#101822] border border-steam-border rounded px-3.5 py-2.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-steam-accent transition-colors font-mono"
+                          placeholder="Recommended for private libraries"
+                          className="w-full px-3 py-2 bg-[#121922] border border-steam-border rounded text-sm text-white placeholder-steam-subtext/60 focus:outline-none focus:border-steam-accent pr-10 font-mono text-xs"
                         />
-                        <Key className="w-4 h-4 text-steam-subtext absolute right-3 top-3 pointer-events-none" />
+                        <Key className="w-4 h-4 text-steam-subtext absolute right-3 top-2.5 pointer-events-none" />
                       </div>
                     </div>
 
@@ -332,46 +463,132 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
 
           {/* GOG TAB */}
           {selectedTab === 'gog' && (
-            <div className="space-y-5">
+            <div className="space-y-6">
               <div className="p-4 bg-purple-950/20 border border-purple-800/40 rounded-lg text-xs text-purple-200/90 leading-relaxed flex items-start gap-3">
                 <Cloud className="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" />
                 <div>
                   <strong className="text-white block mb-1">GOG.com Cloud Integration</strong>
                   Connect your GOG games without needing GOG Galaxy installed. We sync your owned
-                  licenses through GOG's cloud web API.
+                  licenses and classic titles directly through GOG's cloud web API.
                 </div>
               </div>
 
-              <div className="bg-[#16202d] border border-steam-border rounded-lg p-5 space-y-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-sm font-bold text-white">GOG Account Web Connect</h3>
-                    <p className="text-xs text-steam-subtext mt-0.5">
-                      Sync games, cloud saves, and playtimes directly from GOG.
-                    </p>
+              {currentIntegration.isConnected ? (
+                /* Connected State Card */
+                <div className="bg-[#16202d] border border-purple-500/30 rounded-lg p-5 space-y-4">
+                  <div className="flex items-center justify-between pb-4 border-b border-steam-border/40">
+                    <div className="flex items-center gap-4">
+                      <div className="w-14 h-14 rounded bg-purple-900/60 border border-purple-500/40 flex items-center justify-center text-purple-300 font-bold text-xl shadow-md">
+                        GOG
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <h3 className="text-base font-bold text-white">
+                            {currentIntegration.accountName || 'SpaceCadet'}
+                          </h3>
+                          <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
+                            <ShieldCheck className="w-3 h-3" /> Connected
+                          </span>
+                        </div>
+                        <p className="text-xs text-purple-300 font-medium mt-1 flex items-center gap-1.5">
+                          <Gamepad2 className="w-3.5 h-3.5" />
+                          {currentIntegration.gamesCount} GOG Titles Cataloged
+                        </p>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => handleDisconnect('gog')}
+                      className="px-3 py-1.5 rounded bg-red-950/40 hover:bg-red-900/60 border border-red-700/50 text-red-300 text-xs font-semibold transition-colors flex items-center gap-1.5"
+                    >
+                      <Unlink className="w-3.5 h-3.5" />
+                      Disconnect
+                    </button>
                   </div>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-gray-800 text-gray-400 border border-gray-700">
-                    Not Connected
-                  </span>
-                </div>
 
-                <div className="pt-2">
-                  <button
-                    onClick={() => {
-                      setSuccessMsg('GOG account connect placeholder. Ready for OAuth token.');
-                    }}
-                    className="px-4 py-2 rounded bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold transition-all shadow-md"
-                  >
-                    Connect GOG Account
-                  </button>
+                  <div className="flex items-center justify-between pt-1">
+                    <div className="text-[11px] text-steam-subtext">
+                      Sync Method:{' '}
+                      <span className="text-white font-medium">GOG Cloud Web API</span> (No Galaxy client required)
+                    </div>
+                    <button
+                      onClick={() => handleConnectGog()}
+                      disabled={isSubmitting}
+                      className="px-3 py-1.5 rounded bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold transition-all flex items-center gap-1.5 shadow-md disabled:opacity-50"
+                    >
+                      <RefreshCw className={`w-3.5 h-3.5 ${isSubmitting ? 'animate-spin' : ''}`} />
+                      {isSubmitting ? 'Syncing...' : 'Sync GOG Library'}
+                    </button>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                /* Connection Form */
+                <form onSubmit={handleConnectGog} className="bg-[#16202d] border border-steam-border rounded-lg p-5 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="text-sm font-bold text-white">GOG Account Web Connect</h3>
+                      <p className="text-xs text-steam-subtext mt-0.5">
+                        Sync games and licenses directly from GOG without desktop launcher.
+                      </p>
+                    </div>
+                    <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-gray-800 text-gray-400 border border-gray-700">
+                      Not Connected
+                    </span>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-white mb-1.5">
+                      GOG Username or Profile ID
+                    </label>
+                    <input
+                      type="text"
+                      value={gogInput}
+                      onChange={(e) => setGogInput(e.target.value)}
+                      placeholder="e.g. SpaceCadet or your GOG username"
+                      className="w-full px-3 py-2 bg-[#121922] border border-steam-border rounded text-sm text-white placeholder-steam-subtext/60 focus:outline-none focus:border-purple-500 font-mono text-xs"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-white mb-1.5">
+                      GOG OAuth Access Token <span className="text-steam-subtext font-normal">(Optional for private libraries)</span>
+                    </label>
+                    <input
+                      type="password"
+                      value={gogToken}
+                      onChange={(e) => setGogToken(e.target.value)}
+                      placeholder="Optional GOG bearer token"
+                      className="w-full px-3 py-2 bg-[#121922] border border-steam-border rounded text-sm text-white placeholder-steam-subtext/60 focus:outline-none focus:border-purple-500 font-mono text-xs"
+                    />
+                  </div>
+
+                  <div className="pt-2 flex items-center justify-between gap-3">
+                    <button
+                      type="button"
+                      onClick={handleQuickConnectGog}
+                      className="px-3.5 py-2 rounded bg-purple-950/40 hover:bg-purple-900/60 border border-purple-700/50 text-purple-200 text-xs font-medium transition-colors flex items-center gap-1.5"
+                    >
+                      <Sparkles className="w-3.5 h-3.5 text-purple-400" />
+                      Quick Connect SpaceCadet (GOG)
+                    </button>
+
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="px-5 py-2 rounded bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold transition-all shadow-md disabled:opacity-50 flex items-center gap-2"
+                    >
+                      {isSubmitting ? <RefreshCw className="w-4 h-4 animate-spin" /> : <ShieldCheck className="w-4 h-4" />}
+                      {isSubmitting ? 'Connecting...' : 'Connect GOG Account'}
+                    </button>
+                  </div>
+                </form>
+              )}
             </div>
           )}
 
           {/* EPIC TAB */}
           {selectedTab === 'epic' && (
-            <div className="space-y-5">
+            <div className="space-y-6">
               <div className="p-4 bg-zinc-900 border border-zinc-700/50 rounded-lg text-xs text-zinc-300 leading-relaxed flex items-start gap-3">
                 <Cloud className="w-5 h-5 text-zinc-400 flex-shrink-0 mt-0.5" />
                 <div>
@@ -381,69 +598,228 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
                 </div>
               </div>
 
-              <div className="bg-[#16202d] border border-steam-border rounded-lg p-5 space-y-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-sm font-bold text-white">Epic Games Account Connect</h3>
-                    <p className="text-xs text-steam-subtext mt-0.5">
-                      Sync owned titles and weekly free game entitlements.
-                    </p>
-                  </div>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-gray-800 text-gray-400 border border-gray-700">
-                    Not Connected
-                  </span>
-                </div>
+              {currentIntegration.isConnected ? (
+                /* Connected State Card */
+                <div className="bg-[#16202d] border border-blue-500/30 rounded-lg p-5 space-y-4">
+                  <div className="flex items-center justify-between pb-4 border-b border-steam-border/40">
+                    <div className="flex items-center gap-4">
+                      <div className="w-14 h-14 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center text-white font-bold text-xl shadow-md">
+                        EPIC
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <h3 className="text-base font-bold text-white">
+                            {currentIntegration.accountName || 'SpaceCadet (Epic)'}
+                          </h3>
+                          <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
+                            <ShieldCheck className="w-3 h-3" /> Connected
+                          </span>
+                        </div>
+                        <p className="text-xs text-blue-300 font-medium mt-1 flex items-center gap-1.5">
+                          <Gamepad2 className="w-3.5 h-3.5" />
+                          {currentIntegration.gamesCount} Epic Titles Cataloged
+                        </p>
+                      </div>
+                    </div>
 
-                <div className="pt-2">
-                  <button
-                    onClick={() => {
-                      setSuccessMsg('Epic Games account connect placeholder. Ready for auth code.');
-                    }}
-                    className="px-4 py-2 rounded bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all shadow-md"
-                  >
-                    Connect Epic Games Account
-                  </button>
+                    <button
+                      onClick={() => handleDisconnect('epic')}
+                      className="px-3 py-1.5 rounded bg-red-950/40 hover:bg-red-900/60 border border-red-700/50 text-red-300 text-xs font-semibold transition-colors flex items-center gap-1.5"
+                    >
+                      <Unlink className="w-3.5 h-3.5" />
+                      Disconnect
+                    </button>
+                  </div>
+
+                  <div className="flex items-center justify-between pt-1">
+                    <div className="text-[11px] text-steam-subtext">
+                      Sync Method:{' '}
+                      <span className="text-white font-medium">Epic Cloud Services</span> (No launcher required)
+                    </div>
+                    <button
+                      onClick={() => handleConnectEpic()}
+                      disabled={isSubmitting}
+                      className="px-3 py-1.5 rounded bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold transition-all flex items-center gap-1.5 shadow-md disabled:opacity-50"
+                    >
+                      <RefreshCw className={`w-3.5 h-3.5 ${isSubmitting ? 'animate-spin' : ''}`} />
+                      {isSubmitting ? 'Syncing...' : 'Sync Epic Library'}
+                    </button>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                /* Connection Form */
+                <form onSubmit={handleConnectEpic} className="bg-[#16202d] border border-steam-border rounded-lg p-5 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="text-sm font-bold text-white">Epic Games Account Connect</h3>
+                      <p className="text-xs text-steam-subtext mt-0.5">
+                        Sync owned titles, exclusives, and weekly free game entitlements.
+                      </p>
+                    </div>
+                    <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-gray-800 text-gray-400 border border-gray-700">
+                      Not Connected
+                    </span>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-white mb-1.5">
+                      Epic Games Display Name or Account ID
+                    </label>
+                    <input
+                      type="text"
+                      value={epicInput}
+                      onChange={(e) => setEpicInput(e.target.value)}
+                      placeholder="e.g. SpaceCadet or Epic Account ID"
+                      className="w-full px-3 py-2 bg-[#121922] border border-steam-border rounded text-sm text-white placeholder-steam-subtext/60 focus:outline-none focus:border-blue-500 font-mono text-xs"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-white mb-1.5">
+                      Epic Exchange Code / Auth Token <span className="text-steam-subtext font-normal">(Optional)</span>
+                    </label>
+                    <input
+                      type="password"
+                      value={epicToken}
+                      onChange={(e) => setEpicToken(e.target.value)}
+                      placeholder="Optional Epic authorization token"
+                      className="w-full px-3 py-2 bg-[#121922] border border-steam-border rounded text-sm text-white placeholder-steam-subtext/60 focus:outline-none focus:border-blue-500 font-mono text-xs"
+                    />
+                  </div>
+
+                  <div className="pt-2 flex items-center justify-between gap-3">
+                    <button
+                      type="button"
+                      onClick={handleQuickConnectEpic}
+                      className="px-3.5 py-2 rounded bg-blue-950/40 hover:bg-blue-900/60 border border-blue-700/50 text-blue-200 text-xs font-medium transition-colors flex items-center gap-1.5"
+                    >
+                      <Sparkles className="w-3.5 h-3.5 text-blue-400" />
+                      Quick Connect SpaceCadet (Epic)
+                    </button>
+
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="px-5 py-2 rounded bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all shadow-md disabled:opacity-50 flex items-center gap-2"
+                    >
+                      {isSubmitting ? <RefreshCw className="w-4 h-4 animate-spin" /> : <ShieldCheck className="w-4 h-4" />}
+                      {isSubmitting ? 'Connecting...' : 'Connect Epic Account'}
+                    </button>
+                  </div>
+                </form>
+              )}
             </div>
           )}
 
           {/* XBOX TAB */}
           {selectedTab === 'xbox' && (
-            <div className="space-y-5">
+            <div className="space-y-6">
               <div className="p-4 bg-emerald-950/20 border border-emerald-800/40 rounded-lg text-xs text-emerald-200/90 leading-relaxed flex items-start gap-3">
                 <Cloud className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
                 <div>
                   <strong className="text-white block mb-1">Xbox / Microsoft Store Cloud Sync</strong>
-                  Sync digital PC and console purchases via your Microsoft account without the Xbox
+                  Sync digital PC and Game Pass purchases via your Microsoft account without the Xbox
                   desktop app.
                 </div>
               </div>
 
-              <div className="bg-[#16202d] border border-steam-border rounded-lg p-5 space-y-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-sm font-bold text-white">Xbox Live Account Connect</h3>
-                    <p className="text-xs text-steam-subtext mt-0.5">
-                      Sync Xbox PC titles, achievements, and Game Pass entitlements.
-                    </p>
-                  </div>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-gray-800 text-gray-400 border border-gray-700">
-                    Not Connected
-                  </span>
-                </div>
+              {currentIntegration.isConnected ? (
+                /* Connected State Card */
+                <div className="bg-[#16202d] border border-emerald-500/30 rounded-lg p-5 space-y-4">
+                  <div className="flex items-center justify-between pb-4 border-b border-steam-border/40">
+                    <div className="flex items-center gap-4">
+                      <div className="w-14 h-14 rounded bg-emerald-950 border border-emerald-500/40 flex items-center justify-center text-emerald-300 font-bold text-xl shadow-md">
+                        XBOX
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <h3 className="text-base font-bold text-white">
+                            {currentIntegration.accountName || 'SpaceCadet85 (Xbox Live)'}
+                          </h3>
+                          <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
+                            <ShieldCheck className="w-3 h-3" /> Connected
+                          </span>
+                        </div>
+                        <p className="text-xs text-emerald-300 font-medium mt-1 flex items-center gap-1.5">
+                          <Gamepad2 className="w-3.5 h-3.5" />
+                          {currentIntegration.gamesCount} Xbox Titles Cataloged
+                        </p>
+                      </div>
+                    </div>
 
-                <div className="pt-2">
-                  <button
-                    onClick={() => {
-                      setSuccessMsg('Xbox account connect placeholder. Ready for Microsoft login.');
-                    }}
-                    className="px-4 py-2 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all shadow-md"
-                  >
-                    Connect Xbox Account
-                  </button>
+                    <button
+                      onClick={() => handleDisconnect('xbox')}
+                      className="px-3 py-1.5 rounded bg-red-950/40 hover:bg-red-900/60 border border-red-700/50 text-red-300 text-xs font-semibold transition-colors flex items-center gap-1.5"
+                    >
+                      <Unlink className="w-3.5 h-3.5" />
+                      Disconnect
+                    </button>
+                  </div>
+
+                  <div className="flex items-center justify-between pt-1">
+                    <div className="text-[11px] text-steam-subtext">
+                      Sync Method:{' '}
+                      <span className="text-white font-medium">Xbox Live Cloud Sync</span> (No Xbox app required)
+                    </div>
+                    <button
+                      onClick={() => handleConnectXbox()}
+                      disabled={isSubmitting}
+                      className="px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-all flex items-center gap-1.5 shadow-md disabled:opacity-50"
+                    >
+                      <RefreshCw className={`w-3.5 h-3.5 ${isSubmitting ? 'animate-spin' : ''}`} />
+                      {isSubmitting ? 'Syncing...' : 'Sync Xbox Library'}
+                    </button>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                /* Connection Form */
+                <form onSubmit={handleConnectXbox} className="bg-[#16202d] border border-steam-border rounded-lg p-5 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="text-sm font-bold text-white">Xbox Live Account Connect</h3>
+                      <p className="text-xs text-steam-subtext mt-0.5">
+                        Sync Xbox PC titles, achievements, and Game Pass entitlements.
+                      </p>
+                    </div>
+                    <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-gray-800 text-gray-400 border border-gray-700">
+                      Not Connected
+                    </span>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-white mb-1.5">
+                      Xbox Gamertag
+                    </label>
+                    <input
+                      type="text"
+                      value={xboxInput}
+                      onChange={(e) => setXboxInput(e.target.value)}
+                      placeholder="e.g. SpaceCadet85"
+                      className="w-full px-3 py-2 bg-[#121922] border border-steam-border rounded text-sm text-white placeholder-steam-subtext/60 focus:outline-none focus:border-emerald-500 font-mono text-xs"
+                    />
+                  </div>
+
+                  <div className="pt-2 flex items-center justify-between gap-3">
+                    <button
+                      type="button"
+                      onClick={handleQuickConnectXbox}
+                      className="px-3.5 py-2 rounded bg-emerald-950/40 hover:bg-emerald-900/60 border border-emerald-700/50 text-emerald-200 text-xs font-medium transition-colors flex items-center gap-1.5"
+                    >
+                      <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+                      Quick Connect SpaceCadet (Xbox Live)
+                    </button>
+
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="px-5 py-2 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all shadow-md disabled:opacity-50 flex items-center gap-2"
+                    >
+                      {isSubmitting ? <RefreshCw className="w-4 h-4 animate-spin" /> : <ShieldCheck className="w-4 h-4" />}
+                      {isSubmitting ? 'Connecting...' : 'Connect Xbox Account'}
+                    </button>
+                  </div>
+                </form>
+              )}
             </div>
           )}
         </div>

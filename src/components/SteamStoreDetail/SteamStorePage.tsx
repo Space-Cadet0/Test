@@ -253,8 +253,13 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
 
           {/* Right Sidebar Details (1:1 Steam Right Column) */}
           <div className="lg:col-span-4 space-y-4">
-            {/* Features (Specifications & Categories with Official Steam Icons) */}
-            <SteamFeaturesList categories={metadata?.categories} title={game.title} />
+            <SteamFeaturesList
+              categories={metadata?.categories}
+              title={game.title}
+              hasAntiCheat={Boolean(metadata?.drmNotice?.toLowerCase().includes('anti-cheat'))}
+              antiCheatName={metadata?.drmNotice?.includes('Easy') ? 'Easy Anti-Cheat' : 'Anti-Cheat Software'}
+              hasEula={Boolean(metadata?.drmNotice?.toLowerCase().includes('eula') || metadata?.legalNotice?.toLowerCase().includes('eula'))}
+            />
 
             {/* Exact 1:1 Languages Matrix Table */}
             <SteamLanguagesTable rawSupportedLanguagesHtml={metadata?.supportedLanguages} />

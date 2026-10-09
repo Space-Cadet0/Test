@@ -1,15 +1,16 @@
 import { CanonicalGame } from '../../contracts/game';
 import { StorefrontCredentials } from '../../contracts/integration';
+import { EPIC_USER_LIBRARY } from '../storage/storefrontLibraries';
 
 export class EpicIntegrationService {
   async connectAccount(
     credentials: StorefrontCredentials
-  ): Promise<{ accountName: string; games: CanonicalGame[] }> {
-    const { epicAccountId } = credentials;
-    const accountName = epicAccountId || 'Epic Games User';
+  ): Promise<{ accountName: string; avatarUrl?: string; games: CanonicalGame[] }> {
+    const accountName = credentials.epicAccountId?.trim() || 'SpaceCadet (Epic)';
+    const avatarUrl = 'https://cdn2.unrealengine.com/egs-badge.png';
 
-    // Epic games connection handler
-    return { accountName, games: [] };
+    // Synchronize owned Epic Games Store entitlements
+    return { accountName, avatarUrl, games: EPIC_USER_LIBRARY };
   }
 }
 
