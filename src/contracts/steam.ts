@@ -70,4 +70,11 @@ export interface SteamEnrichedMetadata {
   drmNotice?: string;
   controllerSupport?: string;
   pcRequirementsHtml?: string;
+  achievements?: {
+    total: number;
+    highlighted?: Array<{
+      name: string;
+      path: string;
+    }>;
+  };
 }

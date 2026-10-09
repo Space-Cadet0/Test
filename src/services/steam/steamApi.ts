@@ -185,6 +185,18 @@ export class SteamApiService {
       const genres: string[] = (data.genres || []).map((g: any) => g.description);
       const tags: string[] = (data.categories || []).map((c: any) => c.description).slice(0, 10);
 
+      // Extract achievements
+      let achievements: { total: number; highlighted?: any[] } | undefined = undefined;
+      if (data.achievements && typeof data.achievements.total === 'number') {
+        achievements = {
+          total: data.achievements.total,
+          highlighted: (data.achievements.highlighted || []).map((h: any) => ({
+            name: h.name || h.localized_name || '',
+            path: h.path || '',
+          })),
+        };
+      }
+
       const metadata: SteamEnrichedMetadata = {
         appId,
         name: data.name,
@@ -211,6 +223,7 @@ export class SteamApiService {
         drmNotice: data.drm_notice,
         controllerSupport: data.controller_support,
         pcRequirementsHtml: data.pc_requirements?.minimum || undefined,
+        achievements,
       };
 
       this.cache.set(appId, metadata);
