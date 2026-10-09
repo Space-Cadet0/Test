@@ -22,34 +22,81 @@ type MediaItem =
   | { type: 'movie'; movie: SteamMovie }
   | { type: 'screenshot'; screenshot: SteamScreenshot };
 
+function extractYouTubeId(url?: string): string | null {
+  if (!url) return null;
+  const match = url.match(
+    /(?:youtu\.be\/|youtube(?:-nocookie)?\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/
+  );
+  return match && match[1] ? match[1] : null;
+}
+
 const VideoPlayer: React.FC<{ movie: SteamMovie }> = ({ movie }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  // Check if it's an iframe embed (YouTube/Wistia from GOG or fallback providers)
-  const candidateUrl = movie.mp4?.max || movie.mp4?.['480'] || movie.webm?.max || '';
+  // Check if it's an iframe embed (YouTube/Wistia/Vimeo from GOG or fallback providers)
+  const candidateUrl =
+    movie.mp4?.max ||
+    movie.mp4?.['480'] ||
+    movie.webm?.max ||
+    movie.webm?.['480'] ||
+    '';
+  const ytId = extractYouTubeId(candidateUrl);
   const isEmbed =
+    Boolean(ytId) ||
     candidateUrl.includes('youtube.com') ||
     candidateUrl.includes('youtu.be') ||
     candidateUrl.includes('wistia.net') ||
     candidateUrl.includes('player.vimeo.com');
 
   if (isEmbed) {
-    let embedSrc = candidateUrl;
-    if (candidateUrl.includes('watch?v=')) {
-      embedSrc = candidateUrl.replace('watch?v=', 'embed/');
-    } else if (candidateUrl.includes('youtu.be/')) {
-      embedSrc = candidateUrl.replace('youtu.be/', 'www.youtube.com/embed/');
-    }
+    const watchUrl = ytId ? `https://www.youtube.com/watch?v=${ytId}` : candidateUrl;
+    const embedSrc = ytId
+      ? `https://www.youtube-nocookie.com/embed/${ytId}?rel=0&modestbranding=1&enablejsapi=1&origin=https://www.gog.com`
+      : candidateUrl;
+
+    const handleOpenExternal = (e: React.MouseEvent) => {
+      e.stopPropagation();
+      if (typeof window !== 'undefined' && (window as any).electronAPI?.openExternal) {
+        (window as any).electronAPI.openExternal(watchUrl);
+      } else {
+        window.open(watchUrl, '_blank', 'noopener,noreferrer');
+      }
+    };
+
     return (
-      <iframe
-        src={embedSrc}
-        title={movie.name}
-        className="w-full h-full border-0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      />
+      <div className="relative w-full h-full bg-black flex items-center justify-center group/embed">
+        <iframe
+          src={embedSrc}
+          title={movie.name}
+          className="w-full h-full border-0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+          referrerPolicy="strict-origin-when-cross-origin"
+        />
+
+        {/* Action Pill to Open Trailer Directly in Browser */}
+        <button
+          type="button"
+          onClick={handleOpenExternal}
+          className="absolute top-3 right-3 z-30 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/85 hover:bg-[#c4302b] text-white text-xs font-semibold shadow-xl backdrop-blur-sm border border-white/20 transition-all cursor-pointer group/yt"
+          title={ytId ? 'Watch on YouTube in browser' : 'Open trailer in browser'}
+        >
+          {ytId ? (
+            <svg
+              className="w-3.5 h-3.5 fill-current text-red-500 group-hover/yt:text-white transition-colors"
+              viewBox="0 0 24 24"
+            >
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+            </svg>
+          ) : (
+            <ExternalLink className="w-3.5 h-3.5" />
+          )}
+          <span>{ytId ? 'Watch on YouTube' : 'Open in Browser'}</span>
+          <ExternalLink className="w-3 h-3 opacity-70 group-hover/yt:opacity-100" />
+        </button>
+      </div>
     );
   }
 
@@ -273,7 +320,10 @@ export const MediaGallery: React.FC<MediaGalleryProps> = ({
       {/* Primary Showcase Viewport */}
       <div className="relative aspect-video w-full bg-black/90 rounded overflow-hidden border border-steam-border shadow-xl group">
         {activeItem?.type === 'movie' ? (
-          <VideoPlayer movie={activeItem.movie} key={activeItem.movie.id || activeItem.movie.name} />
+          <VideoPlayer
+            movie={activeItem.movie}
+            key={`movie-${activeItem.movie.id}-${activeItem.movie.name}-${activeIndex}`}
+          />
         ) : activeItem?.type === 'screenshot' ? (
           <div
             className="relative w-full h-full cursor-pointer overflow-hidden"

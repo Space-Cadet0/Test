@@ -41,6 +41,15 @@ function createMainWindow() {
     });
   }
 
+  // Ensure links and popups (e.g. YouTube "Watch on YouTube") open in default web browser
+  mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+    if (url.startsWith('https://') || url.startsWith('http://')) {
+      require('electron').shell.openExternal(url);
+      return { action: 'deny' };
+    }
+    return { action: 'allow' };
+  });
+
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
@@ -59,6 +68,39 @@ if (!gotTheLock) {
   });
 
   app.whenReady().then(() => {
+    // Intercept YouTube and external video embed requests to allow playback from file:// origins
+    const embedFilters = [
+      '*://*.youtube.com/*',
+      '*://youtube.com/*',
+      '*://*.youtube-nocookie.com/*',
+      '*://youtube-nocookie.com/*',
+      '*://*.wistia.net/*',
+      '*://*.fast.wistia.net/*',
+    ];
+
+    session.defaultSession.webRequest.onBeforeSendHeaders(
+      { urls: embedFilters },
+      (details, callback) => {
+        delete details.requestHeaders['origin'];
+        delete details.requestHeaders['Origin'];
+        delete details.requestHeaders['referer'];
+        delete details.requestHeaders['Referer'];
+        details.requestHeaders['Origin'] = 'https://www.gog.com';
+        details.requestHeaders['Referer'] = 'https://www.gog.com/';
+        callback({ requestHeaders: details.requestHeaders });
+      }
+    );
+
+    session.defaultSession.webRequest.onHeadersReceived(
+      { urls: embedFilters },
+      (details, callback) => {
+        const responseHeaders = { ...details.responseHeaders };
+        delete responseHeaders['x-frame-options'];
+        delete responseHeaders['X-Frame-Options'];
+        callback({ responseHeaders });
+      }
+    );
+
     createMainWindow();
 
     app.on('activate', () => {
@@ -358,3 +400,15 @@ ipcMain.handle('scan:steam-installed', async () => {
     return { success: false, error: err.message, installedSteamAppIds: [] };
   }
 });
+
+/**
+ * Open URL in user's default external browser (e.g. YouTube trailers)
+ */
+ipcMain.handle('shell:open-external', async (_event, url) => {
+  if (url && (url.startsWith('https://') || url.startsWith('http://'))) {
+    await require('electron').shell.openExternal(url);
+    return true;
+  }
+  return false;
+});
+
