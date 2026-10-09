@@ -58,7 +58,7 @@ const STORE_AUTH_CONFIGS: Record<StorefrontId, StoreAuthConfig> = {
     storeName: 'Steam',
   },
   epic: {
-    url: 'https://www.epicgames.com/id/login?redirectUrl=https%3A%2F%2Fwww.epicgames.com%2Fid%2Fapi%2Fredirect%3FclientId%3D34a29223a14247768ced321e0a53d639%26responseType%3Dcode',
+    url: 'https://www.epicgames.com/id/login?redirectUrl=https%3A%2F%2Fwww.epicgames.com%2Fid%2Fapi%2Fredirect%3FclientId%3D34a02cf8f4414e29b15921876da36f9a%26responseType%3Dcode',
     title: 'Epic Games Sign In',
     width: 520,
     height: 720,
@@ -116,6 +116,26 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
   const extractCodeFromInput = (input: string): string | null => {
     if (!input) return null;
     const trimmed = input.trim();
+
+    // Check for JSON response format e.g. {"authorizationCode": "..."}
+    if (trimmed.startsWith('{') && trimmed.endsWith('}')) {
+      try {
+        const parsed = JSON.parse(trimmed);
+        if (parsed.authorizationCode) return parsed.authorizationCode;
+        if (parsed.code) return parsed.code;
+        if (parsed.redirectUrl && parsed.redirectUrl.includes('code=')) {
+          const match = parsed.redirectUrl.match(/code=([a-zA-Z0-9_\-]+)/);
+          if (match) return match[1];
+        }
+      } catch {
+        // Fall through to regex
+      }
+    }
+
+    // Direct JSON substring match
+    const authCodeJsonMatch = trimmed.match(/"authorizationCode"\s*:\s*"([a-zA-Z0-9_\-]+)"/i);
+    if (authCodeJsonMatch) return authCodeJsonMatch[1];
+
     if (trimmed.includes('code=')) {
       try {
         const url = new URL(trimmed.startsWith('http') ? trimmed : `https://${trimmed}`);
@@ -167,7 +187,7 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
     integrations.find((i) => i.storefrontId === selectedTab) || integrations[0];
 
   /**
-   * Launch real storefront sign-in in a focused popup window
+   * Launch real storefront sign-in in a focused popup window or native Electron window
    */
   const handleLaunchStoreSignIn = (storefrontId: StorefrontId) => {
     const config = STORE_AUTH_CONFIGS[storefrontId];
@@ -175,6 +195,30 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
 
     setErrorMsg(null);
     setSuccessMsg(null);
+
+    // Native Electron Desktop Environment Support (Playnite/Heroic style)
+    if (typeof window !== 'undefined' && (window as any).electronAPI?.isElectron) {
+      setAuthenticatingStore(storefrontId);
+      setIsSubmitting(true);
+      (window as any).electronAPI
+        .loginStore(storefrontId)
+        .then(async (res: { success: boolean; code?: string; error?: string }) => {
+          if (res.success && res.code) {
+            await completeStoreAuthentication(storefrontId, res.code);
+          } else if (res.error) {
+            setErrorMsg(res.error);
+            setIsSubmitting(false);
+            setAuthenticatingStore(null);
+          }
+        })
+        .catch((err: any) => {
+          setErrorMsg(err?.message || 'Native authentication failed.');
+          setIsSubmitting(false);
+          setAuthenticatingStore(null);
+        });
+      return;
+    }
+
     setAuthenticatingStore(storefrontId);
     authStartTimeRef.current = Date.now();
 
@@ -221,12 +265,12 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
     try {
       let resultGames: CanonicalGame[] = [];
       let accountName = 'Verified User';
+      const tokenOrCode = explicitCode || extractCodeFromInput(authRedirectInput) || undefined;
 
       if (storefrontId === 'gog') {
-        const tokenOrCode = explicitCode || extractCodeFromInput(authRedirectInput) || gogToken.trim() || undefined;
         const { integration, games } = await connectGogIntegration({
           gogUsername: gogInput.trim() || undefined,
-          gogToken: tokenOrCode,
+          gogToken: tokenOrCode || gogToken.trim() || undefined,
         });
         resultGames = games;
         accountName = integration.accountName || 'GOG Account';
@@ -239,14 +283,14 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
         accountName = integration.accountName || 'Steam User';
       } else if (storefrontId === 'epic') {
         const { integration, games } = await connectEpicIntegration({
-          epicAccountId: epicInput.trim() || 'Epic Games User',
-          epicToken: epicToken.trim() || undefined,
+          epicAccountId: epicInput.trim() || undefined,
+          epicToken: tokenOrCode || epicToken.trim() || undefined,
         });
         resultGames = games;
         accountName = integration.accountName || 'Epic Games User';
       } else if (storefrontId === 'xbox') {
         const { integration, games } = await connectXboxIntegration({
-          webToken: xboxInput.trim() || 'Xbox Live User',
+          webToken: tokenOrCode || xboxInput.trim() || undefined,
         });
         resultGames = games;
         accountName = integration.accountName || 'Xbox Live User';
@@ -402,6 +446,10 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
                     <>
                       Please log in on the official GOG sign-in window. Once you authenticate (via Google or GOG account), GOG redirects to the confirmation page (<code className="text-emerald-300 bg-black/40 px-1 py-0.5 rounded text-[11px]">embed.gog.com/on_login_success</code>).
                     </>
+                  ) : selectedTab === 'epic' ? (
+                    <>
+                      Log in with your Epic Games account. Once authenticated, Epic redirects to confirm the launcher token.
+                    </>
                   ) : (
                     `Please log in on the official ${STORE_AUTH_CONFIGS[selectedTab]?.storeName} sign-in page in the pop-up window. Once complete, this app will automatically connect and synchronize your owned titles.`
                   )}
@@ -424,30 +472,47 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
                 </div>
               )}
 
-              {selectedTab === 'gog' && (
-                <div className="max-w-md mx-auto text-left space-y-1.5 bg-[#121922] p-3 rounded border border-steam-border/60">
-                  <label className="block text-[11px] font-semibold text-white">
-                    Optional: Paste Pop-Up Address Bar URL or Code
-                  </label>
-                  <input
-                    type="text"
-                    value={authRedirectInput}
-                    onChange={(e) => {
-                      const val = e.target.value;
-                      setAuthRedirectInput(val);
-                      const code = extractCodeFromInput(val);
-                      if (code) {
-                        completeStoreAuthentication(selectedTab, code);
-                      }
-                    }}
-                    placeholder="e.g. https://embed.gog.com/on_login_success?origin=client&code=..."
-                    className="w-full px-2.5 py-1.5 bg-[#0d1218] border border-steam-border rounded text-xs text-white font-mono placeholder:text-steam-subtext/50 focus:outline-none focus:border-steam-accent"
-                  />
-                  <p className="text-[10px] text-steam-subtext">
-                    If GOG stops at the success page, you can paste the URL here or just click the button below.
-                  </p>
+              {/* Special callout banner for Epic Games Store */}
+              {selectedTab === 'epic' && (
+                <div className="p-3 bg-blue-950/40 border border-blue-500/50 rounded text-blue-200 text-xs text-left max-w-lg mx-auto flex items-start gap-2.5 shadow-inner">
+                  <CheckCircle2 className="w-5 h-5 flex-shrink-0 text-sky-400 mt-0.5" />
+                  <div className="space-y-1">
+                    <span className="font-bold text-sky-300">Epic Games Authentication:</span>
+                    <p className="text-[11px] leading-relaxed text-blue-200/90">
+                      After logging into Epic Games, the pop-up will display your confirmation redirect or authorization JSON. Paste the URL or text below, or click <strong>I've Completed Sign In</strong> to finalize sync.
+                    </p>
+                  </div>
                 </div>
               )}
+
+              <div className="max-w-md mx-auto text-left space-y-1.5 bg-[#121922] p-3 rounded border border-steam-border/60">
+                <label className="block text-[11px] font-semibold text-white">
+                  Paste Pop-Up Address Bar URL or Authorization Text:
+                </label>
+                <input
+                  type="text"
+                  value={authRedirectInput}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setAuthRedirectInput(val);
+                    const code = extractCodeFromInput(val);
+                    if (code) {
+                      completeStoreAuthentication(selectedTab, code);
+                    }
+                  }}
+                  placeholder={
+                    selectedTab === 'gog'
+                      ? 'e.g. https://embed.gog.com/on_login_success?origin=client&code=...'
+                      : selectedTab === 'epic'
+                      ? 'e.g. https://localhost/launcher/authorized?code=... or {"authorizationCode":"..."}'
+                      : 'Paste URL or code here...'
+                  }
+                  className="w-full px-2.5 py-1.5 bg-[#0d1218] border border-steam-border rounded text-xs text-white font-mono placeholder:text-steam-subtext/50 focus:outline-none focus:border-steam-accent"
+                />
+                <p className="text-[10px] text-steam-subtext">
+                  Auto-detects and extracts authorization codes from full URLs or JSON strings instantly.
+                </p>
+              </div>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
                 <button
