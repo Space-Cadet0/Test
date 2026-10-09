@@ -37,13 +37,6 @@ export const MediaGallery: React.FC<MediaGalleryProps> = ({
     }
   }, [activeIndex]);
 
-  const handleScroll = (direction: 'left' | 'right') => {
-    if (thumbStripRef.current) {
-      const offset = direction === 'left' ? -350 : 350;
-      thumbStripRef.current.scrollBy({ left: offset, behavior: 'smooth' });
-    }
-  };
-
   const selectItem = (index: number) => {
     setActiveIndex(index);
     // Smooth scroll the active thumbnail into view
@@ -133,65 +126,82 @@ export const MediaGallery: React.FC<MediaGalleryProps> = ({
       </div>
 
       {/* Steam Thumbnail Strip Carousel */}
-      <div className="relative flex items-center w-full px-7">
-        {/* Left Arrow Button */}
-        <button
-          onClick={() => handleScroll('left')}
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-6 h-16 bg-[#101822]/90 hover:bg-steam-accent/30 text-white flex items-center justify-center border border-steam-border rounded-l transition-all shadow-md"
-          aria-label="Previous thumbnails"
-        >
-          <ChevronLeft className="w-4 h-4 text-steam-accent" />
-        </button>
+      <div className="flex flex-col w-full mt-1">
+        <div className="relative flex items-center w-full">
+          {/* Left Arrow Button */}
+          <button
+            onClick={() => selectItem(Math.max(0, activeIndex - 1))}
+            disabled={activeIndex === 0}
+            className="flex-shrink-0 w-8 h-[65px] bg-black/70 hover:bg-[#67c1f5]/30 disabled:opacity-30 disabled:hover:bg-black/70 text-white flex items-center justify-center transition-all z-10"
+            aria-label="Previous thumbnail"
+          >
+            <ChevronLeft className="w-4 h-4 text-steam-accent" />
+          </button>
 
-        {/* Scrollable Thumbnails List */}
-        <div
-          ref={thumbStripRef}
-          className="flex items-center gap-2 overflow-x-auto scrollbar-none py-1 scroll-smooth w-full select-none"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-        >
-          {items.map((item, idx) => {
-            const isSelected = idx === activeIndex;
-            const thumbUrl =
-              item.type === 'movie'
-                ? item.movie.thumbnail
-                : item.screenshot.pathThumbnail;
+          {/* Scrollable Thumbnails List */}
+          <div
+            ref={thumbStripRef}
+            className="flex items-center gap-[4px] overflow-x-auto scrollbar-none py-0.5 px-1 scroll-smooth w-full select-none bg-black/40"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {items.map((item, idx) => {
+              const isSelected = idx === activeIndex;
+              const thumbUrl =
+                item.type === 'movie'
+                  ? item.movie.thumbnail
+                  : item.screenshot.pathThumbnail;
 
-            return (
-              <button
-                key={idx}
-                onClick={() => selectItem(idx)}
-                className={`relative flex-shrink-0 w-28 h-16 rounded overflow-hidden border-2 transition-all group/thumb ${
-                  isSelected
-                    ? 'border-steam-accent shadow-lg shadow-steam-accent/20 scale-[1.02]'
-                    : 'border-[#1b2838] opacity-70 hover:opacity-100 hover:border-steam-subtext'
-                }`}
-              >
-                <img
-                  src={thumbUrl}
-                  alt={item.type === 'movie' ? item.movie.name : `Thumbnail ${idx}`}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-                {item.type === 'movie' && (
-                  <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                    <div className="p-1 rounded-full bg-black/60 border border-white/40">
-                      <Play className="w-3.5 h-3.5 fill-white text-white translate-x-0.5" />
+              return (
+                <button
+                  key={idx}
+                  onClick={() => selectItem(idx)}
+                  className={`relative flex-shrink-0 w-[116px] h-[65px] overflow-hidden transition-all bg-black ${
+                    isSelected
+                      ? 'border-2 border-white'
+                      : 'border border-black/40 opacity-70 hover:opacity-100 hover:border-steam-subtext'
+                  }`}
+                >
+                  <img
+                    src={thumbUrl}
+                    alt={item.type === 'movie' ? item.movie.name : `Thumbnail ${idx}`}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                  {item.type === 'movie' && (
+                    <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                      <div className="p-1 rounded-full bg-black/60 border border-white/40">
+                        <Play className="w-3 h-3 fill-white text-white translate-x-0.5" />
+                      </div>
                     </div>
-                  </div>
-                )}
-              </button>
-            );
-          })}
+                  )}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Right Arrow Button */}
+          <button
+            onClick={() => selectItem(Math.min(items.length - 1, activeIndex + 1))}
+            disabled={activeIndex >= items.length - 1}
+            className="flex-shrink-0 w-8 h-[65px] bg-black/70 hover:bg-[#67c1f5]/30 disabled:opacity-30 disabled:hover:bg-black/70 text-white flex items-center justify-center transition-all z-10"
+            aria-label="Next thumbnail"
+          >
+            <ChevronRight className="w-4 h-4 text-steam-accent" />
+          </button>
         </div>
 
-        {/* Right Arrow Button */}
-        <button
-          onClick={() => handleScroll('right')}
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-6 h-16 bg-[#101822]/90 hover:bg-steam-accent/30 text-white flex items-center justify-center border border-steam-border rounded-r transition-all shadow-md"
-          aria-label="Next thumbnails"
-        >
-          <ChevronRight className="w-4 h-4 text-steam-accent" />
-        </button>
+        {/* Steam Trackbar Slider under thumbnails */}
+        {items.length > 1 && (
+          <div className="w-full h-[9px] bg-black/60 rounded-none relative mt-1 overflow-hidden">
+            <div
+              className="h-full bg-[#3d4450] hover:bg-[#5c6576] rounded-none transition-all cursor-pointer"
+              style={{
+                width: `${Math.max(15, (5 / Math.max(5, items.length)) * 100)}%`,
+                marginLeft: `${(activeIndex / Math.max(1, items.length - 1)) * (100 - Math.max(15, (5 / Math.max(5, items.length)) * 100))}%`,
+              }}
+            />
+          </div>
+        )}
       </div>
 
       {/* Lightbox Modal for Screenshots */}

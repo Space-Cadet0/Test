@@ -3,7 +3,10 @@ import { CanonicalGame } from '../../contracts/game';
 import { SteamEnrichedMetadata } from '../../contracts/steam';
 import { steamApi } from '../../services/steam/steamApi';
 import { MediaGallery } from './MediaGallery';
-import { ReviewSentimentBadge } from './ReviewSentimentBadge';
+import { SteamHeroDetails } from './SteamHeroDetails';
+import { SteamLibraryActionBar } from './SteamLibraryActionBar';
+import { HowLongToBeatCard } from './HowLongToBeatCard';
+import { getHowLongToBeat } from '../../services/hltb/howLongToBeat';
 import { SystemRequirements } from './SystemRequirements';
 import { PlatformBadges } from './PlatformBadges';
 import { SteamLanguagesTable } from './SteamLanguagesTable';
@@ -11,13 +14,9 @@ import { SteamFeaturesList } from './SteamFeaturesList';
 import { SteamSidebarNotices } from './SteamSidebarNotices';
 import {
   ExternalLink,
-  Calendar,
-  Layers,
   Sparkles,
   ArrowLeft,
-  Check,
   RefreshCw,
-  Tag
 } from 'lucide-react';
 
 interface SteamStorePageProps {
@@ -161,10 +160,13 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({ game, onBackToLi
           </div>
         </div>
 
-        {/* Main Steam Highlight Showcase (2-Column Split: Media Player + Summary) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 bg-[#16202d]/80 backdrop-blur rounded border border-steam-border p-4 md:p-6 shadow-2xl">
+        {/* Steam Library Action & Stats Bar (Play Button, Library Status, Play Time, Last Played, Space Required, Achievements) */}
+        <SteamLibraryActionBar game={game} metadata={metadata} />
+
+        {/* Main Steam Highlight Showcase (1:1 Steam 2-Column Split: Media Player + Details) */}
+        <div className="flex flex-col lg:flex-row gap-4 bg-[#16202d]/80 backdrop-blur rounded border border-steam-border p-4 shadow-xl">
           {/* Left Column: Media Gallery (Trailers + Screenshots) */}
-          <div className="lg:col-span-8 flex flex-col justify-start">
+          <div className="flex-1 min-w-0 lg:max-w-[616px]">
             {isLoading ? (
               <div className="aspect-video w-full bg-black/60 rounded flex flex-col items-center justify-center gap-3 animate-pulse border border-steam-border">
                 <Sparkles className="w-8 h-8 text-steam-accent animate-spin" />
@@ -179,98 +181,21 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({ game, onBackToLi
             )}
           </div>
 
-          {/* Right Column: Game Metadata & Summary Card */}
-          <div className="lg:col-span-4 flex flex-col justify-between space-y-4">
-            <div className="space-y-4">
-              {/* Header Capsule Artwork */}
-              <div className="rounded overflow-hidden border border-steam-border shadow-md">
-                <img
-                  src={metadata?.headerImage || game.headerImage}
-                  alt={game.title}
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-
-              {/* Short Synopsis Description */}
-              <p className="text-xs md:text-sm text-[#c6d4df] leading-relaxed line-clamp-4">
-                {shortDescription || 'No description available for this title.'}
-              </p>
-
-              {/* Steam Review Sentiment Box */}
-              <div className="bg-[#101720]/80 p-3 rounded border border-steam-border/60">
-                <div className="text-[11px] uppercase tracking-wider text-steam-subtext font-semibold mb-1">
-                  Overall Steam Reviews:
-                </div>
-                <ReviewSentimentBadge summary={reviewSummary} />
-              </div>
-
-              {/* Key Details (Release Date, Developers, Publishers) */}
-              <div className="space-y-1.5 text-xs border-t border-steam-border/40 pt-3">
-                <div className="flex justify-between items-center py-0.5">
-                  <span className="text-steam-subtext">Release Date:</span>
-                  <span className="text-white font-medium flex items-center gap-1">
-                    <Calendar className="w-3.5 h-3.5 text-steam-accent" />
-                    {releaseDate}
-                  </span>
-                </div>
-
-                <div className="flex justify-between items-center py-0.5">
-                  <span className="text-steam-subtext">Developer:</span>
-                  <span className="text-steam-accent hover:underline font-medium cursor-pointer">
-                    {developers.join(', ') || 'Unknown'}
-                  </span>
-                </div>
-
-                <div className="flex justify-between items-center py-0.5">
-                  <span className="text-steam-subtext">Publisher:</span>
-                  <span className="text-steam-accent hover:underline font-medium cursor-pointer">
-                    {publishers.join(', ') || 'Unknown'}
-                  </span>
-                </div>
-              </div>
-
-              {/* Popular User-Defined Tags */}
-              <div className="space-y-2 border-t border-steam-border/40 pt-3">
-                <div className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-steam-subtext font-semibold">
-                  <Tag className="w-3 h-3 text-steam-accent" />
-                  Popular user-defined tags for this product:
-                </div>
-                <div className="flex flex-wrap gap-1.5">
-                  {tags.map((tag, i) => (
-                    <span
-                      key={i}
-                      className="px-2 py-0.5 text-[11px] bg-[#67c1f5]/20 hover:bg-[#67c1f5]/30 text-steam-accent rounded border border-steam-accent/30 transition-colors cursor-default"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Platform Ownership Status Banner */}
-            <div className="bg-[#1b2838] p-3 rounded border border-[#2a475e] mt-2">
-              <div className="text-xs font-semibold text-white mb-1.5 flex items-center gap-1.5">
-                <Layers className="w-3.5 h-3.5 text-emerald-400" />
-                Library Status
-              </div>
-              <div className="space-y-1 text-[11px] text-steam-subtext">
-                {game.platforms.map((p) => (
-                  <div key={p.platformId} className="flex items-center justify-between">
-                    <span className="capitalize font-medium text-white">{p.platformId}:</span>
-                    {p.installed ? (
-                      <span className="text-emerald-400 flex items-center gap-1 font-medium">
-                        <Check className="w-3 h-3" /> Installed locally
-                      </span>
-                    ) : (
-                      <span className="text-steam-subtext">Available in Cloud</span>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          {/* Right Column: 1:1 Steam Details (Fixed 324px Width) */}
+          <SteamHeroDetails
+            headerImage={metadata?.headerImage || game.headerImage}
+            title={game.title}
+            shortDescription={shortDescription}
+            reviewSummary={reviewSummary}
+            releaseDate={releaseDate}
+            developers={developers}
+            publishers={publishers}
+            tags={tags}
+          />
         </div>
+
+        {/* HowLongToBeat Stats Section */}
+        <HowLongToBeatCard hltb={getHowLongToBeat(game.steamAppId, game.genres, game.tags)} gameTitle={game.title} />
 
         {/* Content Section: Description & Technical Specs */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-4">
