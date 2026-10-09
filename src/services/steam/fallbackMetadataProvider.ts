@@ -136,7 +136,11 @@ export class FallbackMetadataProvider {
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/^-|-$/g, '');
 
-      const url = `${this.getEpicContentBaseUrl()}/api/en-US/content/products/${cleanSlug}`;
+      const url =
+        typeof window !== 'undefined' && window.location.hostname === 'localhost'
+          ? `/api/epic-content/api/en-US/content/products/${cleanSlug}`
+          : `${this.getEpicContentBaseUrl()}/api/en-US/content/products/${cleanSlug}`;
+
       const res = await axios.get(url, { timeout: 8000 });
       const data = res.data;
 
@@ -145,36 +149,99 @@ export class FallbackMetadataProvider {
 
       const d = home.data;
       const screenshots: SteamScreenshot[] = [];
+      const movies: SteamMovie[] = [];
 
-      // Extract carousel/gallery images
-      const gallery = d.gallery?.galleryImages || d.carousel?.items || [];
-      gallery.forEach((item: any, idx: number) => {
-        const imgUrl = item.src || item.url || item.image;
-        if (imgUrl) {
+      // Extract carousel items (videos and images)
+      const carouselItems = d?.carousel?.items || [];
+      carouselItems.forEach((item: any, idx: number) => {
+        // 1. Extract image screenshots
+        const rawImg =
+          item.image?.src ||
+          item.image?.url ||
+          (typeof item.image === 'string' ? item.image : null) ||
+          item.src ||
+          item.url;
+        if (rawImg && typeof rawImg === 'string' && !screenshots.some((s) => s.pathFull === rawImg)) {
           screenshots.push({
             id: idx,
-            pathThumbnail: imgUrl,
-            pathFull: imgUrl,
+            pathThumbnail: rawImg,
+            pathFull: rawImg,
+          });
+        }
+
+        // 2. Extract video trailers
+        if (item.video?.recipes) {
+          try {
+            const recipes = typeof item.video.recipes === 'string' ? JSON.parse(item.video.recipes) : item.video.recipes;
+            const langObj = recipes['en-US'] || recipes['en'] || Object.values(recipes)[0];
+            if (Array.isArray(langObj)) {
+              const hlsOutput = langObj.find((r: any) => r.recipe === 'video-hls')?.outputs?.find((o: any) => o.key === 'manifest');
+              const mp4Output = langObj.find((r: any) => r.recipe === 'video-fmp4' || r.recipe === 'video-webm')?.outputs?.find((o: any) => o.key === 'manifest');
+              const thumbOutput = langObj.find((r: any) => r.outputs?.some((o: any) => o.key === 'thumbnail'))?.outputs?.find((o: any) => o.key === 'thumbnail');
+
+              const videoUrl = hlsOutput?.url || mp4Output?.url;
+              const thumbUrl = thumbOutput?.url;
+
+              if (videoUrl) {
+                movies.push({
+                  id: idx,
+                  name: `Trailer ${movies.length + 1}`,
+                  thumbnail: thumbUrl || '',
+                  webm: { '480': videoUrl, max: videoUrl },
+                  mp4: { '480': videoUrl, max: videoUrl },
+                  hls: hlsOutput?.url,
+                });
+              }
+
+              if (thumbUrl && !screenshots.some((s) => s.pathFull === thumbUrl)) {
+                screenshots.push({
+                  id: 1000 + idx,
+                  pathThumbnail: thumbUrl,
+                  pathFull: thumbUrl,
+                });
+              }
+            }
+          } catch {
+            // Ignore parse errors
+          }
+        }
+      });
+
+      // Also check gallery images if available
+      const galleryImages = d.gallery?.galleryImages || [];
+      galleryImages.forEach((g: any, idx: number) => {
+        const gUrl = g.src || g.url || (typeof g === 'string' ? g : null);
+        if (gUrl && typeof gUrl === 'string' && !screenshots.some((s) => s.pathFull === gUrl)) {
+          screenshots.push({
+            id: 2000 + idx,
+            pathThumbnail: gUrl,
+            pathFull: gUrl,
           });
         }
       });
 
       const reqs = d.requirements?.systems?.[0]?.details || [];
-      const minReq = reqs.find((r: any) => r.title?.toLowerCase().includes('minimum'))?.description;
-      const recReq = reqs.find((r: any) => r.title?.toLowerCase().includes('recommended'))?.description;
+      const minReq = reqs.map((r: any) => (r.title && r.minimum ? `<strong>${r.title}:</strong> ${r.minimum}` : '')).filter(Boolean).join('<br>');
+      const recReq = reqs.map((r: any) => (r.title && r.recommended ? `<strong>${r.title}:</strong> ${r.recommended}` : '')).filter(Boolean).join('<br>');
+
+      const descFull = d.about?.description || d.about?.about || d.markdown?.markdown || '';
+      const descShort = d.about?.shortDescription || '';
+      const headerImage = d.hero?.portrait || d.banner?.image || d.about?.image?.src || '';
 
       return {
-        aboutTheGame: d.about?.about || d.markdown?.markdown || '',
-        detailedDescription: d.about?.about || '',
-        shortDescription: d.about?.shortDescription || '',
-        headerImage: d.hero?.portrait || d.banner?.image || '',
+        aboutTheGame: descFull,
+        detailedDescription: descFull,
+        shortDescription: descShort,
+        headerImage,
         screenshots,
-        movies: [],
+        movies,
         systemRequirements: {
           minimum: minReq,
           recommended: recReq,
         },
         releaseDate: d.meta?.releaseDate ? d.meta.releaseDate.substring(0, 10) : '',
+        developers: d.about?.developerAttribution ? [d.about.developerAttribution] : undefined,
+        publishers: d.about?.publisherAttribution ? [d.about.publisherAttribution] : undefined,
       };
     } catch (err: any) {
       console.warn(`[Fallback Provider] Epic product content lookup failed for ${slugOrTitle}:`, err?.message);
@@ -196,7 +263,17 @@ export class FallbackMetadataProvider {
     }
 
     if (!storeMetadata && epicPlatform) {
-      storeMetadata = await this.fetchEpicProductMetadata(epicPlatform.platformGameId || game.title);
+      // First try slug derived from game title (e.g. "Alan Wake 2" -> "alan-wake-2")
+      const titleSlug = game.title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '');
+      storeMetadata = await this.fetchEpicProductMetadata(titleSlug);
+
+      // If not found and platformGameId is not a raw hex hash, try platformGameId
+      if (!storeMetadata && epicPlatform.platformGameId && !/^[0-9a-f]{20,}$/i.test(epicPlatform.platformGameId)) {
+        storeMetadata = await this.fetchEpicProductMetadata(epicPlatform.platformGameId);
+      }
     }
 
     // Pull OpenCritic review data

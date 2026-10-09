@@ -289,10 +289,10 @@ export const EPIC_USER_LIBRARY: CanonicalGame[] = [
     ],
     "headerImage": "https://cdn1.epicgames.com/item/c4763f236d08423eb47b4c3008779c84/EGS_AlanWake2_RemedyEntertainment_S1_2560x1440-ec44404c0b41bc457cb94cd72cf85872",
     "capsuleImage": "https://cdn1.epicgames.com/item/c4763f236d08423eb47b4c3008779c84/EGS_AlanWake2_RemedyEntertainment_S2_1200x1600-c7c8091ddac0f9669c8e5905bca88aaa",
-    "shortDescription": "Alan Wake 2",
-    "releaseDate": "2024-12-12",
+    "shortDescription": "Saga Anderson arrives to investigate ritualistic murders in a small town. Alan Wake pens a dark story to shape the reality around him. These two heroes are somehow connected. Can they become the heroes they need to be?",
+    "releaseDate": "2023-10-27",
     "developers": [
-      "Epic Games Publishing"
+      "Remedy Entertainment"
     ],
     "publishers": [
       "Epic Games Publishing"
