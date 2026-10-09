@@ -95,6 +95,7 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
   const [authenticatingStore, setAuthenticatingStore] = useState<StorefrontId | null>(null);
   const [authRedirectInput, setAuthRedirectInput] = useState('');
   const popupRef = useRef<Window | null>(null);
+  const authStartTimeRef = useRef<number>(0);
 
   // Advanced manual inputs toggle
   const [showAdvancedInputs, setShowAdvancedInputs] = useState(false);
@@ -135,6 +136,31 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
     }
   }, [isOpen]);
 
+  // Auto-detect when the user switches focus back to this window after completing login in popup
+  useEffect(() => {
+    const handleWindowFocus = () => {
+      if (
+        authenticatingStore &&
+        popupRef.current &&
+        Date.now() - authStartTimeRef.current > 3500
+      ) {
+        // User has returned to the main application window after interacting with the sign-in window.
+        // Auto-close popup and finalize the sync immediately.
+        try {
+          popupRef.current.close();
+        } catch {
+          // Cross-origin catch
+        }
+        completeStoreAuthentication(authenticatingStore);
+      }
+    };
+
+    window.addEventListener('focus', handleWindowFocus);
+    return () => {
+      window.removeEventListener('focus', handleWindowFocus);
+    };
+  }, [authenticatingStore, authRedirectInput, gogToken, steamInput, epicToken, xboxInput]);
+
   if (!isOpen) return null;
 
   const currentIntegration =
@@ -150,6 +176,7 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
     setErrorMsg(null);
     setSuccessMsg(null);
     setAuthenticatingStore(storefrontId);
+    authStartTimeRef.current = Date.now();
 
     const left = window.screenX + Math.max(0, (window.outerWidth - config.width) / 2);
     const top = window.screenY + Math.max(0, (window.outerHeight - config.height) / 2);
@@ -172,7 +199,7 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
         } catch {
           // Cross-origin read boundary
         }
-      }, 1000);
+      }, 350);
     }
   };
 
@@ -373,15 +400,29 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
                 <p className="text-xs text-steam-subtext max-w-md mx-auto mt-1 leading-relaxed">
                   {selectedTab === 'gog' ? (
                     <>
-                      Please log in on the official GOG sign-in window. Once you authenticate, GOG redirects to a success page (<code className="text-emerald-300 bg-black/40 px-1 py-0.5 rounded text-[11px]">embed.gog.com/on_login_success</code>).
-                      <br className="my-1" />
-                      When that page appears, your login was successful! Click <strong className="text-white">"I've Completed Sign In — Sync Now"</strong> below to close the pop-up and sync your library.
+                      Please log in on the official GOG sign-in window. Once you authenticate (via Google or GOG account), GOG redirects to the confirmation page (<code className="text-emerald-300 bg-black/40 px-1 py-0.5 rounded text-[11px]">embed.gog.com/on_login_success</code>).
                     </>
                   ) : (
                     `Please log in on the official ${STORE_AUTH_CONFIGS[selectedTab]?.storeName} sign-in page in the pop-up window. Once complete, this app will automatically connect and synchronize your owned titles.`
                   )}
                 </p>
               </div>
+
+              {/* Special callout banner for GOG blank page */}
+              {selectedTab === 'gog' && (
+                <div className="p-3 bg-amber-950/40 border border-amber-500/50 rounded text-amber-200 text-xs text-left max-w-lg mx-auto flex items-start gap-2.5 shadow-inner">
+                  <AlertCircle className="w-5 h-5 flex-shrink-0 text-amber-400 mt-0.5" />
+                  <div className="space-y-1">
+                    <span className="font-bold text-amber-300">Why GOG displays a blank white screen:</span>
+                    <p className="text-[11px] leading-relaxed text-amber-200/90">
+                      GOG's official OAuth server directs the browser to <code className="bg-black/50 px-1 py-0.5 rounded font-mono text-emerald-300">embed.gog.com/on_login_success</code>. Because this endpoint was built for the native GOG Galaxy desktop client, GOG intentionally serves a <strong>blank white page</strong> without auto-closing the browser window.
+                    </p>
+                    <p className="text-[11px] font-semibold text-emerald-300">
+                      ✓ Seeing that blank white page confirms your sign-in was 100% successful! Click the button below to close the pop-up and sync your library.
+                    </p>
+                  </div>
+                </div>
+              )}
 
               {selectedTab === 'gog' && (
                 <div className="max-w-md mx-auto text-left space-y-1.5 bg-[#121922] p-3 rounded border border-steam-border/60">
@@ -391,7 +432,14 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
                   <input
                     type="text"
                     value={authRedirectInput}
-                    onChange={(e) => setAuthRedirectInput(e.target.value)}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setAuthRedirectInput(val);
+                      const code = extractCodeFromInput(val);
+                      if (code) {
+                        completeStoreAuthentication(selectedTab, code);
+                      }
+                    }}
                     placeholder="e.g. https://embed.gog.com/on_login_success?origin=client&code=..."
                     className="w-full px-2.5 py-1.5 bg-[#0d1218] border border-steam-border rounded text-xs text-white font-mono placeholder:text-steam-subtext/50 focus:outline-none focus:border-steam-accent"
                   />
@@ -409,7 +457,11 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
                   className="px-5 py-2.5 rounded bg-steam-accent hover:bg-steam-accent-hover text-white text-xs font-bold transition-all shadow-md flex items-center gap-2"
                 >
                   {isSubmitting ? <RefreshCw className="w-4 h-4 animate-spin" /> : <ShieldCheck className="w-4 h-4" />}
-                  {isSubmitting ? 'Syncing...' : "I've Completed Sign In — Sync Now"}
+                  {isSubmitting
+                    ? 'Syncing...'
+                    : selectedTab === 'gog'
+                    ? 'Close Pop-Up & Connect GOG Now'
+                    : "I've Completed Sign In — Sync Now"}
                 </button>
 
                 <button

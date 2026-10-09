@@ -7,7 +7,6 @@ import { SteamHeroDetails } from './SteamHeroDetails';
 import { SteamLibraryActionBar } from './SteamLibraryActionBar';
 import { HowLongToBeatCard } from './HowLongToBeatCard';
 import { getHowLongToBeat } from '../../services/hltb/howLongToBeat';
-import { OpenCriticCard } from './OpenCriticCard';
 import { getOpenCriticData } from '../../services/opencritic/openCritic';
 import { SystemRequirements } from './SystemRequirements';
 import { PlatformBadges } from './PlatformBadges';
@@ -219,11 +218,8 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
           />
         </div>
 
-        {/* Critical Consensus & Gameplay Completion Dashboards */}
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-          <OpenCriticCard openCritic={openCriticData} gameTitle={game.title} />
-          <HowLongToBeatCard hltb={getHowLongToBeat(game.steamAppId, game.genres, game.tags)} gameTitle={game.title} />
-        </div>
+        {/* Gameplay Completion Dashboard (HowLongToBeat) */}
+        <HowLongToBeatCard hltb={getHowLongToBeat(game.steamAppId, game.genres, game.tags)} gameTitle={game.title} />
 
         {/* Content Section: Description & Technical Specs */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-4">

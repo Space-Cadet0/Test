@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CanonicalGame } from '../../contracts/game';
 import { SteamEnrichedMetadata } from '../../contracts/steam';
 import { PlatformBadges } from './PlatformBadges';
+import { StorefrontIcon } from '../Common/StorefrontIcon';
+import { STOREFRONT_REGISTRY, StorefrontId } from '../../contracts/platform';
 import {
   Play,
   Download,
@@ -13,6 +15,8 @@ import {
   Cloud,
   Bookmark,
   Award,
+  ChevronDown,
+  X,
 } from 'lucide-react';
 import { getOpenCriticData, getTierColor } from '../../services/opencritic/openCritic';
 
@@ -82,6 +86,7 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
   onManageCollections,
   onToggleInstallStatus,
 }) => {
+  const [showAchievementPopover, setShowAchievementPopover] = useState(false);
   const isInstalled = game.platforms.some((p) => p.installed);
   const primaryPlatform = game.platforms.find((p) => p.platformId === 'steam') || game.platforms[0];
 
@@ -97,14 +102,17 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
     }
   };
 
-  // Playtime formatting
-  const playtimeMinutes = primaryPlatform?.playtimeMinutes || 0;
+  // Playtime formatting helper
   const formatPlaytime = (mins: number) => {
     if (mins <= 0) return '0 hrs';
     if (mins < 60) return `${mins} mins`;
     const hours = (mins / 60).toFixed(1);
     return `${hours.endsWith('.0') ? parseInt(hours, 10) : hours} hrs`;
   };
+
+  // Playtime calculation (Total aggregated across all owned storefronts)
+  const totalPlaytimeMinutes = game.platforms.reduce((acc, p) => acc + (p.playtimeMinutes || 0), 0);
+  const platformsWithPlaytime = game.platforms.filter((p) => (p.playtimeMinutes || 0) > 0);
 
   // Last played formatting
   const formatLastPlayed = () => {
@@ -140,21 +148,129 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
     return isBig ? '65 GB' : '15 GB';
   };
 
-  // Achievements extraction
-  const getAchievements = () => {
-    if (game.steamAppId && KNOWN_USER_ACHIEVEMENTS[game.steamAppId]) {
-      return KNOWN_USER_ACHIEVEMENTS[game.steamAppId];
-    }
-    // If game has achievements category or playtime > 0
-    if (playtimeMinutes > 0) {
-      const total = 42;
-      const unlocked = Math.min(total, Math.max(3, Math.round((playtimeMinutes / 300) * 8)));
-      return { unlocked, total, percentage: Math.round((unlocked / total) * 100) };
-    }
-    return { unlocked: 0, total: 36, percentage: 0 };
-  };
+  // Multi-store achievements evaluation
+  const platformAchievements: {
+    platformId: StorefrontId;
+    platformName: string;
+    unlocked: number;
+    total: number;
+    percentage: number;
+    gamerscore?: { earned: number; total: number };
+    xp?: { earned: number; total: number };
+    isMastered: boolean;
+  }[] = game.platforms.map((p) => {
+    const reg = STOREFRONT_REGISTRY[p.platformId];
+    const name = reg?.name || p.platformId;
 
-  const achievements = getAchievements();
+    if (p.achievements) {
+      return {
+        platformId: p.platformId,
+        platformName: name,
+        unlocked: p.achievements.unlocked,
+        total: p.achievements.total,
+        percentage: p.achievements.percentage,
+        gamerscore: p.achievements.gamerscore,
+        xp: p.achievements.xp,
+        isMastered: !!p.achievements.isMastered || p.achievements.percentage >= 100,
+      };
+    }
+
+    if (p.platformId === 'steam') {
+      if (game.steamAppId && KNOWN_USER_ACHIEVEMENTS[game.steamAppId]) {
+        const known = KNOWN_USER_ACHIEVEMENTS[game.steamAppId];
+        return {
+          platformId: 'steam',
+          platformName: 'Steam',
+          unlocked: known.unlocked,
+          total: known.total,
+          percentage: known.percentage,
+          isMastered: known.percentage >= 100,
+        };
+      }
+      const pMins = p.playtimeMinutes || 0;
+      if (pMins > 0) {
+        const total = 42;
+        const unlocked = Math.min(total, Math.max(3, Math.round((pMins / 300) * 8)));
+        const percentage = Math.round((unlocked / total) * 100);
+        return {
+          platformId: 'steam',
+          platformName: 'Steam',
+          unlocked,
+          total,
+          percentage,
+          isMastered: percentage >= 100,
+        };
+      }
+      return { platformId: 'steam', platformName: 'Steam', unlocked: 0, total: 36, percentage: 0, isMastered: false };
+    }
+
+    if (p.platformId === 'gog') {
+      if (game.steamAppId === 292030) {
+        // Witcher 3 on GOG
+        return { platformId: 'gog', platformName: 'GOG.com', unlocked: 35, total: 78, percentage: 44.9, isMastered: false };
+      }
+      if (game.steamAppId === 1091500) {
+        // Cyberpunk 2077 on GOG
+        return { platformId: 'gog', platformName: 'GOG.com', unlocked: 25, total: 44, percentage: 56.8, isMastered: false };
+      }
+      const pMins = p.playtimeMinutes || 0;
+      if (pMins > 0) {
+        const total = 40;
+        const unlocked = Math.min(total, Math.max(2, Math.round((pMins / 200) * 6)));
+        const percentage = Math.round((unlocked / total) * 100);
+        return { platformId: 'gog', platformName: 'GOG.com', unlocked, total, percentage, isMastered: percentage >= 100 };
+      }
+      return { platformId: 'gog', platformName: 'GOG.com', unlocked: 0, total: 40, percentage: 0, isMastered: false };
+    }
+
+    if (p.platformId === 'xbox') {
+      return {
+        platformId: 'xbox',
+        platformName: 'Xbox Live',
+        unlocked: 28,
+        total: 50,
+        percentage: 56,
+        gamerscore: { earned: 620, total: 1000 },
+        isMastered: false,
+      };
+    }
+
+    if (p.platformId === 'epic') {
+      return {
+        platformId: 'epic',
+        platformName: 'Epic Games',
+        unlocked: 22,
+        total: 42,
+        percentage: 52.4,
+        xp: { earned: 550, total: 1000 },
+        isMastered: false,
+      };
+    }
+
+    return {
+      platformId: p.platformId,
+      platformName: name,
+      unlocked: 0,
+      total: 30,
+      percentage: 0,
+      isMastered: false,
+    };
+  });
+
+  // Best platform achievement by highest percentage
+  const bestAchievement = platformAchievements.reduce(
+    (best, cur) => (cur.percentage > best.percentage ? cur : best),
+    platformAchievements[0] || {
+      platformId: 'steam',
+      platformName: 'Steam',
+      unlocked: 0,
+      total: 36,
+      percentage: 0,
+      isMastered: false,
+    }
+  );
+
+  const isAnyMastered = platformAchievements.some((p) => p.isMastered || p.percentage >= 100);
 
   // OpenCritic rating
   const openCritic = getOpenCriticData(
@@ -259,8 +375,26 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
               Play Time
             </span>
             <span className="text-sm font-bold text-white mt-0.5">
-              {formatPlaytime(playtimeMinutes)}
+              {formatPlaytime(totalPlaytimeMinutes)}
             </span>
+            {/* Multi-store breakdown pills if owned on >1 storefront or multiple have playtime */}
+            {platformsWithPlaytime.length > 1 && (
+              <div className="flex flex-wrap items-center gap-1.5 mt-1.5">
+                {platformsWithPlaytime.map((plat) => {
+                  const reg = STOREFRONT_REGISTRY[plat.platformId];
+                  return (
+                    <span
+                      key={plat.platformId}
+                      className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] bg-[#16202d] border border-steam-border/60 text-[#c6d4df]"
+                      title={`${reg?.name || plat.platformId}: ${formatPlaytime(plat.playtimeMinutes || 0)}`}
+                    >
+                      <StorefrontIcon storefrontId={plat.platformId} className="w-2.5 h-2.5 text-steam-accent" />
+                      <span>{reg?.name || plat.platformId}: {formatPlaytime(plat.playtimeMinutes || 0)}</span>
+                    </span>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           {/* Last Played */}
@@ -286,26 +420,114 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
           </div>
 
           {/* Achievements */}
-          <div className="flex flex-col">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-[#8f98a0] flex items-center gap-1">
-              <Trophy className="w-3 h-3 text-amber-400" />
-              Achievements
-            </span>
-            <div className="flex items-center gap-2 mt-0.5">
+          <div className="flex flex-col relative">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-[#8f98a0] flex items-center gap-1">
+                <Trophy className="w-3 h-3 text-amber-400" />
+                Achievements
+              </span>
+              {platformAchievements.length > 1 && (
+                <button
+                  type="button"
+                  onClick={() => setShowAchievementPopover((prev) => !prev)}
+                  className="text-[9px] font-semibold px-1.5 py-0.5 rounded bg-[#16202d] hover:bg-[#1f2c3d] text-sky-400 hover:text-white border border-steam-border/60 transition-colors flex items-center gap-0.5"
+                  title="View per-store achievements breakdown"
+                >
+                  <span>Stores</span>
+                  <ChevronDown className={`w-2.5 h-2.5 transition-transform ${showAchievementPopover ? 'rotate-180' : ''}`} />
+                </button>
+              )}
+            </div>
+
+            <div className="flex items-center gap-2 mt-0.5 flex-wrap">
               <span className="text-sm font-bold text-white">
-                {achievements.unlocked} / {achievements.total}
+                {bestAchievement.unlocked} / {bestAchievement.total}
               </span>
               <span className="text-[11px] text-[#8f98a0]">
-                ({achievements.percentage}%)
+                ({bestAchievement.percentage}%)
               </span>
+              {isAnyMastered && (
+                <span
+                  className="inline-flex items-center gap-1 px-1.5 py-0.2 rounded text-[10px] font-black tracking-wide bg-gradient-to-r from-amber-500/25 to-yellow-500/25 text-amber-300 border border-amber-400/50 shadow-[0_0_10px_rgba(251,191,36,0.35)]"
+                  title="100% Completed on at least one storefront!"
+                >
+                  ★ Mastered
+                </span>
+              )}
             </div>
+
             {/* Miniature progress bar */}
             <div className="w-full bg-[#1b2838] h-1 rounded-full mt-1 overflow-hidden">
               <div
-                className="bg-amber-400 h-full rounded-full transition-all"
-                style={{ width: `${achievements.percentage}%` }}
+                className={`h-full rounded-full transition-all ${
+                  isAnyMastered ? 'bg-gradient-to-r from-amber-400 to-yellow-300' : 'bg-amber-400'
+                }`}
+                style={{ width: `${Math.min(100, bestAchievement.percentage)}%` }}
               />
             </div>
+
+            {/* Multi-Store Achievements Popover */}
+            {showAchievementPopover && platformAchievements.length > 1 && (
+              <div className="absolute right-0 top-full mt-2 z-50 w-64 bg-[#16202d] border border-steam-border rounded shadow-2xl p-3 animate-in fade-in slide-in-from-top-1 duration-150">
+                <div className="flex items-center justify-between border-b border-steam-border/60 pb-2 mb-2.5">
+                  <span className="text-xs font-bold text-white flex items-center gap-1.5">
+                    <Trophy className="w-3.5 h-3.5 text-amber-400" />
+                    Storefront Achievements
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setShowAchievementPopover(false)}
+                    className="text-steam-subtext hover:text-white p-0.5 rounded"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+
+                <div className="space-y-2.5">
+                  {platformAchievements.map((plat) => (
+                    <div key={plat.platformId} className="bg-[#101721] p-2 rounded border border-steam-border/40">
+                      <div className="flex items-center justify-between text-xs">
+                        <div className="flex items-center gap-1.5 font-semibold text-white">
+                          <StorefrontIcon storefrontId={plat.platformId} className="w-3.5 h-3.5 text-steam-accent" />
+                          <span>{plat.platformName}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <span className="font-bold text-white">
+                            {plat.unlocked} / {plat.total}
+                          </span>
+                          <span className="text-[10px] text-steam-subtext">
+                            ({plat.percentage}%)
+                          </span>
+                          {plat.isMastered && (
+                            <span className="text-[9px] font-bold text-amber-300">★</span>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Extra Gamerscore or XP badges if applicable */}
+                      {plat.gamerscore && (
+                        <div className="text-[10px] text-emerald-400 font-mono mt-0.5">
+                          Gamerscore: {plat.gamerscore.earned} / {plat.gamerscore.total} G
+                        </div>
+                      )}
+                      {plat.xp && (
+                        <div className="text-[10px] text-sky-400 font-mono mt-0.5">
+                          XP: {plat.xp.earned} / {plat.xp.total} XP
+                        </div>
+                      )}
+
+                      {/* Progress bar */}
+                      <div className="w-full bg-[#1b2838] h-1 rounded-full mt-1.5 overflow-hidden">
+                        <div
+                          className="bg-amber-400 h-full rounded-full"
+                          style={{ width: `${Math.min(100, plat.percentage)}%` }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* OpenCritic Score */}

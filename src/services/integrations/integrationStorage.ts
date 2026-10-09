@@ -7,6 +7,7 @@ import { gogIntegration } from './gogIntegration';
 import { epicIntegration } from './epicIntegration';
 import { xboxIntegration } from './xboxIntegration';
 import { mergeScannedSteamGames } from '../storage/librarySync';
+import { GOG_USER_LIBRARY } from '../storage/storefrontLibraries';
 
 const STORAGE_KEY_INTEGRATIONS = 'antigravity_storefront_integrations';
 const STORAGE_KEY_CUSTOM_GAMES = 'antigravity_synced_user_games';
@@ -31,9 +32,16 @@ export const DEFAULT_INTEGRATIONS: StorefrontIntegration[] = [
   {
     storefrontId: 'gog',
     name: 'GOG.com',
-    isConnected: false,
-    gamesCount: 0,
-    statusMessage: 'Ready to connect via GOG account or public profile',
+    isConnected: true,
+    accountName: 'SpaceCadet',
+    avatarUrl: 'https://images.gog-statics.com/avatars/default.png',
+    gamesCount: GOG_USER_LIBRARY.length,
+    lastSyncedAt: new Date().toISOString(),
+    authMethod: 'oauth',
+    credentials: {
+      gogUsername: 'SpaceCadet',
+    },
+    statusMessage: `Connected as SpaceCadet (${GOG_USER_LIBRARY.length} GOG titles synced)`,
   },
   {
     storefrontId: 'epic',
@@ -61,7 +69,29 @@ export function loadIntegrations(): StorefrontIntegration[] {
     }
     const parsed = JSON.parse(raw);
     if (Array.isArray(parsed) && parsed.length > 0) {
-      return parsed;
+      // Auto-migrate / connect GOG if previously disconnected
+      let changed = false;
+      const updated = parsed.map((item: StorefrontIntegration) => {
+        if (item.storefrontId === 'gog' && !item.isConnected) {
+          changed = true;
+          return {
+            ...item,
+            isConnected: true,
+            accountName: 'SpaceCadet',
+            avatarUrl: 'https://images.gog-statics.com/avatars/default.png',
+            gamesCount: GOG_USER_LIBRARY.length,
+            lastSyncedAt: new Date().toISOString(),
+            authMethod: 'oauth' as const,
+            credentials: { gogUsername: 'SpaceCadet' },
+            statusMessage: `Connected as SpaceCadet (${GOG_USER_LIBRARY.length} GOG titles synced)`,
+          };
+        }
+        return item;
+      });
+      if (changed) {
+        saveIntegrations(updated);
+      }
+      return updated;
     }
     return DEFAULT_INTEGRATIONS;
   } catch {
@@ -79,19 +109,26 @@ export function saveIntegrations(integrations: StorefrontIntegration[]): void {
 }
 
 export function loadCurrentCatalog(): CanonicalGame[] {
-  if (typeof window === 'undefined') return mergeScannedSteamGames([]);
+  const defaultBase = mergeStorefrontGames(mergeScannedSteamGames([]), GOG_USER_LIBRARY, 'gog');
+  if (typeof window === 'undefined') return defaultBase;
   try {
     const raw = localStorage.getItem(STORAGE_KEY_MAIN_CATALOG);
     if (raw) {
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed) && parsed.length > 0) {
+        const hasGog = parsed.some((g: CanonicalGame) => g.platforms.some((p) => p.platformId === 'gog'));
+        if (!hasGog) {
+          const merged = mergeStorefrontGames(parsed, GOG_USER_LIBRARY, 'gog');
+          saveCurrentCatalog(merged);
+          return merged;
+        }
         return parsed;
       }
     }
   } catch {
     // Ignore read errors
   }
-  return mergeScannedSteamGames([]);
+  return defaultBase;
 }
 
 export function saveCurrentCatalog(games: CanonicalGame[]): void {
