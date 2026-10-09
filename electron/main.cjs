@@ -4,6 +4,9 @@ const os = require('node:os');
 const fs = require('node:fs');
 const storeSync = require('./storeSync.cjs');
 
+// Ensure videos and embedded trailers autoplay smoothly without requiring user gesture
+app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
+
 let mainWindow = null;
 
 function createMainWindow() {
@@ -81,12 +84,16 @@ if (!gotTheLock) {
     session.defaultSession.webRequest.onBeforeSendHeaders(
       { urls: embedFilters },
       (details, callback) => {
-        delete details.requestHeaders['origin'];
-        delete details.requestHeaders['Origin'];
-        delete details.requestHeaders['referer'];
-        delete details.requestHeaders['Referer'];
-        details.requestHeaders['Origin'] = 'https://www.gog.com';
-        details.requestHeaders['Referer'] = 'https://www.gog.com/';
+        // Crucial: Only rewrite headers for the frame document request itself (subFrame / mainFrame).
+        // Preserving original headers for XHR/fetch/chunks prevents YouTube's internal player API from stalling at 0:00.
+        if (details.resourceType === 'subFrame' || details.resourceType === 'mainFrame') {
+          delete details.requestHeaders['origin'];
+          delete details.requestHeaders['Origin'];
+          delete details.requestHeaders['referer'];
+          delete details.requestHeaders['Referer'];
+          details.requestHeaders['Origin'] = 'https://www.gog.com';
+          details.requestHeaders['Referer'] = 'https://www.gog.com/';
+        }
         callback({ requestHeaders: details.requestHeaders });
       }
     );

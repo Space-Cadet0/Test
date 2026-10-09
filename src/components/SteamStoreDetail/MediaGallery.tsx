@@ -53,7 +53,7 @@ const VideoPlayer: React.FC<{ movie: SteamMovie }> = ({ movie }) => {
   if (isEmbed) {
     const watchUrl = ytId ? `https://www.youtube.com/watch?v=${ytId}` : candidateUrl;
     const embedSrc = ytId
-      ? `https://www.youtube-nocookie.com/embed/${ytId}?rel=0&modestbranding=1&enablejsapi=1&origin=https://www.gog.com`
+      ? `https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&rel=0&modestbranding=1&enablejsapi=1`
       : candidateUrl;
 
     const handleOpenExternal = (e: React.MouseEvent) => {
