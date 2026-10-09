@@ -1,6 +1,7 @@
 import { CanonicalGame } from '../../contracts/game';
 import { KNOWN_EPIC_APP_NAMES } from './epicCodenames';
 import { GOG_USER_LIBRARY } from '../storage/gogUserLibrary';
+import { EPIC_USER_LIBRARY } from '../storage/epicUserLibrary';
 
 /**
  * Checks if a string is a 20+ hex hash or UUID
@@ -106,6 +107,19 @@ for (const g of GOG_USER_LIBRARY) {
   for (const p of g.platforms) {
     if (p.platformId === 'gog' && p.platformGameId) {
       validGogProductIds.add(p.platformGameId.trim());
+    }
+  }
+}
+
+const validEpicCatalogIds = new Set<string>();
+const validEpicTitles = new Set<string>();
+const validEpicSteamAppIds = new Set<number>();
+for (const g of EPIC_USER_LIBRARY) {
+  validEpicTitles.add(normalizeCanonicalTitle(g.title));
+  if (g.steamAppId) validEpicSteamAppIds.add(g.steamAppId);
+  for (const p of g.platforms) {
+    if (p.platformId === 'epic' && p.platformGameId) {
+      validEpicCatalogIds.add(p.platformGameId.trim().toLowerCase());
     }
   }
 }
@@ -223,7 +237,11 @@ export function sanitizeGameCatalog(catalog: CanonicalGame[]): CanonicalGame[] {
     }
 
     const currentTitleLower = game.title.toLowerCase().trim();
-    if (['bobcat', 'boxfish', 'calluna', 'catnip', 'cormorant'].includes(currentTitleLower)) {
+    if ([
+      'bobcat', 'boxfish', 'calluna', 'catnip', 'cormorant',
+      'hazelnut', 'hazlenut', 'herring', 'boga', 'barbet', 'basil', 'batfish', 'batfishs2', 'blobfish',
+      'speedwell', 'wombat'
+    ].includes(currentTitleLower)) {
       continue;
     }
 
@@ -254,7 +272,25 @@ export function sanitizeGameCatalog(catalog: CanonicalGame[]): CanonicalGame[] {
       }
     }
 
-    // 7. Intelligent cross-store deduplication by Steam App ID and Normalized Title
+    // 7. Purge false Epic platform presence from unowned Epic titles (e.g. unowned mock entries like Hades, loose DLC assets, or mismatched titles)
+    if (game.platforms.some((p) => p.platformId === 'epic')) {
+      const epicPlatform = game.platforms.find((p) => p.platformId === 'epic');
+      const epicGameId = (epicPlatform?.platformGameId || '').trim().toLowerCase();
+      const isRealEpicGame =
+        (epicGameId && validEpicCatalogIds.has(epicGameId)) ||
+        (game.steamAppId && validEpicSteamAppIds.has(game.steamAppId)) ||
+        validEpicTitles.has(normTitle);
+
+      if (!isRealEpicGame) {
+        game = {
+          ...game,
+          platforms: game.platforms.filter((p) => p.platformId !== 'epic'),
+        };
+        if (game.platforms.length === 0) continue;
+      }
+    }
+
+    // 8. Intelligent cross-store deduplication by Steam App ID and Normalized Title
     const existingIndex =
       (game.steamAppId && steamIdToIndex.has(game.steamAppId)
         ? steamIdToIndex.get(game.steamAppId)

@@ -170,6 +170,11 @@ const KNOWN_STEAM_MAPPINGS = {
   'predator: hunting grounds': 1556200,
   'borderlands 3': 397540,
   'saints row': 742420,
+  'hazelnut': 48000,
+  'hazlenut': 48000,
+  'herring': 383270,
+  'limbo': 48000,
+  'hue': 383270,
 };
 
 const KNOWN_EPIC_APP_NAMES = {
@@ -184,6 +189,9 @@ const KNOWN_EPIC_APP_NAMES = {
   calluna: { title: 'Control', steamAppId: 870780, developer: 'Remedy Entertainment' },
   catnip: { title: 'Borderlands 3', steamAppId: 397540, developer: 'Gearbox Software' },
   cormorant: { title: 'Saints Row', steamAppId: 742420, developer: 'Deep Silver Volition' },
+  hazelnut: { title: 'Limbo', steamAppId: 48000, developer: 'Playdead' },
+  hazlenut: { title: 'Limbo', steamAppId: 48000, developer: 'Playdead' },
+  herring: { title: 'Hue', steamAppId: 383270, developer: 'Curve Digital' },
   wombat: { title: 'World War Z', steamAppId: 699130, developer: 'Saber Interactive' },
   speedwell: { title: 'Metro Last Light Redux', steamAppId: 287390, developer: '4A Games' },
   sugar: { title: 'Rocket League', steamAppId: 252950, developer: 'Psyonix LLC' },

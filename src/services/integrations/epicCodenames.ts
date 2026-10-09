@@ -72,6 +72,24 @@ export const KNOWN_EPIC_APP_NAMES: Record<string, EpicCodenameMapping> = {
     developer: 'Deep Silver Volition',
     description: 'Experience the biggest and best Saints Row playground ever created.',
   },
+  hazelnut: {
+    title: 'Limbo',
+    steamAppId: 48000,
+    developer: 'Playdead',
+    description: 'Uncertain of his sister\'s fate, a boy enters LIMBO.',
+  },
+  hazlenut: {
+    title: 'Limbo',
+    steamAppId: 48000,
+    developer: 'Playdead',
+    description: 'Uncertain of his sister\'s fate, a boy enters LIMBO.',
+  },
+  herring: {
+    title: 'Hue',
+    steamAppId: 383270,
+    developer: 'Curve Digital',
+    description: 'Hue is a vibrant, award-winning puzzle-adventure, where you alter the world by changing its background colour.',
+  },
   wombat: {
     title: 'World War Z',
     steamAppId: 699130,

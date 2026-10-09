@@ -181,7 +181,7 @@ export function loadCurrentCatalog(): CanonicalGame[] {
         }
 
         const epicCount = cleaned.filter((g: CanonicalGame) => g.platforms?.some((p) => p.platformId === 'epic')).length;
-        if (epicCount < EPIC_USER_LIBRARY.length) {
+        if (epicCount !== EPIC_USER_LIBRARY.length) {
           cleaned = sanitizeGameCatalog(mergeStorefrontGames(cleaned, EPIC_USER_LIBRARY, 'epic'));
         }
 
