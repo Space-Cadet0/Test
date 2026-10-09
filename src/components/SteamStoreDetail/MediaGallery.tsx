@@ -106,12 +106,12 @@ const VideoPlayer: React.FC<{ movie: SteamMovie }> = ({ movie }) => {
     (movie.mp4?.max && !movie.mp4.max.includes('.mpd') && !movie.mp4.max.includes('.m3u8')
       ? movie.mp4.max
       : '') ||
-    (movie.id ? `https://video.akamai.steamstatic.com/store_trailers/${movie.id}/movie_max.mp4` : '');
+    (!hlsUrl && movie.id ? `https://video.akamai.steamstatic.com/store_trailers/${movie.id}/movie_max.mp4` : '');
   const mp4LowUrl =
     (movie.mp4?.['480'] && !movie.mp4['480'].includes('.mpd') && !movie.mp4['480'].includes('.m3u8')
       ? movie.mp4['480']
       : '') ||
-    (movie.id ? `https://video.akamai.steamstatic.com/store_trailers/${movie.id}/movie480.mp4` : '');
+    (!hlsUrl && movie.id ? `https://video.akamai.steamstatic.com/store_trailers/${movie.id}/movie480.mp4` : '');
 
   useEffect(() => {
     const video = videoRef.current;
@@ -129,7 +129,7 @@ const VideoPlayer: React.FC<{ movie: SteamMovie }> = ({ movie }) => {
         if (data.fatal) {
           hlsInstance?.destroy();
           hlsInstance = null;
-          // Fall back to direct MP4
+          // Fall back to direct MP4 if available
           if (mp4MaxUrl) {
             video.src = mp4MaxUrl;
           } else {
@@ -142,6 +142,8 @@ const VideoPlayer: React.FC<{ movie: SteamMovie }> = ({ movie }) => {
       video.src = hlsUrl;
     } else if (mp4MaxUrl) {
       video.src = mp4MaxUrl;
+    } else {
+      setIsError(true);
     }
 
     return () => {
@@ -179,17 +181,18 @@ const VideoPlayer: React.FC<{ movie: SteamMovie }> = ({ movie }) => {
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
         onError={() => {
-          // If max failed, try low resolution MP4
-          if (videoRef.current && mp4LowUrl && videoRef.current.src !== mp4LowUrl) {
-            videoRef.current.src = mp4LowUrl;
-          } else {
-            setIsError(true);
+          if (!hlsUrl) {
+            // If max failed, try low resolution MP4
+            if (videoRef.current && mp4LowUrl && videoRef.current.src !== mp4LowUrl) {
+              videoRef.current.src = mp4LowUrl;
+            } else {
+              setIsError(true);
+            }
           }
         }}
-        onClick={togglePlay}
       >
-        {mp4MaxUrl && <source src={mp4MaxUrl} type="video/mp4" />}
-        {mp4LowUrl && <source src={mp4LowUrl} type="video/mp4" />}
+        {!hlsUrl && mp4MaxUrl && <source src={mp4MaxUrl} type="video/mp4" />}
+        {!hlsUrl && mp4LowUrl && <source src={mp4LowUrl} type="video/mp4" />}
       </video>
 
       {/* Prominent Play Overlay when Paused */}
@@ -210,9 +213,9 @@ const VideoPlayer: React.FC<{ movie: SteamMovie }> = ({ movie }) => {
       {isError && (
         <div className="absolute inset-0 bg-black/80 flex flex-col items-center justify-center gap-2 text-steam-subtext text-xs p-4 text-center">
           <span>Unable to stream video directly</span>
-          {mp4MaxUrl && (
+          {(mp4MaxUrl || hlsUrl) && (
             <a
-              href={mp4MaxUrl}
+              href={mp4MaxUrl || hlsUrl}
               target="_blank"
               rel="noreferrer"
               className="text-steam-accent hover:underline"
