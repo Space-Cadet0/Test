@@ -17,8 +17,9 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
         "playtimeMinutes": 0
       }
     ],
-    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3783210/header.jpg",
-    "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3783210/library_600x900_2x.jpg",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3783210/1055e2e14c7eadb6b7f444db978c8c85b3a84eab/header.jpg?t=1759856432",
+    "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3783210/2a4236503b98fd2ffba0e0dd73d9d39ade99b7e1/capsule_231x87.jpg?t=1759856432",
+    "iconUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3783210/2a4236503b98fd2ffba0e0dd73d9d39ade99b7e1/capsule_231x87.jpg?t=1759856432",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2025-10-07",
     "developers": [],
@@ -3774,7 +3775,7 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     }
   },
   {
-    "id": "steam-1225270",
+    "id": "steam-1139900",
     "title": "Ghostrunner",
     "sortTitle": "Ghostrunner",
     "platforms": [
@@ -3785,12 +3786,19 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
         "playtimeMinutes": 0
       }
     ],
-    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1225270/header.jpg",
-    "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1225270/library_600x900_2x.jpg",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1139900/header.jpg",
+    "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1139900/library_600x900_2x.jpg",
+    "iconUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1139900/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2020-10-27",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "One More Level",
+      "3D Realms",
+      "Slipgate Ironworks™"
+    ],
+    "publishers": [
+      "505 Games"
+    ],
     "genres": [
       "Action"
     ],
@@ -3798,7 +3806,7 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
       "GOG",
       "DRM-Free"
     ],
-    "steamAppId": 1225270,
+    "steamAppId": 1139900,
     "reviewSummary": {
       "reviewScore": 4,
       "reviewScoreDesc": "Positive",

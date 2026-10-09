@@ -1474,15 +1474,21 @@ export const KNOWN_EPIC_APP_NAMES: Record<string, EpicCodenameMapping> = {
   },
   "ea8df71f923649a193ab1c1fded7e1b3": {
     "title": "Ghostrunner",
-    "steamAppId": 1225270,
+    "steamAppId": 1139900,
     "developer": "505 Games",
-    "description": "Ghostrunner"
+    "description": "Ghostrunner",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1139900/header.jpg",
+    "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1139900/library_600x900_2x.jpg",
+    "iconUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1139900/library_600x900_2x.jpg"
   },
   "1044c51716c4423e83da5818d289057e": {
     "title": "Ghostrunner",
-    "steamAppId": 1225270,
+    "steamAppId": 1139900,
     "developer": "505 Games",
-    "description": "Ghostrunner"
+    "description": "Ghostrunner",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1139900/header.jpg",
+    "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1139900/library_600x900_2x.jpg",
+    "iconUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1139900/library_600x900_2x.jpg"
   },
   "blackcoral production": {
     "title": "Black Widow: Recharged",
@@ -2217,19 +2223,31 @@ export const KNOWN_EPIC_APP_NAMES: Record<string, EpicCodenameMapping> = {
     "description": "Fallout: A Post Nuclear Role Playing Game"
   },
   "second extinction": {
-    "title": "Second Extinction'",
+    "title": "Second Extinction",
+    "steamAppId": 1024380,
     "developer": "Systemic Reaction",
-    "description": "Second Extinction?"
+    "description": "Second Extinction is a relentless 3-player cooperative FPS where you wipe out mutated dinosaurs that have taken over the Earth.",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1024380/header.jpg",
+    "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1024380/library_600x900_2x.jpg",
+    "iconUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1024380/library_600x900_2x.jpg"
   },
   "18a85afedeac4ea885b27fee3e0c81db": {
-    "title": "Second Extinction'",
+    "title": "Second Extinction",
+    "steamAppId": 1024380,
     "developer": "Systemic Reaction",
-    "description": "Second Extinction?"
+    "description": "Second Extinction is a relentless 3-player cooperative FPS where you wipe out mutated dinosaurs that have taken over the Earth.",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1024380/header.jpg",
+    "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1024380/library_600x900_2x.jpg",
+    "iconUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1024380/library_600x900_2x.jpg"
   },
   "9c48bdf0c65b45cc9e64aa43e7e740b0": {
-    "title": "Second Extinction'",
+    "title": "Second Extinction",
+    "steamAppId": 1024380,
     "developer": "Systemic Reaction",
-    "description": "Second Extinction?"
+    "description": "Second Extinction is a relentless 3-player cooperative FPS where you wipe out mutated dinosaurs that have taken over the Earth.",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1024380/header.jpg",
+    "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1024380/library_600x900_2x.jpg",
+    "iconUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1024380/library_600x900_2x.jpg"
   },
   "fd51551d919847beb178985f6daf0306": {
     "title": "Tunche",
@@ -4346,13 +4364,19 @@ export const KNOWN_EPIC_APP_NAMES: Record<string, EpicCodenameMapping> = {
     "title": "Wildgate",
     "steamAppId": 3504780,
     "developer": "Dreamhaven, Inc.",
-    "description": "Wildgate is a crew-based PVP multiplayer shooter that blends tactical ship-to-ship combat with fast-paced first-person action. Evade deadly environmental hazards, search for powerful weapons and ship upgrades, and be the first crew to escape with the Artifact."
+    "description": "Wildgate is a crew-based PVP multiplayer shooter that blends tactical ship-to-ship combat with fast-paced first-person action. Evade deadly environmental hazards, search for powerful weapons and ship upgrades, and be the first crew to escape with the Artifact.",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3504780/95f1381dac57ce601d5260de3c792f8a2ee2bc93/header.jpg?t=1787942042",
+    "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3504780/22488e2f7358b27d1ccff845bc5bd02e72a1494e/capsule_231x87.jpg?t=1787942042",
+    "iconUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3504780/22488e2f7358b27d1ccff845bc5bd02e72a1494e/capsule_231x87.jpg?t=1787942042"
   },
   "b4a56169dbf54207bc9cb58529f2a75a": {
     "title": "Wildgate",
     "steamAppId": 3504780,
     "developer": "Dreamhaven, Inc.",
-    "description": "Wildgate is a crew-based PVP multiplayer shooter that blends tactical ship-to-ship combat with fast-paced first-person action. Evade deadly environmental hazards, search for powerful weapons and ship upgrades, and be the first crew to escape with the Artifact."
+    "description": "Wildgate is a crew-based PVP multiplayer shooter that blends tactical ship-to-ship combat with fast-paced first-person action. Evade deadly environmental hazards, search for powerful weapons and ship upgrades, and be the first crew to escape with the Artifact.",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3504780/95f1381dac57ce601d5260de3c792f8a2ee2bc93/header.jpg?t=1787942042",
+    "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3504780/22488e2f7358b27d1ccff845bc5bd02e72a1494e/capsule_231x87.jpg?t=1787942042",
+    "iconUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3504780/22488e2f7358b27d1ccff845bc5bd02e72a1494e/capsule_231x87.jpg?t=1787942042"
   },
   "lawrencium production": {
     "title": "Dreamscaper",

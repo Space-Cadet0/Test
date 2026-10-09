@@ -278,19 +278,41 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
                 className="group relative flex flex-col rounded-md overflow-hidden bg-[#16202d] border border-steam-border/70 hover:border-steam-accent transition-all duration-200 cursor-pointer shadow-md hover:shadow-2xl hover:scale-[1.03] active:scale-[0.99]"
               >
                 {/* 2:3 Portrait Capsule Viewport */}
-                <div className="relative aspect-[2/3] w-full bg-black/60 overflow-hidden">
-                  <img
-                    src={coverArtUrl}
-                    alt={game.title}
-                    loading="lazy"
-                    onError={(e) => {
-                      // Fallback to landscape header if portrait cover fails
-                      if (game.headerImage && e.currentTarget.src !== game.headerImage) {
-                        e.currentTarget.src = game.headerImage;
-                      }
-                    }}
-                    className="w-full h-full object-cover group-hover:brightness-105 transition-all duration-300"
-                  />
+                <div className="relative aspect-[2/3] w-full bg-black/60 overflow-hidden flex items-center justify-center">
+                  {coverArtUrl ? (
+                    <img
+                      src={coverArtUrl}
+                      alt={game.title}
+                      loading="lazy"
+                      onError={(e) => {
+                        const target = e.currentTarget;
+                        const steamHeader = game.steamAppId
+                          ? `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${game.steamAppId}/header.jpg`
+                          : null;
+                        if (steamHeader && target.src !== steamHeader) {
+                          target.src = steamHeader;
+                        } else if (game.headerImage && target.src !== game.headerImage) {
+                          target.src = game.headerImage;
+                        } else {
+                          target.style.display = 'none';
+                          const fallback = target.parentElement?.querySelector('.grid-cover-fallback') as HTMLElement | null;
+                          if (fallback) fallback.style.display = 'flex';
+                        }
+                      }}
+                      className="w-full h-full object-cover group-hover:brightness-105 transition-all duration-300"
+                    />
+                  ) : null}
+
+                  {/* Fallback branded card if image unavailable or failed */}
+                  <div
+                    className="grid-cover-fallback w-full h-full flex flex-col items-center justify-center p-4 text-center bg-gradient-to-b from-[#1b2838] to-[#0f161f] select-none"
+                    style={{ display: coverArtUrl ? 'none' : 'flex' }}
+                  >
+                    <Gamepad2 className="w-10 h-10 text-slate-500 mb-2 opacity-60 group-hover:scale-110 group-hover:text-steam-accent transition-all" />
+                    <span className="text-xs font-semibold text-slate-300 line-clamp-3 leading-tight px-1">
+                      {game.title}
+                    </span>
+                  </div>
 
                   {/* Gradient bottom shadow to ensure overlays pop */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none" />

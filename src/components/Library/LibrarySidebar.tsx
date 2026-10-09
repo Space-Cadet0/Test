@@ -171,18 +171,51 @@ export const LibrarySidebar: React.FC<LibrarySidebarProps> = ({
         }`}
       >
         {/* Small Thumbnail Icon */}
-        <div className="w-6 h-6 rounded bg-black/60 overflow-hidden flex-shrink-0 border border-steam-border/40 group-hover:border-steam-accent/50">
-          <img
-            src={game.iconUrl || game.capsuleImage || game.headerImage}
-            alt=""
-            className="w-full h-full object-cover"
-            loading="lazy"
-            onError={(e) => {
-              if (game.headerImage && e.currentTarget.src !== game.headerImage) {
-                e.currentTarget.src = game.headerImage;
-              }
-            }}
-          />
+        <div className="w-6 h-6 rounded bg-black/60 overflow-hidden flex-shrink-0 border border-steam-border/40 group-hover:border-steam-accent/50 relative">
+          {(() => {
+            const initialIconUrl =
+              game.iconUrl ||
+              game.capsuleImage ||
+              (game.steamAppId
+                ? `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${game.steamAppId}/header.jpg`
+                : undefined) ||
+              game.headerImage;
+
+            return (
+              <>
+                {initialIconUrl ? (
+                  <img
+                    src={initialIconUrl}
+                    alt=""
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    onError={(e) => {
+                      const currentSrc = e.currentTarget.src;
+                      const steamHeader = game.steamAppId
+                        ? `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${game.steamAppId}/header.jpg`
+                        : null;
+                      if (steamHeader && currentSrc !== steamHeader && !currentSrc.includes(`${game.steamAppId}/header.jpg`)) {
+                        e.currentTarget.src = steamHeader;
+                      } else if (game.headerImage && currentSrc !== game.headerImage) {
+                        e.currentTarget.src = game.headerImage;
+                      } else {
+                        e.currentTarget.style.display = 'none';
+                        if (e.currentTarget.nextElementSibling) {
+                          (e.currentTarget.nextElementSibling as HTMLElement).style.display = 'flex';
+                        }
+                      }
+                    }}
+                  />
+                ) : null}
+                <div
+                  className={`w-full h-full ${initialIconUrl ? 'hidden' : 'flex'} items-center justify-center bg-gradient-to-br from-[#1b2838] to-[#2a475e] text-[10px] font-bold text-steam-accent select-none`}
+                  aria-hidden="true"
+                >
+                  {game.title.charAt(0).toUpperCase()}
+                </div>
+              </>
+            );
+          })()}
         </div>
 
         {/* Game Title & Badges */}

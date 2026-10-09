@@ -310,6 +310,155 @@ export function sanitizeGameCatalog(catalog: CanonicalGame[]): CanonicalGame[] {
       };
     }
 
+    // Disambiguate / normalize Ghostrunner (fix wrong steamAppId 1225270 -> 1139900)
+    if (
+      currentTitleLower === 'ghostrunner' ||
+      normTitle === 'ghostrunner' ||
+      game.steamAppId === 1225270 ||
+      game.id === 'steam-1225270'
+    ) {
+      game = {
+        ...game,
+        id: 'steam-1139900',
+        steamAppId: 1139900,
+        headerImage: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1139900/header.jpg',
+        capsuleImage: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1139900/library_600x900_2x.jpg',
+        iconUrl: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1139900/library_600x900_2x.jpg',
+      };
+    }
+
+    // Disambiguate / normalize Heretic + Hexen (newer hashed Steam assets)
+    if (
+      currentTitleLower === 'heretic + hexen' ||
+      normTitle === 'heretic hexen' ||
+      game.steamAppId === 3286930
+    ) {
+      game = {
+        ...game,
+        id: 'steam-3286930',
+        steamAppId: 3286930,
+        headerImage: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3286930/af11a57f074bf3f1b901bb96f9ea519a0928c80c/header.jpg?t=1756918167',
+        capsuleImage: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3286930/a0b0d3447b8101ee6aa75c72fd9fd8c918df7470/capsule_616x353.jpg',
+        iconUrl: 'https://shared.fastly.steamstatic.com/community_assets/images/apps/3286930/3392b11331bc4855f803ca939720fa94e3a01bdd.jpg',
+      };
+    }
+
+    // Disambiguate / normalize Second Extinction (delisted, fix trailing quote typo, add Steam ID 1024380)
+    if (
+      currentTitleLower.startsWith('second extinction') ||
+      normTitle === 'second extinction' ||
+      game.id === 'epic-9c48bdf0c65b45cc9e64aa43e7e740b0' ||
+      game.steamAppId === 1024380
+    ) {
+      game = {
+        ...game,
+        id: 'steam-1024380',
+        title: 'Second Extinction',
+        sortTitle: 'Second Extinction',
+        steamAppId: 1024380,
+        headerImage: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1024380/header.jpg',
+        capsuleImage: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1024380/library_600x900_2x.jpg',
+        iconUrl: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1024380/library_600x900_2x.jpg',
+        shortDescription: 'Second Extinction is a relentless 3-player cooperative FPS where you wipe out mutated dinosaurs that have taken over the Earth.',
+      };
+    }
+
+    // Disambiguate / normalize 60 Minutes to Extinction: Escape Room (hashed Steam assets)
+    if (
+      currentTitleLower.includes('60 minutes to extinction') ||
+      normTitle.includes('60 minutes to extinction') ||
+      game.steamAppId === 3783210
+    ) {
+      game = {
+        ...game,
+        id: 'steam-3783210',
+        steamAppId: 3783210,
+        headerImage: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3783210/1055e2e14c7eadb6b7f444db978c8c85b3a84eab/header.jpg?t=1759856432',
+        capsuleImage: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3783210/2a4236503b98fd2ffba0e0dd73d9d39ade99b7e1/capsule_231x87.jpg?t=1759856432',
+        iconUrl: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3783210/2a4236503b98fd2ffba0e0dd73d9d39ade99b7e1/capsule_231x87.jpg?t=1759856432',
+      };
+    }
+
+    // Disambiguate / normalize DEATH STRANDING 2: ON THE BEACH (hashed Steam assets)
+    if (
+      currentTitleLower.includes('death stranding 2') ||
+      normTitle.includes('death stranding 2') ||
+      game.steamAppId === 3280350
+    ) {
+      game = {
+        ...game,
+        id: 'steam-3280350',
+        steamAppId: 3280350,
+        headerImage: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3280350/6270c77b0729e2df0a17d660286eeddfd9169386/header.jpg?t=1774022345',
+        capsuleImage: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3280350/6e07f61e2585bae97d2406d45666a7ee70543792/capsule_231x87.jpg?t=1774022345',
+        iconUrl: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3280350/6e07f61e2585bae97d2406d45666a7ee70543792/capsule_231x87.jpg?t=1774022345',
+      };
+    }
+
+    // Disambiguate / normalize Little Nightmares Enhanced Edition (hashed Steam assets)
+    if (
+      currentTitleLower.includes('little nightmares enhanced') ||
+      normTitle.includes('little nightmares enhanced') ||
+      game.steamAppId === 2149010
+    ) {
+      game = {
+        ...game,
+        id: 'steam-2149010',
+        steamAppId: 2149010,
+        headerImage: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2149010/8f1da102713653906647c5024843479395be3394/header.jpg?t=1760951366',
+        capsuleImage: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2149010/87b7d077139d1f8fa48aee66960288c639409e74/capsule_231x87.jpg?t=1760951366',
+        iconUrl: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2149010/87b7d077139d1f8fa48aee66960288c639409e74/capsule_231x87.jpg?t=1760951366',
+      };
+    }
+
+    // Disambiguate / normalize The Blood of Dawnwalker (hashed Steam assets)
+    if (
+      currentTitleLower.includes('blood of dawnwalker') ||
+      normTitle.includes('blood of dawnwalker') ||
+      game.steamAppId === 3751260
+    ) {
+      game = {
+        ...game,
+        id: 'steam-3751260',
+        steamAppId: 3751260,
+        headerImage: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3751260/a7062f3b59d491c2678e3fd7ce2672858e480641/header.jpg?t=1791298326',
+        capsuleImage: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3751260/512cea7b8d6470681fc081ab933290bf14a8f956/capsule_231x87.jpg?t=1791298326',
+        iconUrl: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3751260/512cea7b8d6470681fc081ab933290bf14a8f956/capsule_231x87.jpg?t=1791298326',
+      };
+    }
+
+    // Disambiguate / normalize Wildgate (hashed Steam assets)
+    if (
+      currentTitleLower === 'wildgate' ||
+      normTitle === 'wildgate' ||
+      game.steamAppId === 3504780
+    ) {
+      game = {
+        ...game,
+        id: 'steam-3504780',
+        steamAppId: 3504780,
+        headerImage: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3504780/95f1381dac57ce601d5260de3c792f8a2ee2bc93/header.jpg?t=1787942042',
+        capsuleImage: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3504780/22488e2f7358b27d1ccff845bc5bd02e72a1494e/capsule_231x87.jpg?t=1787942042',
+        iconUrl: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3504780/22488e2f7358b27d1ccff845bc5bd02e72a1494e/capsule_231x87.jpg?t=1787942042',
+      };
+    }
+
+    // Disambiguate / normalize Spacewar (archival assets)
+    if (
+      currentTitleLower === 'spacewar' ||
+      normTitle === 'spacewar' ||
+      game.steamAppId === 480
+    ) {
+      game = {
+        ...game,
+        id: 'steam-480',
+        steamAppId: 480,
+        headerImage: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Spacewar%21-PDP-1-20070512.jpg/960px-Spacewar%21-PDP-1-20070512.jpg',
+        capsuleImage: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Spacewar%21-PDP-1-20070512.jpg/960px-Spacewar%21-PDP-1-20070512.jpg',
+        iconUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Spacewar%21-PDP-1-20070512.jpg/960px-Spacewar%21-PDP-1-20070512.jpg',
+      };
+    }
+
     // 5. Remove erroneous 'epic' platform presence from non-Epic titles
     if (currentTitleLower.includes('gwent') || currentTitleLower.includes('heroes of might and magic')) {
       game = {
@@ -393,9 +542,9 @@ export function sanitizeGameCatalog(catalog: CanonicalGame[]): CanonicalGame[] {
           ? `steam-${game.steamAppId}`
           : existing.id,
         platforms: mergedPlatforms,
-        headerImage: (existing.headerImage && !existing.headerImage.includes('egs-badge.png')) ? existing.headerImage : game.headerImage,
-        capsuleImage: (existing.capsuleImage && !existing.capsuleImage.includes('egs-badge.png')) ? existing.capsuleImage : game.capsuleImage,
-        iconUrl: (existing.iconUrl && !existing.iconUrl.includes('egs-badge.png')) ? existing.iconUrl : (game.iconUrl || game.capsuleImage),
+        headerImage: (game.headerImage && (!existing.headerImage || existing.headerImage.includes('egs-badge.png') || existing.headerImage.includes('1225270') || existing.headerImage.endsWith('/3286930/header.jpg') || existing.headerImage.endsWith('/3783210/header.jpg') || existing.headerImage.endsWith('/3280350/header.jpg') || existing.headerImage.endsWith('/2149010/header.jpg') || existing.headerImage.endsWith('/3751260/header.jpg') || existing.headerImage.endsWith('/3504780/header.jpg') || existing.headerImage.endsWith('/480/header.jpg'))) ? game.headerImage : (existing.headerImage || game.headerImage),
+        capsuleImage: (game.capsuleImage && (!existing.capsuleImage || existing.capsuleImage.includes('egs-badge.png') || existing.capsuleImage.includes('1225270') || existing.capsuleImage.includes('/3783210/library_') || existing.capsuleImage.includes('/3280350/library_') || existing.capsuleImage.includes('/2149010/library_') || existing.capsuleImage.includes('/3751260/library_') || existing.capsuleImage.includes('/3504780/library_') || existing.capsuleImage.includes('/480/'))) ? game.capsuleImage : (existing.capsuleImage || game.capsuleImage),
+        iconUrl: (game.iconUrl && (!existing.iconUrl || existing.iconUrl.includes('egs-badge.png') || existing.iconUrl.includes('1225270'))) ? game.iconUrl : (existing.iconUrl || game.iconUrl || game.capsuleImage),
         shortDescription: existing.shortDescription || game.shortDescription,
         developers: existing.developers && existing.developers.length > 0 ? existing.developers : game.developers,
         publishers: existing.publishers && existing.publishers.length > 0 ? existing.publishers : game.publishers,

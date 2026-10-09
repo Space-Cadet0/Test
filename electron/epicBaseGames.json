@@ -3945,10 +3945,10 @@
     ]
   },
   {
-    "id": "steam-1225270",
+    "id": "steam-1139900",
     "title": "Ghostrunner",
     "sortTitle": "Ghostrunner",
-    "steamAppId": 1225270,
+    "steamAppId": 1139900,
     "platforms": [
       {
         "platformId": "epic",
@@ -3957,8 +3957,9 @@
         "playtimeMinutes": 0
       }
     ],
-    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1225270/header.jpg",
-    "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1225270/library_600x900_2x.jpg",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1139900/header.jpg",
+    "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1139900/library_600x900_2x.jpg",
+    "iconUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1139900/library_600x900_2x.jpg",
     "shortDescription": "Ghostrunner",
     "releaseDate": "2021-08-31",
     "developers": [
@@ -8306,9 +8307,10 @@
     ]
   },
   {
-    "id": "epic-9c48bdf0c65b45cc9e64aa43e7e740b0",
-    "title": "Second Extinction'",
-    "sortTitle": "Second Extinction'",
+    "id": "steam-1024380",
+    "title": "Second Extinction",
+    "sortTitle": "Second Extinction",
+    "steamAppId": 1024380,
     "platforms": [
       {
         "platformId": "epic",
@@ -8317,9 +8319,10 @@
         "playtimeMinutes": 0
       }
     ],
-    "headerImage": "https://cdn1.epicgames.com/offer/fcd3387b58864614b66952d0430d2b9a/EGS_SecondExtinction_SystemicReaction_S1_2560x1440-4a9d265c505b45c75b65916c366f5fca",
-    "capsuleImage": "https://cdn1.epicgames.com/item/fcd3387b58864614b66952d0430d2b9a/SE_Epic_Portrait_Product_S2_1200x1600_1200x1600-8a67e373e3462b41f38e61142c103d03",
-    "shortDescription": "Second Extinction?",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1024380/header.jpg",
+    "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1024380/library_600x900_2x.jpg",
+    "iconUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1024380/library_600x900_2x.jpg",
+    "shortDescription": "Second Extinction is a relentless 3-player cooperative FPS where you wipe out mutated dinosaurs that have taken over the Earth.",
     "releaseDate": "2022-10-14",
     "developers": [
       "Systemic Reaction"
@@ -11663,8 +11666,9 @@
         "playtimeMinutes": 0
       }
     ],
-    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3504780/header.jpg",
-    "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3504780/library_600x900_2x.jpg",
+    "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3504780/95f1381dac57ce601d5260de3c792f8a2ee2bc93/header.jpg?t=1787942042",
+    "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3504780/22488e2f7358b27d1ccff845bc5bd02e72a1494e/capsule_231x87.jpg?t=1787942042",
+    "iconUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3504780/22488e2f7358b27d1ccff845bc5bd02e72a1494e/capsule_231x87.jpg?t=1787942042",
     "shortDescription": "Wildgate is a crew-based PVP multiplayer shooter that blends tactical ship-to-ship combat with fast-paced first-person action. Evade deadly environmental hazards, search for powerful weapons and ship upgrades, and be the first crew to escape with the Artifact.",
     "releaseDate": "2025-12-30",
     "developers": [
