@@ -2,6 +2,8 @@ import axios from 'axios';
 import { CanonicalGame } from '../../contracts/game';
 import { StorefrontCredentials } from '../../contracts/integration';
 import { EPIC_USER_LIBRARY } from '../storage/storefrontLibraries';
+import { KNOWN_EPIC_APP_NAMES } from './epicCodenames';
+import { steamMatcher } from '../steam/steamMatcher';
 
 export class EpicIntegrationService {
   private getOAuthBaseUrl(): string {
@@ -110,16 +112,18 @@ export class EpicIntegrationService {
           // 6. Skip Fortnite microtransactions / item shop add-ons
           if (item.appName?.startsWith('Fortnite_')) continue;
 
-          let title = (item.metadata?.title || '').trim();
+          const appNameLower = (item.appName || '').toLowerCase().trim();
+          const catalogIdLower = (item.catalogItemId || '').toLowerCase().trim();
+          let rawTitle = (item.metadata?.title || '').trim();
+          const titleLower = rawTitle.toLowerCase().trim();
 
-          // Resolve known Epic app IDs that lack top-level titles (e.g. Doki Doki Literature Club Plus!)
-          if (
-            item.appName === 'c5109bdceb3a453bb38c2fdc964ddee8' ||
-            item.catalogItemId === 'c5109bdceb3a453bb38c2fdc964ddee8' ||
-            title === 'c5109bdceb3a453bb38c2fdc964ddee8'
-          ) {
-            title = 'Doki Doki Literature Club Plus!';
-          }
+          // Check if item matches a known Epic codename / unlisted app
+          const codename =
+            KNOWN_EPIC_APP_NAMES[appNameLower] ||
+            KNOWN_EPIC_APP_NAMES[catalogIdLower] ||
+            KNOWN_EPIC_APP_NAMES[titleLower];
+
+          let title = codename ? codename.title : rawTitle;
 
           // If title is missing, pure hex hash, or UUID, NEVER allow as a game entry
           if (
@@ -147,13 +151,9 @@ export class EpicIntegrationService {
           const appId = item.catalogItemId || item.appName;
 
           // Match Steam App ID if available
-          let steamAppId: number | undefined;
-          if (lower.includes('doki doki literature club plus')) steamAppId = 1388880;
-          else if (lower.includes('death stranding')) steamAppId = 1190460;
-          else if (lower.includes('cyberpunk 2077')) steamAppId = 1091500;
-          else if (lower.includes('control')) steamAppId = 870780;
-          else if (lower.includes('hades')) steamAppId = 1145360;
-          else if (lower.includes('alan wake 2')) steamAppId = undefined; // Epic exclusive
+          const steamAppId: number | undefined = (codename && codename.steamAppId)
+            ? codename.steamAppId
+            : ((await steamMatcher.matchGameToSteam(title)) || undefined);
 
           const headerImg = steamAppId
             ? `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${steamAppId}/header.jpg`
@@ -162,6 +162,14 @@ export class EpicIntegrationService {
           const capsuleImg = steamAppId
             ? `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${steamAppId}/library_600x900_2x.jpg`
             : tallCover || wideBanner || 'https://cdn2.unrealengine.com/egs-badge.png';
+
+          const developer = (codename && codename.developer)
+            ? codename.developer
+            : (item.metadata?.developer || '');
+
+          const shortDescription = (codename && codename.description)
+            ? codename.description
+            : (item.metadata?.description || 'Epic Games Store Title');
 
           games.push({
             id: steamAppId ? `steam-${steamAppId}` : `epic-${appId}`,
@@ -178,9 +186,9 @@ export class EpicIntegrationService {
             ],
             headerImage: headerImg,
             capsuleImage: capsuleImg,
-            shortDescription: item.metadata?.description || 'Epic Games Store Title',
+            shortDescription,
             releaseDate: item.metadata?.releaseDate || '',
-            developers: item.metadata?.developer ? [item.metadata.developer] : [],
+            developers: developer ? [developer] : [],
             publishers: item.metadata?.publisher ? [item.metadata.publisher] : [],
             genres: ['Action'],
             tags: ['Epic Games Store'],

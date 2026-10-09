@@ -164,6 +164,53 @@ export const KNOWN_STORE_STEAM_MAPPINGS: Record<string, number> = {
   'soma': 282140,
   'outlast': 238320,
   'outlast 2': 414700,
+
+  // Epic Games Codenames & Store Exclusives
+  'into the breach': 590380,
+  'hitman': 236870,
+  'human resource machine': 375820,
+  'batman - the telltale series': 498240,
+  'batman: the telltale series': 498240,
+  'the telltale batman shadows edition': 498240,
+  'telltale batman season 1': 498240,
+  'telltale batman season 2': 675260,
+  'batman: the enemy within': 675260,
+  'batman: the enemy within - the telltale series': 675260,
+  'world war z': 699130,
+  'rocket league': 252950,
+  'overcooked! 2': 448510,
+  'yooka-laylee and the impossible lair': 1084600,
+  'minit': 609490,
+  'brothers - a tale of two sons': 225080,
+  'mutant year zero: road to eden': 760060,
+  'tacoma': 643880,
+  'farming simulator 19': 787860,
+  'dragon age: inquisition': 1222690,
+  'super meat boy': 40800,
+  'dead by daylight': 381210,
+  'the bridge': 230050,
+  'boga': 1190460,
+  'blobfish': 590380,
+  'barbet': 236870,
+  'basil': 375820,
+  'batfish': 498240,
+  'batfishs2': 675260,
+  'wombat': 699130,
+  'speedwell': 287390,
+  'sugar': 252950,
+  'potoo': 448510,
+  'duckbill': 1084600,
+  'petrel': 609490,
+  'tamarind': 225080,
+  'dodo': 49520,
+  'falcon': 760060,
+  'flagfin': 643880,
+  'stellula': 787860,
+  'verdi': 1222690,
+  'peppermint': 1824220,
+  'buffalo': 40800,
+  'brill': 381210,
+  'sunbird': 230050,
 };
 
 /**
@@ -216,17 +263,20 @@ export function normalizeGameTitle(rawTitle: string): string {
 }
 
 /**
- * Computes token similarity between two game names (Jaccard coefficient + substring check)
+ * Computes token similarity between two game names (Jaccard coefficient + phrase check)
  */
-function computeTitleSimilarity(source: string, candidate: string): number {
+export function computeTitleSimilarity(source: string, candidate: string): number {
   const s1 = source.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
   const s2 = candidate.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
 
+  if (!s1 || !s2) return 0;
   if (s1 === s2) return 1.0;
-  if (s1.includes(s2) || s2.includes(s1)) return 0.88;
 
-  const tokens1 = new Set(s1.split(' ').filter(Boolean));
-  const tokens2 = new Set(s2.split(' ').filter(Boolean));
+  const words1 = s1.split(' ').filter(Boolean);
+  const words2 = s2.split(' ').filter(Boolean);
+
+  const tokens1 = new Set(words1);
+  const tokens2 = new Set(words2);
 
   let intersection = 0;
   for (const t of tokens1) {
@@ -235,7 +285,27 @@ function computeTitleSimilarity(source: string, candidate: string): number {
 
   const union = new Set([...tokens1, ...tokens2]).size;
   if (union === 0) return 0;
-  return intersection / union;
+  const jaccard = intersection / union;
+
+  // Single word checks: must match an exact word token in candidate!
+  // e.g. "boga" does NOT match "path of the bogatyr"!
+  if (words1.length === 1 && !tokens2.has(words1[0])) {
+    return 0;
+  }
+  if (words2.length === 1 && !tokens1.has(words2[0])) {
+    return 0;
+  }
+
+  // Exact multi-word phrase containment
+  if (words1.length >= 2 && (s1.includes(s2) || s2.includes(s1))) {
+    const minWords = Math.min(words1.length, words2.length);
+    const maxWords = Math.max(words1.length, words2.length);
+    if (minWords / maxWords >= 0.5 && intersection >= minWords) {
+      return 0.88;
+    }
+  }
+
+  return jaccard;
 }
 
 const STORAGE_KEY_MATCHED_APP_IDS = 'antigravity_steam_matched_app_ids';
@@ -254,7 +324,14 @@ export class SteamMatcherService {
       if (raw) {
         const parsed = JSON.parse(raw);
         for (const [k, v] of Object.entries(parsed)) {
-          this.cache.set(k.toLowerCase(), typeof v === 'number' ? v : null);
+          const lk = k.toLowerCase();
+          // Purge stale false matches for codenames like boga -> Path of the Bogatyr
+          if (lk === 'boga' && v !== 1190460) continue;
+          if (lk === 'blobfish' && v !== 590380) continue;
+          if (lk === 'barbet' && v !== 236870) continue;
+          if (lk === 'basil' && v !== 375820) continue;
+          if (lk === 'batfish' && v !== 498240) continue;
+          this.cache.set(lk, typeof v === 'number' ? v : null);
         }
       }
     } catch {

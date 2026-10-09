@@ -109,7 +109,147 @@ const KNOWN_STEAM_MAPPINGS = {
   'system shock 2': 238210,
   'system shock': 482400,
   'vampire: the masquerade - bloodlines': 2600,
+
+  // Epic Codenames & Exclusives
+  'death stranding': 1190460,
+  'into the breach': 590380,
+  'hitman': 236870,
+  'human resource machine': 375820,
+  'batman - the telltale series': 498240,
+  'batman: the telltale series': 498240,
+  'the telltale batman shadows edition': 498240,
+  'telltale batman season 1': 498240,
+  'telltale batman season 2': 675260,
+  'batman: the enemy within': 675260,
+  'batman: the enemy within - the telltale series': 675260,
+  'doki doki literature club plus!': 1388880,
+  'world war z': 699130,
+  'rocket league': 252950,
+  'overcooked! 2': 448510,
+  'yooka-laylee and the impossible lair': 1084600,
+  'minit': 609490,
+  'brothers - a tale of two sons': 225080,
+  'borderlands 2': 49520,
+  'mutant year zero: road to eden': 760060,
+  'tacoma': 643880,
+  'farming simulator 19': 787860,
+  'dragon age: inquisition': 1222690,
+  'chivalry 2': 1824220,
+  'super meat boy': 40800,
+  'dead by daylight': 381210,
+  'the bridge': 230050,
+  'boga': 1190460,
+  'blobfish': 590380,
+  'barbet': 236870,
+  'basil': 375820,
+  'batfish': 498240,
+  'batfishs2': 675260,
+  'wombat': 699130,
+  'speedwell': 287390,
+  'sugar': 252950,
+  'potoo': 448510,
+  'duckbill': 1084600,
+  'petrel': 609490,
+  'tamarind': 225080,
+  'dodo': 49520,
+  'falcon': 760060,
+  'flagfin': 643880,
+  'stellula': 787860,
+  'verdi': 1222690,
+  'peppermint': 1824220,
+  'buffalo': 40800,
+  'brill': 381210,
+  'sunbird': 230050,
 };
+
+const KNOWN_EPIC_APP_NAMES = {
+  boga: { title: 'Death Stranding', steamAppId: 1190460, developer: 'Kojima Productions' },
+  blobfish: { title: 'Into The Breach', steamAppId: 590380, developer: 'Subset Games' },
+  barbet: { title: 'HITMAN', steamAppId: 236870, developer: 'IO Interactive' },
+  basil: { title: 'Human Resource Machine', steamAppId: 375820, developer: 'Tomorrow Corporation' },
+  batfish: { title: 'Batman - The Telltale Series', steamAppId: 498240, developer: 'Telltale Games' },
+  batfishs2: { title: 'Batman: The Enemy Within - The Telltale Series', steamAppId: 675260, developer: 'Telltale Games' },
+  wombat: { title: 'World War Z', steamAppId: 699130, developer: 'Saber Interactive' },
+  speedwell: { title: 'Metro Last Light Redux', steamAppId: 287390, developer: '4A Games' },
+  sugar: { title: 'Rocket League', steamAppId: 252950, developer: 'Psyonix LLC' },
+  potoo: { title: 'Overcooked! 2', steamAppId: 448510, developer: 'Ghost Town Games' },
+  duckbill: { title: 'Yooka-Laylee and the Impossible Lair', steamAppId: 1084600, developer: 'Playtonic Games' },
+  petrel: { title: 'Minit', steamAppId: 609490, developer: 'JW, Kitty, Jukio, and Dom' },
+  tamarind: { title: 'Brothers - A Tale of Two Sons', steamAppId: 225080, developer: 'Starbreeze Studios' },
+  dodo: { title: 'Borderlands 2', steamAppId: 49520, developer: 'Gearbox Software' },
+  falcon: { title: 'Mutant Year Zero: Road to Eden', steamAppId: 760060, developer: 'The Bearded Ladies' },
+  flagfin: { title: 'Tacoma', steamAppId: 643880, developer: 'Fullbright' },
+  stellula: { title: 'Farming Simulator 19', steamAppId: 787860, developer: 'Giants Software' },
+  verdi: { title: 'Dragon Age: Inquisition', steamAppId: 1222690, developer: 'BioWare' },
+  peppermint: { title: 'Chivalry 2', steamAppId: 1824220, developer: 'Torn Banner Studios' },
+  buffalo: { title: 'Super Meat Boy', steamAppId: 40800, developer: 'Team Meat' },
+  brill: { title: 'Dead by Daylight', steamAppId: 381210, developer: 'Behaviour Interactive Inc.' },
+  sunbird: { title: 'The Bridge', steamAppId: 230050, developer: 'The Quantum Astrophysicists Guild' },
+  c5109bdceb3a453bb38c2fdc964ddee8: { title: 'Doki Doki Literature Club Plus!', steamAppId: 1388880, developer: 'Team Salvato' },
+  snail: { title: 'Subnautica', steamAppId: 264710, developer: 'Unknown Worlds Entertainment' },
+  walrus: { title: 'The Witness', steamAppId: 210970, developer: 'Thekla, Inc.' },
+  gull: { title: 'Transistor', steamAppId: 237930, developer: 'Supergiant Games' },
+  flamingo: { title: 'Celeste', steamAppId: 504230, developer: 'Maddy Makes Games' },
+  ox: { title: 'Oxenfree', steamAppId: 388880, developer: 'Night School Studio' },
+  finch: { title: 'What Remains of Edith Finch', steamAppId: 501300, developer: 'Giant Sparrow' },
+  lemur: { title: 'Slime Rancher', steamAppId: 433340, developer: 'Monomi Park' },
+  pelican: { title: 'Enter the Gungeon', steamAppId: 311690, developer: 'Dodge Roll' },
+  mallard: { title: 'Moonlighter', steamAppId: 606150, developer: 'Digital Sun' },
+  chaffinch: { title: 'This War of Mine', steamAppId: 282070, developer: '11 bit studios' },
+  avocet: { title: 'Alan Wake', steamAppId: 108710, developer: 'Remedy Entertainment' },
+  curlew: { title: 'Hyper Light Drifter', steamAppId: 257850, developer: 'Heart Machine' },
+  godwit: { title: 'Fez', steamAppId: 224760, developer: 'Polytron Corporation' },
+  skua: { title: 'Inside', steamAppId: 304430, developer: 'Playdead' },
+  waxwing: { title: 'SOMA', steamAppId: 282140, developer: 'Frictional Games' },
+  garganey: { title: 'The Wolf Among Us', steamAppId: 250320, developer: 'Telltale Games' },
+  snipe: { title: 'The Talos Principle', steamAppId: 257510, developer: 'Croteam' },
+  albatross: { title: 'Ape Out', steamAppId: 447150, developer: 'Gabe Cuzzillo' },
+  parakeet: { title: 'Metro 2033 Redux', steamAppId: 286690, developer: '4A Games' },
+  crossbill: { title: 'TowerFall Ascension', steamAppId: 251470, developer: 'Maddy Makes Games' },
+};
+
+function computeTokenSimilarity(source, candidate) {
+  const s1 = source.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+  const s2 = candidate.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+
+  if (!s1 || !s2) return 0;
+  if (s1 === s2) return 1.0;
+
+  const words1 = s1.split(' ').filter(Boolean);
+  const words2 = s2.split(' ').filter(Boolean);
+
+  const tokens1 = new Set(words1);
+  const tokens2 = new Set(words2);
+
+  let intersection = 0;
+  for (const t of tokens1) {
+    if (tokens2.has(t)) intersection++;
+  }
+
+  const union = new Set([...tokens1, ...tokens2]).size;
+  if (union === 0) return 0;
+  const jaccard = intersection / union;
+
+  // Single word checks: must match an exact word token in candidate!
+  // e.g. "boga" does NOT match "path of the bogatyr"!
+  if (words1.length === 1 && !tokens2.has(words1[0])) {
+    return 0;
+  }
+  if (words2.length === 1 && !tokens1.has(words2[0])) {
+    return 0;
+  }
+
+  // Exact multi-word phrase containment
+  if (words1.length >= 2 && (s1.includes(s2) || s2.includes(s1))) {
+    const minWords = Math.min(words1.length, words2.length);
+    const maxWords = Math.max(words1.length, words2.length);
+    if (minWords / maxWords >= 0.5 && intersection >= minWords) {
+      return 0.88;
+    }
+  }
+
+  return jaccard;
+}
 
 const steamMatchCache = new Map();
 
@@ -168,8 +308,9 @@ async function matchSteamAppId(rawTitle) {
           continue;
         }
 
-        // Check if name matches or has high overlap
-        if (itemName === normalized || itemName.includes(normalized) || normalized.includes(itemName)) {
+        // Require genuine token similarity (>= 0.72)
+        const sim = computeTokenSimilarity(normalized, itemName);
+        if (sim >= 0.72) {
           steamMatchCache.set(lower, item.id);
           return item.id;
         }
@@ -505,16 +646,18 @@ async function fetchEpicOwnedGames(accessToken, accountId) {
         // 6. Skip Fortnite microtransactions / item shop add-ons
         if (item.appName?.startsWith('Fortnite_')) continue;
 
-        let title = (item.metadata?.title || '').trim();
+        const appNameLower = (item.appName || '').toLowerCase().trim();
+        const catalogIdLower = (item.catalogItemId || '').toLowerCase().trim();
+        let rawTitle = (item.metadata?.title || '').trim();
+        const titleLower = rawTitle.toLowerCase().trim();
 
-        // Resolve known Epic app IDs that lack top-level titles (e.g. Doki Doki Literature Club Plus!)
-        if (
-          item.appName === 'c5109bdceb3a453bb38c2fdc964ddee8' ||
-          item.catalogItemId === 'c5109bdceb3a453bb38c2fdc964ddee8' ||
-          title === 'c5109bdceb3a453bb38c2fdc964ddee8'
-        ) {
-          title = 'Doki Doki Literature Club Plus!';
-        }
+        // Check if item matches a known Epic codename / unlisted app
+        const codename =
+          KNOWN_EPIC_APP_NAMES[appNameLower] ||
+          KNOWN_EPIC_APP_NAMES[catalogIdLower] ||
+          KNOWN_EPIC_APP_NAMES[titleLower];
+
+        let title = codename ? codename.title : rawTitle;
 
         // If title is missing, pure hex hash, or UUID, NEVER allow as a game entry
         if (
@@ -542,7 +685,7 @@ async function fetchEpicOwnedGames(accessToken, accountId) {
         const appId = item.catalogItemId || item.appName;
         const pt = playtimeMap.get(item.appName) || playtimeMap.get(item.catalogItemId) || {};
 
-        const steamAppId = await matchSteamAppId(title);
+        const steamAppId = (codename && codename.steamAppId) ? codename.steamAppId : await matchSteamAppId(title);
 
         const headerImg = steamAppId
           ? `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${steamAppId}/header.jpg`
@@ -551,6 +694,14 @@ async function fetchEpicOwnedGames(accessToken, accountId) {
         const capsuleImg = steamAppId
           ? `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${steamAppId}/library_600x900_2x.jpg`
           : tallCover || wideBanner || 'https://cdn2.unrealengine.com/egs-badge.png';
+
+        const developer = (codename && codename.developer)
+          ? codename.developer
+          : (item.metadata?.developer || '');
+
+        const shortDescription = (codename && codename.description)
+          ? codename.description
+          : (item.metadata?.description || 'Epic Games Store Title');
 
         games.push({
           id: steamAppId ? `steam-${steamAppId}` : `epic-${appId}`,
@@ -568,9 +719,9 @@ async function fetchEpicOwnedGames(accessToken, accountId) {
           ],
           headerImage: headerImg,
           capsuleImage: capsuleImg,
-          shortDescription: item.metadata?.description || 'Epic Games Store Title',
+          shortDescription,
           releaseDate: item.metadata?.releaseDate || '',
-          developers: item.metadata?.developer ? [item.metadata.developer] : [],
+          developers: developer ? [developer] : [],
           publishers: item.metadata?.publisher ? [item.metadata.publisher] : [],
           genres: ['Action'],
           tags: ['Epic Games Store'],

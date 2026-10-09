@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { getOpenCriticData, getTierColor } from '../../services/opencritic/openCritic';
 import { ActiveGameFilter } from '../../contracts/filter';
+import { parseTimestampMs } from '../../utils/dateUtils';
 
 interface LibraryGridViewProps {
   games: CanonicalGame[];
@@ -68,15 +69,15 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
       return ptB - ptA;
     }
     if (sortBy === 'recent') {
-      const lpA = Math.max(
-        0,
-        ...a.platforms.map((p) => (typeof p.lastPlayed === 'number' ? p.lastPlayed : 0))
-      );
-      const lpB = Math.max(
-        0,
-        ...b.platforms.map((p) => (typeof p.lastPlayed === 'number' ? p.lastPlayed : 0))
-      );
-      return lpB - lpA;
+      const getRecentMs = (g: CanonicalGame) => {
+        let maxMs = 0;
+        for (const p of g.platforms) {
+          const ms = parseTimestampMs(p.lastPlayed);
+          if (ms && ms > maxMs) maxMs = ms;
+        }
+        return maxMs;
+      };
+      return getRecentMs(b) - getRecentMs(a);
     }
     return a.title.localeCompare(b.title, undefined, { sensitivity: 'base' });
   });

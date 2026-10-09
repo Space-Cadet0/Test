@@ -49,18 +49,26 @@ export function App() {
               ...g,
               platforms: g.platforms.map((p) => ({ ...p, installed: false })),
             }));
-          return mergeScannedSteamGames(cleaned);
+          const sanitized = sanitizeGameCatalog(mergeScannedSteamGames(cleaned));
+          try {
+            localStorage.setItem('universal_game_library_catalog', JSON.stringify(sanitized));
+          } catch {}
+          return sanitized;
         }
       } catch (e) {
         console.error('Failed to parse cached games:', e);
       }
     }
-    return mergeScannedSteamGames([]);
+    const defaultCatalog = sanitizeGameCatalog(mergeScannedSteamGames([]));
+    try {
+      localStorage.setItem('universal_game_library_catalog', JSON.stringify(defaultCatalog));
+    } catch {}
+    return defaultCatalog;
   });
 
   // Default to Baldur's Gate 3 (or first verified owned title)
   const [selectedGame, setSelectedGame] = useState<CanonicalGame | null>(() => {
-    const initialGames = mergeScannedSteamGames([]);
+    const initialGames = sanitizeGameCatalog(mergeScannedSteamGames([]));
     return initialGames.find((g) => g.steamAppId === 1086940) || initialGames[0] || null;
   });
   const [isGridView, setIsGridView] = useState(false);

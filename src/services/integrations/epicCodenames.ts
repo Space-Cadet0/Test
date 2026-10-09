@@ -1,0 +1,267 @@
+export interface EpicCodenameMapping {
+  title: string;
+  steamAppId?: number;
+  developer?: string;
+  description?: string;
+}
+
+export const KNOWN_EPIC_APP_NAMES: Record<string, EpicCodenameMapping> = {
+  boga: {
+    title: 'Death Stranding',
+    steamAppId: 1190460,
+    developer: 'Kojima Productions',
+    description: 'From legendary game creator Hideo Kojima comes an all-new, genre-defying experience. Sam Bridges must brave a world utterly transformed by the Death Stranding.',
+  },
+  blobfish: {
+    title: 'Into The Breach',
+    steamAppId: 590380,
+    developer: 'Subset Games',
+    description: 'Control powerful mechs from the future to defeat an alien threat. In this turn-based strategy game from the creators of FTL, each attempt to save the world presents a new challenge.',
+  },
+  barbet: {
+    title: 'HITMAN',
+    steamAppId: 236870,
+    developer: 'IO Interactive',
+    description: 'Experiment and have fun in the ultimate playground as Agent 47 to become the master assassin.',
+  },
+  basil: {
+    title: 'Human Resource Machine',
+    steamAppId: 375820,
+    developer: 'Tomorrow Corporation',
+    description: 'Human Resource Machine is a puzzle game for nerds. In each level, your boss gives you a job. Automate it by programming your little office worker.',
+  },
+  batfish: {
+    title: 'Batman - The Telltale Series',
+    steamAppId: 498240,
+    developer: 'Telltale Games',
+    description: 'Enter the fractured psyche of Bruce Wayne and discover the powerful and far-reaching consequences of your choices as the Dark Knight.',
+  },
+  batfishs2: {
+    title: 'Batman: The Enemy Within - The Telltale Series',
+    steamAppId: 675260,
+    developer: 'Telltale Games',
+    description: 'In this latest chapter from the award-winning studio behind Batman - The Telltale Series, both Bruce Wayne and Batman will be forced into precarious new roles.',
+  },
+  wombat: {
+    title: 'World War Z',
+    steamAppId: 699130,
+    developer: 'Saber Interactive',
+    description: 'World War Z is a heart-pounding, four-player cooperative third-person shooter featuring massive swarms of zombies.',
+  },
+  speedwell: {
+    title: 'Metro Last Light Redux',
+    steamAppId: 287390,
+    developer: '4A Games',
+    description: 'It is the year 2034. Beneath the ruins of post-apocalyptic Moscow, the remnants of mankind are besieged by deadly threats from outside – and within.',
+  },
+  sugar: {
+    title: 'Rocket League',
+    steamAppId: 252950,
+    developer: 'Psyonix LLC',
+    description: 'Rocket League is a high-powered hybrid of arcade-style soccer and vehicular mayhem with easy-to-understand controls and fluid, physics-driven competition.',
+  },
+  potoo: {
+    title: 'Overcooked! 2',
+    steamAppId: 448510,
+    developer: 'Ghost Town Games',
+    description: 'Overcooked returns with a brand-new helping of chaotic cooking action! Journey back to the Onion Kingdom and assemble your team of chefs in classic couch co-op or online play.',
+  },
+  duckbill: {
+    title: 'Yooka-Laylee and the Impossible Lair',
+    steamAppId: 1084600,
+    developer: 'Playtonic Games',
+    description: 'Yooka-Laylee and the Impossible Lair is a brand-new 2.5D platform adventure from some of the key creative talent behind Donkey Kong Country.',
+  },
+  petrel: {
+    title: 'Minit',
+    steamAppId: 609490,
+    developer: 'JW, Kitty, Jukio, and Dom',
+    description: 'Minit is a peculiar little adventure played sixty seconds at a time.',
+  },
+  tamarind: {
+    title: 'Brothers - A Tale of Two Sons',
+    steamAppId: 225080,
+    developer: 'Starbreeze Studios',
+    description: 'Guide two brothers on an epic fairy tale journey from visionary Swedish film director, Josef Fares.',
+  },
+  dodo: {
+    title: 'Borderlands 2',
+    steamAppId: 49520,
+    developer: 'Gearbox Software',
+    description: 'A new era of shoot and loot is about to begin. Play as one of four new vault hunters facing off against a massive new world of creatures, psychos and the evil mastermind, Handsome Jack.',
+  },
+  falcon: {
+    title: 'Mutant Year Zero: Road to Eden',
+    steamAppId: 760060,
+    developer: 'The Bearded Ladies',
+    description: 'A tactical adventure game combining the turn-based combat of XCOM with story, exploration, stealth, and strategy.',
+  },
+  flagfin: {
+    title: 'Tacoma',
+    steamAppId: 643880,
+    developer: 'Fullbright',
+    description: 'A narrative adventure set aboard a high-tech space station in the year 2088.',
+  },
+  stellula: {
+    title: 'Farming Simulator 19',
+    steamAppId: 787860,
+    developer: 'Giants Software',
+    description: 'The ultimate farming simulation returns with a complete graphics overhaul and the most complete farming experience ever!',
+  },
+  verdi: {
+    title: 'Dragon Age: Inquisition',
+    steamAppId: 1222690,
+    developer: 'BioWare',
+    description: 'When the sky opens up and rains chaos, the world needs heroes. Become the savior of Thedas in Dragon Age: Inquisition – Game of the Year Edition.',
+  },
+  peppermint: {
+    title: 'Chivalry 2',
+    steamAppId: 1824220,
+    developer: 'Torn Banner Studios',
+    description: 'Chivalry 2 is a multiplayer first-person slasher inspired by epic medieval movie battles.',
+  },
+  buffalo: {
+    title: 'Super Meat Boy',
+    steamAppId: 40800,
+    developer: 'Team Meat',
+    description: 'Super Meat Boy is a tough as nails platformer where you play as an animated cube of meat who will be trying to save his girlfriend.',
+  },
+  brill: {
+    title: 'Dead by Daylight',
+    steamAppId: 381210,
+    developer: 'Behaviour Interactive Inc.',
+    description: 'Dead by Daylight is an asymmetric multiplayer horror game where one player takes on the role of the savage Killer, and the other four players play as Survivors.',
+  },
+  sunbird: {
+    title: 'The Bridge',
+    steamAppId: 230050,
+    developer: 'The Quantum Astrophysicists Guild',
+    description: 'The Bridge is a logic puzzle game that forces the player to reevaluate their preconceptions of physics and perspective.',
+  },
+  c5109bdceb3a453bb38c2fdc964ddee8: {
+    title: 'Doki Doki Literature Club Plus!',
+    steamAppId: 1388880,
+    developer: 'Team Salvato',
+    description: 'Welcome to a terrifying world of poetry and romance! Write poems for your crush and erase any mistakes along the way to ensure your perfect ending.',
+  },
+  snail: {
+    title: 'Subnautica',
+    steamAppId: 264710,
+    developer: 'Unknown Worlds Entertainment',
+    description: 'Descend into the depths of an alien underwater world filled with wonder and peril. Craft equipment, pilot submarines and out-smart wildlife to explore lush coral reefs, volcanoes, cave systems, and more.',
+  },
+  walrus: {
+    title: 'The Witness',
+    steamAppId: 210970,
+    developer: 'Thekla, Inc.',
+    description: 'You wake up, alone, on a strange island full of puzzles that will challenge and surprise you.',
+  },
+  gull: {
+    title: 'Transistor',
+    steamAppId: 237930,
+    developer: 'Supergiant Games',
+    description: 'Discover the world of Transistor, a sci-fi themed action RPG from the creators of Bastion.',
+  },
+  flamingo: {
+    title: 'Celeste',
+    steamAppId: 504230,
+    developer: 'Maddy Makes Games',
+    description: 'Help Madeline survive her inner demons on her journey to the top of Celeste Mountain, in this super-tight platformer from the creators of TowerFall.',
+  },
+  ox: {
+    title: 'Oxenfree',
+    steamAppId: 388880,
+    developer: 'Night School Studio',
+    description: 'Oxenfree is a supernatural thriller about a group of friends who unwittingly open a ghostly rift.',
+  },
+  finch: {
+    title: 'What Remains of Edith Finch',
+    steamAppId: 501300,
+    developer: 'Giant Sparrow',
+    description: 'What Remains of Edith Finch is a collection of strange tales about a family in Washington state.',
+  },
+  lemur: {
+    title: 'Slime Rancher',
+    steamAppId: 433340,
+    developer: 'Monomi Park',
+    description: 'Slime Rancher is the tale of Beatrix LeBeau, a plucky, young rancher who sets out for a life a thousand light years away from Earth on the ‘Far, Far Range’.',
+  },
+  pelican: {
+    title: 'Enter the Gungeon',
+    steamAppId: 311690,
+    developer: 'Dodge Roll',
+    description: 'Enter the Gungeon is a bullet hell dungeon crawler following a band of misfits seeking to shoot, loot, dodge roll and table-flip their way to personal absolution.',
+  },
+  mallard: {
+    title: 'Moonlighter',
+    steamAppId: 606150,
+    developer: 'Digital Sun',
+    description: 'Moonlighter is an Action RPG with rogue-lite elements that demonstrates two sides of the coin – revealing everyday routines of Will, an adventurous shopkeeper.',
+  },
+  chaffinch: {
+    title: 'This War of Mine',
+    steamAppId: 282070,
+    developer: '11 bit studios',
+    description: 'In This War Of Mine you do not play as an elite soldier, rather a group of civilians trying to survive in a besieged city.',
+  },
+  avocet: {
+    title: 'Alan Wake',
+    steamAppId: 108710,
+    developer: 'Remedy Entertainment',
+    description: 'A dark presence stalks the small town of Bright Falls, pushing Alan Wake to the brink of sanity in his fight to unravel the mystery and save his love.',
+  },
+  curlew: {
+    title: 'Hyper Light Drifter',
+    steamAppId: 257850,
+    developer: 'Heart Machine',
+    description: 'Echoes of a dark and violent past resonate throughout a savage land, steeped in treasures and blood.',
+  },
+  godwit: {
+    title: 'Fez',
+    steamAppId: 224760,
+    developer: 'Polytron Corporation',
+    description: 'Gomez is a 2D creature living in a 2D world. Or is he? When the existence of a mysterious 3rd dimension is revealed to him, Gomez is sent out on a journey.',
+  },
+  skua: {
+    title: 'Inside',
+    steamAppId: 304430,
+    developer: 'Playdead',
+    description: 'Hunted and alone, a boy finds himself drawn into the center of a dark project.',
+  },
+  waxwing: {
+    title: 'SOMA',
+    steamAppId: 282140,
+    developer: 'Frictional Games',
+    description: 'From the creators of Amnesia: The Dark Descent comes SOMA, a sci-fi horror game set below the waves of the Atlantic ocean.',
+  },
+  garganey: {
+    title: 'The Wolf Among Us',
+    steamAppId: 250320,
+    developer: 'Telltale Games',
+    description: 'From the makers of the 2012 Game of the Year: The Walking Dead, comes a gritty, violent and mature thriller based on the award-winning Fables comic books.',
+  },
+  snipe: {
+    title: 'The Talos Principle',
+    steamAppId: 257510,
+    developer: 'Croteam',
+    description: 'The Talos Principle is a philosophical first-person puzzle game from Croteam, the creators of the legendary Serious Sam games.',
+  },
+  albatross: {
+    title: 'Ape Out',
+    steamAppId: 447150,
+    developer: 'Gabe Cuzzillo',
+    description: 'APE OUT is a wildly intense and colorfully stylized smash`em up about primal escape, rhythmic violence, and frenetic jazz.',
+  },
+  parakeet: {
+    title: 'Metro 2033 Redux',
+    steamAppId: 286690,
+    developer: '4A Games',
+    description: 'In 2013, the world was devastated by an apocalyptic event, annihilating almost all mankind and turning the Earth’s surface into a poisonous wasteland.',
+  },
+  crossbill: {
+    title: 'TowerFall Ascension',
+    steamAppId: 251470,
+    developer: 'Maddy Makes Games',
+    description: 'TowerFall Ascension is the definitive version of the hit archery combat game.',
+  },
+};

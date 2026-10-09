@@ -19,6 +19,7 @@ import {
   X,
 } from 'lucide-react';
 import { getOpenCriticData, getTierColor } from '../../services/opencritic/openCritic';
+import { parseTimestampMs, formatLastPlayedDate, formatPlaytime } from '../../utils/dateUtils';
 
 interface SteamLibraryActionBarProps {
   game: CanonicalGame;
@@ -102,34 +103,24 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
     }
   };
 
-  // Playtime formatting helper
-  const formatPlaytime = (mins: number) => {
-    if (mins <= 0) return '0 hrs';
-    if (mins < 60) return `${mins} mins`;
-    const hours = (mins / 60).toFixed(1);
-    return `${hours.endsWith('.0') ? parseInt(hours, 10) : hours} hrs`;
-  };
-
   // Playtime calculation (Total aggregated across all owned storefronts)
   const totalPlaytimeMinutes = game.platforms.reduce((acc, p) => acc + (p.playtimeMinutes || 0), 0);
   const platformsWithPlaytime = game.platforms.filter((p) => (p.playtimeMinutes || 0) > 0);
 
-  // Last played formatting
+  // Last played formatting across all owned storefronts
   const formatLastPlayed = () => {
-    const raw = primaryPlatform?.lastPlayed;
-    if (!raw) return 'Never';
-    if (typeof raw === 'number' && raw > 0) {
-      const date = new Date(raw * 1000);
-      return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-    }
-    if (typeof raw === 'string') {
-      const parsed = Date.parse(raw);
-      if (!isNaN(parsed)) {
-        return new Date(parsed).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+    let latestMs: number | null = null;
+    let latestRaw: string | number | undefined = undefined;
+
+    for (const p of game.platforms) {
+      const ms = parseTimestampMs(p.lastPlayed);
+      if (ms !== null && (latestMs === null || ms > latestMs)) {
+        latestMs = ms;
+        latestRaw = p.lastPlayed;
       }
-      return raw;
     }
-    return 'Never';
+
+    return formatLastPlayedDate(latestRaw || primaryPlatform?.lastPlayed);
   };
 
   // Space Required extraction

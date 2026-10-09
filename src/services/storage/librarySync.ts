@@ -11,25 +11,50 @@ export function mergeScannedSteamGames(existingGames: CanonicalGame[]): Canonica
   for (const scanned of allSteamGames) {
     const existingIndex = merged.findIndex(
       (g) =>
-        (g.steamAppId && g.steamAppId === scanned.steamAppId) ||
+        (g.steamAppId && scanned.steamAppId && g.steamAppId === scanned.steamAppId) ||
         g.title.toLowerCase().trim() === scanned.title.toLowerCase().trim()
     );
 
+    const scannedSteam = scanned.platforms.find((p) => p.platformId === 'steam');
+
     if (existingIndex >= 0) {
       const existing = merged[existingIndex];
-      const hasSteam = existing.platforms.some((p) => p.platformId === 'steam');
-      if (!hasSteam) {
-        merged[existingIndex] = {
-          ...existing,
-          steamAppId: existing.steamAppId || scanned.steamAppId,
-          platforms: [...existing.platforms, ...scanned.platforms],
-        };
+      let hasSteam = false;
+
+      const updatedPlatforms = existing.platforms.map((p) => {
+        if (p.platformId === 'steam') {
+          hasSteam = true;
+          if (scannedSteam) {
+            return {
+              ...p,
+              playtimeMinutes: Math.max(p.playtimeMinutes || 0, scannedSteam.playtimeMinutes || 0),
+              lastPlayed: scannedSteam.lastPlayed || p.lastPlayed,
+              installed: p.installed || scannedSteam.installed,
+            };
+          }
+        }
+        return p;
+      });
+
+      if (!hasSteam && scannedSteam) {
+        updatedPlatforms.push(scannedSteam);
       }
+
+      merged[existingIndex] = {
+        ...existing,
+        steamAppId: existing.steamAppId || scanned.steamAppId,
+        platforms: updatedPlatforms,
+        headerImage: existing.headerImage || scanned.headerImage,
+        capsuleImage: existing.capsuleImage || scanned.capsuleImage,
+        shortDescription: existing.shortDescription || scanned.shortDescription,
+        reviewSummary: existing.reviewSummary || scanned.reviewSummary,
+        tags: existing.tags && existing.tags.length > 0 ? existing.tags : scanned.tags,
+      };
     } else {
       merged.push(scanned);
     }
   }
 
-  // Sort alphabetically by canonical title (ignoring leading articles if desired)
+  // Sort alphabetically by canonical title
   return merged.sort((a, b) => a.title.localeCompare(b.title, undefined, { sensitivity: 'base' }));
 }

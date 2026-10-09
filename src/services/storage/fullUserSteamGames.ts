@@ -240,7 +240,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
         platformId: 'steam',
         platformGameId: '257350',
         installed: false,
-        playtimeMinutes: 0,
+        playtimeMinutes: 23813,
         lastPlayed: '1730666199',
       }
     ],
@@ -263,7 +263,7 @@ export const FULL_USER_STEAM_GAMES: CanonicalGame[] = [
         platformId: 'steam',
         platformGameId: '228280',
         installed: false,
-        playtimeMinutes: 0,
+        playtimeMinutes: 6800,
         lastPlayed: '1726344413',
       }
     ],
