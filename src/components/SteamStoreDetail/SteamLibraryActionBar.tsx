@@ -284,13 +284,13 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
     <div className="bg-[#101822] border border-[#2a475e] rounded p-4 shadow-xl text-steam-text select-none">
       <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
         {/* Left: Action Button & Library Status */}
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="flex items-center gap-3 shrink-0 flex-nowrap py-0.5">
           {/* Main Action Button (Play / Install) */}
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5 shrink-0">
             {isInstalled ? (
               <button
                 onClick={handlePlayClick}
-                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded font-bold text-sm text-white tracking-wider uppercase transition-all shadow-md hover:brightness-110 active:scale-[0.99]"
+                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded font-bold text-sm text-white tracking-wider uppercase transition-all shadow-md hover:brightness-110 active:scale-[0.99] shrink-0"
                 style={{
                   background: 'linear-gradient(to right, #75b022 5%, #588a1b 95%)',
                   boxShadow: '0 0 16px rgba(91, 163, 43, 0.45)',
@@ -303,7 +303,7 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
             ) : (
               <button
                 onClick={handleInstallClick}
-                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded font-bold text-sm text-white tracking-wider uppercase transition-all shadow-md hover:brightness-110 active:scale-[0.99]"
+                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded font-bold text-sm text-white tracking-wider uppercase transition-all shadow-md hover:brightness-110 active:scale-[0.99] shrink-0"
                 style={{
                   background: 'linear-gradient(to right, #214b6b 0%, #123049 100%)',
                   border: '1px solid #3878a8',
@@ -320,7 +320,7 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
             {onToggleInstallStatus && (
               <button
                 onClick={onToggleInstallStatus}
-                className="p-2.5 rounded text-steam-subtext hover:text-white bg-[#16202d] hover:bg-[#1f2c3d] border border-steam-border/80 transition-colors"
+                className="p-2.5 rounded text-steam-subtext hover:text-white bg-[#16202d] hover:bg-[#1f2c3d] border border-steam-border/80 transition-colors shrink-0"
                 title={
                   isInstalled
                     ? 'Manually mark as uninstalled (cloud only)'
@@ -336,7 +336,7 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
           {onManageCollections && (
             <button
               onClick={onManageCollections}
-              className="inline-flex items-center gap-1.5 px-3 py-2 rounded text-xs font-semibold text-steam-text hover:text-white bg-[#1b2838] hover:bg-[#25394b] border border-[#2a475e] transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-2 rounded text-xs font-semibold text-steam-text hover:text-white bg-[#1b2838] hover:bg-[#25394b] border border-[#2a475e] transition-colors shrink-0"
               title="Add or remove from user collections"
             >
               <Bookmark className="w-3.5 h-3.5 text-steam-accent" />
@@ -345,7 +345,7 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
           )}
 
           {/* Library Status Indicator */}
-          <div className="flex flex-col justify-center border-l border-[#2a475e]/60 pl-3.5 py-0.5 shrink-0">
+          <div className="flex flex-col justify-center border-l border-[#2a475e]/60 pl-3.5 py-0.5 shrink-0 min-w-max">
             <div className="flex items-center gap-1.5 text-xs font-semibold text-white whitespace-nowrap">
               {isInstalled ? (
                 <>

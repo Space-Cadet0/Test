@@ -19,6 +19,10 @@ import { StorefrontId } from '../../contracts/platform';
 import { StorefrontIntegration } from '../../contracts/integration';
 import {
   loadIntegrations,
+  saveIntegrations,
+  loadCurrentCatalog,
+  saveCurrentCatalog,
+  mergeStorefrontGames,
   connectSteamIntegration,
   connectGogIntegration,
   connectEpicIntegration,
@@ -202,9 +206,40 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
       setIsSubmitting(true);
       (window as any).electronAPI
         .loginStore(storefrontId)
-        .then(async (res: { success: boolean; code?: string; error?: string }) => {
-          if (res.success && res.code) {
-            await completeStoreAuthentication(storefrontId, res.code);
+        .then(async (res: { success: boolean; code?: string; accountName?: string; avatarUrl?: string; games?: CanonicalGame[]; error?: string; syncError?: string }) => {
+          if (res.success) {
+            if (res.games && res.games.length > 0) {
+              // Direct native synchronization completed by Electron Main Process!
+              const integration: StorefrontIntegration = {
+                storefrontId,
+                name: STORE_AUTH_CONFIGS[storefrontId]?.storeName || storefrontId.toUpperCase(),
+                isConnected: true,
+                accountName: res.accountName || 'Connected User',
+                avatarUrl: res.avatarUrl,
+                gamesCount: res.games.length,
+                lastSyncedAt: new Date().toISOString(),
+                authMethod: 'oauth',
+                statusMessage: `Connected as ${res.accountName || 'user'} (${res.games.length} titles synced)`,
+              };
+
+              const current = loadCurrentCatalog();
+              const merged = mergeStorefrontGames(current, res.games, storefrontId);
+              const updatedIntegrations = loadIntegrations().map((i) =>
+                i.storefrontId === storefrontId ? integration : i
+              );
+              saveIntegrations(updatedIntegrations);
+              saveCurrentCatalog(merged);
+              setIntegrations(updatedIntegrations);
+              setSuccessMsg(`Successfully connected as ${res.accountName || 'user'}! Synced ${res.games.length} titles from ${STORE_AUTH_CONFIGS[storefrontId]?.storeName || storefrontId.toUpperCase()}.`);
+              onLibraryUpdated(merged);
+              setIsSubmitting(false);
+              setAuthenticatingStore(null);
+              return;
+            } else if (res.code) {
+              await completeStoreAuthentication(storefrontId, res.code);
+            } else {
+              await completeStoreAuthentication(storefrontId);
+            }
           } else if (res.error) {
             setErrorMsg(res.error);
             setIsSubmitting(false);

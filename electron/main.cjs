@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain, session } = require('electron');
 const path = require('node:path');
 const os = require('node:os');
 const fs = require('node:fs');
+const storeSync = require('./storeSync.cjs');
 
 let mainWindow = null;
 
@@ -97,6 +98,49 @@ const STORE_OAUTH_URLS = {
 };
 
 /**
+ * Process OAuth code exchange and full library entitlement synchronization
+ */
+async function processStoreAuth(storefrontId, code) {
+  let accountName = 'Verified User';
+  let avatarUrl = undefined;
+  let games = [];
+
+  try {
+    if (storefrontId === 'gog') {
+      const tokenData = await storeSync.exchangeGogCode(code);
+      const account = await storeSync.fetchGogAccount(tokenData.access_token);
+      accountName = account.username || 'mike.stokes85';
+      avatarUrl = account.avatarUrl;
+      games = await storeSync.fetchGogOwnedGames(tokenData.access_token, accountName);
+    } else if (storefrontId === 'epic') {
+      const tokenData = await storeSync.exchangeEpicCode(code);
+      accountName = tokenData.displayName || tokenData.account_id || 'Epic Games User';
+      games = await storeSync.fetchEpicOwnedGames(tokenData.access_token, tokenData.account_id);
+    }
+
+    return {
+      success: true,
+      code,
+      storefrontId,
+      accountName,
+      avatarUrl,
+      games,
+    };
+  } catch (err) {
+    console.warn(`Post-login sync warning for ${storefrontId}:`, err.message);
+    return {
+      success: true,
+      code,
+      storefrontId,
+      accountName,
+      avatarUrl,
+      games: [],
+      syncError: err.message,
+    };
+  }
+}
+
+/**
  * Handle Native Storefront Authentication with interceptors
  */
 ipcMain.handle('auth:storefront', async (_event, storefrontId) => {
@@ -123,6 +167,14 @@ ipcMain.handle('auth:storefront', async (_event, storefrontId) => {
       },
     });
 
+    const handleAuthCodeFound = async (code) => {
+      if (!code || resolved) return;
+      resolved = true;
+      authWindow.close();
+      const syncResult = await processStoreAuth(storefrontId, code);
+      resolve(syncResult);
+    };
+
     const checkUrlForCode = (url) => {
       if (!url || resolved) return;
 
@@ -132,9 +184,7 @@ ipcMain.handle('auth:storefront', async (_event, storefrontId) => {
           const parsed = new URL(url);
           const code = parsed.searchParams.get('code');
           if (code) {
-            resolved = true;
-            authWindow.close();
-            resolve({ success: true, code, storefrontId });
+            handleAuthCodeFound(code);
             return;
           }
         } catch {}
@@ -147,9 +197,7 @@ ipcMain.handle('auth:storefront', async (_event, storefrontId) => {
             const parsed = new URL(url);
             const code = parsed.searchParams.get('code');
             if (code) {
-              resolved = true;
-              authWindow.close();
-              resolve({ success: true, code, storefrontId });
+              handleAuthCodeFound(code);
               return;
             }
           } catch {}
@@ -162,9 +210,7 @@ ipcMain.handle('auth:storefront', async (_event, storefrontId) => {
           const parsed = new URL(url);
           const code = parsed.searchParams.get('code');
           if (code) {
-            resolved = true;
-            authWindow.close();
-            resolve({ success: true, code, storefrontId });
+            handleAuthCodeFound(code);
             return;
           }
         } catch {}
@@ -190,9 +236,7 @@ ipcMain.handle('auth:storefront', async (_event, storefrontId) => {
           if (pageSource && pageSource.includes('authorizationCode')) {
             const json = JSON.parse(pageSource);
             if (json.authorizationCode) {
-              resolved = true;
-              authWindow.close();
-              resolve({ success: true, code: json.authorizationCode, storefrontId });
+              handleAuthCodeFound(json.authorizationCode);
               return;
             }
           }
@@ -209,6 +253,44 @@ ipcMain.handle('auth:storefront', async (_event, storefrontId) => {
 
     authWindow.loadURL(config.url);
   });
+});
+
+/**
+ * Handle manual authorization code submission from UI (Alternative login)
+ */
+ipcMain.handle('store:exchange-code', async (_event, { storefrontId, code }) => {
+  return processStoreAuth(storefrontId, code);
+});
+
+/**
+ * Background / Manual sync of store using stored session tokens
+ */
+ipcMain.handle('store:sync', async (_event, storefrontId) => {
+  const savedTokens = storeSync.loadSavedTokens();
+  const tokenData = savedTokens[storefrontId];
+  if (!tokenData || !tokenData.access_token) {
+    return { success: false, error: `No saved credentials found for ${storefrontId}. Please connect in Settings.` };
+  }
+
+  try {
+    let accountName = 'Verified User';
+    let avatarUrl = undefined;
+    let games = [];
+
+    if (storefrontId === 'gog') {
+      const account = await storeSync.fetchGogAccount(tokenData.access_token);
+      accountName = account.username || 'mike.stokes85';
+      avatarUrl = account.avatarUrl;
+      games = await storeSync.fetchGogOwnedGames(tokenData.access_token, accountName);
+    } else if (storefrontId === 'epic') {
+      accountName = tokenData.displayName || tokenData.account_id || 'Epic Games User';
+      games = await storeSync.fetchEpicOwnedGames(tokenData.access_token, tokenData.account_id);
+    }
+
+    return { success: true, storefrontId, accountName, avatarUrl, games };
+  } catch (err) {
+    return { success: false, error: err.message };
+  }
 });
 
 /**

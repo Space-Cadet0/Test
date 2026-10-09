@@ -107,6 +107,11 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/gog-auth/, ''),
       },
+      '/api/gog-menu': {
+        target: 'https://menu.gog.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/gog-menu/, ''),
+      },
       '/api/gog-profile': {
         target: 'https://www.gog.com',
         changeOrigin: true,

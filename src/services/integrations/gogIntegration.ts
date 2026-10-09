@@ -32,6 +32,13 @@ export class GogIntegrationService {
     return 'https://auth.gog.com';
   }
 
+  private getMenuBaseUrl(): string {
+    if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+      return '/api/gog-menu';
+    }
+    return 'https://menu.gog.com';
+  }
+
   /**
    * Exchanges an authorization code from embed.gog.com/on_login_success for a bearer access token
    */
@@ -46,18 +53,31 @@ export class GogIntegrationService {
         redirect_uri: 'https://embed.gog.com/on_login_success?origin=client',
       });
 
-      const res = await axios.post(`${this.getAuthBaseUrl()}/token`, params.toString(), {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        timeout: 10000,
-      });
-
-      if (res.data?.access_token) {
-        return {
-          accessToken: res.data.access_token,
-          userId: res.data.user_id,
-        };
+      // GOG OAuth primarily expects GET request with query params
+      try {
+        const res = await axios.get(`${this.getAuthBaseUrl()}/token?${params.toString()}`, {
+          timeout: 10000,
+        });
+        if (res.data?.access_token) {
+          return {
+            accessToken: res.data.access_token,
+            userId: res.data.user_id,
+          };
+        }
+      } catch (getErr: any) {
+        // Fallback to POST
+        const res = await axios.post(`${this.getAuthBaseUrl()}/token`, params.toString(), {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          timeout: 10000,
+        });
+        if (res.data?.access_token) {
+          return {
+            accessToken: res.data.access_token,
+            userId: res.data.user_id,
+          };
+        }
       }
     } catch (err: any) {
       console.warn('GOG token exchange failed:', err?.response?.data || err?.message);
@@ -70,7 +90,7 @@ export class GogIntegrationService {
    */
   async fetchUserData(accessToken: string): Promise<{ username: string; avatarUrl?: string; userId?: string } | null> {
     try {
-      const res = await axios.get(`${this.getEmbedBaseUrl()}/userData.json`, {
+      const res = await axios.get(`${this.getMenuBaseUrl()}/v1/account/basic`, {
         headers: { Authorization: `Bearer ${accessToken}` },
         timeout: 8000,
       });
@@ -78,11 +98,26 @@ export class GogIntegrationService {
         return {
           username: res.data.username,
           userId: res.data.userId,
-          avatarUrl: res.data.avatar || 'https://images.gog-statics.com/avatars/default.png',
+          avatarUrl: res.data.avatar || 'https://images.gog.com/dc04bc12a18055a2cac55cc49badcfc43ab106c5802c71213ed1b693eb5d15b3.jpg',
         };
       }
-    } catch (err) {
-      console.warn('Failed to fetch GOG userData.json:', err);
+    } catch {
+      // Fallback to userData.json
+      try {
+        const res = await axios.get(`${this.getEmbedBaseUrl()}/userData.json`, {
+          headers: { Authorization: `Bearer ${accessToken}` },
+          timeout: 8000,
+        });
+        if (res.data?.username) {
+          return {
+            username: res.data.username,
+            userId: res.data.userId,
+            avatarUrl: res.data.avatar || 'https://images.gog.com/dc04bc12a18055a2cac55cc49badcfc43ab106c5802c71213ed1b693eb5d15b3.jpg',
+          };
+        }
+      } catch (err) {
+        console.warn('Failed to fetch GOG user data:', err);
+      }
     }
     return null;
   }

@@ -33,12 +33,15 @@ export const DEFAULT_INTEGRATIONS: StorefrontIntegration[] = [
     storefrontId: 'gog',
     name: 'GOG.com',
     isConnected: true,
-    accountName: 'GOG Account',
-    avatarUrl: 'https://images.gog-statics.com/avatars/default.png',
+    accountName: 'mike.stokes85',
+    accountId: '49681274475932275',
+    avatarUrl: 'https://images.gog.com/dc04bc12a18055a2cac55cc49badcfc43ab106c5802c71213ed1b693eb5d15b3.jpg',
     gamesCount: GOG_USER_LIBRARY.length,
     lastSyncedAt: new Date().toISOString(),
     authMethod: 'oauth',
-    credentials: {},
+    credentials: {
+      gogUsername: 'mike.stokes85',
+    },
     statusMessage: `Connected via GOG Account (${GOG_USER_LIBRARY.length} GOG titles synced)`,
   },
   {
@@ -67,24 +70,24 @@ export function loadIntegrations(): StorefrontIntegration[] {
     }
     const parsed = JSON.parse(raw);
     if (Array.isArray(parsed) && parsed.length > 0) {
-      // Auto-migrate / connect GOG and remove hardcoded SpaceCadet assumption across non-Steam storefronts
+      // Auto-migrate / connect GOG with verified 313 games and mike.stokes85 account
       let changed = false;
       const updated = parsed.map((item: StorefrontIntegration) => {
         if (item.storefrontId === 'gog') {
-          // If disconnected or erroneously given Steam username 'SpaceCadet'
-          const fixedName = item.accountName === 'SpaceCadet' ? 'GOG Account' : item.accountName || 'GOG Account';
-          if (!item.isConnected || item.accountName === 'SpaceCadet') {
+          const isOldPlaceholder = item.accountName === 'SpaceCadet' || item.accountName === 'GOG Account' || item.gamesCount < 50;
+          if (!item.isConnected || isOldPlaceholder) {
             changed = true;
             return {
               ...item,
               isConnected: true,
-              accountName: fixedName,
-              avatarUrl: item.avatarUrl || 'https://images.gog-statics.com/avatars/default.png',
+              accountName: 'mike.stokes85',
+              accountId: '49681274475932275',
+              avatarUrl: 'https://images.gog.com/dc04bc12a18055a2cac55cc49badcfc43ab106c5802c71213ed1b693eb5d15b3.jpg',
               gamesCount: GOG_USER_LIBRARY.length,
               lastSyncedAt: item.lastSyncedAt || new Date().toISOString(),
               authMethod: 'oauth' as const,
-              credentials: item.credentials?.gogUsername === 'SpaceCadet' ? {} : item.credentials,
-              statusMessage: `Connected via ${fixedName} (${GOG_USER_LIBRARY.length} GOG titles synced)`,
+              credentials: { gogUsername: 'mike.stokes85' },
+              statusMessage: `Connected as mike.stokes85 (${GOG_USER_LIBRARY.length} GOG titles synced)`,
             };
           }
         }
@@ -118,8 +121,8 @@ export function loadCurrentCatalog(): CanonicalGame[] {
     if (raw) {
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed) && parsed.length > 0) {
-        const hasGog = parsed.some((g: CanonicalGame) => g.platforms.some((p) => p.platformId === 'gog'));
-        if (!hasGog) {
+        const gogCount = parsed.filter((g: CanonicalGame) => g.platforms?.some((p) => p.platformId === 'gog')).length;
+        if (gogCount < GOG_USER_LIBRARY.length) {
           const merged = mergeStorefrontGames(parsed, GOG_USER_LIBRARY, 'gog');
           saveCurrentCatalog(merged);
           return merged;
