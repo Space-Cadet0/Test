@@ -419,3 +419,107 @@ ipcMain.handle('shell:open-external', async (_event, url) => {
   return false;
 });
 
+// HowLongToBeat Token Cache
+let hltbCachedToken = null;
+let hltbTokenExpiry = 0;
+
+async function getHltbToken() {
+  if (hltbCachedToken && Date.now() < hltbTokenExpiry) {
+    return hltbCachedToken;
+  }
+  try {
+    const initRes = await fetch(`https://howlongtobeat.com/api/search/site/init?t=${Date.now()}`, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36',
+        'Referer': 'https://howlongtobeat.com/',
+      },
+    });
+    if (!initRes.ok) return null;
+    const initData = await initRes.json();
+    if (initData?.token) {
+      hltbCachedToken = initData.token;
+      hltbTokenExpiry = Date.now() + 10 * 60 * 1000;
+      return hltbCachedToken;
+    }
+  } catch (e) {
+    console.warn('[HLTB] Token init failed:', e.message);
+  }
+  return null;
+}
+
+/**
+ * Live HowLongToBeat API Search IPC Handler
+ */
+ipcMain.handle('hltb:search', async (_event, gameTitle) => {
+  if (!gameTitle || typeof gameTitle !== 'string') {
+    return { success: false, data: [] };
+  }
+
+  try {
+    const cleanTerms = gameTitle
+      .replace(/[+:]/g, ' ')
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean);
+
+    if (cleanTerms.length === 0) return { success: false, data: [] };
+
+    let token = await getHltbToken();
+    if (!token) return { success: false, error: 'Could not obtain HLTB token', data: [] };
+
+    const executeSearch = async (authToken) => {
+      return await fetch('https://howlongtobeat.com/api/search/site', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-auth-token': authToken,
+          'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36',
+          'Referer': 'https://howlongtobeat.com/',
+        },
+        body: JSON.stringify({
+          searchType: 'games',
+          searchTerms: cleanTerms,
+          searchPage: 1,
+          size: 10,
+          searchOptions: {
+            games: {
+              userId: 0,
+              platform: '',
+              sortCategory: 'popular',
+              rangeCategory: 'main',
+              rangeTime: { min: 0, max: 0 },
+              gameplay: { perspective: '', flow: '', genre: '' },
+              year: '',
+              modifier: '',
+            },
+            users: { sortCategory: 'postcount' },
+            lists: { sortCategory: 'follows' },
+            filter: '',
+            sort: 0,
+            randomizer: 0,
+          },
+          useCache: true,
+        }),
+      });
+    };
+
+    let searchRes = await executeSearch(token);
+    if (searchRes.status === 403) {
+      hltbCachedToken = null;
+      token = await getHltbToken();
+      if (token) {
+        searchRes = await executeSearch(token);
+      }
+    }
+
+    if (!searchRes.ok) {
+      return { success: false, error: `HLTB status ${searchRes.status}`, data: [] };
+    }
+
+    const json = await searchRes.json();
+    return { success: true, data: json.data || [] };
+  } catch (err) {
+    return { success: false, error: err.message, data: [] };
+  }
+});
+

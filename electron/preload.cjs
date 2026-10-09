@@ -7,4 +7,5 @@ contextBridge.exposeInMainWorld('electronAPI', {
   exchangeCode: (storefrontId, code) => ipcRenderer.invoke('store:exchange-code', { storefrontId, code }),
   scanLocalGames: () => ipcRenderer.invoke('scan:steam-installed'),
   openExternal: (url) => ipcRenderer.invoke('shell:open-external', url),
+  searchHltb: (title) => ipcRenderer.invoke('hltb:search', title),
 });

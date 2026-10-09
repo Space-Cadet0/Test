@@ -142,6 +142,14 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/gog-product/, ''),
       },
+      '/api/hltb': {
+        target: 'https://howlongtobeat.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/hltb/, ''),
+        headers: {
+          Referer: 'https://howlongtobeat.com/',
+        },
+      },
     },
   }
 });
