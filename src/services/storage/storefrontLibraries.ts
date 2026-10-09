@@ -1,6 +1,6 @@
 import { CanonicalGame } from '../../contracts/game';
 
-// Re-export verified 313 GOG titles for mike.stokes85 matching https://www.gog.com/u/mike.stokes85/games
+// Re-export verified 314 GOG titles for mike.stokes85 matching https://www.gog.com/en/account
 export { GOG_USER_LIBRARY } from './gogUserLibrary';
 
 // Re-export verified 402 Epic Games Store titles matching official launcher library

@@ -53,12 +53,12 @@ export function App() {
           let sanitized = sanitizeGameCatalog(mergeScannedSteamGames(cleaned));
 
           const gogCount = sanitized.filter((g: CanonicalGame) => g.platforms?.some((p) => p.platformId === 'gog')).length;
-          if (gogCount < GOG_USER_LIBRARY.length) {
+          if (gogCount !== GOG_USER_LIBRARY.length) {
             sanitized = sanitizeGameCatalog(mergeStorefrontGames(sanitized, GOG_USER_LIBRARY, 'gog'));
           }
 
           const epicCount = sanitized.filter((g: CanonicalGame) => g.platforms?.some((p) => p.platformId === 'epic')).length;
-          if (epicCount < EPIC_USER_LIBRARY.length) {
+          if (epicCount !== EPIC_USER_LIBRARY.length) {
             sanitized = sanitizeGameCatalog(mergeStorefrontGames(sanitized, EPIC_USER_LIBRARY, 'epic'));
           }
 

@@ -457,7 +457,7 @@ async function fetchGogOwnedGames(accessToken, username) {
     let totalPages = 1;
 
     while (currentPage <= totalPages && currentPage <= 35) {
-      const url = `https://embed.gog.com/account/getFilteredProducts?hiddenFlag=0&mediaType=1&page=${currentPage}&sortBy=title`;
+      const url = `https://embed.gog.com/account/getFilteredProducts?hasHiddenProducts=false&isDefault=true&mediaType=1&page=${currentPage}&limit=100`;
       const res = await fetch(url, {
         headers: {
           Authorization: `Bearer ${accessToken}`,

@@ -1,5 +1,6 @@
 import { CanonicalGame } from '../../contracts/game';
 import { KNOWN_EPIC_APP_NAMES } from './epicCodenames';
+import { GOG_USER_LIBRARY } from '../storage/gogUserLibrary';
 
 /**
  * Checks if a string is a 20+ hex hash or UUID
@@ -96,6 +97,17 @@ export function normalizeCanonicalTitle(title: string): string {
     .replace(/\s+edition$/g, '')
     .replace(/\s+/g, ' ')
     .trim();
+}
+
+const validGogProductIds = new Set<string>();
+const validGogTitles = new Set<string>();
+for (const g of GOG_USER_LIBRARY) {
+  validGogTitles.add(normalizeCanonicalTitle(g.title));
+  for (const p of g.platforms) {
+    if (p.platformId === 'gog' && p.platformGameId) {
+      validGogProductIds.add(p.platformGameId.trim());
+    }
+  }
 }
 
 /**
@@ -224,8 +236,25 @@ export function sanitizeGameCatalog(catalog: CanonicalGame[]): CanonicalGame[] {
       if (game.platforms.length === 0) continue;
     }
 
-    // 6. Intelligent cross-store deduplication by Steam App ID and Normalized Title
     const normTitle = normalizeCanonicalTitle(game.title);
+
+    // 6. Purge false GOG platform presence from unowned GOG titles (e.g. old bestselling catalog items like Anno 1404)
+    if (game.platforms.some((p) => p.platformId === 'gog')) {
+      const gogPlatform = game.platforms.find((p) => p.platformId === 'gog');
+      const isRealGogGame =
+        (gogPlatform?.platformGameId && validGogProductIds.has(gogPlatform.platformGameId.trim())) ||
+        validGogTitles.has(normTitle);
+
+      if (!isRealGogGame) {
+        game = {
+          ...game,
+          platforms: game.platforms.filter((p) => p.platformId !== 'gog'),
+        };
+        if (game.platforms.length === 0) continue;
+      }
+    }
+
+    // 7. Intelligent cross-store deduplication by Steam App ID and Normalized Title
     const existingIndex =
       (game.steamAppId && steamIdToIndex.has(game.steamAppId)
         ? steamIdToIndex.get(game.steamAppId)

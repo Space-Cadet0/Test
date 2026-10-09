@@ -84,7 +84,7 @@ export function loadIntegrations(): StorefrontIntegration[] {
       let changed = false;
       const updated = parsed.map((item: StorefrontIntegration) => {
         if (item.storefrontId === 'gog') {
-          const isOldPlaceholder = item.accountName === 'SpaceCadet' || item.accountName === 'GOG Account' || item.gamesCount < 50;
+          const isOldPlaceholder = item.accountName === 'SpaceCadet' || item.accountName === 'GOG Account' || item.gamesCount !== GOG_USER_LIBRARY.length;
           if (!item.isConnected || isOldPlaceholder) {
             changed = true;
             return {
@@ -176,7 +176,7 @@ export function loadCurrentCatalog(): CanonicalGame[] {
         let cleaned = sanitizeGameCatalog(parsed);
 
         const gogCount = cleaned.filter((g: CanonicalGame) => g.platforms?.some((p) => p.platformId === 'gog')).length;
-        if (gogCount < GOG_USER_LIBRARY.length) {
+        if (gogCount !== GOG_USER_LIBRARY.length) {
           cleaned = sanitizeGameCatalog(mergeStorefrontGames(cleaned, GOG_USER_LIBRARY, 'gog'));
         }
 
