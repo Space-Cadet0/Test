@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { StorefrontId, STOREFRONT_REGISTRY } from '../../contracts/platform';
-import { Search, RefreshCw, Layers, Gamepad, Cloud, ChevronLeft, ChevronRight } from 'lucide-react';
+import { loadIntegrations } from '../../services/integrations/integrationStorage';
+import {
+  RefreshCw,
+  Layers,
+  Cloud,
+  ChevronLeft,
+  ChevronRight,
+  Menu,
+} from 'lucide-react';
 
 interface TopNavBarProps {
-  searchQuery: string;
-  onSearchChange: (query: string) => void;
+  searchQuery?: string;
+  onSearchChange?: (query: string) => void;
   selectedPlatform: StorefrontId | 'all';
   onSelectPlatform: (platform: StorefrontId | 'all') => void;
   installedOnly: boolean;
@@ -21,11 +29,10 @@ interface TopNavBarProps {
   canGoForward?: boolean;
   onGoForward?: () => void;
   forwardTitle?: string | null;
+  connectedStorefronts?: StorefrontId[];
 }
 
 export const TopNavBar: React.FC<TopNavBarProps> = ({
-  searchQuery,
-  onSearchChange,
   selectedPlatform,
   onSelectPlatform,
   installedOnly,
@@ -34,7 +41,6 @@ export const TopNavBar: React.FC<TopNavBarProps> = ({
   filteredCount,
   isSyncing,
   onTriggerSync,
-  onHomeClick,
   onOpenIntegrations,
   canGoBack = false,
   onGoBack,
@@ -42,9 +48,35 @@ export const TopNavBar: React.FC<TopNavBarProps> = ({
   canGoForward = false,
   onGoForward,
   forwardTitle,
+  connectedStorefronts,
 }) => {
-  const platforms: (StorefrontId | 'all')[] = [
-    'all',
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement | null>(null);
+
+  // Close burger menu on outside click or escape
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    }
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        setIsMenuOpen(false);
+      }
+    }
+    if (isMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isMenuOpen]);
+
+  // All known storefront IDs in canonical order
+  const allPlatforms: StorefrontId[] = [
     'steam',
     'gog',
     'epic',
@@ -56,12 +88,107 @@ export const TopNavBar: React.FC<TopNavBarProps> = ({
     'itch',
   ];
 
+  // Set of connected storefront IDs
+  const connectedSet = useMemo(() => {
+    if (connectedStorefronts && connectedStorefronts.length > 0) {
+      return new Set<StorefrontId>(connectedStorefronts);
+    }
+    try {
+      const integrations = loadIntegrations();
+      return new Set<StorefrontId>(
+        integrations.filter((i) => i.isConnected).map((i) => i.storefrontId)
+      );
+    } catch {
+      return new Set<StorefrontId>(['steam', 'gog', 'epic']);
+    }
+  }, [connectedStorefronts]);
+
+  // Only display 'all' and connected storefronts
+  const visiblePlatforms: (StorefrontId | 'all')[] = useMemo(() => {
+    return ['all', ...allPlatforms.filter((p) => connectedSet.has(p))];
+  }, [connectedSet]);
+
   return (
-    <header className="sticky top-0 z-40 bg-[#171a21]/95 backdrop-blur-md border-b border-steam-border shadow-md">
-      <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
-        {/* Left: History Nav + Brand & Home Button */}
-        <div className="flex items-center gap-2.5 w-full md:w-auto justify-between md:justify-start">
-          {/* Back & Forward History Controls */}
+    <header className="sticky top-0 z-40 bg-[#171a21]/95 backdrop-blur-md border-b border-steam-border shadow-md select-none">
+      <div className="max-w-[1700px] mx-auto px-4 py-2.5 flex items-center justify-between gap-3">
+        {/* Left Section: Burger Menu + History Navigation */}
+        <div className="flex items-center gap-2.5 shrink-0">
+          {/* Burger Menu Button with Dropdown */}
+          <div className="relative" ref={menuRef}>
+            <button
+              type="button"
+              onClick={() => setIsMenuOpen((prev) => !prev)}
+              className={`p-2 rounded transition-all flex items-center justify-center border shadow-sm cursor-pointer ${
+                isMenuOpen
+                  ? 'bg-steam-accent text-black border-steam-accent shadow-[0_0_12px_rgba(102,192,244,0.4)]'
+                  : 'bg-[#10141a] text-steam-text hover:text-white hover:bg-[#1a222d] border-steam-border/80'
+              }`}
+              title="Menu (Accounts, Sync All)"
+              aria-label="Menu"
+              aria-expanded={isMenuOpen}
+            >
+              <Menu className="w-4 h-4" />
+              {isSyncing && (
+                <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+              )}
+            </button>
+
+            {/* Burger Dropdown Menu */}
+            {isMenuOpen && (
+              <div className="absolute left-0 top-full mt-2 w-56 rounded-md bg-[#16202d] border border-steam-border shadow-2xl z-50 py-1.5 backdrop-blur-md animate-in fade-in zoom-in-95 duration-150">
+                {/* Accounts */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    onOpenIntegrations();
+                  }}
+                  className="w-full flex items-center justify-between px-3.5 py-2.5 text-xs text-steam-text hover:text-white hover:bg-[#1f2c3d] transition-colors text-left cursor-pointer group"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <Cloud className="w-4 h-4 text-sky-400 group-hover:scale-110 transition-transform" />
+                    <div className="flex flex-col">
+                      <span className="font-semibold text-white">Accounts</span>
+                      <span className="text-[10px] text-steam-subtext">Connected storefronts</span>
+                    </div>
+                  </div>
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
+                </button>
+
+                {/* Sync All */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    onTriggerSync();
+                  }}
+                  disabled={isSyncing}
+                  className="w-full flex items-center justify-between px-3.5 py-2.5 text-xs text-steam-text hover:text-white hover:bg-[#1f2c3d] transition-colors text-left cursor-pointer disabled:opacity-50 group"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <RefreshCw
+                      className={`w-4 h-4 ${
+                        isSyncing
+                          ? 'animate-spin text-steam-accent'
+                          : 'text-emerald-400 group-hover:rotate-45 transition-transform'
+                      }`}
+                    />
+                    <div className="flex flex-col">
+                      <span className="font-semibold text-white">
+                        {isSyncing ? 'Syncing...' : 'Sync All'}
+                      </span>
+                      <span className="text-[10px] text-steam-subtext">Manifests & cloud libraries</span>
+                    </div>
+                  </div>
+                  {isSyncing && (
+                    <span className="text-[10px] text-steam-accent font-semibold">Active</span>
+                  )}
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* History Navigation: Back & Forward Controls */}
           <div className="flex items-center bg-[#10141a] p-0.5 rounded border border-steam-border/80 shadow-inner">
             <button
               type="button"
@@ -92,72 +219,36 @@ export const TopNavBar: React.FC<TopNavBarProps> = ({
               <ChevronRight className="w-4 h-4" />
             </button>
           </div>
-
-          <button
-            onClick={onHomeClick}
-            className="flex items-center gap-2.5 text-white hover:text-steam-accent transition-colors group"
-          >
-            <div className="w-8 h-8 rounded bg-gradient-to-br from-steam-border to-steam-dark flex items-center justify-center border border-steam-border group-hover:border-steam-accent shadow-sm">
-              <Gamepad className="w-5 h-5 text-steam-accent" />
-            </div>
-            <div className="text-left">
-              <span className="text-sm font-black tracking-wider uppercase bg-clip-text text-transparent bg-gradient-to-r from-white via-steam-text to-steam-accent">
-                OmniLibrary
-              </span>
-              <span className="block text-[10px] text-steam-subtext uppercase tracking-widest font-medium">
-                Universal Game Browser
-              </span>
-            </div>
-          </button>
-
-          {/* Accounts & Integrations button */}
-          <button
-            onClick={onOpenIntegrations}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-[#212b36] hover:bg-steam-border text-steam-text hover:text-white rounded border border-steam-border transition-all shadow-sm group"
-            title="Manage connected storefront accounts (Steam, GOG, Epic, Xbox) without local launchers"
-          >
-            <Cloud className="w-3.5 h-3.5 text-sky-400 group-hover:scale-110 transition-transform" />
-            <span>Accounts</span>
-            <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
-          </button>
-
-          {/* Sync status button */}
-          <button
-            onClick={onTriggerSync}
-            disabled={isSyncing}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-[#212b36] hover:bg-steam-border text-steam-text hover:text-white rounded border border-steam-border transition-all disabled:opacity-50"
-            title="Scan local manifests and sync cloud accounts"
-          >
-            <RefreshCw className={`w-3.5 h-3.5 ${isSyncing ? 'animate-spin text-steam-accent' : 'text-emerald-400'}`} />
-            <span>{isSyncing ? 'Syncing...' : 'Sync All'}</span>
-          </button>
         </div>
 
-        {/* Center: Search Input */}
-        <div className="relative w-full md:w-80">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-steam-subtext pointer-events-none" />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => onSearchChange(e.target.value)}
-            placeholder="Search across all storefronts..."
-            className="w-full pl-9 pr-3 py-1.5 text-xs bg-[#10141a] text-white placeholder-steam-subtext rounded border border-steam-border/80 focus:border-steam-accent focus:outline-none transition-colors"
-          />
-          {searchQuery && (
-            <button
-              onClick={() => onSearchChange('')}
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs text-steam-subtext hover:text-white"
-            >
-              ×
-            </button>
-          )}
+        {/* Center Section: Merged Storefront Filter Pills (Only Connected Storefronts) */}
+        <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none min-w-0 flex-1 justify-start md:justify-center px-1">
+          {visiblePlatforms.map((p) => {
+            const isSelected = selectedPlatform === p;
+            const meta = p === 'all' ? null : STOREFRONT_REGISTRY[p];
+            const name = p === 'all' ? 'All Libraries' : meta?.name || p.toUpperCase();
+
+            return (
+              <button
+                key={p}
+                onClick={() => onSelectPlatform(p)}
+                className={`px-3 py-1 rounded text-xs whitespace-nowrap font-medium transition-all cursor-pointer ${
+                  isSelected
+                    ? 'bg-steam-accent text-black font-bold shadow-md shadow-steam-accent/20'
+                    : 'bg-[#1b222d] text-steam-text hover:text-white hover:bg-[#253040] border border-steam-border/40'
+                }`}
+              >
+                {name}
+              </button>
+            );
+          })}
         </div>
 
-        {/* Right: Counter & Installed Filter */}
-        <div className="flex items-center gap-3 text-xs w-full md:w-auto justify-end">
+        {/* Right Section: Installed Only Filter & Games Counter */}
+        <div className="flex items-center gap-3 text-xs shrink-0">
           <button
             onClick={onToggleInstalledOnly}
-            className={`px-2.5 py-1 text-xs rounded border transition-colors flex items-center gap-1.5 ${
+            className={`px-2.5 py-1 text-xs rounded border transition-colors flex items-center gap-1.5 cursor-pointer ${
               installedOnly
                 ? 'bg-emerald-950/70 border-emerald-500/70 text-emerald-400 font-semibold'
                 : 'bg-steam-card border-steam-border text-steam-subtext hover:text-white'
@@ -171,31 +262,6 @@ export const TopNavBar: React.FC<TopNavBarProps> = ({
             <Layers className="w-3.5 h-3.5 text-steam-accent" />
             <strong className="text-white">{filteredCount}</strong> / {totalGamesCount} Games
           </span>
-        </div>
-      </div>
-
-      {/* Platform Filter Pills Sub-bar */}
-      <div className="bg-[#12161c] border-t border-steam-border/30 px-4 py-2">
-        <div className="max-w-7xl mx-auto flex items-center gap-1.5 overflow-x-auto scrollbar-none">
-          {platforms.map((p) => {
-            const isSelected = selectedPlatform === p;
-            const meta = p === 'all' ? null : STOREFRONT_REGISTRY[p];
-            const name = p === 'all' ? 'All Libraries' : meta?.name || p.toUpperCase();
-
-            return (
-              <button
-                key={p}
-                onClick={() => onSelectPlatform(p)}
-                className={`px-3 py-1 rounded text-xs whitespace-nowrap font-medium transition-all ${
-                  isSelected
-                    ? 'bg-steam-accent text-black font-bold shadow-md shadow-steam-accent/20'
-                    : 'bg-[#1b222d] text-steam-text hover:text-white hover:bg-[#253040] border border-steam-border/40'
-                }`}
-              >
-                {name}
-              </button>
-            );
-          })}
         </div>
       </div>
     </header>

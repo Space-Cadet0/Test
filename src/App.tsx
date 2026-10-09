@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { CanonicalGame } from './contracts/game';
 import { StorefrontId } from './contracts/platform';
 import { GameCollection } from './contracts/collection';
@@ -119,6 +119,35 @@ export function App() {
     return games.find((g) => g.id === currentEntry.selectedGameId) || games[0] || null;
   }, [games, currentEntry.selectedGameId]);
 
+  const mainContentRef = useRef<HTMLElement | null>(null);
+
+  // When a new page is loaded in the main content section, make sure it starts at the top of the page
+  useEffect(() => {
+    const scrollToTop = () => {
+      if (mainContentRef.current) {
+        mainContentRef.current.scrollTop = 0;
+        mainContentRef.current.scrollTo?.({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+        const scrollables = mainContentRef.current.querySelectorAll('.overflow-y-auto');
+        scrollables.forEach((el) => {
+          el.scrollTop = 0;
+          el.scrollTo?.({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+        });
+      }
+      window.scrollTo(0, 0);
+    };
+
+    scrollToTop();
+    const rafId = requestAnimationFrame(scrollToTop);
+    return () => cancelAnimationFrame(rafId);
+  }, [
+    currentEntry?.view,
+    currentEntry?.selectedGameId,
+    currentEntry?.activeFilter,
+    currentEntry?.activeGroupId,
+    isGridView,
+    selectedGame?.id,
+  ]);
+
   const navigateSelectGame = (game: CanonicalGame) => {
     pushEntry({
       view: 'game',
@@ -191,6 +220,24 @@ export function App() {
 
   // Integrations modal state
   const [isIntegrationsModalOpen, setIsIntegrationsModalOpen] = useState(false);
+
+  // Connected storefronts based on integration state & library games
+  const connectedStorefronts = useMemo(() => {
+    try {
+      const integrations = loadIntegrations();
+      const connected = new Set<StorefrontId>(
+        integrations.filter((i) => i.isConnected).map((i) => i.storefrontId)
+      );
+      for (const game of games) {
+        for (const p of game.platforms) {
+          connected.add(p.platformId);
+        }
+      }
+      return Array.from(connected);
+    } catch {
+      return ['steam', 'gog', 'epic'] as StorefrontId[];
+    }
+  }, [games, isIntegrationsModalOpen]);
 
   // Synchronize installed game status against the workstation's actual file system
   useEffect(() => {
@@ -490,6 +537,7 @@ export function App() {
         canGoForward={canGoForward}
         onGoForward={goForward}
         forwardTitle={forwardTitle}
+        connectedStorefronts={connectedStorefronts}
       />
 
       {/* Sync Status Banner */}
@@ -529,7 +577,7 @@ export function App() {
         />
 
         {/* Right Main Pane: Steam Storefront Detail Layout OR Group/Whole Library Grid View */}
-        <main className="flex-1 h-full overflow-y-auto bg-[#0b0f14] relative">
+        <main ref={mainContentRef} className="flex-1 h-full overflow-y-auto bg-[#0b0f14] relative">
           {isGridView || !selectedGame ? (
             <LibraryGridView
               games={activeGroupData ? activeGroupData.games : filteredGames}

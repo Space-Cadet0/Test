@@ -2,7 +2,7 @@ import React from 'react';
 import { SteamReviewSummary } from '../../contracts/steam';
 import { OpenCriticData, getTierColor } from '../../services/opencritic/openCritic';
 import { ActiveGameFilter } from '../../contracts/filter';
-import { HelpCircle } from 'lucide-react';
+import { HelpCircle, ExternalLink } from 'lucide-react';
 
 interface SteamHeroDetailsProps {
   headerImage: string;
@@ -65,9 +65,20 @@ export const SteamHeroDetails: React.FC<SteamHeroDetailsProps> = ({
           </span>
           {reviewSummary && reviewSummary.totalReviews > 0 ? (
             <div className="flex items-center gap-1">
-              <span className={`font-bold hover:underline cursor-pointer ${getReviewColor(reviewSummary.reviewScoreDesc)}`}>
+              <button
+                type="button"
+                onClick={() =>
+                  onApplyFilter?.({
+                    type: 'review',
+                    label: 'Reviews',
+                    value: reviewSummary.reviewScoreDesc,
+                  })
+                }
+                className={`font-bold hover:underline cursor-pointer text-left ${getReviewColor(reviewSummary.reviewScoreDesc)}`}
+                title={`Filter library for other "${reviewSummary.reviewScoreDesc}" games`}
+              >
                 {reviewSummary.reviewScoreDesc}
-              </span>
+              </button>
               <span className="text-[#556772] font-normal">
                 ({reviewSummary.totalReviews.toLocaleString()})
               </span>
@@ -85,19 +96,42 @@ export const SteamHeroDetails: React.FC<SteamHeroDetailsProps> = ({
               OpenCritic:
             </span>
             <div className="flex items-center gap-1.5">
-              <span
-                className={`px-1.5 py-0.2 rounded text-[10px] font-bold border ${getTierColor(openCritic.tier).badgeBg} ${getTierColor(openCritic.tier).badgeBorder} ${getTierColor(openCritic.tier).badgeText}`}
+              <button
+                type="button"
+                onClick={() =>
+                  onApplyFilter?.({
+                    type: 'opencritic',
+                    label: 'OpenCritic',
+                    value: openCritic.tier,
+                  })
+                }
+                className={`px-1.5 py-0.2 rounded text-[10px] font-bold border hover:brightness-125 cursor-pointer ${getTierColor(openCritic.tier).badgeBg} ${getTierColor(openCritic.tier).badgeBorder} ${getTierColor(openCritic.tier).badgeText}`}
+                title={`Filter library for ${openCritic.tier} OpenCritic games`}
               >
                 {openCritic.score}
-              </span>
+              </button>
+              <button
+                type="button"
+                onClick={() =>
+                  onApplyFilter?.({
+                    type: 'opencritic',
+                    label: 'OpenCritic',
+                    value: openCritic.tier,
+                  })
+                }
+                className={`font-bold hover:underline cursor-pointer ${getTierColor(openCritic.tier).accentText}`}
+                title={`Filter library for ${openCritic.tier} OpenCritic games`}
+              >
+                {openCritic.tier}
+              </button>
               <a
                 href={openCritic.url}
                 target="_blank"
                 rel="noreferrer"
-                className={`font-bold hover:underline cursor-pointer ${getTierColor(openCritic.tier).accentText}`}
-                title={`OpenCritic ${openCritic.tier} rating`}
+                className="text-[#556772] hover:text-[#c6d4df] transition-colors ml-0.5"
+                title={`View ${title} on OpenCritic.com`}
               >
-                {openCritic.tier}
+                <ExternalLink className="w-2.5 h-2.5" />
               </a>
               <span className="text-[#556772] font-normal text-[11px]">
                 ({openCritic.percentRecommended}% rec)

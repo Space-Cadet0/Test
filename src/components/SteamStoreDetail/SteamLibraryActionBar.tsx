@@ -17,16 +17,19 @@ import {
   Award,
   ChevronDown,
   X,
+  ExternalLink,
 } from 'lucide-react';
 import { getOpenCriticData, getTierColor } from '../../services/opencritic/openCritic';
 import { parseTimestampMs, formatLastPlayedDate, formatPlaytime } from '../../utils/dateUtils';
 import { getKnownAchievementTotal } from '../../services/storage/knownGameAchievements';
+import { ActiveGameFilter } from '../../contracts/filter';
 
 interface SteamLibraryActionBarProps {
   game: CanonicalGame;
   metadata?: SteamEnrichedMetadata | null;
   onManageCollections?: () => void;
   onToggleInstallStatus?: () => void;
+  onApplyFilter?: (filter: ActiveGameFilter) => void;
 }
 
 // User-specific known achievements from ~/Library/Application Support/Steam/userdata/284583470/config/librarycache/achievement_progress.json
@@ -87,6 +90,7 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
   metadata,
   onManageCollections,
   onToggleInstallStatus,
+  onApplyFilter,
 }) => {
   const [showAchievementPopover, setShowAchievementPopover] = useState(false);
   const isInstalled = game.platforms.some((p) => p.installed);
@@ -448,14 +452,28 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
               <span className={`text-sm font-black ${ocColors.accentText}`}>
                 {openCritic.score}
               </span>
+              <button
+                type="button"
+                onClick={() =>
+                  onApplyFilter?.({
+                    type: 'opencritic',
+                    label: 'OpenCritic',
+                    value: openCritic.tier,
+                  })
+                }
+                className={`text-[10px] font-bold px-1.5 py-0.2 rounded border hover:underline hover:brightness-125 cursor-pointer ${ocColors.badgeBg} ${ocColors.badgeBorder} ${ocColors.badgeText}`}
+                title={`Filter library for ${openCritic.tier} OpenCritic games`}
+              >
+                {openCritic.tier}
+              </button>
               <a
                 href={openCritic.url}
                 target="_blank"
                 rel="noreferrer"
-                className={`text-[10px] font-bold px-1.5 py-0.2 rounded border hover:underline ${ocColors.badgeBg} ${ocColors.badgeBorder} ${ocColors.badgeText}`}
-                title={`OpenCritic: ${openCritic.score}/100 • ${openCritic.tier} (${openCritic.percentRecommended}% recommended)`}
+                className="text-steam-subtext hover:text-white transition-colors"
+                title={`View ${game.title} on OpenCritic.com`}
               >
-                {openCritic.tier}
+                <ExternalLink className="w-2.5 h-2.5" />
               </a>
             </div>
             <span className="text-[10px] text-[#8f98a0] mt-0.5 truncate">

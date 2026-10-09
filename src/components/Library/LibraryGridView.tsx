@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { CanonicalGame } from '../../contracts/game';
 import { StorefrontIcon, getStorefrontDisplayName } from '../Common/StorefrontIcon';
 import {
@@ -47,6 +47,7 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
   onGoBack,
   backTitle,
 }) => {
+  const gridContainerRef = useRef<HTMLDivElement | null>(null);
   const [hoveredGame, setHoveredGame] = useState<CanonicalGame | null>(null);
   const [previewPos, setPreviewPos] = useState<{ x: number; y: number; align: 'left' | 'right' }>({
     x: 0,
@@ -55,6 +56,25 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
   });
   const [sortBy, setSortBy] = useState<'alphabetical' | 'rating' | 'playtime' | 'recent'>('alphabetical');
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Scroll to top whenever grid title or filter changes
+  useEffect(() => {
+    const scrollToTop = () => {
+      if (gridContainerRef.current) {
+        gridContainerRef.current.scrollTop = 0;
+        gridContainerRef.current.scrollTo?.({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+      }
+      if (gridContainerRef.current?.parentElement) {
+        gridContainerRef.current.parentElement.scrollTop = 0;
+        gridContainerRef.current.parentElement.scrollTo?.({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+      }
+      window.scrollTo(0, 0);
+    };
+
+    scrollToTop();
+    const rafId = requestAnimationFrame(scrollToTop);
+    return () => cancelAnimationFrame(rafId);
+  }, [title, activeFilter]);
 
   // Sorting
   const sortedGames = [...games].sort((a, b) => {
@@ -120,7 +140,7 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
   };
 
   return (
-    <div className="w-full min-h-full bg-[#0e141b] text-steam-text pb-28 overflow-y-auto relative select-none">
+    <div ref={gridContainerRef} className="w-full min-h-full bg-[#0e141b] text-steam-text pb-28 overflow-y-auto relative select-none">
       {/* Background ambient lighting */}
       <div className="absolute top-0 left-0 right-0 h-96 opacity-10 pointer-events-none bg-gradient-to-b from-steam-accent/40 via-transparent to-transparent filter blur-3xl" />
 

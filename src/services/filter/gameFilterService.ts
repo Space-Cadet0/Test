@@ -1,6 +1,7 @@
 import { CanonicalGame } from '../../contracts/game';
 import { ActiveGameFilter } from '../../contracts/filter';
 import steamEnrichedCache from '../storage/steamEnrichedCache.json';
+import { getOpenCriticData } from '../opencritic/openCritic';
 
 const cache = steamEnrichedCache as Record<string, any>;
 
@@ -10,6 +11,60 @@ const cache = steamEnrichedCache as Record<string, any>;
 export function matchesGameFilter(game: CanonicalGame, filter: ActiveGameFilter): boolean {
   if (!filter || !filter.value) return true;
   const target = filter.value.trim().toLowerCase();
+
+  if (filter.type === 'opencritic') {
+    const pos =
+      game.reviewSummary?.positivePercent ??
+      game.enrichedMetadata?.reviewSummary?.positivePercent ??
+      (game.steamAppId ? cache[game.steamAppId.toString()]?.reviewSummary?.positivePercent : undefined);
+
+    const oc = getOpenCriticData(game.steamAppId, game.title, pos);
+    const tier = oc.tier.toLowerCase();
+    return tier === target || target.includes(tier) || tier.includes(target);
+  }
+
+  if (filter.type === 'review') {
+    const desc = (
+      game.reviewSummary?.reviewScoreDesc ||
+      game.enrichedMetadata?.reviewSummary?.reviewScoreDesc ||
+      (game.steamAppId ? cache[game.steamAppId.toString()]?.reviewSummary?.reviewScoreDesc : '') ||
+      ''
+    ).trim().toLowerCase();
+
+    if (desc) {
+      if (desc === target) return true;
+      const normDesc = desc.replace(/[^a-z]/g, '');
+      const normTarget = target.replace(/[^a-z]/g, '');
+      if (normDesc === normTarget) return true;
+
+      const keywords = ['overwhelmingly', 'very', 'mostly', 'mixed', 'negative'];
+      const targetHasKeyword = keywords.filter((k) => normTarget.includes(k));
+      const descHasKeyword = keywords.filter((k) => normDesc.includes(k));
+      if (
+        targetHasKeyword.length > 0 &&
+        targetHasKeyword.every((k) => descHasKeyword.includes(k)) &&
+        descHasKeyword.every((k) => targetHasKeyword.includes(k))
+      ) {
+        return true;
+      }
+    }
+
+    // Fallback based on positivePercent if explicit descriptor string is missing
+    const pos =
+      game.reviewSummary?.positivePercent ??
+      game.enrichedMetadata?.reviewSummary?.positivePercent ??
+      (game.steamAppId ? cache[game.steamAppId.toString()]?.reviewSummary?.positivePercent : undefined);
+
+    if (pos !== undefined) {
+      if (pos >= 95 && target.includes('overwhelmingly positive')) return true;
+      if (pos >= 80 && pos < 95 && target.includes('very positive')) return true;
+      if (pos >= 70 && pos < 80 && target.includes('mostly positive')) return true;
+      if (pos >= 40 && pos < 70 && target.includes('mixed')) return true;
+      if (pos < 40 && target.includes('negative')) return true;
+    }
+
+    return false;
+  }
 
   if (filter.type === 'developer') {
     return game.developers.some(
