@@ -35,7 +35,9 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({ game, onBackToLi
 
     async function loadData() {
       if (game.steamAppId) {
-        setIsLoading(true);
+        if (!game.enrichedMetadata) {
+          setIsLoading(true);
+        }
         const liveData = await steamApi.fetchGameMetadata(game.steamAppId);
         if (isMounted && liveData) {
           setMetadata(liveData);
@@ -44,12 +46,8 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({ game, onBackToLi
       }
     }
 
-    if (!game.enrichedMetadata && game.steamAppId) {
-      loadData();
-    } else {
-      setMetadata(game.enrichedMetadata || null);
-      setIsLoading(false);
-    }
+    setMetadata(game.enrichedMetadata || null);
+    loadData();
 
     return () => {
       isMounted = false;
@@ -74,7 +72,11 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({ game, onBackToLi
   const publishers = metadata?.publishers || game.publishers;
   const releaseDate = metadata?.releaseDate || game.releaseDate || 'TBA';
   const tags = metadata?.tags || game.tags;
-  const detailedDescription = metadata?.detailedDescription || metadata?.aboutTheGame;
+  const detailedDescription =
+    metadata?.aboutTheGame ||
+    metadata?.detailedDescription ||
+    game.enrichedMetadata?.aboutTheGame ||
+    game.enrichedMetadata?.detailedDescription;
 
   return (
     <div className="w-full min-h-full bg-[#0e141b] text-steam-text pb-24 overflow-y-auto relative">

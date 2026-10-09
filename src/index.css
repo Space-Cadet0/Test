@@ -28,27 +28,52 @@
   }
 }
 
-/* Steam description typography styling */
+/* Steam description typography & media styling */
 .steam-description-content {
   color: #acb2b8;
   line-height: 1.6;
+  font-size: 0.875rem;
 }
-.steam-description-content h2,
-.steam-description-content .bb_tag {
-  color: #66c0f4;
-  font-size: 1.15rem;
-  font-weight: 600;
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
+.steam-description-content .bb_tag,
+.steam-description-content h2 {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border-bottom: 1px solid rgba(102, 192, 244, 0.2);
-  padding-bottom: 0.25rem;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  padding-bottom: 0.35rem;
 }
+.steam-description-content .bb_tag strong,
+.steam-description-content h2 strong {
+  color: #ffffff;
+}
+.steam-description-content .bb_paragraph,
 .steam-description-content p {
-  margin-bottom: 1rem;
+  margin-bottom: 0.85rem;
 }
-.steam-description-content ul {
+.steam-description-content .bb_img_ctn {
+  display: block;
+  margin: 1.25rem 0;
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: #000000;
+  border: 1px solid rgba(42, 71, 94, 0.4);
+}
+.steam-description-content video.bb_img,
+.steam-description-content img.bb_img,
+.steam-description-content video,
+.steam-description-content img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 3px;
+}
+.steam-description-content ul,
+.steam-description-content .bb_ul {
   list-style-type: disc;
   margin-left: 1.5rem;
   margin-bottom: 1rem;
@@ -59,9 +84,4 @@
 .steam-description-content strong,
 .steam-description-content b {
   color: #ffffff;
-}
-.steam-description-content img {
-  border-radius: 4px;
-  margin: 1rem 0;
-  max-width: 100%;
 }
