@@ -281,6 +281,20 @@ export function sanitizeGameCatalog(catalog: CanonicalGame[]): CanonicalGame[] {
       };
     }
 
+    // Disambiguate / normalize Alan Wake 2 (Epic exclusive)
+    if (
+      currentTitleLower === 'alan wake 2' ||
+      normTitle === 'alan wake 2'
+    ) {
+      game = {
+        ...game,
+        id: 'epic-93f2a8c3547846eda966cb3c152a026e',
+        headerImage: 'https://cdn2.unrealengine.com/egs-alanwake2-remedyentertainment-s1-2560x1440-309c7412b7bc.jpg',
+        capsuleImage: 'https://cdn2.unrealengine.com/egs-alanwake2-remedyentertainment-s2-1200x1600-0ebb9a566b72.jpg',
+        iconUrl: 'https://cdn2.unrealengine.com/egs-alanwake2-remedyentertainment-ic1-400x400-5366b10d0f67.png',
+      };
+    }
+
     // 5. Remove erroneous 'epic' platform presence from non-Epic titles
     if (currentTitleLower.includes('gwent') || currentTitleLower.includes('heroes of might and magic')) {
       game = {
@@ -366,6 +380,7 @@ export function sanitizeGameCatalog(catalog: CanonicalGame[]): CanonicalGame[] {
         platforms: mergedPlatforms,
         headerImage: existing.headerImage || game.headerImage,
         capsuleImage: existing.capsuleImage || game.capsuleImage,
+        iconUrl: existing.iconUrl || game.iconUrl,
         shortDescription: existing.shortDescription || game.shortDescription,
         developers: existing.developers && existing.developers.length > 0 ? existing.developers : game.developers,
         publishers: existing.publishers && existing.publishers.length > 0 ? existing.publishers : game.publishers,

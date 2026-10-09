@@ -19,10 +19,15 @@ export const GameCard: React.FC<GameCardProps> = ({ game, onSelect }) => {
       {/* Capsule Banner Image */}
       <div className="relative aspect-[16/9] w-full overflow-hidden bg-black/60">
         <img
-          src={game.headerImage}
+          src={game.headerImage || game.capsuleImage}
           alt={game.title}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           loading="lazy"
+          onError={(e) => {
+            if (game.capsuleImage && e.currentTarget.src !== game.capsuleImage) {
+              e.currentTarget.src = game.capsuleImage;
+            }
+          }}
         />
 
         {/* Installed indicator pill */}

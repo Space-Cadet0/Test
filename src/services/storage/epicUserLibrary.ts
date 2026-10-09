@@ -287,8 +287,9 @@ export const EPIC_USER_LIBRARY: CanonicalGame[] = [
         "playtimeMinutes": 0
       }
     ],
-    "headerImage": "https://cdn1.epicgames.com/item/c4763f236d08423eb47b4c3008779c84/EGS_AlanWake2_RemedyEntertainment_S1_2560x1440-ec44404c0b41bc457cb94cd72cf85872",
-    "capsuleImage": "https://cdn1.epicgames.com/item/c4763f236d08423eb47b4c3008779c84/EGS_AlanWake2_RemedyEntertainment_S2_1200x1600-c7c8091ddac0f9669c8e5905bca88aaa",
+    "headerImage": "https://cdn2.unrealengine.com/egs-alanwake2-remedyentertainment-s1-2560x1440-309c7412b7bc.jpg",
+    "capsuleImage": "https://cdn2.unrealengine.com/egs-alanwake2-remedyentertainment-s2-1200x1600-0ebb9a566b72.jpg",
+    "iconUrl": "https://cdn2.unrealengine.com/egs-alanwake2-remedyentertainment-ic1-400x400-5366b10d0f67.png",
     "shortDescription": "Saga Anderson arrives to investigate ritualistic murders in a small town. Alan Wake pens a dark story to shape the reality around him. These two heroes are somehow connected. Can they become the heroes they need to be?",
     "releaseDate": "2023-10-27",
     "developers": [

@@ -54,6 +54,7 @@ export interface SteamEnrichedMetadata {
   aboutTheGame: string;
   headerImage: string;
   capsuleImage?: string;
+  iconUrl?: string;
   developers: string[];
   publishers: string[];
   releaseDate: string;

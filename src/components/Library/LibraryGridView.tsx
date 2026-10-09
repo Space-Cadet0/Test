@@ -263,9 +263,11 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-4">
           {sortedGames.map((game) => {
             const isInstalled = game.platforms.some((p) => p.installed);
-            const coverArtUrl = game.steamAppId
-              ? `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${game.steamAppId}/library_600x900_2x.jpg`
-              : game.headerImage;
+            const coverArtUrl =
+              game.capsuleImage ||
+              (game.steamAppId
+                ? `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${game.steamAppId}/library_600x900_2x.jpg`
+                : game.headerImage);
 
             return (
               <div
@@ -282,8 +284,8 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
                     alt={game.title}
                     loading="lazy"
                     onError={(e) => {
-                      // Fallback to landscape header if portrait 600x900 fails
-                      if (e.currentTarget.src !== game.headerImage) {
+                      // Fallback to landscape header if portrait cover fails
+                      if (game.headerImage && e.currentTarget.src !== game.headerImage) {
                         e.currentTarget.src = game.headerImage;
                       }
                     }}
@@ -388,7 +390,7 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
           {/* Header Image Banner */}
           <div className="relative aspect-video w-full bg-black/60 overflow-hidden">
             <img
-              src={hoveredGame.headerImage}
+              src={hoveredGame.headerImage || hoveredGame.capsuleImage}
               alt={hoveredGame.title}
               className="w-full h-full object-cover"
             />

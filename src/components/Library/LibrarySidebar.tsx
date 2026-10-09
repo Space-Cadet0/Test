@@ -173,10 +173,15 @@ export const LibrarySidebar: React.FC<LibrarySidebarProps> = ({
         {/* Small Thumbnail Icon */}
         <div className="w-6 h-6 rounded bg-black/60 overflow-hidden flex-shrink-0 border border-steam-border/40 group-hover:border-steam-accent/50">
           <img
-            src={game.headerImage}
+            src={game.iconUrl || game.capsuleImage || game.headerImage}
             alt=""
             className="w-full h-full object-cover"
             loading="lazy"
+            onError={(e) => {
+              if (game.headerImage && e.currentTarget.src !== game.headerImage) {
+                e.currentTarget.src = game.headerImage;
+              }
+            }}
           />
         </div>
 

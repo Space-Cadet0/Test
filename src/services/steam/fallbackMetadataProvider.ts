@@ -18,6 +18,63 @@ const GOG_SPECIAL_DESCRIPTIONS: Record<string, { lead: string; full: string; rel
   },
 };
 
+export function formatDescriptionToHtml(rawDesc: string): string {
+  if (!rawDesc) return '';
+  // If already full HTML with paragraph or heading tags, return as-is
+  if (rawDesc.includes('<p class="bb_paragraph">') || rawDesc.includes('<h2 class="bb_tag">')) {
+    return rawDesc;
+  }
+
+  const lines = rawDesc.split(/\r?\n/);
+  const htmlParts: string[] = [];
+  let currentParagraph: string[] = [];
+
+  const formatInline = (text: string): string => {
+    return text
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/__(.+?)__/g, '<strong>$1</strong>')
+      .replace(/(?<!\*)\*([^*]+?)\*(?!\*)/g, '<em>$1</em>')
+      .replace(/(?<!_)_([^_]+?)_(?!_)/g, '<em>$1</em>');
+  };
+
+  const flushParagraph = () => {
+    if (currentParagraph.length > 0) {
+      const text = currentParagraph.join(' ').trim();
+      if (text) {
+        htmlParts.push(`<p class="bb_paragraph">${formatInline(text)}</p>`);
+      }
+      currentParagraph = [];
+    }
+  };
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) {
+      flushParagraph();
+      continue;
+    }
+
+    const headingMatch = trimmed.match(/^#{1,4}\s+(.+)$/);
+    if (headingMatch) {
+      flushParagraph();
+      htmlParts.push(`<h2 class="bb_tag">${formatInline(headingMatch[1].trim())}</h2>`);
+      continue;
+    }
+
+    const boldOnlyMatch = trimmed.match(/^\*\*(.+?)\*\*$/);
+    if (boldOnlyMatch) {
+      flushParagraph();
+      htmlParts.push(`<h2 class="bb_tag">${boldOnlyMatch[1].trim()}</h2>`);
+      continue;
+    }
+
+    currentParagraph.push(trimmed);
+  }
+
+  flushParagraph();
+  return htmlParts.join('\n');
+}
+
 export class FallbackMetadataProvider {
   private getGogBaseUrl(): string {
     if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
@@ -225,14 +282,29 @@ export class FallbackMetadataProvider {
       const recReq = reqs.map((r: any) => (r.title && r.recommended ? `<strong>${r.title}:</strong> ${r.recommended}` : '')).filter(Boolean).join('<br>');
 
       const descFull = d.about?.description || d.about?.about || d.markdown?.markdown || '';
+      const formattedAbout = formatDescriptionToHtml(descFull);
       const descShort = d.about?.shortDescription || '';
-      const headerImage = d.hero?.portrait || d.banner?.image || d.about?.image?.src || '';
+      const headerImage =
+        d.hero?.backgroundImageUrl ||
+        d.hero?.portrait ||
+        d.banner?.image ||
+        d.about?.image?.src ||
+        '';
+      const capsuleImage =
+        d.hero?.portraitBackgroundImageUrl ||
+        d.hero?.portrait ||
+        '';
+      const iconUrl =
+        d.hero?.logoImage?.src ||
+        '';
 
       return {
-        aboutTheGame: descFull,
-        detailedDescription: descFull,
+        aboutTheGame: formattedAbout,
+        detailedDescription: formattedAbout,
         shortDescription: descShort,
         headerImage,
+        capsuleImage,
+        iconUrl,
         screenshots,
         movies,
         systemRequirements: {
@@ -294,7 +366,8 @@ export class FallbackMetadataProvider {
       detailedDescription: storeMetadata?.detailedDescription || storeMetadata?.aboutTheGame || game.shortDescription || '',
       aboutTheGame: storeMetadata?.aboutTheGame || storeMetadata?.detailedDescription || game.shortDescription || '',
       headerImage: ensureHttps(storeMetadata?.headerImage || game.headerImage),
-      capsuleImage: ensureHttps(game.capsuleImage || storeMetadata?.headerImage || game.headerImage),
+      capsuleImage: ensureHttps(storeMetadata?.capsuleImage || game.capsuleImage || storeMetadata?.headerImage || game.headerImage),
+      iconUrl: ensureHttps(storeMetadata?.iconUrl || game.iconUrl || ''),
       developers: game.developers || [],
       publishers: game.publishers || [],
       releaseDate: storeMetadata?.releaseDate || game.releaseDate || 'TBA',

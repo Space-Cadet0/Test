@@ -238,6 +238,9 @@ export function mergeStorefrontGames(
 
       merged[existingIndex] = {
         ...existing,
+        headerImage: existing.headerImage || newGame.headerImage,
+        capsuleImage: existing.capsuleImage || newGame.capsuleImage,
+        iconUrl: existing.iconUrl || newGame.iconUrl,
         steamAppId: existing.steamAppId || newGame.steamAppId,
         id: existing.steamAppId
           ? `steam-${existing.steamAppId}`

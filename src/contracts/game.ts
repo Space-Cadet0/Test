@@ -29,6 +29,7 @@ export interface CanonicalGame {
   platforms: GamePlatformOwnership[];
   headerImage: string;
   capsuleImage?: string;
+  iconUrl?: string;
   shortDescription?: string;
   releaseDate?: string;
   developers: string[];
