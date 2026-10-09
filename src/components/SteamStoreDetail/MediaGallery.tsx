@@ -1,7 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Hls from 'hls.js';
 import { SteamScreenshot, SteamMovie } from '../../contracts/steam';
-import { Play, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
+import {
+  Play,
+  ChevronLeft,
+  ChevronRight,
+  Maximize2,
+  X,
+  Image as ImageIcon,
+  ExternalLink,
+} from 'lucide-react';
 
 interface MediaGalleryProps {
   screenshots: SteamScreenshot[];
@@ -187,13 +196,54 @@ export const MediaGallery: React.FC<MediaGalleryProps> = ({
     ...screenshots.map((s) => ({ type: 'screenshot' as const, screenshot: s })),
   ];
 
+  // List of all viewable screenshots for lightbox modal
+  const allScreenshots: SteamScreenshot[] =
+    screenshots.length > 0
+      ? screenshots
+      : headerImage
+      ? [{ id: 0, pathThumbnail: headerImage, pathFull: headerImage }]
+      : [];
+
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const thumbStripRef = useRef<HTMLDivElement>(null);
+  const modalThumbStripRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setActiveIndex(0);
   }, [screenshots, movies]);
+
+  // Keyboard navigation for lightbox
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setLightboxIndex(null);
+      } else if (e.key === 'ArrowLeft') {
+        setLightboxIndex((prev) =>
+          prev !== null && prev > 0 ? prev - 1 : allScreenshots.length - 1
+        );
+      } else if (e.key === 'ArrowRight') {
+        setLightboxIndex((prev) =>
+          prev !== null && prev < allScreenshots.length - 1 ? prev + 1 : 0
+        );
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxIndex, allScreenshots.length]);
+
+  // Scroll active modal thumbnail into view
+  useEffect(() => {
+    if (lightboxIndex === null || !modalThumbStripRef.current) return;
+    const strip = modalThumbStripRef.current;
+    if (strip.children[lightboxIndex]) {
+      const child = strip.children[lightboxIndex] as HTMLElement;
+      child.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+  }, [lightboxIndex]);
 
   const activeItem = items[activeIndex] || (items.length > 0 ? items[0] : null);
 
@@ -207,6 +257,17 @@ export const MediaGallery: React.FC<MediaGalleryProps> = ({
     }
   };
 
+  const openLightbox = () => {
+    if (activeItem?.type === 'screenshot') {
+      const idx = allScreenshots.findIndex(
+        (s) => s.id === activeItem.screenshot.id || s.pathFull === activeItem.screenshot.pathFull
+      );
+      setLightboxIndex(idx >= 0 ? idx : 0);
+    } else if (allScreenshots.length > 0) {
+      setLightboxIndex(0);
+    }
+  };
+
   return (
     <div className="w-full flex flex-col gap-2.5">
       {/* Primary Showcase Viewport */}
@@ -216,7 +277,7 @@ export const MediaGallery: React.FC<MediaGalleryProps> = ({
         ) : activeItem?.type === 'screenshot' ? (
           <div
             className="relative w-full h-full cursor-pointer overflow-hidden"
-            onClick={() => setIsLightboxOpen(true)}
+            onClick={openLightbox}
           >
             <img
               src={activeItem.screenshot.pathFull}
@@ -227,16 +288,23 @@ export const MediaGallery: React.FC<MediaGalleryProps> = ({
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                setIsLightboxOpen(true);
+                openLightbox();
               }}
               className="absolute bottom-3 right-3 p-1.5 bg-black/70 hover:bg-black/90 text-white rounded border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity"
-              title="Full screen screenshot"
+              title="Expand screenshot"
             >
               <Maximize2 className="w-4 h-4" />
             </button>
           </div>
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-steam-card">
+          <div
+            className={`w-full h-full flex items-center justify-center bg-steam-card ${
+              headerImage ? 'cursor-pointer' : ''
+            }`}
+            onClick={() => {
+              if (headerImage) openLightbox();
+            }}
+          >
             {headerImage ? (
               <img src={headerImage} alt="Cover" className="w-full h-full object-cover" />
             ) : (
@@ -325,25 +393,123 @@ export const MediaGallery: React.FC<MediaGalleryProps> = ({
         )}
       </div>
 
-      {/* Lightbox Modal for Screenshots */}
-      {isLightboxOpen && activeItem?.type === 'screenshot' && (
-        <div
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex items-center justify-center p-4 cursor-zoom-out"
-          onClick={() => setIsLightboxOpen(false)}
-        >
-          <img
-            src={activeItem.screenshot.pathFull}
-            alt="Full size screenshot"
-            className="max-w-[95vw] max-h-[92vh] object-contain rounded shadow-2xl border border-white/10"
-          />
-          <button
-            onClick={() => setIsLightboxOpen(false)}
-            className="absolute top-5 right-6 px-3 py-1.5 text-xs font-semibold bg-zinc-800 hover:bg-zinc-700 text-white rounded border border-zinc-600"
+      {/* Dedicated Fixed-Size Pop-out Modal for Screenshots (Portaled to document.body) */}
+      {lightboxIndex !== null && allScreenshots[lightboxIndex] &&
+        typeof document !== 'undefined' &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 select-none animate-in fade-in duration-150"
+            onClick={() => setLightboxIndex(null)}
           >
-            Close (Esc)
-          </button>
-        </div>
-      )}
+            <div
+              className="relative w-[1140px] max-w-[94vw] h-[780px] max-h-[88vh] bg-[#101722] border border-[#2a475e] rounded-xl shadow-2xl flex flex-col overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between px-4 py-3 bg-[#182333] border-b border-[#2a475e]/70 flex-shrink-0">
+                <div className="flex items-center gap-2 text-sm text-steam-light font-medium">
+                  <ImageIcon className="w-4 h-4 text-steam-accent" />
+                  <span>
+                    Screenshot {lightboxIndex + 1} of {allScreenshots.length}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  {allScreenshots[lightboxIndex].pathFull && (
+                    <a
+                      href={allScreenshots[lightboxIndex].pathFull}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium text-steam-subtext hover:text-white bg-[#212f45] hover:bg-[#2d405e] rounded border border-white/10 transition-colors"
+                      title="Open full resolution in browser"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      <span>Full Res</span>
+                    </a>
+                  )}
+                  <button
+                    onClick={() => setLightboxIndex(null)}
+                    className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold bg-[#2a384d] hover:bg-[#3d5170] text-white rounded border border-white/10 transition-colors cursor-pointer"
+                    title="Close (Esc)"
+                  >
+                    <X className="w-4 h-4" />
+                    <span className="text-[10px] uppercase tracking-wider text-steam-subtext">Esc</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Main Image Stage */}
+              <div className="flex-1 min-h-0 relative flex items-center justify-center bg-black/95 p-3 select-none overflow-hidden">
+                {allScreenshots.length > 1 && (
+                  <button
+                    onClick={() =>
+                      setLightboxIndex((prev) =>
+                        prev !== null && prev > 0 ? prev - 1 : allScreenshots.length - 1
+                      )
+                    }
+                    className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-11 h-16 rounded bg-black/60 hover:bg-[#67c1f5]/30 text-white flex items-center justify-center transition-all border border-white/10 hover:border-steam-accent shadow-lg cursor-pointer"
+                    title="Previous screenshot (Left arrow)"
+                  >
+                    <ChevronLeft className="w-7 h-7 text-steam-accent" />
+                  </button>
+                )}
+
+                <img
+                  src={allScreenshots[lightboxIndex].pathFull}
+                  alt={`Screenshot ${lightboxIndex + 1}`}
+                  className="max-w-full max-h-full object-contain rounded shadow-2xl"
+                />
+
+                {allScreenshots.length > 1 && (
+                  <button
+                    onClick={() =>
+                      setLightboxIndex((prev) =>
+                        prev !== null && prev < allScreenshots.length - 1 ? prev + 1 : 0
+                      )
+                    }
+                    className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-11 h-16 rounded bg-black/60 hover:bg-[#67c1f5]/30 text-white flex items-center justify-center transition-all border border-white/10 hover:border-steam-accent shadow-lg cursor-pointer"
+                    title="Next screenshot (Right arrow)"
+                  >
+                    <ChevronRight className="w-7 h-7 text-steam-accent" />
+                  </button>
+                )}
+              </div>
+
+              {/* Bottom Thumbnail Strip */}
+              {allScreenshots.length > 1 && (
+                <div className="p-2.5 bg-[#141d2b] border-t border-[#2a475e]/70 flex-shrink-0">
+                  <div
+                    ref={modalThumbStripRef}
+                    className="flex items-center gap-2 overflow-x-auto scrollbar-none py-1 px-1 scroll-smooth w-full select-none"
+                    style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                  >
+                    {allScreenshots.map((shot, idx) => {
+                      const isSelected = idx === lightboxIndex;
+                      return (
+                        <button
+                          key={shot.id ?? idx}
+                          onClick={() => setLightboxIndex(idx)}
+                          className={`relative flex-shrink-0 w-24 h-14 rounded overflow-hidden transition-all bg-black cursor-pointer ${
+                            isSelected
+                              ? 'border-2 border-steam-accent ring-2 ring-steam-accent/40 scale-105'
+                              : 'border border-white/10 opacity-60 hover:opacity-100 hover:border-steam-subtext'
+                          }`}
+                        >
+                          <img
+                            src={shot.pathThumbnail || shot.pathFull}
+                            alt={`Thumbnail ${idx + 1}`}
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                          />
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>,
+          document.body
+        )}
     </div>
   );
 };
