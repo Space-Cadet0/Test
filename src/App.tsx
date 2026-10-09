@@ -2,7 +2,6 @@ import { useState, useMemo } from 'react';
 import { CanonicalGame } from './contracts/game';
 import { StorefrontId } from './contracts/platform';
 import { GameCollection } from './contracts/collection';
-import { INITIAL_LIBRARY_GAMES } from './services/storage/mockLibrary';
 import { mergeScannedSteamGames } from './services/storage/librarySync';
 import { loadCollections, saveCollections } from './services/storage/collectionStorage';
 import { steamApi } from './services/steam/steamApi';
@@ -14,12 +13,13 @@ import { Plus, Sparkles, X, CheckCircle2 } from 'lucide-react';
 
 export function App() {
   const [games, setGames] = useState<CanonicalGame[]>(() =>
-    mergeScannedSteamGames(INITIAL_LIBRARY_GAMES)
+    mergeScannedSteamGames([])
   );
-  // Default to Gears of War: E-Day (first game in the catalog)
-  const [selectedGame, setSelectedGame] = useState<CanonicalGame | null>(
-    INITIAL_LIBRARY_GAMES[0] || null
-  );
+  // Default to Baldur's Gate 3 (or first verified owned title)
+  const [selectedGame, setSelectedGame] = useState<CanonicalGame | null>(() => {
+    const initialGames = mergeScannedSteamGames([]);
+    return initialGames.find((g) => g.steamAppId === 1086940) || initialGames[0] || null;
+  });
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedPlatform, setSelectedPlatform] = useState<StorefrontId | 'all'>('all');
   const [installedOnly, setInstalledOnly] = useState(false);

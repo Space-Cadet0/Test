@@ -53,7 +53,7 @@ export const MediaGallery: React.FC<MediaGalleryProps> = ({
       <div className="relative aspect-video w-full bg-black/90 rounded overflow-hidden border border-steam-border shadow-xl group">
         {activeItem?.type === 'movie' ? (
           <div className="relative w-full h-full flex items-center justify-center bg-black">
-            {activeItem.movie.mp4.max || activeItem.movie.mp4['480'] || activeItem.movie.webm.max ? (
+            {activeItem.movie.mp4?.max || activeItem.movie.mp4?.['480'] || activeItem.movie.webm?.max ? (
               <video
                 ref={videoRef}
                 controls
@@ -63,13 +63,13 @@ export const MediaGallery: React.FC<MediaGalleryProps> = ({
                 preload="metadata"
                 className="w-full h-full object-contain"
               >
-                {activeItem.movie.mp4.max && (
+                {activeItem.movie.mp4?.max && (
                   <source src={activeItem.movie.mp4.max} type="video/mp4" />
                 )}
-                {activeItem.movie.webm.max && (
+                {activeItem.movie.webm?.max && (
                   <source src={activeItem.movie.webm.max} type="video/webm" />
                 )}
-                {activeItem.movie.mp4['480'] && (
+                {activeItem.movie.mp4?.['480'] && (
                   <source src={activeItem.movie.mp4['480']} type="video/mp4" />
                 )}
               </video>

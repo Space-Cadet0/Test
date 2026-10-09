@@ -8,13 +8,13 @@ export interface SteamMovie {
   id: number;
   name: string;
   thumbnail: string;
-  webm: {
-    480: string;
-    max: string;
+  webm?: {
+    480?: string;
+    max?: string;
   };
-  mp4: {
-    480: string;
-    max: string;
+  mp4?: {
+    480?: string;
+    max?: string;
   };
 }
 

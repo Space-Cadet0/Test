@@ -29,6 +29,8 @@ export function getSteamCategoryIconUrl(id: number): string {
   return map[id] || 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_singlePlayer.png';
 }
 
+import steamEnrichedCache from '../storage/steamEnrichedCache.json';
+
 export class SteamApiService {
   private cache = new Map<number, SteamEnrichedMetadata>();
   private rateLimitedUntil = 0;
@@ -51,6 +53,19 @@ export class SteamApiService {
   async fetchGameMetadata(appId: number): Promise<SteamEnrichedMetadata | null> {
     if (this.cache.has(appId)) {
       return this.cache.get(appId)!;
+    }
+
+    const preCached = (steamEnrichedCache as Record<string, any>)[String(appId)];
+    if (preCached && preCached.aboutTheGame) {
+      const enriched: SteamEnrichedMetadata = {
+        ...preCached,
+        categories: (preCached.categories || []).map((c: any) => ({
+          ...c,
+          icon: getSteamCategoryIconUrl(c.id),
+        })),
+      };
+      this.cache.set(appId, enriched);
+      return enriched;
     }
 
     if (this.isStoreRateLimited()) {
