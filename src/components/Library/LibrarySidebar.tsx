@@ -1,7 +1,8 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { CanonicalGame } from '../../contracts/game';
 import { STOREFRONT_REGISTRY, StorefrontId } from '../../contracts/platform';
 import { GameCollection } from '../../contracts/collection';
+import { StorefrontIcon } from '../Common/StorefrontIcon';
 import {
   Gamepad2,
   CheckCircle2,
@@ -76,6 +77,21 @@ export const LibrarySidebar: React.FC<LibrarySidebarProps> = ({
     }
     return {};
   });
+
+  const [isStoresDropdownOpen, setIsStoresDropdownOpen] = useState(false);
+  const storesDropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (storesDropdownRef.current && !storesDropdownRef.current.contains(event.target as Node)) {
+        setIsStoresDropdownOpen(false);
+      }
+    }
+    if (isStoresDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [isStoresDropdownOpen]);
 
   const platforms: (StorefrontId | 'all')[] = [
     'all',
@@ -236,38 +252,71 @@ export const LibrarySidebar: React.FC<LibrarySidebarProps> = ({
         {/* Filter Controls Row */}
         <div className="flex items-center justify-between text-xs">
           {/* Storefront Filter Dropdown */}
-          <div className="relative group">
-            <div className="flex items-center gap-1 text-[11px] text-steam-subtext hover:text-white cursor-pointer px-1.5 py-0.5 rounded hover:bg-steam-card">
+          <div className="relative" ref={storesDropdownRef}>
+            <button
+              type="button"
+              onClick={() => setIsStoresDropdownOpen((prev) => !prev)}
+              className={`flex items-center gap-1.5 text-[11px] px-2 py-1 rounded transition-colors cursor-pointer border select-none ${
+                isStoresDropdownOpen
+                  ? 'bg-[#1b222d] text-white border-steam-accent/70 shadow-sm'
+                  : 'text-steam-subtext hover:text-white hover:bg-steam-card border-transparent'
+              }`}
+              title="Filter library by storefront"
+              aria-expanded={isStoresDropdownOpen}
+            >
               <Filter className="w-3 h-3 text-steam-accent" />
-              <span className="capitalize font-medium">
+              <span className="capitalize font-medium truncate max-w-[100px]">
                 {selectedPlatform === 'all'
                   ? 'All Stores'
                   : STOREFRONT_REGISTRY[selectedPlatform]?.name || selectedPlatform}
               </span>
-              <ChevronDown className="w-3 h-3 text-steam-subtext" />
-            </div>
+              <ChevronDown
+                className={`w-3 h-3 text-steam-subtext transition-transform duration-200 ${
+                  isStoresDropdownOpen ? 'rotate-180 text-white' : ''
+                }`}
+              />
+            </button>
 
             {/* Dropdown Menu */}
-            <div className="absolute left-0 top-full mt-1 w-44 bg-[#1b222d] border border-steam-border rounded shadow-xl py-1 z-50 hidden group-hover:block">
-              {platforms.map((p) => {
-                const name =
-                  p === 'all'
-                    ? 'All Storefronts'
-                    : STOREFRONT_REGISTRY[p]?.name || p.toUpperCase();
-                return (
-                  <button
-                    key={p}
-                    onClick={() => onSelectPlatform(p)}
-                    className={`w-full text-left px-3 py-1 text-xs flex items-center justify-between hover:bg-steam-border transition-colors ${
-                      selectedPlatform === p ? 'text-steam-accent font-bold' : 'text-steam-text'
-                    }`}
-                  >
-                    <span>{name}</span>
-                    {selectedPlatform === p && <span className="w-1.5 h-1.5 rounded-full bg-steam-accent" />}
-                  </button>
-                );
-              })}
-            </div>
+            {isStoresDropdownOpen && (
+              <div className="absolute left-0 top-full mt-1 w-48 bg-[#1b222d] border border-steam-border rounded shadow-2xl py-1 z-50 animate-in fade-in-50 duration-100">
+                <div className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-steam-subtext border-b border-steam-border/40 mb-1">
+                  Filter Storefront
+                </div>
+                <div className="max-h-64 overflow-y-auto">
+                  {platforms.map((p) => {
+                    const isSelected = selectedPlatform === p;
+                    const name =
+                      p === 'all'
+                        ? 'All Stores'
+                        : STOREFRONT_REGISTRY[p]?.name || p.toUpperCase();
+                    return (
+                      <button
+                        key={p}
+                        type="button"
+                        onClick={() => {
+                          onSelectPlatform(p);
+                          setIsStoresDropdownOpen(false);
+                        }}
+                        className={`w-full text-left px-3 py-1.5 text-xs flex items-center justify-between hover:bg-[#253040] transition-colors ${
+                          isSelected ? 'text-steam-accent font-bold bg-[#141b24]' : 'text-steam-text'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2">
+                          {p !== 'all' ? (
+                            <StorefrontIcon storefrontId={p} className="w-3.5 h-3.5" />
+                          ) : (
+                            <Filter className="w-3.5 h-3.5 text-steam-accent opacity-70" />
+                          )}
+                          <span>{name}</span>
+                        </div>
+                        {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-steam-accent" />}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Installed toggle button */}
