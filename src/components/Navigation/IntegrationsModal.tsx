@@ -103,11 +103,11 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
   // Manual Form States
   const [steamInput, setSteamInput] = useState('76561198244849198');
   const [steamApiKey, setSteamApiKey] = useState('');
-  const [gogInput, setGogInput] = useState('SpaceCadet');
+  const [gogInput, setGogInput] = useState('');
   const [gogToken, setGogToken] = useState('');
-  const [epicInput, setEpicInput] = useState('SpaceCadet (Epic)');
+  const [epicInput, setEpicInput] = useState('');
   const [epicToken, setEpicToken] = useState('');
-  const [xboxInput, setXboxInput] = useState('SpaceCadet85');
+  const [xboxInput, setXboxInput] = useState('');
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -225,11 +225,11 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
       if (storefrontId === 'gog') {
         const tokenOrCode = explicitCode || extractCodeFromInput(authRedirectInput) || gogToken.trim() || undefined;
         const { integration, games } = await connectGogIntegration({
-          gogUsername: gogInput.trim() || 'SpaceCadet',
+          gogUsername: gogInput.trim() || undefined,
           gogToken: tokenOrCode,
         });
         resultGames = games;
-        accountName = integration.accountName || 'SpaceCadet';
+        accountName = integration.accountName || 'GOG Account';
       } else if (storefrontId === 'steam') {
         const { integration, games } = await connectSteamIntegration({
           steamId: steamInput.trim() || '76561198244849198',
@@ -278,13 +278,13 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
         const { games } = await connectSteamIntegration({ steamId: '76561198244849198' });
         resultGames = games;
       } else if (storefrontId === 'gog') {
-        const { games } = await connectGogIntegration({ gogUsername: 'SpaceCadet' });
+        const { games } = await connectGogIntegration({ gogUsername: gogInput.trim() || undefined });
         resultGames = games;
       } else if (storefrontId === 'epic') {
-        const { games } = await connectEpicIntegration({ epicAccountId: 'SpaceCadet (Epic)' });
+        const { games } = await connectEpicIntegration({ epicAccountId: epicInput.trim() || undefined });
         resultGames = games;
       } else if (storefrontId === 'xbox') {
-        const { games } = await connectXboxIntegration({ webToken: 'SpaceCadet85' });
+        const { games } = await connectXboxIntegration({ webToken: xboxInput.trim() || undefined });
         resultGames = games;
       }
 
@@ -589,7 +589,7 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
                     className="text-xs text-steam-subtext hover:text-white transition-colors flex items-center gap-1.5 pt-1"
                   >
                     <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                    <span>Or 1-click Quick Connect (Demo SpaceCadet)</span>
+                    <span>Or 1-click Quick Connect & Sync Catalog</span>
                   </button>
                 </div>
               </div>

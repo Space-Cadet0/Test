@@ -6,7 +6,7 @@ export class EpicIntegrationService {
   async connectAccount(
     credentials: StorefrontCredentials
   ): Promise<{ accountName: string; avatarUrl?: string; games: CanonicalGame[] }> {
-    const accountName = credentials.epicAccountId?.trim() || 'SpaceCadet (Epic)';
+    const accountName = credentials.epicAccountId?.trim() || 'Epic Games Account';
     const avatarUrl = 'https://cdn2.unrealengine.com/egs-badge.png';
 
     // Synchronize owned Epic Games Store entitlements

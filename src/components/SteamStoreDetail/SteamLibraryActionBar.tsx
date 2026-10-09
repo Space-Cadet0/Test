@@ -345,7 +345,7 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
           )}
 
           {/* Library Status Indicator */}
-          <div className="flex flex-col justify-center border-l border-[#2a475e]/60 pl-3">
+          <div className="flex flex-col justify-center border-l border-[#2a475e]/60 pl-3.5 py-0.5">
             <div className="flex items-center gap-1.5 text-xs font-semibold text-white">
               {isInstalled ? (
                 <>
@@ -359,9 +359,9 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
                 </>
               )}
             </div>
-            <div className="flex flex-col gap-1.5 mt-1.5">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-[#8f98a0]">Owned on:</span>
-              <PlatformBadges platforms={game.platforms} layout="vertical-stacked" />
+            <div className="flex items-center gap-1.5 mt-1">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[#8f98a0] whitespace-nowrap">Owned on:</span>
+              <PlatformBadges platforms={game.platforms} size="sm" layout="horizontal" />
             </div>
           </div>
         </div>

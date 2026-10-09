@@ -33,15 +33,13 @@ export const DEFAULT_INTEGRATIONS: StorefrontIntegration[] = [
     storefrontId: 'gog',
     name: 'GOG.com',
     isConnected: true,
-    accountName: 'SpaceCadet',
+    accountName: 'GOG Account',
     avatarUrl: 'https://images.gog-statics.com/avatars/default.png',
     gamesCount: GOG_USER_LIBRARY.length,
     lastSyncedAt: new Date().toISOString(),
     authMethod: 'oauth',
-    credentials: {
-      gogUsername: 'SpaceCadet',
-    },
-    statusMessage: `Connected as SpaceCadet (${GOG_USER_LIBRARY.length} GOG titles synced)`,
+    credentials: {},
+    statusMessage: `Connected via GOG Account (${GOG_USER_LIBRARY.length} GOG titles synced)`,
   },
   {
     storefrontId: 'epic',
@@ -69,22 +67,26 @@ export function loadIntegrations(): StorefrontIntegration[] {
     }
     const parsed = JSON.parse(raw);
     if (Array.isArray(parsed) && parsed.length > 0) {
-      // Auto-migrate / connect GOG if previously disconnected
+      // Auto-migrate / connect GOG and remove hardcoded SpaceCadet assumption across non-Steam storefronts
       let changed = false;
       const updated = parsed.map((item: StorefrontIntegration) => {
-        if (item.storefrontId === 'gog' && !item.isConnected) {
-          changed = true;
-          return {
-            ...item,
-            isConnected: true,
-            accountName: 'SpaceCadet',
-            avatarUrl: 'https://images.gog-statics.com/avatars/default.png',
-            gamesCount: GOG_USER_LIBRARY.length,
-            lastSyncedAt: new Date().toISOString(),
-            authMethod: 'oauth' as const,
-            credentials: { gogUsername: 'SpaceCadet' },
-            statusMessage: `Connected as SpaceCadet (${GOG_USER_LIBRARY.length} GOG titles synced)`,
-          };
+        if (item.storefrontId === 'gog') {
+          // If disconnected or erroneously given Steam username 'SpaceCadet'
+          const fixedName = item.accountName === 'SpaceCadet' ? 'GOG Account' : item.accountName || 'GOG Account';
+          if (!item.isConnected || item.accountName === 'SpaceCadet') {
+            changed = true;
+            return {
+              ...item,
+              isConnected: true,
+              accountName: fixedName,
+              avatarUrl: item.avatarUrl || 'https://images.gog-statics.com/avatars/default.png',
+              gamesCount: GOG_USER_LIBRARY.length,
+              lastSyncedAt: item.lastSyncedAt || new Date().toISOString(),
+              authMethod: 'oauth' as const,
+              credentials: item.credentials?.gogUsername === 'SpaceCadet' ? {} : item.credentials,
+              statusMessage: `Connected via ${fixedName} (${GOG_USER_LIBRARY.length} GOG titles synced)`,
+            };
+          }
         }
         return item;
       });

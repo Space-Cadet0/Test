@@ -17,9 +17,15 @@ export const MediaGallery: React.FC<MediaGalleryProps> = ({
   movies,
   headerImage,
 }) => {
+  // Filter out regional non-English trailers (e.g. Chinese/Japanese dubs) when English trailers exist, matching official Steam store
+  const hasEnglishMovies = movies.some((m) => !/[\u4e00-\u9fff\u3040-\u30ff\uac00-\ud7af]/.test(m.name));
+  const visibleMovies = hasEnglishMovies
+    ? movies.filter((m) => !/[\u4e00-\u9fff\u3040-\u30ff\uac00-\ud7af]/.test(m.name))
+    : movies;
+
   // Combine movies and screenshots in typical Steam order (movies first, then screenshots)
   const items: MediaItem[] = [
-    ...movies.map((m) => ({ type: 'movie' as const, movie: m })),
+    ...visibleMovies.map((m) => ({ type: 'movie' as const, movie: m })),
     ...screenshots.map((s) => ({ type: 'screenshot' as const, screenshot: s })),
   ];
 

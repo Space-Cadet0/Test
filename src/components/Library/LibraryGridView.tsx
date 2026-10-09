@@ -12,6 +12,7 @@ import {
   ArrowLeft,
   X,
   Sliders,
+  Award,
 } from 'lucide-react';
 import { getOpenCriticData, getTierColor } from '../../services/opencritic/openCritic';
 import { ActiveGameFilter } from '../../contracts/filter';
@@ -45,11 +46,22 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
     y: 0,
     align: 'left',
   });
-  const [sortBy, setSortBy] = useState<'alphabetical' | 'playtime' | 'recent'>('alphabetical');
+  const [sortBy, setSortBy] = useState<'alphabetical' | 'rating' | 'playtime' | 'recent'>('alphabetical');
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Sorting
   const sortedGames = [...games].sort((a, b) => {
+    if (sortBy === 'rating') {
+      const ocA = getOpenCriticData(a.steamAppId, a.title, a.reviewSummary?.positivePercent);
+      const ocB = getOpenCriticData(b.steamAppId, b.title, b.reviewSummary?.positivePercent);
+      if (ocB.score !== ocA.score) {
+        return ocB.score - ocA.score; // Highest OpenCritic score first
+      }
+      if (ocB.percentRecommended !== ocA.percentRecommended) {
+        return ocB.percentRecommended - ocA.percentRecommended;
+      }
+      return a.title.localeCompare(b.title, undefined, { sensitivity: 'base' });
+    }
     if (sortBy === 'playtime') {
       const ptA = a.platforms.reduce((acc, p) => acc + (p.playtimeMinutes || 0), 0);
       const ptB = b.platforms.reduce((acc, p) => acc + (p.playtimeMinutes || 0), 0);
@@ -169,6 +181,18 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
                 Alphabetical
               </button>
               <button
+                onClick={() => setSortBy('rating')}
+                className={`px-3 py-1 rounded text-xs font-semibold transition-colors flex items-center gap-1.5 ${
+                  sortBy === 'rating'
+                    ? 'bg-steam-accent text-black shadow-sm'
+                    : 'text-steam-text hover:text-white'
+                }`}
+                title="Sort by OpenCritic rating (highest score first)"
+              >
+                <Award className="w-3.5 h-3.5" />
+                <span>Rating</span>
+              </button>
+              <button
                 onClick={() => setSortBy('playtime')}
                 className={`px-3 py-1 rounded text-xs font-semibold transition-colors ${
                   sortBy === 'playtime'
@@ -286,7 +310,13 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
                     const ocColors = getTierColor(oc.tier);
                     return (
                       <div
-                        className={`absolute top-2 right-2 flex items-center gap-1 text-[10px] font-extrabold px-1.5 py-0.5 rounded border shadow-md backdrop-blur-md ${ocColors.badgeBg} ${ocColors.badgeBorder} ${ocColors.badgeText}`}
+                        className={`absolute top-2 right-2 flex items-center gap-1 text-[10px] font-extrabold px-1.5 py-0.5 rounded border shadow-md backdrop-blur-md transition-all ${
+                          ocColors.badgeBg
+                        } ${ocColors.badgeBorder} ${ocColors.badgeText} ${
+                          sortBy === 'rating'
+                            ? 'ring-2 ring-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.55)] scale-105'
+                            : ''
+                        }`}
                         title={`OpenCritic: ${oc.score}/100 • ${oc.tier} (${oc.percentRecommended}% recommended)`}
                       >
                         <span className="text-[9px] opacity-75">OC</span>

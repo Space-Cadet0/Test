@@ -14,7 +14,7 @@ export class GogIntegrationService {
   async connectAccount(
     credentials: StorefrontCredentials
   ): Promise<{ accountName: string; avatarUrl?: string; games: CanonicalGame[] }> {
-    const accountName = credentials.gogUsername?.trim() || 'SpaceCadet';
+    const accountName = credentials.gogUsername?.trim() || 'GOG Account';
     const avatarUrl = 'https://images.gog-statics.com/avatars/default.png';
 
     // If an auth token or cookie is available, query GOG embed API
