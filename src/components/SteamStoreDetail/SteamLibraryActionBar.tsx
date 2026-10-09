@@ -389,11 +389,15 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
                 <button
                   type="button"
                   onClick={() => setShowAchievementPopover((prev) => !prev)}
-                  className="text-[9px] font-semibold px-1.5 py-0.5 rounded bg-[#16202d] hover:bg-[#1f2c3d] text-sky-400 hover:text-white border border-steam-border/60 transition-colors flex items-center gap-0.5"
-                  title="View per-store achievements breakdown"
+                  className={`text-[9px] font-semibold px-2 py-0.5 rounded transition-all flex items-center gap-1 cursor-pointer ${
+                    showAchievementPopover
+                      ? 'bg-steam-accent text-black font-bold shadow-sm'
+                      : 'bg-[#16202d] hover:bg-[#1f2c3d] text-sky-400 hover:text-white border border-steam-border/60'
+                  }`}
+                  title={showAchievementPopover ? 'Hide storefront achievements breakdown' : 'View per-store achievements breakdown'}
                 >
                   <span>Stores</span>
-                  <ChevronDown className={`w-2.5 h-2.5 transition-transform ${showAchievementPopover ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`w-2.5 h-2.5 transition-transform duration-200 ${showAchievementPopover ? 'rotate-180' : ''}`} />
                 </button>
               )}
             </div>
@@ -432,77 +436,6 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
                 No Achievements
               </span>
             )}
-
-            {/* Multi-Store Achievements Popover */}
-            {showAchievementPopover && platformAchievements.length > 1 && (
-              <div className="absolute right-0 top-full mt-2 z-50 w-64 bg-[#16202d] border border-steam-border rounded shadow-2xl p-3 animate-in fade-in slide-in-from-top-1 duration-150">
-                <div className="flex items-center justify-between border-b border-steam-border/60 pb-2 mb-2.5">
-                  <span className="text-xs font-bold text-white flex items-center gap-1.5">
-                    <Trophy className="w-3.5 h-3.5 text-amber-400" />
-                    Storefront Achievements
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => setShowAchievementPopover(false)}
-                    className="text-steam-subtext hover:text-white p-0.5 rounded"
-                  >
-                    <X className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-
-                <div className="space-y-2.5">
-                  {platformAchievements.map((plat) => (
-                    <div key={plat.platformId} className="bg-[#101721] p-2 rounded border border-steam-border/40">
-                      <div className="flex items-center justify-between text-xs">
-                        <div className="flex items-center gap-1.5 font-semibold text-white">
-                          <StorefrontIcon storefrontId={plat.platformId} className="w-3.5 h-3.5 text-steam-accent" />
-                          <span>{plat.platformName}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          {plat.total > 0 ? (
-                            <>
-                              <span className="font-bold text-white">
-                                {plat.unlocked} / {plat.total}
-                              </span>
-                              <span className="text-[10px] text-steam-subtext">
-                                ({plat.percentage}%)
-                              </span>
-                              {plat.isMastered && (
-                                <span className="text-[9px] font-bold text-amber-300">★</span>
-                              )}
-                            </>
-                          ) : (
-                            <span className="text-[10px] text-steam-subtext">No Achievements</span>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Extra Gamerscore or XP badges if applicable */}
-                      {plat.total > 0 && plat.gamerscore && (
-                        <div className="text-[10px] text-emerald-400 font-mono mt-0.5">
-                          Gamerscore: {plat.gamerscore.earned} / {plat.gamerscore.total} G
-                        </div>
-                      )}
-                      {plat.total > 0 && plat.xp && (
-                        <div className="text-[10px] text-sky-400 font-mono mt-0.5">
-                          XP: {plat.xp.earned} / {plat.xp.total} XP
-                        </div>
-                      )}
-
-                      {/* Progress bar */}
-                      {plat.total > 0 && (
-                        <div className="w-full bg-[#1b2838] h-1 rounded-full mt-1.5 overflow-hidden">
-                          <div
-                            className="bg-amber-400 h-full rounded-full"
-                            style={{ width: `${Math.min(100, plat.percentage)}%` }}
-                          />
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
 
           {/* OpenCritic Score */}
@@ -531,6 +464,93 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
           </div>
         </div>
       </div>
+
+      {/* Multi-Store Achievements Drawer (Expandable Inline to Avoid Obscuring Content Below) */}
+      {showAchievementPopover && platformAchievements.length > 1 && (
+        <div className="mt-4 pt-3.5 border-t border-[#2a475e]/70 animate-in fade-in duration-150">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <Trophy className="w-4 h-4 text-amber-400" />
+              <span className="text-xs font-bold text-white tracking-wide">
+                Storefront Achievements Breakdown
+              </span>
+              <span className="text-[10px] text-steam-subtext font-normal">
+                ({platformAchievements.length} connected storefronts)
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setShowAchievementPopover(false)}
+              className="text-steam-subtext hover:text-white px-2 py-0.5 rounded hover:bg-white/10 text-xs flex items-center gap-1 cursor-pointer transition-colors"
+              title="Close storefront achievements"
+            >
+              <span className="text-[11px]">Close</span>
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {platformAchievements.map((plat) => (
+              <div key={plat.platformId} className="bg-[#141d28] p-3 rounded border border-steam-border/50 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between text-xs mb-1.5">
+                    <div className="flex items-center gap-1.5 font-semibold text-white">
+                      <StorefrontIcon storefrontId={plat.platformId} className="w-3.5 h-3.5 text-steam-accent" />
+                      <span>{plat.platformName}</span>
+                    </div>
+                    {plat.isMastered && (
+                      <span className="text-[10px] font-black text-amber-300 bg-amber-400/15 border border-amber-400/40 px-1.5 py-0.2 rounded">
+                        ★ Mastered
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="flex items-baseline justify-between mt-1">
+                    {plat.total > 0 ? (
+                      <>
+                        <span className="text-sm font-bold text-white">
+                          {plat.unlocked} <span className="text-xs text-steam-subtext font-normal">/ {plat.total}</span>
+                        </span>
+                        <span className="text-xs font-semibold text-amber-400">
+                          {plat.percentage}%
+                        </span>
+                      </>
+                    ) : (
+                      <span className="text-xs text-steam-subtext">No Achievements</span>
+                    )}
+                  </div>
+
+                  {/* Extra Gamerscore or XP badges if applicable */}
+                  {plat.total > 0 && plat.gamerscore && (
+                    <div className="text-[10px] text-emerald-400 font-mono mt-1">
+                      Gamerscore: {plat.gamerscore.earned} / {plat.gamerscore.total} G
+                    </div>
+                  )}
+                  {plat.total > 0 && plat.xp && (
+                    <div className="text-[10px] text-sky-400 font-mono mt-1">
+                      XP: {plat.xp.earned} / {plat.xp.total} XP
+                    </div>
+                  )}
+                </div>
+
+                {/* Progress bar */}
+                {plat.total > 0 && (
+                  <div className="w-full bg-[#1b2838] h-1.5 rounded-full mt-2.5 overflow-hidden">
+                    <div
+                      className={`h-full rounded-full transition-all ${
+                        plat.isMastered || plat.percentage >= 100
+                          ? 'bg-gradient-to-r from-amber-400 to-yellow-300'
+                          : 'bg-amber-400'
+                      }`}
+                      style={{ width: `${Math.min(100, plat.percentage)}%` }}
+                    />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

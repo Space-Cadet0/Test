@@ -586,13 +586,7 @@ export function App() {
                   ? activeGroupData.name
                   : 'All Games'
               }
-              onBackToLibrary={() => {
-                if (canGoBack) {
-                  goBack();
-                } else {
-                  navigateHome();
-                }
-              }}
+              onBackToLibrary={navigateHome}
               onManageCollections={() => handleOpenManageCollections(selectedGame)}
               onToggleInstallStatus={() => handleToggleInstallStatus(selectedGame)}
               onApplyFilter={(filter) => {

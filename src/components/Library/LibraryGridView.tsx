@@ -126,32 +126,32 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
 
       <div className="max-w-[1600px] mx-auto px-6 pt-6 space-y-6 relative">
         {/* Header Bar */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-steam-border/60 pb-4">
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded bg-steam-accent/15 border border-steam-accent/30 text-steam-accent shadow-sm flex items-center justify-center">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 border-b border-steam-border/60 pb-4">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="p-2.5 rounded bg-steam-accent/15 border border-steam-accent/30 text-steam-accent shadow-sm flex items-center justify-center shrink-0">
               {groupIcon || <Gamepad2 className="w-6 h-6" />}
             </div>
-            <div>
+            <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-2.5">
-                {canGoBack && onGoBack && (
+                {activeFilter && backTitle && onGoBack && (
                   <button
                     type="button"
                     onClick={onGoBack}
-                    className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-bold text-steam-accent hover:text-white bg-[#1b2838] hover:bg-[#25394e] border border-steam-border hover:border-steam-accent/60 rounded transition-all shadow-sm group cursor-pointer"
-                    title={`Back to ${backTitle || 'previous page'} (Alt + ←)`}
+                    className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-bold text-steam-accent hover:text-white bg-[#1b2838] hover:bg-[#25394e] border border-steam-border hover:border-steam-accent/60 rounded transition-all shadow-sm group cursor-pointer shrink-0"
+                    title={`Back to ${backTitle} (Alt + ←)`}
                   >
                     <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
-                    <span>Back{backTitle ? ` to ${backTitle}` : ''}</span>
+                    <span>Back to {backTitle}</span>
                   </button>
                 )}
                 <h1 className="text-xl font-bold text-white tracking-wide flex items-center gap-2">
                   {title || 'All Games'}
-                  <span className="text-xs px-2 py-0.5 rounded-full bg-[#1b2838] border border-steam-border text-steam-accent font-semibold">
+                  <span className="text-xs px-2 py-0.5 rounded-full bg-[#1b2838] border border-steam-border text-steam-accent font-semibold shrink-0">
                     {games.length}
                   </span>
                 </h1>
                 {activeFilter && (
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-steam-accent/20 border border-steam-accent/40 text-steam-accent text-xs">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-steam-accent/20 border border-steam-accent/40 text-steam-accent text-xs shrink-0">
                     <Sliders className="w-3 h-3" />
                     <span>
                       Filter: <strong className="text-white">{activeFilter.label}</strong>: {activeFilter.value}
@@ -170,10 +170,10 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
                 {onClearGroupFilter && !activeFilter && (
                   <button
                     onClick={onClearGroupFilter}
-                    className="inline-flex items-center gap-1 px-2.5 py-0.5 text-[11px] font-semibold text-steam-accent hover:text-white bg-[#16202d] hover:bg-[#202f42] border border-steam-border rounded transition-colors group cursor-pointer"
+                    className="inline-flex items-center gap-1 px-2.5 py-0.5 text-[11px] font-semibold text-steam-accent hover:text-white bg-[#16202d] hover:bg-[#202f42] border border-steam-border rounded transition-colors group cursor-pointer shrink-0"
                     title="Return to All Games library grid"
                   >
-                    <ArrowLeft className="w-3 h-3 group-hover:-translate-x-0.5 transition-transform" />
+                    <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
                     <span>All Games</span>
                   </button>
                 )}
@@ -185,12 +185,12 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
           </div>
 
           {/* Sort Controls */}
-          <div className="flex items-center gap-2 text-xs">
-            <span className="text-steam-subtext font-medium">Sort by:</span>
-            <div className="flex items-center rounded border border-steam-border bg-[#16202d] p-0.5">
+          <div className="flex items-center gap-2 text-xs shrink-0 self-end lg:self-center">
+            <span className="text-steam-subtext font-medium whitespace-nowrap">Sort by:</span>
+            <div className="flex items-center rounded border border-steam-border bg-[#16202d] p-0.5 shrink-0">
               <button
                 onClick={() => setSortBy('alphabetical')}
-                className={`px-3 py-1 rounded text-xs font-semibold transition-colors ${
+                className={`px-3 py-1 rounded text-xs font-semibold whitespace-nowrap transition-colors ${
                   sortBy === 'alphabetical'
                     ? 'bg-steam-accent text-black shadow-sm'
                     : 'text-steam-text hover:text-white'
@@ -200,7 +200,7 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
               </button>
               <button
                 onClick={() => setSortBy('rating')}
-                className={`px-3 py-1 rounded text-xs font-semibold transition-colors flex items-center gap-1.5 ${
+                className={`px-3 py-1 rounded text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
                   sortBy === 'rating'
                     ? 'bg-steam-accent text-black shadow-sm'
                     : 'text-steam-text hover:text-white'
@@ -212,7 +212,7 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
               </button>
               <button
                 onClick={() => setSortBy('playtime')}
-                className={`px-3 py-1 rounded text-xs font-semibold transition-colors ${
+                className={`px-3 py-1 rounded text-xs font-semibold whitespace-nowrap transition-colors ${
                   sortBy === 'playtime'
                     ? 'bg-steam-accent text-black shadow-sm'
                     : 'text-steam-text hover:text-white'
@@ -222,7 +222,7 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
               </button>
               <button
                 onClick={() => setSortBy('recent')}
-                className={`px-3 py-1 rounded text-xs font-semibold transition-colors ${
+                className={`px-3 py-1 rounded text-xs font-semibold whitespace-nowrap transition-colors ${
                   sortBy === 'recent'
                     ? 'bg-steam-accent text-black shadow-sm'
                     : 'text-steam-text hover:text-white'
