@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import Hls from 'hls.js';
 import { SteamScreenshot, SteamMovie } from '../../contracts/steam';
 import { Play, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
 
@@ -11,6 +12,163 @@ interface MediaGalleryProps {
 type MediaItem =
   | { type: 'movie'; movie: SteamMovie }
   | { type: 'screenshot'; screenshot: SteamScreenshot };
+
+const VideoPlayer: React.FC<{ movie: SteamMovie }> = ({ movie }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  // Check if it's an iframe embed (YouTube/Wistia from GOG or fallback providers)
+  const candidateUrl = movie.mp4?.max || movie.mp4?.['480'] || movie.webm?.max || '';
+  const isEmbed =
+    candidateUrl.includes('youtube.com') ||
+    candidateUrl.includes('youtu.be') ||
+    candidateUrl.includes('wistia.net') ||
+    candidateUrl.includes('player.vimeo.com');
+
+  if (isEmbed) {
+    let embedSrc = candidateUrl;
+    if (candidateUrl.includes('watch?v=')) {
+      embedSrc = candidateUrl.replace('watch?v=', 'embed/');
+    } else if (candidateUrl.includes('youtu.be/')) {
+      embedSrc = candidateUrl.replace('youtu.be/', 'www.youtube.com/embed/');
+    }
+    return (
+      <iframe
+        src={embedSrc}
+        title={movie.name}
+        className="w-full h-full border-0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      />
+    );
+  }
+
+  // Determine stream URLs
+  const hlsUrl = movie.hls || '';
+  const mp4MaxUrl =
+    (movie.mp4?.max && !movie.mp4.max.includes('.mpd') && !movie.mp4.max.includes('.m3u8')
+      ? movie.mp4.max
+      : '') ||
+    (movie.id ? `https://video.akamai.steamstatic.com/store_trailers/${movie.id}/movie_max.mp4` : '');
+  const mp4LowUrl =
+    (movie.mp4?.['480'] && !movie.mp4['480'].includes('.mpd') && !movie.mp4['480'].includes('.m3u8')
+      ? movie.mp4['480']
+      : '') ||
+    (movie.id ? `https://video.akamai.steamstatic.com/store_trailers/${movie.id}/movie480.mp4` : '');
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    let hlsInstance: Hls | null = null;
+    setIsError(false);
+
+    if (hlsUrl && Hls.isSupported()) {
+      hlsInstance = new Hls({ enableWorker: true, lowLatencyMode: false });
+      hlsInstance.loadSource(hlsUrl);
+      hlsInstance.attachMedia(video);
+
+      hlsInstance.on(Hls.Events.ERROR, (_event, data) => {
+        if (data.fatal) {
+          hlsInstance?.destroy();
+          hlsInstance = null;
+          // Fall back to direct MP4
+          if (mp4MaxUrl) {
+            video.src = mp4MaxUrl;
+          } else {
+            setIsError(true);
+          }
+        }
+      });
+    } else if (hlsUrl && video.canPlayType('application/vnd.apple.mpegurl')) {
+      // Native Safari / WebKit HLS
+      video.src = hlsUrl;
+    } else if (mp4MaxUrl) {
+      video.src = mp4MaxUrl;
+    }
+
+    return () => {
+      if (hlsInstance) {
+        hlsInstance.destroy();
+      }
+      if (video) {
+        video.pause();
+        video.removeAttribute('src');
+        video.load();
+      }
+    };
+  }, [movie, hlsUrl, mp4MaxUrl]);
+
+  const togglePlay = () => {
+    if (!videoRef.current) return;
+    if (videoRef.current.paused) {
+      videoRef.current.play().catch((err) => {
+        console.warn('Playback error:', err);
+      });
+    } else {
+      videoRef.current.pause();
+    }
+  };
+
+  return (
+    <div className="relative w-full h-full bg-black flex items-center justify-center group/video">
+      <video
+        ref={videoRef}
+        controls
+        playsInline
+        poster={movie.thumbnail}
+        preload="metadata"
+        className="w-full h-full object-contain cursor-pointer"
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+        onError={() => {
+          // If max failed, try low resolution MP4
+          if (videoRef.current && mp4LowUrl && videoRef.current.src !== mp4LowUrl) {
+            videoRef.current.src = mp4LowUrl;
+          } else {
+            setIsError(true);
+          }
+        }}
+        onClick={togglePlay}
+      >
+        {mp4MaxUrl && <source src={mp4MaxUrl} type="video/mp4" />}
+        {mp4LowUrl && <source src={mp4LowUrl} type="video/mp4" />}
+      </video>
+
+      {/* Prominent Play Overlay when Paused */}
+      {!isPlaying && !isError && (
+        <div
+          onClick={togglePlay}
+          className="absolute inset-0 bg-black/35 flex flex-col items-center justify-center gap-3 cursor-pointer transition-opacity group-hover/video:bg-black/20"
+        >
+          <div className="w-16 h-16 rounded-full bg-steam-accent/30 border-2 border-steam-accent flex items-center justify-center text-white backdrop-blur shadow-2xl transform group-hover/video:scale-110 transition-transform">
+            <Play className="w-7 h-7 fill-white translate-x-0.5" />
+          </div>
+          <span className="text-sm font-semibold tracking-wide text-white drop-shadow bg-black/60 px-3 py-1 rounded">
+            {movie.name}
+          </span>
+        </div>
+      )}
+
+      {isError && (
+        <div className="absolute inset-0 bg-black/80 flex flex-col items-center justify-center gap-2 text-steam-subtext text-xs p-4 text-center">
+          <span>Unable to stream video directly</span>
+          {mp4MaxUrl && (
+            <a
+              href={mp4MaxUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="text-steam-accent hover:underline"
+            >
+              Open video stream in new tab
+            </a>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
 
 export const MediaGallery: React.FC<MediaGalleryProps> = ({
   screenshots,
@@ -31,17 +189,9 @@ export const MediaGallery: React.FC<MediaGalleryProps> = ({
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
   const thumbStripRef = useRef<HTMLDivElement>(null);
 
   const activeItem = items[activeIndex] || (items.length > 0 ? items[0] : null);
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-    }
-  }, [activeIndex]);
 
   const selectItem = (index: number) => {
     setActiveIndex(index);
@@ -58,46 +208,7 @@ export const MediaGallery: React.FC<MediaGalleryProps> = ({
       {/* Primary Showcase Viewport */}
       <div className="relative aspect-video w-full bg-black/90 rounded overflow-hidden border border-steam-border shadow-xl group">
         {activeItem?.type === 'movie' ? (
-          <div className="relative w-full h-full flex items-center justify-center bg-black">
-            {activeItem.movie.mp4?.max || activeItem.movie.mp4?.['480'] || activeItem.movie.webm?.max ? (
-              <video
-                ref={videoRef}
-                controls
-                width={1280}
-                height={720}
-                poster={activeItem.movie.thumbnail}
-                preload="metadata"
-                className="w-full h-full object-contain"
-              >
-                {activeItem.movie.mp4?.max && (
-                  <source src={activeItem.movie.mp4.max} type="video/mp4" />
-                )}
-                {activeItem.movie.webm?.max && (
-                  <source src={activeItem.movie.webm.max} type="video/webm" />
-                )}
-                {activeItem.movie.mp4?.['480'] && (
-                  <source src={activeItem.movie.mp4['480']} type="video/mp4" />
-                )}
-              </video>
-            ) : (
-              // Newer Steam trailer with dash/hls stream thumbnail presentation
-              <div className="relative w-full h-full">
-                <img
-                  src={activeItem.movie.thumbnail}
-                  alt={activeItem.movie.name}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center gap-3">
-                  <div className="w-16 h-16 rounded-full bg-steam-accent/20 border-2 border-steam-accent flex items-center justify-center text-white backdrop-blur shadow-lg group-hover:scale-110 transition-transform">
-                    <Play className="w-7 h-7 fill-white translate-x-0.5" />
-                  </div>
-                  <span className="text-sm font-semibold tracking-wide text-white drop-shadow">
-                    {activeItem.movie.name}
-                  </span>
-                </div>
-              </div>
-            )}
-          </div>
+          <VideoPlayer movie={activeItem.movie} key={activeItem.movie.id || activeItem.movie.name} />
         ) : activeItem?.type === 'screenshot' ? (
           <div
             className="relative w-full h-full cursor-pointer overflow-hidden"

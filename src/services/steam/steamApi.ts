@@ -116,19 +116,30 @@ export class SteamApiService {
       }));
 
       // Extract movies / trailers
-      const rawMovies: SteamMovie[] = (data.movies || []).map((m: any) => ({
-        id: m.id,
-        name: m.name,
-        thumbnail: m.thumbnail,
-        webm: {
-          480: m.webm?.['480'] || '',
-          max: m.webm?.max || '',
-        },
-        mp4: {
-          480: m.mp4?.['480'] || m.dash_h264 || '',
-          max: m.mp4?.max || m.hls_h264 || '',
-        },
-      }));
+      const rawMovies: SteamMovie[] = (data.movies || []).map((m: any) => {
+        const hlsUrl = m.hls_h264 || '';
+        const rawMp4Max = m.mp4?.max && !m.mp4.max.includes('.mpd') && !m.mp4.max.includes('.m3u8') ? m.mp4.max : '';
+        const rawMp4Low = m.mp4?.['480'] && !m.mp4['480'].includes('.mpd') && !m.mp4['480'].includes('.m3u8') ? m.mp4['480'] : '';
+
+        // Synthesize official Steam Akamai trailer CDN URLs if not directly provided
+        const mp4Max = rawMp4Max || (m.id ? `https://video.akamai.steamstatic.com/store_trailers/${m.id}/movie_max.mp4` : '');
+        const mp4Low = rawMp4Low || (m.id ? `https://video.akamai.steamstatic.com/store_trailers/${m.id}/movie480.mp4` : '');
+
+        return {
+          id: m.id,
+          name: m.name,
+          thumbnail: m.thumbnail,
+          hls: hlsUrl,
+          webm: {
+            480: m.webm?.['480'] || '',
+            max: m.webm?.max || '',
+          },
+          mp4: {
+            480: mp4Low,
+            max: mp4Max,
+          },
+        };
+      });
 
       // Filter out regional non-English trailers (e.g. CJK dubs) when English/international trailers exist
       const hasEnglishMovies = rawMovies.some((m) => !/[\u4e00-\u9fff\u3040-\u30ff\uac00-\ud7af]/.test(m.name));

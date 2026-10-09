@@ -18,7 +18,10 @@
     "productName": "Universal Game Library",
     "mac": {
       "category": "public.app-category.games",
-      "target": ["dir", "dmg"],
+      "target": [
+        "dir",
+        "dmg"
+      ],
       "hardenedRuntime": false,
       "gatekeeperAssess": false
     },
@@ -35,6 +38,7 @@
     "axios": "^1.7.9",
     "cheerio": "^1.0.0",
     "clsx": "^2.1.1",
+    "hls.js": "^1.7.3",
     "lucide-react": "^0.475.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

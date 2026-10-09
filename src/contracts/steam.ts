@@ -8,6 +8,7 @@ export interface SteamMovie {
   id: number;
   name: string;
   thumbnail: string;
+  hls?: string;
   webm?: {
     480?: string;
     max?: string;
