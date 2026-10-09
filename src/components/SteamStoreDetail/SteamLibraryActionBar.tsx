@@ -284,7 +284,7 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
     <div className="bg-[#101822] border border-[#2a475e] rounded p-4 shadow-xl text-steam-text select-none">
       <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
         {/* Left: Action Button & Library Status */}
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex items-center gap-3 shrink-0">
           {/* Main Action Button (Play / Install) */}
           <div className="flex items-center gap-1.5">
             {isInstalled ? (
@@ -345,23 +345,23 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
           )}
 
           {/* Library Status Indicator */}
-          <div className="flex flex-col justify-center border-l border-[#2a475e]/60 pl-3.5 py-0.5">
-            <div className="flex items-center gap-1.5 text-xs font-semibold text-white">
+          <div className="flex flex-col justify-center border-l border-[#2a475e]/60 pl-3.5 py-0.5 shrink-0">
+            <div className="flex items-center gap-1.5 text-xs font-semibold text-white whitespace-nowrap">
               {isInstalled ? (
                 <>
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                   <span className="text-emerald-400">Ready to Play</span>
                 </>
               ) : (
                 <>
-                  <Cloud className="w-3.5 h-3.5 text-sky-400" />
+                  <Cloud className="w-3.5 h-3.5 text-sky-400 shrink-0" />
                   <span className="text-sky-300">In Library (Cloud)</span>
                 </>
               )}
             </div>
-            <div className="flex items-center gap-1.5 mt-1">
+            <div className="flex items-center gap-1.5 mt-1 whitespace-nowrap">
               <span className="text-[10px] font-bold uppercase tracking-wider text-[#8f98a0] whitespace-nowrap">Owned on:</span>
-              <PlatformBadges platforms={game.platforms} size="sm" layout="horizontal" />
+              <PlatformBadges platforms={game.platforms} iconOnly />
             </div>
           </div>
         </div>

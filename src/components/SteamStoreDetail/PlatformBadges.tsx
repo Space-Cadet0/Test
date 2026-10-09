@@ -8,13 +8,45 @@ interface PlatformBadgesProps {
   platforms: GamePlatformOwnership[];
   size?: 'sm' | 'md' | 'lg';
   layout?: 'horizontal' | 'vertical-stacked';
+  iconOnly?: boolean;
 }
 
 export const PlatformBadges: React.FC<PlatformBadgesProps> = ({
   platforms,
   size = 'md',
   layout = 'horizontal',
+  iconOnly = false,
 }) => {
+  if (iconOnly) {
+    return (
+      <div className="flex items-center gap-1.5 flex-nowrap shrink-0">
+        {platforms.map((p) => {
+          const name = getStorefrontDisplayName(p.platformId);
+          const isInstalled = Boolean(p.installed);
+
+          return (
+            <div
+              key={p.platformId}
+              className={`relative inline-flex items-center justify-center w-6 h-6 rounded border transition-all cursor-default group ${
+                isInstalled
+                  ? 'border-emerald-500/50 bg-emerald-950/40 text-emerald-300 hover:border-emerald-400'
+                  : 'border-[#2a475e] bg-[#16202d] text-slate-300 hover:border-sky-500/60 hover:text-white'
+              }`}
+              title={`${name} • ${isInstalled ? 'Installed locally' : 'In Cloud Library'}${p.installPath ? ` (${p.installPath})` : ''}`}
+            >
+              <StorefrontIcon storefrontId={p.platformId} className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
+              {isInstalled && (
+                <span
+                  className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400 ring-1 ring-[#101822]"
+                  title="Installed locally"
+                />
+              )}
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
   if (layout === 'vertical-stacked') {
     return (
       <div className="flex flex-wrap items-center gap-2.5">

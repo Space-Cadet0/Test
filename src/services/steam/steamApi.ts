@@ -116,7 +116,7 @@ export class SteamApiService {
       }));
 
       // Extract movies / trailers
-      const movies: SteamMovie[] = (data.movies || []).map((m: any) => ({
+      const rawMovies: SteamMovie[] = (data.movies || []).map((m: any) => ({
         id: m.id,
         name: m.name,
         thumbnail: m.thumbnail,
@@ -129,6 +129,12 @@ export class SteamApiService {
           max: m.mp4?.max || m.hls_h264 || '',
         },
       }));
+
+      // Filter out regional non-English trailers (e.g. CJK dubs) when English/international trailers exist
+      const hasEnglishMovies = rawMovies.some((m) => !/[\u4e00-\u9fff\u3040-\u30ff\uac00-\ud7af]/.test(m.name));
+      const movies = hasEnglishMovies
+        ? rawMovies.filter((m) => !/[\u4e00-\u9fff\u3040-\u30ff\uac00-\ud7af]/.test(m.name))
+        : rawMovies;
 
       // Extract review summary
       let reviewSummary: SteamReviewSummary = {
