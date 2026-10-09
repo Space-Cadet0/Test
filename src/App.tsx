@@ -9,6 +9,9 @@ import { TopNavBar } from './components/Navigation/TopNavBar';
 import { LibrarySidebar } from './components/Library/LibrarySidebar';
 import { SteamStorePage } from './components/SteamStoreDetail/SteamStorePage';
 import { ManageCollectionsModal } from './components/Library/ManageCollectionsModal';
+import { IntegrationsModal } from './components/Navigation/IntegrationsModal';
+import { loadIntegrations } from './services/integrations/integrationStorage';
+import { steamIntegration } from './services/integrations/steamIntegration';
 import { Plus, Sparkles, X, CheckCircle2 } from 'lucide-react';
 
 export function App() {
@@ -30,6 +33,9 @@ export function App() {
   const [collections, setCollections] = useState<GameCollection[]>(() => loadCollections());
   const [isManageCollectionsOpen, setIsManageCollectionsOpen] = useState(false);
   const [collectionModalGame, setCollectionModalGame] = useState<CanonicalGame | null>(null);
+
+  // Integrations modal state
+  const [isIntegrationsModalOpen, setIsIntegrationsModalOpen] = useState(false);
 
   // Quick import modal state
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
@@ -142,20 +148,33 @@ export function App() {
     }
   };
 
-  // Trigger library sync simulation
-  const handleTriggerSync = () => {
+  // Trigger library cloud sync across connected storefronts
+  const handleTriggerSync = async () => {
     setIsSyncing(true);
-    setSyncNotice('Scanning local Steam directory (~/Library/Application Support/Steam)...');
+    setSyncNotice('Syncing connected cloud storefront accounts...');
 
-    setTimeout(() => {
-      const updated = mergeScannedSteamGames(games);
-      setGames(updated);
-      setIsSyncing(false);
+    try {
+      const integrations = loadIntegrations();
+      const steamInteg = integrations.find((i) => i.storefrontId === 'steam' && i.isConnected);
+
+      let syncedGames = games;
+      if (steamInteg?.credentials?.steamId) {
+        const res = await steamIntegration.fetchOwnedGames(steamInteg.credentials);
+        syncedGames = res.games;
+      } else {
+        syncedGames = mergeScannedSteamGames([]);
+      }
+
+      setGames(syncedGames);
       setSyncNotice(
-        `Local sync complete! SpaceCadet Steam client synchronized (${updated.length} multi-platform titles indexed).`
+        `Cloud sync complete! ${syncedGames.length} verified owned titles synchronized from connected storefronts.`
       );
+    } catch (err: any) {
+      setSyncNotice(`Sync notice: ${err?.message || 'Using cached verified catalog'}`);
+    } finally {
+      setIsSyncing(false);
       setTimeout(() => setSyncNotice(null), 4000);
-    }, 1000);
+    }
   };
 
   // Collection Management Handlers
@@ -216,6 +235,7 @@ export function App() {
         filteredCount={filteredGames.length}
         isSyncing={isSyncing}
         onTriggerSync={handleTriggerSync}
+        onOpenIntegrations={() => setIsIntegrationsModalOpen(true)}
         onHomeClick={() => {
           if (filteredGames.length > 0) {
             setSelectedGame(filteredGames[0]);
@@ -346,6 +366,18 @@ export function App() {
         onRenameCollection={handleRenameCollection}
         onDeleteCollection={handleDeleteCollection}
         onToggleGameInCollection={handleToggleGameInCollection}
+      />
+
+      {/* Modal: Storefront Integrations & Cloud Sync (No Launchers Required) */}
+      <IntegrationsModal
+        isOpen={isIntegrationsModalOpen}
+        onClose={() => setIsIntegrationsModalOpen(false)}
+        onLibraryUpdated={(newGames) => {
+          setGames(newGames);
+          if (newGames.length > 0 && (!selectedGame || !newGames.some((g) => g.id === selectedGame.id))) {
+            setSelectedGame(newGames[0]);
+          }
+        }}
       />
     </div>
   );

@@ -10,8 +10,23 @@ export default defineConfig({
       '/api/steam-store': {
         target: 'https://store.steampowered.com',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/steam-store/, '')
-      }
-    }
+        rewrite: (path) => path.replace(/^\/api\/steam-store/, ''),
+      },
+      '/api/steam-api': {
+        target: 'https://api.steampowered.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/steam-api/, ''),
+      },
+      '/api/steam-community': {
+        target: 'https://steamcommunity.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/steam-community/, ''),
+      },
+      '/api/gog-embed': {
+        target: 'https://embed.gog.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/gog-embed/, ''),
+      },
+    },
   }
 });

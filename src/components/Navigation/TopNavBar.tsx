@@ -1,6 +1,6 @@
 import React from 'react';
 import { StorefrontId, STOREFRONT_REGISTRY } from '../../contracts/platform';
-import { Search, RefreshCw, Layers, Gamepad } from 'lucide-react';
+import { Search, RefreshCw, Layers, Gamepad, Cloud } from 'lucide-react';
 
 interface TopNavBarProps {
   searchQuery: string;
@@ -14,6 +14,7 @@ interface TopNavBarProps {
   isSyncing: boolean;
   onTriggerSync: () => void;
   onHomeClick: () => void;
+  onOpenIntegrations: () => void;
 }
 
 export const TopNavBar: React.FC<TopNavBarProps> = ({
@@ -28,6 +29,7 @@ export const TopNavBar: React.FC<TopNavBarProps> = ({
   isSyncing,
   onTriggerSync,
   onHomeClick,
+  onOpenIntegrations,
 }) => {
   const platforms: (StorefrontId | 'all')[] = [
     'all',
@@ -62,6 +64,17 @@ export const TopNavBar: React.FC<TopNavBarProps> = ({
                 Universal Game Browser
               </span>
             </div>
+          </button>
+
+          {/* Accounts & Integrations button */}
+          <button
+            onClick={onOpenIntegrations}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-[#212b36] hover:bg-steam-border text-steam-text hover:text-white rounded border border-steam-border transition-all shadow-sm group"
+            title="Manage connected storefront accounts (Steam, GOG, Epic, Xbox) without local launchers"
+          >
+            <Cloud className="w-3.5 h-3.5 text-sky-400 group-hover:scale-110 transition-transform" />
+            <span>Accounts</span>
+            <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
           </button>
 
           {/* Sync status button */}
