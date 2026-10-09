@@ -10,12 +10,14 @@ import {
   Calendar,
   Trophy,
   CheckCircle2,
-  Cloud
+  Cloud,
+  Bookmark
 } from 'lucide-react';
 
 interface SteamLibraryActionBarProps {
   game: CanonicalGame;
   metadata?: SteamEnrichedMetadata | null;
+  onManageCollections?: () => void;
 }
 
 // User-specific known achievements from ~/Library/Application Support/Steam/userdata/284583470/config/librarycache/achievement_progress.json
@@ -71,7 +73,11 @@ const KNOWN_INSTALL_SIZES: Record<number, string> = {
   268500: '45 GB',
 };
 
-export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({ game, metadata }) => {
+export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
+  game,
+  metadata,
+  onManageCollections,
+}) => {
   const isInstalled = game.platforms.some((p) => p.installed);
   const primaryPlatform = game.platforms.find((p) => p.platformId === 'steam') || game.platforms[0];
 
@@ -162,6 +168,18 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({ ga
             >
               <Download className="w-4 h-4 text-sky-400" />
               <span>Install</span>
+            </button>
+          )}
+
+          {/* Collections Shortcut Button */}
+          {onManageCollections && (
+            <button
+              onClick={onManageCollections}
+              className="inline-flex items-center gap-1.5 px-3 py-2 rounded text-xs font-semibold text-steam-text hover:text-white bg-[#1b2838] hover:bg-[#25394b] border border-[#2a475e] transition-colors"
+              title="Add or remove from user collections"
+            >
+              <Bookmark className="w-3.5 h-3.5 text-steam-accent" />
+              <span>Collections</span>
             </button>
           )}
 

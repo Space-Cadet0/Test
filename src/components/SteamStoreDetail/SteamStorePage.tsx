@@ -22,9 +22,14 @@ import {
 interface SteamStorePageProps {
   game: CanonicalGame;
   onBackToLibrary?: () => void;
+  onManageCollections?: () => void;
 }
 
-export const SteamStorePage: React.FC<SteamStorePageProps> = ({ game, onBackToLibrary }) => {
+export const SteamStorePage: React.FC<SteamStorePageProps> = ({
+  game,
+  onBackToLibrary,
+  onManageCollections,
+}) => {
   const [metadata, setMetadata] = useState<SteamEnrichedMetadata | null>(
     game.enrichedMetadata || null
   );
@@ -161,7 +166,11 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({ game, onBackToLi
         </div>
 
         {/* Steam Library Action & Stats Bar (Play Button, Library Status, Play Time, Last Played, Space Required, Achievements) */}
-        <SteamLibraryActionBar game={game} metadata={metadata} />
+        <SteamLibraryActionBar
+          game={game}
+          metadata={metadata}
+          onManageCollections={onManageCollections}
+        />
 
         {/* Main Steam Highlight Showcase (1:1 Steam 2-Column Split: Media Player + Details) */}
         <div className="flex flex-col lg:flex-row gap-4 bg-[#16202d]/80 backdrop-blur rounded border border-steam-border p-4 shadow-xl">

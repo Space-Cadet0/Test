@@ -1,12 +1,15 @@
 import { useState, useMemo } from 'react';
 import { CanonicalGame } from './contracts/game';
 import { StorefrontId } from './contracts/platform';
+import { GameCollection } from './contracts/collection';
 import { INITIAL_LIBRARY_GAMES } from './services/storage/mockLibrary';
 import { mergeScannedSteamGames } from './services/storage/librarySync';
+import { loadCollections, saveCollections } from './services/storage/collectionStorage';
 import { steamApi } from './services/steam/steamApi';
 import { TopNavBar } from './components/Navigation/TopNavBar';
 import { LibrarySidebar } from './components/Library/LibrarySidebar';
 import { SteamStorePage } from './components/SteamStoreDetail/SteamStorePage';
+import { ManageCollectionsModal } from './components/Library/ManageCollectionsModal';
 import { Plus, Sparkles, X, CheckCircle2 } from 'lucide-react';
 
 export function App() {
@@ -22,6 +25,11 @@ export function App() {
   const [installedOnly, setInstalledOnly] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
   const [syncNotice, setSyncNotice] = useState<string | null>(null);
+
+  // Collections state
+  const [collections, setCollections] = useState<GameCollection[]>(() => loadCollections());
+  const [isManageCollectionsOpen, setIsManageCollectionsOpen] = useState(false);
+  const [collectionModalGame, setCollectionModalGame] = useState<CanonicalGame | null>(null);
 
   // Quick import modal state
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
@@ -150,6 +158,50 @@ export function App() {
     }, 1000);
   };
 
+  // Collection Management Handlers
+  const handleOpenManageCollections = (game?: CanonicalGame) => {
+    setCollectionModalGame(game || null);
+    setIsManageCollectionsOpen(true);
+  };
+
+  const handleCreateCollection = (name: string) => {
+    const newCol: GameCollection = {
+      id: `col-${Date.now()}`,
+      name,
+      gameIds: collectionModalGame ? [collectionModalGame.id] : [],
+    };
+    const updated = [...collections, newCol];
+    setCollections(updated);
+    saveCollections(updated);
+  };
+
+  const handleRenameCollection = (id: string, newName: string) => {
+    const updated = collections.map((c) => (c.id === id ? { ...c, name: newName } : c));
+    setCollections(updated);
+    saveCollections(updated);
+  };
+
+  const handleDeleteCollection = (id: string) => {
+    const updated = collections.filter((c) => c.id !== id);
+    setCollections(updated);
+    saveCollections(updated);
+  };
+
+  const handleToggleGameInCollection = (collectionId: string, gameId: string) => {
+    const updated = collections.map((c) => {
+      if (c.id === collectionId) {
+        const has = c.gameIds.includes(gameId);
+        return {
+          ...c,
+          gameIds: has ? c.gameIds.filter((id) => id !== gameId) : [...c.gameIds, gameId],
+        };
+      }
+      return c;
+    });
+    setCollections(updated);
+    saveCollections(updated);
+  };
+
   return (
     <div className="h-screen w-screen bg-[#0e141b] text-steam-text flex flex-col font-steam overflow-hidden">
       {/* Top Navigation Bar */}
@@ -193,12 +245,18 @@ export function App() {
           installedOnly={installedOnly}
           onToggleInstalledOnly={() => setInstalledOnly(!installedOnly)}
           onOpenImportModal={() => setIsImportModalOpen(true)}
+          collections={collections}
+          onOpenManageCollectionsModal={handleOpenManageCollections}
+          onToggleGameInCollection={handleToggleGameInCollection}
         />
 
         {/* Right Main Pane: Steam Storefront Detail Layout */}
         <main className="flex-1 h-full overflow-y-auto bg-[#0b0f14] relative">
           {selectedGame ? (
-            <SteamStorePage game={selectedGame} />
+            <SteamStorePage
+              game={selectedGame}
+              onManageCollections={() => handleOpenManageCollections(selectedGame)}
+            />
           ) : (
             <div className="h-full flex flex-col items-center justify-center text-center p-8 text-steam-subtext space-y-3">
               <Sparkles className="w-12 h-12 text-steam-accent/40" />
@@ -277,6 +335,18 @@ export function App() {
           </div>
         </div>
       )}
+
+      {/* Modal: Manage Collections */}
+      <ManageCollectionsModal
+        isOpen={isManageCollectionsOpen}
+        onClose={() => setIsManageCollectionsOpen(false)}
+        collections={collections}
+        game={collectionModalGame}
+        onCreateCollection={handleCreateCollection}
+        onRenameCollection={handleRenameCollection}
+        onDeleteCollection={handleDeleteCollection}
+        onToggleGameInCollection={handleToggleGameInCollection}
+      />
     </div>
   );
 }
