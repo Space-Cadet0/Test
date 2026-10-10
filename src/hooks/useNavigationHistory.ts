@@ -1,12 +1,14 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef, useMemo } from 'react';
 import { ActiveGameFilter } from '../contracts/filter';
 
 export interface NavHistoryEntry {
+  id: string;
   view: 'game' | 'grid';
   selectedGameId: string | null;
   activeFilter: ActiveGameFilter | null;
   activeGroupId: string | null;
   title: string;
+  scrollY?: number;
 }
 
 interface HistoryState {
@@ -14,14 +16,40 @@ interface HistoryState {
   index: number;
 }
 
-export function useNavigationHistory(initialEntry: NavHistoryEntry) {
-  const [historyState, setHistoryState] = useState<HistoryState>(() => ({
-    entries: [initialEntry],
-    index: 0,
-  }));
+let nextNavId = 0;
+export function createNavEntryId(): string {
+  return `nav-${++nextNavId}-${Date.now()}`;
+}
+
+export function useNavigationHistory(
+  initialEntry: Omit<NavHistoryEntry, 'id'> & { id?: string },
+  getCurrentScroll?: () => number
+) {
+  const scrollMapRef = useRef<Map<string, number>>(new Map());
+
+  const [historyState, setHistoryState] = useState<HistoryState>(() => {
+    const entryWithId: NavHistoryEntry = {
+      ...initialEntry,
+      id: initialEntry.id || createNavEntryId(),
+      scrollY: initialEntry.scrollY ?? 0,
+    };
+    scrollMapRef.current.set(entryWithId.id, entryWithId.scrollY ?? 0);
+    return {
+      entries: [entryWithId],
+      index: 0,
+    };
+  });
 
   const { entries, index } = historyState;
-  const currentEntry = entries[index] || initialEntry;
+  const rawCurrent = entries[index] || entries[0];
+
+  const currentEntry = useMemo(() => {
+    const savedY = scrollMapRef.current.get(rawCurrent.id) ?? rawCurrent.scrollY ?? 0;
+    return {
+      ...rawCurrent,
+      scrollY: savedY,
+    };
+  }, [rawCurrent]);
 
   const canGoBack = index > 0;
   const backEntry = canGoBack ? entries[index - 1] : null;
@@ -31,51 +59,100 @@ export function useNavigationHistory(initialEntry: NavHistoryEntry) {
   const forwardEntry = canGoForward ? entries[index + 1] : null;
   const forwardTitle = forwardEntry ? forwardEntry.title : null;
 
-  const pushEntry = useCallback((entry: NavHistoryEntry) => {
-    setHistoryState((prev) => {
-      const current = prev.entries[prev.index];
-      // Do not push identical consecutive state
-      if (
-        current &&
-        current.view === entry.view &&
-        current.selectedGameId === entry.selectedGameId &&
-        current.activeGroupId === entry.activeGroupId &&
-        current.activeFilter?.type === entry.activeFilter?.type &&
-        current.activeFilter?.value === entry.activeFilter?.value
-      ) {
-        return prev;
-      }
+  const saveCurrentScroll = useCallback((scrollY: number) => {
+    const cur = historyState.entries[historyState.index];
+    if (cur) {
+      scrollMapRef.current.set(cur.id, scrollY);
+    }
+  }, [historyState.entries, historyState.index]);
 
-      const truncated = prev.entries.slice(0, prev.index + 1);
-      const nextEntries = [...truncated, entry];
-      const clampedEntries =
-        nextEntries.length > 50 ? nextEntries.slice(nextEntries.length - 50) : nextEntries;
-      return {
-        entries: clampedEntries,
-        index: clampedEntries.length - 1,
-      };
-    });
-  }, []);
+  const pushEntry = useCallback(
+    (entry: Omit<NavHistoryEntry, 'id'> & { id?: string }) => {
+      const currentScroll = getCurrentScroll ? getCurrentScroll() : 0;
+      setHistoryState((prev) => {
+        const current = prev.entries[prev.index];
+        if (current) {
+          scrollMapRef.current.set(current.id, currentScroll);
+        }
+
+        // Do not push identical consecutive state
+        if (
+          current &&
+          current.view === entry.view &&
+          current.selectedGameId === entry.selectedGameId &&
+          current.activeGroupId === entry.activeGroupId &&
+          current.activeFilter?.type === entry.activeFilter?.type &&
+          current.activeFilter?.value === entry.activeFilter?.value
+        ) {
+          return prev;
+        }
+
+        const entryWithId: NavHistoryEntry = {
+          ...entry,
+          id: entry.id || createNavEntryId(),
+          scrollY: entry.scrollY ?? 0,
+        };
+        scrollMapRef.current.set(entryWithId.id, entryWithId.scrollY ?? 0);
+
+        const truncated = prev.entries.slice(0, prev.index + 1);
+        if (truncated.length > 0) {
+          truncated[truncated.length - 1] = {
+            ...truncated[truncated.length - 1],
+            scrollY: currentScroll,
+          };
+        }
+
+        const nextEntries = [...truncated, entryWithId];
+        const clampedEntries =
+          nextEntries.length > 50 ? nextEntries.slice(nextEntries.length - 50) : nextEntries;
+        return {
+          entries: clampedEntries,
+          index: clampedEntries.length - 1,
+        };
+      });
+    },
+    [getCurrentScroll]
+  );
 
   const goBack = useCallback(() => {
+    const currentScroll = getCurrentScroll ? getCurrentScroll() : 0;
     setHistoryState((prev) => {
       if (prev.index <= 0) return prev;
+      const current = prev.entries[prev.index];
+      if (current) {
+        scrollMapRef.current.set(current.id, currentScroll);
+      }
+      const updatedEntries = [...prev.entries];
+      updatedEntries[prev.index] = {
+        ...current,
+        scrollY: currentScroll,
+      };
       return {
-        ...prev,
+        entries: updatedEntries,
         index: prev.index - 1,
       };
     });
-  }, []);
+  }, [getCurrentScroll]);
 
   const goForward = useCallback(() => {
+    const currentScroll = getCurrentScroll ? getCurrentScroll() : 0;
     setHistoryState((prev) => {
       if (prev.index >= prev.entries.length - 1) return prev;
+      const current = prev.entries[prev.index];
+      if (current) {
+        scrollMapRef.current.set(current.id, currentScroll);
+      }
+      const updatedEntries = [...prev.entries];
+      updatedEntries[prev.index] = {
+        ...current,
+        scrollY: currentScroll,
+      };
       return {
-        ...prev,
+        entries: updatedEntries,
         index: prev.index + 1,
       };
     });
-  }, []);
+  }, [getCurrentScroll]);
 
   // Global keyboard shortcuts (Alt+Left / Cmd+[, Alt+Right / Cmd+], Backspace) and mouse buttons (3 & 4)
   useEffect(() => {
@@ -146,5 +223,6 @@ export function useNavigationHistory(initialEntry: NavHistoryEntry) {
     pushEntry,
     goBack,
     goForward,
+    saveCurrentScroll,
   };
 }

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { CanonicalGame } from '../../contracts/game';
 import { StorefrontIcon, getStorefrontDisplayName } from '../Common/StorefrontIcon';
 import {
@@ -57,24 +57,12 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
   const [sortBy, setSortBy] = useState<'alphabetical' | 'rating' | 'playtime' | 'recent'>('alphabetical');
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Scroll to top whenever grid title or filter changes
-  useEffect(() => {
-    const scrollToTop = () => {
-      if (gridContainerRef.current) {
-        gridContainerRef.current.scrollTop = 0;
-        gridContainerRef.current.scrollTo?.({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
-      }
-      if (gridContainerRef.current?.parentElement) {
-        gridContainerRef.current.parentElement.scrollTop = 0;
-        gridContainerRef.current.parentElement.scrollTo?.({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
-      }
-      window.scrollTo(0, 0);
-    };
-
-    scrollToTop();
-    const rafId = requestAnimationFrame(scrollToTop);
-    return () => cancelAnimationFrame(rafId);
-  }, [title, activeFilter]);
+  const handleSortChange = (newSort: 'alphabetical' | 'rating' | 'playtime' | 'recent') => {
+    setSortBy(newSort);
+    if (gridContainerRef.current?.parentElement) {
+      gridContainerRef.current.parentElement.scrollTop = 0;
+    }
+  };
 
   // Sorting
   const sortedGames = [...games].sort((a, b) => {
@@ -140,7 +128,7 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
   };
 
   return (
-    <div ref={gridContainerRef} className="w-full min-h-full bg-[#0e141b] text-steam-text pb-28 overflow-y-auto relative select-none">
+    <div ref={gridContainerRef} className="w-full min-h-full bg-[#0e141b] text-steam-text pb-28 relative select-none">
       {/* Background ambient lighting */}
       <div className="absolute top-0 left-0 right-0 h-96 opacity-10 pointer-events-none bg-gradient-to-b from-steam-accent/40 via-transparent to-transparent filter blur-3xl" />
 
@@ -209,7 +197,7 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
             <span className="text-steam-subtext font-medium whitespace-nowrap">Sort by:</span>
             <div className="flex items-center rounded border border-steam-border bg-[#16202d] p-0.5 shrink-0">
               <button
-                onClick={() => setSortBy('alphabetical')}
+                onClick={() => handleSortChange('alphabetical')}
                 className={`px-3 py-1 rounded text-xs font-semibold whitespace-nowrap transition-colors ${
                   sortBy === 'alphabetical'
                     ? 'bg-steam-accent text-black shadow-sm'
@@ -219,7 +207,7 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
                 Alphabetical
               </button>
               <button
-                onClick={() => setSortBy('rating')}
+                onClick={() => handleSortChange('rating')}
                 className={`px-3 py-1 rounded text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
                   sortBy === 'rating'
                     ? 'bg-steam-accent text-black shadow-sm'
@@ -231,7 +219,7 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
                 <span>Rating</span>
               </button>
               <button
-                onClick={() => setSortBy('playtime')}
+                onClick={() => handleSortChange('playtime')}
                 className={`px-3 py-1 rounded text-xs font-semibold whitespace-nowrap transition-colors ${
                   sortBy === 'playtime'
                     ? 'bg-steam-accent text-black shadow-sm'
@@ -241,7 +229,7 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
                 Play Time
               </button>
               <button
-                onClick={() => setSortBy('recent')}
+                onClick={() => handleSortChange('recent')}
                 className={`px-3 py-1 rounded text-xs font-semibold whitespace-nowrap transition-colors ${
                   sortBy === 'recent'
                     ? 'bg-steam-accent text-black shadow-sm'

@@ -50,24 +50,6 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
   const [isRefreshing, setIsRefreshing] = useState(false);
   const isCooldown = steamApi.isStoreRateLimited();
 
-  // Scroll to top whenever a new game page is loaded
-  useEffect(() => {
-    const scrollToTop = () => {
-      if (containerRef.current) {
-        containerRef.current.scrollTop = 0;
-        containerRef.current.scrollTo?.({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
-      }
-      if (containerRef.current?.parentElement) {
-        containerRef.current.parentElement.scrollTop = 0;
-        containerRef.current.parentElement.scrollTo?.({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
-      }
-      window.scrollTo(0, 0);
-    };
-
-    scrollToTop();
-    const rafId = requestAnimationFrame(scrollToTop);
-    return () => cancelAnimationFrame(rafId);
-  }, [game.id]);
 
   useEffect(() => {
     let isMounted = true;
@@ -170,7 +152,7 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
   );
 
   return (
-    <div ref={containerRef} className="w-full min-h-full bg-[#0e141b] text-steam-text pb-24 overflow-y-auto relative">
+    <div ref={containerRef} className="w-full min-h-full bg-[#0e141b] text-steam-text pb-24 relative">
       {/* Background Hero Ambient Glow */}
       <div
         className="absolute top-0 left-0 right-0 h-96 opacity-15 pointer-events-none bg-cover bg-center filter blur-3xl"

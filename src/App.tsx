@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useRef } from 'react';
+import { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import { CanonicalGame } from './contracts/game';
 import { StorefrontId } from './contracts/platform';
 import { GameCollection } from './contracts/collection';
@@ -85,7 +85,17 @@ export function App() {
     return defaultCatalog;
   });
 
-  // Navigation history & state stack
+  const mainContentRef = useRef<HTMLElement | null>(null);
+
+  const getCurrentScroll = useCallback((): number => {
+    if (!mainContentRef.current) return 0;
+    if (mainContentRef.current.scrollTop > 0) return mainContentRef.current.scrollTop;
+    const child = mainContentRef.current.firstElementChild as HTMLElement | null;
+    if (child && child.scrollTop > 0) return child.scrollTop;
+    return 0;
+  }, []);
+
+  // Navigation history & state stack with scroll restoration
   const initialGame = useMemo(() => {
     const initialGames = sanitizeGameCatalog(mergeScannedSteamGames([]));
     return initialGames.find((g) => g.steamAppId === 1086940) || initialGames[0] || null;
@@ -100,13 +110,18 @@ export function App() {
     pushEntry,
     goBack,
     goForward,
-  } = useNavigationHistory({
-    view: 'game',
-    selectedGameId: initialGame?.id || 'steam-1086940',
-    activeFilter: null,
-    activeGroupId: null,
-    title: initialGame?.title || "Baldur's Gate 3",
-  });
+    saveCurrentScroll,
+  } = useNavigationHistory(
+    {
+      view: 'game',
+      selectedGameId: initialGame?.id || 'steam-1086940',
+      activeFilter: null,
+      activeGroupId: null,
+      title: initialGame?.title || "Baldur's Gate 3",
+      scrollY: 0,
+    },
+    getCurrentScroll
+  );
 
   const isGridView = currentEntry.view === 'grid';
   const activeGroupId = currentEntry.activeGroupId;
@@ -119,34 +134,39 @@ export function App() {
     return games.find((g) => g.id === currentEntry.selectedGameId) || games[0] || null;
   }, [games, currentEntry.selectedGameId]);
 
-  const mainContentRef = useRef<HTMLElement | null>(null);
-
-  // When a new page is loaded in the main content section, make sure it starts at the top of the page
+  // Scroll management: when new page loads, start at top (0); when pressing back/forward, restore previous scroll level
   useEffect(() => {
-    const scrollToTop = () => {
-      if (mainContentRef.current) {
-        mainContentRef.current.scrollTop = 0;
-        mainContentRef.current.scrollTo?.({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
-        const scrollables = mainContentRef.current.querySelectorAll('.overflow-y-auto');
-        scrollables.forEach((el) => {
-          el.scrollTop = 0;
-          el.scrollTo?.({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
-        });
+    const targetScrollY = currentEntry.scrollY ?? 0;
+    let attempts = 0;
+    const maxAttempts = 10;
+
+    const applyScroll = () => {
+      if (!mainContentRef.current) return;
+      mainContentRef.current.scrollTop = targetScrollY;
+      const child = mainContentRef.current.firstElementChild as HTMLElement | null;
+      if (child && child.scrollHeight > child.clientHeight) {
+        child.scrollTop = targetScrollY;
       }
-      window.scrollTo(0, 0);
+      attempts++;
+      const currentY = mainContentRef.current.scrollTop || child?.scrollTop || 0;
+      if (targetScrollY > 0 && Math.abs(currentY - targetScrollY) > 5 && attempts < maxAttempts) {
+        requestAnimationFrame(applyScroll);
+      }
     };
 
-    scrollToTop();
-    const rafId = requestAnimationFrame(scrollToTop);
-    return () => cancelAnimationFrame(rafId);
-  }, [
-    currentEntry?.view,
-    currentEntry?.selectedGameId,
-    currentEntry?.activeFilter,
-    currentEntry?.activeGroupId,
-    isGridView,
-    selectedGame?.id,
-  ]);
+    applyScroll();
+    const rafId = requestAnimationFrame(applyScroll);
+    const t1 = setTimeout(applyScroll, 30);
+    const t2 = setTimeout(applyScroll, 80);
+    const t3 = setTimeout(applyScroll, 150);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+    };
+  }, [currentEntry.id]);
 
   const navigateSelectGame = (game: CanonicalGame) => {
     pushEntry({
@@ -577,7 +597,15 @@ export function App() {
         />
 
         {/* Right Main Pane: Steam Storefront Detail Layout OR Group/Whole Library Grid View */}
-        <main ref={mainContentRef} className="flex-1 h-full overflow-y-auto bg-[#0b0f14] relative">
+        <main
+          ref={mainContentRef}
+          onScroll={() => {
+            if (mainContentRef.current) {
+              saveCurrentScroll(mainContentRef.current.scrollTop);
+            }
+          }}
+          className="flex-1 h-full overflow-y-auto bg-[#0b0f14] relative"
+        >
           {isGridView || !selectedGame ? (
             <LibraryGridView
               games={activeGroupData ? activeGroupData.games : filteredGames}
@@ -634,7 +662,7 @@ export function App() {
                   ? activeGroupData.name
                   : 'All Games'
               }
-              onBackToLibrary={navigateHome}
+              onBackToLibrary={canGoBack ? goBack : navigateHome}
               onManageCollections={() => handleOpenManageCollections(selectedGame)}
               onToggleInstallStatus={() => handleToggleInstallStatus(selectedGame)}
               onApplyFilter={(filter) => {
