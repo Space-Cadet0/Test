@@ -28,9 +28,6 @@ interface LibraryGridViewProps {
   onClearGroupFilter?: () => void;
   activeFilter?: ActiveGameFilter | null;
   onClearActiveFilter?: () => void;
-  canGoBack?: boolean;
-  onGoBack?: () => void;
-  backTitle?: string | null;
 }
 
 export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
@@ -43,9 +40,6 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
   onClearGroupFilter,
   activeFilter,
   onClearActiveFilter,
-  canGoBack = false,
-  onGoBack,
-  backTitle,
 }) => {
   const gridContainerRef = useRef<HTMLDivElement | null>(null);
   const [hoveredGame, setHoveredGame] = useState<CanonicalGame | null>(null);
@@ -141,17 +135,6 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
             </div>
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-2.5">
-                {activeFilter && backTitle && onGoBack && (
-                  <button
-                    type="button"
-                    onClick={onGoBack}
-                    className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-bold text-steam-accent hover:text-white bg-[#1b2838] hover:bg-[#25394e] border border-steam-border hover:border-steam-accent/60 rounded transition-all shadow-sm group cursor-pointer shrink-0"
-                    title={`Back to ${backTitle} (Alt + ←)`}
-                  >
-                    <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
-                    <span>Back to {backTitle}</span>
-                  </button>
-                )}
                 <h1 className="text-xl font-bold text-white tracking-wide flex items-center gap-2">
                   {title || 'All Games'}
                   <span className="text-xs px-2 py-0.5 rounded-full bg-[#1b2838] border border-steam-border text-steam-accent font-semibold shrink-0">
@@ -265,16 +248,7 @@ export const LibraryGridView: React.FC<LibraryGridViewProps> = ({
                 ? `You have not assigned any titles to the "${title}" collection yet. You can add games from the sidebar or any game detail page.`
                 : 'No titles match your current filter or search criteria. Try clearing search or switching platforms.'}
             </p>
-            {canGoBack && onGoBack ? (
-              <button
-                type="button"
-                onClick={onGoBack}
-                className="mt-2 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded bg-steam-accent text-black font-semibold text-xs hover:brightness-110 transition-all shadow cursor-pointer"
-              >
-                <ArrowLeft className="w-3.5 h-3.5" />
-                <span>Back{backTitle ? ` to ${backTitle}` : ''}</span>
-              </button>
-            ) : activeFilter && onClearActiveFilter ? (
+            {activeFilter && onClearActiveFilter ? (
               <button
                 onClick={onClearActiveFilter}
                 className="mt-2 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded bg-steam-accent text-black font-semibold text-xs hover:brightness-110 transition-all shadow"

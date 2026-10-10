@@ -647,9 +647,6 @@ export function App() {
               onClearGroupFilter={activeGroupId ? navigateHome : undefined}
               activeFilter={activeFilter}
               onClearActiveFilter={navigateClearFilter}
-              canGoBack={canGoBack}
-              onGoBack={goBack}
-              backTitle={backTitle}
             />
           ) : (
             <SteamStorePage
