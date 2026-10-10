@@ -1,5 +1,5 @@
 {
-  "name": "universal-game-library",
+  "name": "one-launcher",
   "private": true,
   "version": "0.1.0",
   "main": "electron/main.cjs",
@@ -14,8 +14,8 @@
     "dist:mac": "npm run build && electron-builder --mac"
   },
   "build": {
-    "appId": "com.universalgame.library",
-    "productName": "Universal Game Library",
+    "appId": "com.onelauncher.app",
+    "productName": "One Launcher",
     "mac": {
       "category": "public.app-category.games",
       "target": [

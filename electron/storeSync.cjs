@@ -10,7 +10,9 @@ const EPIC_CLIENT_AUTH = 'MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2
 
 function getTokensFilePath() {
   try {
-    const userDataPath = app ? app.getPath('userData') : path.join(process.env.HOME || '.', '.universal-game-library');
+    const defaultDir = path.join(process.env.HOME || '.', '.one-launcher');
+    const legacyDir = path.join(process.env.HOME || '.', '.universal-game-library');
+    const userDataPath = app ? app.getPath('userData') : (fs.existsSync(legacyDir) && !fs.existsSync(defaultDir) ? legacyDir : defaultDir);
     if (!fs.existsSync(userDataPath)) {
       fs.mkdirSync(userDataPath, { recursive: true });
     }

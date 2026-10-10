@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SteamCategory } from '../../contracts/steam';
 import { getSteamCategoryIconUrl } from '../../services/steam/steamApi';
+import { getEffectiveCategories } from '../../services/steam/steamFeatureNormalizer';
 import { ActiveGameFilter } from '../../contracts/filter';
 import { ChevronDown, Sliders, CheckCircle2, Gamepad } from 'lucide-react';
 
@@ -10,6 +11,7 @@ interface SteamFeaturesListProps {
   hasAntiCheat?: boolean;
   antiCheatName?: string;
   hasEula?: boolean;
+  isOwnedOnSteam?: boolean;
   onApplyFilter?: (filter: ActiveGameFilter) => void;
 }
 
@@ -25,14 +27,15 @@ export const SteamFeaturesList: React.FC<SteamFeaturesListProps> = ({
   hasAntiCheat = false,
   antiCheatName = 'Easy Anti-Cheat',
   hasEula = false,
+  isOwnedOnSteam = true,
   onApplyFilter,
 }) => {
   const [showAccessibility, setShowAccessibility] = useState(false);
 
   // Fallback defaults if no categories exist
-  let rawCategories = categories;
-  if (rawCategories.length === 0) {
-    rawCategories = [
+  let baseCategories = categories;
+  if (baseCategories.length === 0) {
+    baseCategories = [
       { id: 2, description: 'Single-player' },
       { id: 36, description: 'Online PvP' },
       { id: 38, description: 'Online Co-op' },
@@ -44,6 +47,8 @@ export const SteamFeaturesList: React.FC<SteamFeaturesListProps> = ({
     ];
   }
 
+  // Non-destructive dynamic projection based on actual Steam ownership
+  const rawCategories = getEffectiveCategories(baseCategories, isOwnedOnSteam);
   const rawIds = new Set(rawCategories.map((c) => c.id));
 
   // Determine specific multiplayer / co-op / pvp presence for suppression of generic parent categories

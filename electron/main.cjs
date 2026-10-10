@@ -15,7 +15,7 @@ function createMainWindow() {
     height: 900,
     minWidth: 1024,
     minHeight: 700,
-    title: 'Universal Game Library',
+    title: 'One Launcher',
     backgroundColor: '#0b0f17',
     titleBarStyle: 'hiddenInset', // Native sleek macOS titlebar
     webPreferences: {

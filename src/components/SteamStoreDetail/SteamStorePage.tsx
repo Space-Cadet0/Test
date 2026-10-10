@@ -16,6 +16,10 @@ import { SteamLanguagesTable } from './SteamLanguagesTable';
 import { SteamFeaturesList } from './SteamFeaturesList';
 import { SteamSidebarNotices } from './SteamSidebarNotices';
 import {
+  isGameOwnedOnSteam,
+  getEffectiveTags,
+} from '../../services/steam/steamFeatureNormalizer';
+import {
   Sparkles,
   ArrowLeft,
 } from 'lucide-react';
@@ -122,6 +126,8 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
   const releaseDate = metadata?.releaseDate || game.releaseDate || 'TBA';
   const tags = (metadata?.tags && metadata.tags.length > 0) ? metadata.tags : (game.tags || []);
   const genres = (metadata?.genres && metadata.genres.length > 0) ? metadata.genres : (game.genres || []);
+  const isOwnedOnSteam = isGameOwnedOnSteam(game.platforms);
+  const effectiveTags = getEffectiveTags(tags, isOwnedOnSteam);
   const detailedDescription =
     metadata?.aboutTheGame ||
     metadata?.detailedDescription ||
@@ -229,7 +235,7 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
             releaseDate={releaseDate}
             developers={developers}
             publishers={publishers}
-            tags={tags}
+            tags={effectiveTags}
             onApplyFilter={onApplyFilter}
           />
         </div>
@@ -277,6 +283,7 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
             <SteamFeaturesList
               categories={metadata?.categories}
               title={game.title}
+              isOwnedOnSteam={isOwnedOnSteam}
               hasAntiCheat={Boolean(metadata?.drmNotice?.toLowerCase().includes('anti-cheat'))}
               antiCheatName={metadata?.drmNotice?.includes('Easy') ? 'Easy Anti-Cheat' : 'Anti-Cheat Software'}
               hasEula={Boolean(metadata?.drmNotice?.toLowerCase().includes('eula') || metadata?.legalNotice?.toLowerCase().includes('eula'))}

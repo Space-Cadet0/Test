@@ -2,6 +2,12 @@ import { CanonicalGame } from '../../contracts/game';
 import { ActiveGameFilter } from '../../contracts/filter';
 import steamEnrichedCache from '../storage/steamEnrichedCache.json';
 import { getOpenCriticData } from '../opencritic/openCritic';
+import {
+  isGameOwnedOnSteam,
+  isSteamExclusiveFeature,
+  getEffectiveCategories,
+  getEffectiveTags,
+} from '../steam/steamFeatureNormalizer';
 
 const cache = steamEnrichedCache as Record<string, any>;
 
@@ -89,21 +95,34 @@ export function matchesGameFilter(game: CanonicalGame, filter: ActiveGameFilter)
   }
 
   if (filter.type === 'tag') {
+    const isOwnedOnSteam = isGameOwnedOnSteam(game.platforms);
+    if (isSteamExclusiveFeature(target) && !isOwnedOnSteam) {
+      return false;
+    }
+    const effectiveTags = getEffectiveTags(game.tags, isOwnedOnSteam);
     return (
-      game.tags.some((t) => t.toLowerCase() === target || t.toLowerCase().includes(target)) ||
+      effectiveTags.some((t) => t.toLowerCase() === target || t.toLowerCase().includes(target)) ||
       game.genres.some((g) => g.toLowerCase() === target || g.toLowerCase().includes(target))
     );
   }
 
   if (filter.type === 'feature') {
-    // 1. Direct tag match (e.g. "HDR available", "Single-player", "Steam Achievements")
-    if (game.tags.some((t) => t.toLowerCase() === target || t.toLowerCase().includes(target))) {
+    const isOwnedOnSteam = isGameOwnedOnSteam(game.platforms);
+    if (isSteamExclusiveFeature(target) && !isOwnedOnSteam) {
+      return false;
+    }
+
+    const effectiveTags = getEffectiveTags(game.tags, isOwnedOnSteam);
+
+    // 1. Direct tag match (e.g. "HDR available", "Single-player", "Achievements")
+    if (effectiveTags.some((t) => t.toLowerCase() === target || t.toLowerCase().includes(target))) {
       return true;
     }
 
     // 2. Direct metadata categories on the game
+    const directCategories = getEffectiveCategories(game.enrichedMetadata?.categories, isOwnedOnSteam);
     if (
-      game.enrichedMetadata?.categories?.some((c) =>
+      directCategories.some((c) =>
         c.description.toLowerCase().includes(target)
       )
     ) {
@@ -113,12 +132,15 @@ export function matchesGameFilter(game: CanonicalGame, filter: ActiveGameFilter)
     // 3. Categories stored in steamEnrichedCache
     if (game.steamAppId) {
       const cached = cache[game.steamAppId.toString()];
-      if (
-        cached?.categories?.some((c: any) =>
-          c.description?.toLowerCase().includes(target)
-        )
-      ) {
-        return true;
+      if (cached?.categories) {
+        const cachedCategories = getEffectiveCategories(cached.categories, isOwnedOnSteam);
+        if (
+          cachedCategories.some((c: any) =>
+            c.description?.toLowerCase().includes(target)
+          )
+        ) {
+          return true;
+        }
       }
     }
 
@@ -215,7 +237,8 @@ export function matchesGameFilter(game: CanonicalGame, filter: ActiveGameFilter)
 
     // Achievements
     if (target.includes('achievement')) {
-      if (game.tags.some((t) => t.toLowerCase().includes('achievement'))) return true;
+      if (game.platforms.some((p) => p.achievements && p.achievements.total > 0)) return true;
+      if (effectiveTags.some((t) => t.toLowerCase().includes('achievement'))) return true;
       if (
         game.steamAppId &&
         cache[game.steamAppId.toString()]?.categories?.some((c: any) =>
@@ -228,6 +251,7 @@ export function matchesGameFilter(game: CanonicalGame, filter: ActiveGameFilter)
 
     // Family Sharing
     if (target.includes('family')) {
+      if (!isOwnedOnSteam) return false;
       if (game.tags.some((t) => t.toLowerCase().includes('family'))) return true;
       if (
         game.steamAppId &&

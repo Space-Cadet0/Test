@@ -144,6 +144,12 @@ export const TopNavBar: React.FC<TopNavBarProps> = ({
             {/* Burger Dropdown Menu */}
             {isMenuOpen && (
               <div className="absolute left-0 top-full mt-2 w-56 rounded-md bg-[#16202d] border border-steam-border shadow-2xl z-50 py-1.5 backdrop-blur-md animate-in fade-in zoom-in-95 duration-150">
+                {/* Brand Header */}
+                <div className="px-3.5 py-1.5 border-b border-steam-border/60 mb-1 flex items-center justify-between">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-steam-accent">One Launcher</span>
+                  <span className="text-[10px] text-steam-subtext font-mono">v0.1.0</span>
+                </div>
+
                 {/* Accounts */}
                 <button
                   type="button"
