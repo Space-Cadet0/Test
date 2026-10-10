@@ -26,7 +26,6 @@ interface SteamStorePageProps {
   onBackToLibrary?: () => void;
   onManageCollections?: () => void;
   onToggleInstallStatus?: () => void;
-  parentGroupName?: string;
   onApplyFilter?: (filter: ActiveGameFilter) => void;
 }
 
@@ -35,7 +34,6 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
   onBackToLibrary,
   onManageCollections,
   onToggleInstallStatus,
-  parentGroupName,
   onApplyFilter,
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -150,10 +148,10 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
             <button
               onClick={onBackToLibrary}
               className="inline-flex items-center gap-1.5 text-steam-accent hover:text-white hover:underline cursor-pointer uppercase tracking-wider text-[11px] font-bold transition-colors group"
-              title={`Return to ${parentGroupName || 'All Games'} library grid`}
+              title="Return to All Games library grid"
             >
               <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
-              <span>{parentGroupName || 'All Games'}</span>
+              <span>All Games</span>
             </button>
             <span>&gt;</span>
             <span className="text-white font-semibold truncate max-w-md">{game.title}</span>

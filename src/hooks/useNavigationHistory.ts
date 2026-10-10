@@ -26,6 +26,7 @@ export function useNavigationHistory(
   getCurrentScroll?: () => number
 ) {
   const scrollMapRef = useRef<Map<string, number>>(new Map());
+  const lastAllGamesScrollY = useRef<number>(initialEntry.scrollY ?? 0);
 
   const [historyState, setHistoryState] = useState<HistoryState>(() => {
     const entryWithId: NavHistoryEntry = {
@@ -63,6 +64,9 @@ export function useNavigationHistory(
     const cur = historyState.entries[historyState.index];
     if (cur) {
       scrollMapRef.current.set(cur.id, scrollY);
+      if (cur.view === 'grid' && !cur.activeFilter && !cur.activeGroupId) {
+        lastAllGamesScrollY.current = scrollY;
+      }
     }
   }, [historyState.entries, historyState.index]);
 
@@ -73,6 +77,9 @@ export function useNavigationHistory(
         const current = prev.entries[prev.index];
         if (current) {
           scrollMapRef.current.set(current.id, currentScroll);
+          if (current.view === 'grid' && !current.activeFilter && !current.activeGroupId) {
+            lastAllGamesScrollY.current = currentScroll;
+          }
         }
 
         // Do not push identical consecutive state
@@ -214,6 +221,10 @@ export function useNavigationHistory(
     };
   }, [canGoBack, canGoForward, goBack, goForward]);
 
+  const getLastAllGamesScrollY = useCallback(() => {
+    return lastAllGamesScrollY.current;
+  }, []);
+
   return {
     currentEntry,
     canGoBack,
@@ -224,5 +235,6 @@ export function useNavigationHistory(
     goBack,
     goForward,
     saveCurrentScroll,
+    getLastAllGamesScrollY,
   };
 }

@@ -113,6 +113,7 @@ export function App() {
     goBack,
     goForward,
     saveCurrentScroll,
+    getLastAllGamesScrollY,
   } = useNavigationHistory(
     {
       view: 'game',
@@ -197,6 +198,7 @@ export function App() {
       activeFilter: null,
       activeGroupId: null,
       title: 'All Games',
+      scrollY: getLastAllGamesScrollY(),
     });
   };
 
@@ -741,14 +743,7 @@ export function App() {
             <SteamStorePage
               key={`${selectedGame.id}-${gameRefreshKey}`}
               game={selectedGame}
-              parentGroupName={
-                activeFilter
-                  ? `${activeFilter.label}: ${activeFilter.value}`
-                  : activeGroupData
-                  ? activeGroupData.name
-                  : 'All Games'
-              }
-              onBackToLibrary={canGoBack ? goBack : navigateHome}
+              onBackToLibrary={navigateHome}
               onManageCollections={() => handleOpenManageCollections(selectedGame)}
               onToggleInstallStatus={() => handleToggleInstallStatus(selectedGame)}
               onApplyFilter={(filter) => {
