@@ -243,8 +243,10 @@ export function mergeStorefrontGames(
                     platformOwnership.playtimeMinutes !== undefined && platformOwnership.playtimeMinutes > 0
                       ? platformOwnership.playtimeMinutes
                       : p.playtimeMinutes,
-                  lastPlayed: platformOwnership.lastPlayed || p.lastPlayed,
-                  achievements: platformOwnership.achievements || p.achievements,
+                  achievements:
+                    platformOwnership.achievements && (platformOwnership.achievements.unlocked > (p.achievements?.unlocked ?? 0) || platformOwnership.achievements.total > (p.achievements?.total ?? 0))
+                      ? platformOwnership.achievements
+                      : (p.achievements || platformOwnership.achievements),
                 }
               : p
           )
