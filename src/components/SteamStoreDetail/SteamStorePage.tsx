@@ -152,10 +152,11 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
   const movies = metadata?.movies || [];
   const reviewSummary = metadata?.reviewSummary || game.reviewSummary;
   const shortDescription = metadata?.shortDescription || game.shortDescription;
-  const developers = metadata?.developers || game.developers;
-  const publishers = metadata?.publishers || game.publishers;
+  const developers = (metadata?.developers && metadata.developers.length > 0) ? metadata.developers : (game.developers || []);
+  const publishers = (metadata?.publishers && metadata.publishers.length > 0) ? metadata.publishers : (game.publishers || []);
   const releaseDate = metadata?.releaseDate || game.releaseDate || 'TBA';
-  const tags = metadata?.tags || game.tags;
+  const tags = (metadata?.tags && metadata.tags.length > 0) ? metadata.tags : (game.tags || []);
+  const genres = (metadata?.genres && metadata.genres.length > 0) ? metadata.genres : (game.genres || []);
   const detailedDescription =
     metadata?.aboutTheGame ||
     metadata?.detailedDescription ||
@@ -364,7 +365,7 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
             <SteamSidebarNotices
               title={game.title}
               steamAppId={game.steamAppId}
-              genres={metadata?.genres || game.genres}
+              genres={genres}
               developers={developers}
               publishers={publishers}
               releaseDate={releaseDate}

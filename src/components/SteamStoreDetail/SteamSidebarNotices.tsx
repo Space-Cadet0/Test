@@ -90,6 +90,7 @@ export const SteamSidebarNotices: React.FC<SteamSidebarNoticesProps> = ({
                 {idx < developers.length - 1 && ', '}
               </span>
             ))}
+            {developers.length === 0 && <span className="text-[#8f98a0]">Unknown</span>}
           </div>
 
           <div>
@@ -107,6 +108,7 @@ export const SteamSidebarNotices: React.FC<SteamSidebarNoticesProps> = ({
                 {idx < publishers.length - 1 && ', '}
               </span>
             ))}
+            {publishers.length === 0 && <span className="text-[#8f98a0]">Unknown</span>}
           </div>
 
           {franchise && (

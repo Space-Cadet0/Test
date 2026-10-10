@@ -34,7 +34,7 @@ export const SystemRequirements: React.FC<SystemRequirementsProps> = ({ requirem
         </h3>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className={`grid grid-cols-1 ${requirements.minimum && requirements.recommended ? 'md:grid-cols-2' : ''} gap-6`}>
         {/* Minimum Specs */}
         {requirements.minimum && (
           <div className="bg-[#101720]/80 p-4 rounded border border-steam-border/40">

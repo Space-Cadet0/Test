@@ -1,9 +1,5 @@
-import { CanonicalGame } from '../../contracts/game';
+import { CanonicalGame } from "../../contracts/game";
 
-/**
- * Authentic, verified library of all 314 GOG titles owned by mike.stokes85.
- * Verified matching official https://www.gog.com/en/account library with Steam metadata matching.
- */
 export const GOG_USER_LIBRARY: CanonicalGame[] = [
   {
     "id": "steam-3783210",
@@ -22,14 +18,28 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "iconUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3783210/2a4236503b98fd2ffba0e0dd73d9d39ade99b7e1/capsule_231x87.jpg?t=1759856432",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2025-10-07",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "mc2games"
+    ],
+    "publishers": [
+      "mc2games"
+    ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Point-and-click",
+      "Puzzle"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Sci-fi",
+      "Puzzle",
+      "Casual",
+      "First-Person",
+      "Science",
+      "Mystery",
+      "Logic",
+      "Investigation",
+      "Post-apocalyptic",
+      "Hidden Object"
     ],
     "steamAppId": 3783210,
     "reviewSummary": {
@@ -57,14 +67,33 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/752590/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2019-05-14",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Asobo Studio"
+    ],
+    "publishers": [
+      "Focus Entertainment"
+    ],
     "genres": [
-      "Adventure"
+      "Action",
+      "Adventure",
+      "Stealth"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Story Rich",
+      "Atmospheric",
+      "Female Protagonist",
+      "Dark",
+      "Great Soundtrack",
+      "Horror",
+      "Third Person",
+      "Historical",
+      "Violent",
+      "Gore",
+      "Medieval",
+      "Emotional",
+      "Stealth"
     ],
     "steamAppId": 752590,
     "reviewSummary": {
@@ -92,14 +121,33 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-1.gog-statics.com/5d2b24aa458b27ee85913f4cfdfd6c3368ff28df6d7f525e38296204eaec98c9_glx_vertical_cover.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2018-05-29",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Madmind Studio"
+    ],
+    "publishers": [
+      "Madmind Studio"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Horror"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Indie",
+      "First-Person",
+      "Dark",
+      "Horror",
+      "Mature",
+      "Sexual Content",
+      "Nudity",
+      "Survival",
+      "Violent",
+      "Gore",
+      "NSFW",
+      "Stealth",
+      "Walking Simulator"
     ],
     "reviewSummary": {
       "reviewScore": 2,
@@ -126,14 +174,33 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/879420/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2018-10-30",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Madmind Studio"
+    ],
+    "publishers": [
+      "Madmind Studio"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Horror"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Indie",
+      "First-Person",
+      "Dark",
+      "Horror",
+      "Mature",
+      "Sexual Content",
+      "Nudity",
+      "Survival",
+      "Violent",
+      "Gore",
+      "NSFW",
+      "Stealth",
+      "Walking Simulator"
     ],
     "steamAppId": 879420,
     "reviewSummary": {
@@ -161,14 +228,24 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-1.gog-statics.com/56262850671fd7232b8ff46deba530007ff7a437fab0ddd67147f8d41aa6bca0_glx_vertical_cover.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1980-01-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Richard Garriot"
+    ],
+    "publishers": [
+      "Richard Garriot"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Adventure",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Fantasy",
+      "Role-playing",
+      "Classic",
+      "Good Old Game",
+      "Free Game"
     ],
     "reviewSummary": {
       "reviewScore": 3,
@@ -195,14 +272,27 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/22650/library_600x900_2x.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "2010-09-22",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Team17 Software"
+    ],
+    "publishers": [
+      "Team17 Digital LTD."
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "Action",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Sci-fi",
+      "Classic",
+      "Horror",
+      "Third Person",
+      "Isometric",
+      "Top-Down",
+      "Shooter",
+      "Twin Stick Shooter"
     ],
     "steamAppId": 22650,
     "reviewSummary": {
@@ -230,14 +320,27 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/22670/library_600x900_2x.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "2010-11-17",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Team17 Software"
+    ],
+    "publishers": [
+      "Team17 Digital LTD."
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "Action",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Sci-fi",
+      "Classic",
+      "Horror",
+      "Third Person",
+      "Isometric",
+      "Top-Down",
+      "Shooter",
+      "Twin Stick Shooter"
     ],
     "steamAppId": 22670,
     "reviewSummary": {
@@ -265,14 +368,29 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/22610/library_600x900_2x.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "2010-06-03",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Team17 Software"
+    ],
+    "publishers": [
+      "Team17 Digital LTD."
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "Action",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Sci-fi",
+      "Classic",
+      "Horror",
+      "Third Person",
+      "Isometric",
+      "Top-Down",
+      "Space",
+      "Shooter",
+      "Shoot'EmUp",
+      "Twin Stick Shooter"
     ],
     "steamAppId": 22610,
     "reviewSummary": {
@@ -300,14 +418,33 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/548090/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "1992-01-02",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Pieces Interactive"
+    ],
+    "publishers": [
+      "THQ Nordic GmbH"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Horror"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Dark",
+      "Horror",
+      "Third Person",
+      "Mystery",
+      "Realistic",
+      "Survival Horror",
+      "Psychological Horror",
+      "Surreal",
+      "Supernatural",
+      "Lovecraftian",
+      "Thriller",
+      "Psychological",
+      "Noir"
     ],
     "steamAppId": 548090,
     "reviewSummary": {
@@ -335,14 +472,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/548890/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "1992-01-02",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Infogrames"
+    ],
+    "publishers": [
+      "Atari"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Survival Horror",
+      "Classic",
+      "Atmospheric",
+      "Third Person"
     ],
     "steamAppId": 548890,
     "reviewSummary": {
@@ -370,14 +514,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/548900/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "1992-01-02",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Infogrames"
+    ],
+    "publishers": [
+      "Atari"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Survival Horror",
+      "Classic",
+      "Atmospheric",
+      "Third Person"
     ],
     "steamAppId": 548900,
     "reviewSummary": {
@@ -405,14 +556,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/949200/library_600x900_2x.jpg",
     "shortDescription": "Simulation on GOG.com (DRM-Free)",
     "releaseDate": "2021-08-18",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Joy Manufacturing Co."
+    ],
+    "publishers": [
+      "Iceberg Interactive"
+    ],
     "genres": [
-      "Simulation"
+      "Simulation",
+      "Historical",
+      "Visual Novel"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Story Rich",
+      "Simulation",
+      "Female Protagonist",
+      "Choices Matter",
+      "Visual Novel",
+      "Historical",
+      "Multiple Endings",
+      "Roguelite",
+      "Choose Your Own Adventure",
+      "Romance",
+      "LGBTQ+",
+      "Dating Sim"
     ],
     "steamAppId": 949200,
     "reviewSummary": {
@@ -447,13 +614,28 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
       "Frictional Games"
     ],
     "genres": [
-      "Action",
-      "Adventure",
-      "Indie"
+      "FPP",
+      "Horror",
+      "Adventure"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Indie",
+      "Story Rich",
+      "Atmospheric",
+      "Exploration",
+      "Classic",
+      "Puzzle",
+      "First-Person",
+      "Dark",
+      "Horror",
+      "Mystery",
+      "FPS",
+      "Survival Horror",
+      "Psychological Horror",
+      "Walking Simulator",
+      "Lovecraftian",
+      "Short"
     ],
     "steamAppId": 239200,
     "reviewSummary": {
@@ -481,14 +663,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/993790/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2020-04-09",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Grey Alien Games"
+    ],
+    "publishers": [
+      "Grey Alien Games"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Fantasy",
+      "Card Game"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Indie",
+      "Fantasy",
+      "Role-playing",
+      "Classic",
+      "Turn-Based",
+      "Dark",
+      "Historical",
+      "Relaxing",
+      "Magic",
+      "Post-apocalyptic",
+      "CRPG",
+      "Card Game"
     ],
     "steamAppId": 993790,
     "reviewSummary": {
@@ -516,14 +714,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-3.gog-statics.com/2cff003da730f1d47d120967a623abc24a15c7dfe2fb9adcda22a7dafd65acbe_glx_vertical_cover.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2013-04-04",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Eric Chahi"
+    ],
+    "publishers": [
+      "The Digital Lounge"
+    ],
     "genres": [
+      "Action",
+      "Platformer",
       "Adventure"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Atmospheric",
+      "2D",
+      "Classic",
+      "Puzzle",
+      "Science",
+      "Platformer",
+      "Difficult",
+      "Retro",
+      "Puzzle Platformer",
+      "Remake"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -550,14 +764,29 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1388870/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2022-08-11",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Nosebleed Interactive"
+    ],
+    "publishers": [
+      "Wired Productions"
+    ],
     "genres": [
-      "Adventure"
+      "Arcade",
+      "Adventure",
+      "Managerial"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "First-Person",
+      "Pixel Graphics",
+      "Funny",
+      "Management",
+      "Resource Management",
+      "Retro",
+      "Realistic",
+      "Managerial",
+      "Local Co-Op",
+      "Arcade"
     ],
     "steamAppId": 1388870,
     "reviewSummary": {
@@ -583,16 +812,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     ],
     "headerImage": "https://images-3.gog-statics.com/3d01fb154f70418e15db31139f2b51ecad8f145c61dcd5b9cb216eb02a5be40e_product_card_v2_mobile_slider_639.jpg",
     "capsuleImage": "https://images-3.gog-statics.com/3d01fb154f70418e15db31139f2b51ecad8f145c61dcd5b9cb216eb02a5be40e_glx_vertical_cover.jpg",
-    "shortDescription": "Action on GOG.com (DRM-Free)",
+    "shortDescription": "Ascendant is the unforgiving beat 'em up that challenges you with a new world each time you play. It utilizes a number of modern roguelike elements such as permadeath and procedurally generated environments.",
     "releaseDate": "2014-05-13",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Hapa Games"
+    ],
+    "publishers": [
+      "Hapa Games"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Roguelike"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Indie",
+      "2D",
+      "Classic",
+      "Platformer",
+      "Roguelike",
+      "Roguelite",
+      "Local Co-Op",
+      "Beat 'em up",
+      "Free Game"
     ],
     "reviewSummary": {
       "reviewScore": 3,
@@ -619,14 +863,35 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/580320/library_600x900_2x.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "2017-09-19",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Orangepixel"
+    ],
+    "publishers": [
+      "Orangepixel",
+      "THQ Nordic Mobile GmbH"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "Action",
+      "Platformer"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Indie",
+      "2D",
+      "Pixel Graphics",
+      "Open World",
+      "Platformer",
+      "Survival",
+      "Difficult",
+      "Roguelike",
+      "Top-Down",
+      "Shooter",
+      "Crafting",
+      "Post-apocalyptic",
+      "Procedural Generation",
+      "Twin Stick Shooter"
     ],
     "steamAppId": 580320,
     "reviewSummary": {
@@ -652,7 +917,7 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     ],
     "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/257350/header.jpg",
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/257350/library_600x900_2x.jpg",
-    "shortDescription": "Return to a timeless RPG masterpiece. Baldur\u2019s Gate II: Enhanced Edition brings the classic 2000 adventure back to life with thoughtful modern refinements, letting you gather your party and dive once more into a rich, choice\u2011driven fantasy epic.",
+    "shortDescription": "Return to a timeless RPG masterpiece. Baldur’s Gate II: Enhanced Edition brings the classic 2000 adventure back to life with thoughtful modern refinements, letting you gather your party and dive once more into a rich, choice‑driven fantasy epic.",
     "releaseDate": "15 Nov, 2013",
     "developers": [
       "Beamdog"
@@ -661,12 +926,24 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
       "Beamdog"
     ],
     "genres": [
-      "Adventure",
-      "RPG"
+      "Role-playing",
+      "Real-time",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Fantasy",
+      "Story Rich",
+      "Atmospheric",
+      "Role-playing",
+      "Classic",
+      "Choices Matter",
+      "Open World",
+      "Multiplayer",
+      "Real-Time",
+      "Magic",
+      "Isometric",
+      "CRPG",
+      "Tabletop"
     ],
     "steamAppId": 257350,
     "reviewSummary": {
@@ -692,7 +969,7 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     ],
     "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/228280/header.jpg",
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/228280/library_600x900_2x.jpg",
-    "shortDescription": "The classic returns! Baldur\u2019s Gate: Enhanced Edition restores the full original adventure and Tales of the Sword Coast, now polished with quality\u2011of\u2011life upgrades for a smoother timeless Dungeons &amp; Dragons journey.",
+    "shortDescription": "The classic returns! Baldur’s Gate: Enhanced Edition restores the full original adventure and Tales of the Sword Coast, now polished with quality‑of‑life upgrades for a smoother timeless Dungeons &amp; Dragons journey.",
     "releaseDate": "16 Jan, 2013",
     "developers": [
       "Beamdog"
@@ -701,12 +978,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
       "Beamdog"
     ],
     "genres": [
-      "Adventure",
-      "RPG"
+      "Role-playing",
+      "Real-time",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Fantasy",
+      "Story Rich",
+      "Atmospheric",
+      "Role-playing",
+      "Classic",
+      "Multiplayer",
+      "Real-Time",
+      "Magic",
+      "Isometric",
+      "CRPG",
+      "Remake"
     ],
     "steamAppId": 228280,
     "reviewSummary": {
@@ -734,14 +1021,33 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/761620/library_600x900_2x.jpg",
     "shortDescription": "Strategy on GOG.com (DRM-Free)",
     "releaseDate": "2018-12-05",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Warm Lamp Games"
+    ],
+    "publishers": [
+      "Alawar"
+    ],
     "genres": [
-      "Strategy"
+      "Strategy",
+      "Adventure",
+      "Managerial"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Indie",
+      "Story Rich",
+      "Atmospheric",
+      "Strategy",
+      "2D",
+      "Dark",
+      "Choices Matter",
+      "Point&Click",
+      "Violent",
+      "Multiple Endings",
+      "Managerial",
+      "Psychological Horror",
+      "Politics",
+      "Dystopian"
     ],
     "steamAppId": 761620,
     "reviewSummary": {
@@ -769,14 +1075,26 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-4.gog-statics.com/b896c4e69f4c1f67b85a27309d3447c812e31ee07d6558364f602f077477510e_glx_vertical_cover.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2020-02-14",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Dr PinkCake"
+    ],
+    "publishers": [
+      "Dr PinkCake"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Narrative",
+      "Visual Novel"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Story Rich",
+      "Role-playing",
+      "Visual Novel",
+      "Mature",
+      "Sexual Content",
+      "Nudity",
+      "NSFW",
+      "Narrative"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -803,14 +1121,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1368340/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "1994-04-11",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Revolution Software"
+    ],
+    "publishers": [
+      "Revolution Software"
+    ],
     "genres": [
-      "Adventure"
+      "Sci-fi",
+      "Adventure",
+      "Point-and-click"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Sci-fi",
+      "Classic",
+      "Puzzle",
+      "Science",
+      "Choices Matter",
+      "Point&Click",
+      "Post-apocalyptic",
+      "Cyberpunk",
+      "Dystopian",
+      "Robots",
+      "Free Game"
     ],
     "steamAppId": 1368340,
     "reviewSummary": {
@@ -838,14 +1172,26 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1561340/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2024-03-06",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "BerserkBoy Games"
+    ],
+    "publishers": [
+      "BerserkBoy Games"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Platformer"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Indie",
+      "2D",
+      "Sci-fi",
+      "Pixel Graphics",
+      "Platformer",
+      "Superhero"
     ],
     "steamAppId": 1561340,
     "reviewSummary": {
@@ -873,14 +1219,36 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-1.gog-statics.com/798b87f729fa965e96455dff61c7983d54eb86a450675e05de2583b78b134973_glx_vertical_cover.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2014-03-24",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Blackpowder Games"
+    ],
+    "publishers": [
+      "Blackpowder Games"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Horror"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Indie",
+      "Story Rich",
+      "Atmospheric",
+      "Exploration",
+      "Classic",
+      "First-Person",
+      "Dark",
+      "Horror",
+      "Historical",
+      "Survival",
+      "FPS",
+      "Medieval",
+      "Stealth",
+      "Survival Horror",
+      "Walking Simulator",
+      "Only On GOG"
     ],
     "reviewSummary": {
       "reviewScore": 3,
@@ -907,14 +1275,27 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-1.gog-statics.com/2d0cd253f7d22db29fd4c2e411f5ef39c9347771b58f385158a8ac58f198560d_glx_vertical_cover.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "1993-08-03",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Apogee Entertainment"
+    ],
+    "publishers": [
+      "Apogee Entertainment"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "Action",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "2D",
+      "Sci-fi",
+      "Classic",
+      "Science",
+      "Platformer",
+      "Shooter",
+      "Good Old Game",
+      "Free Game"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -941,14 +1322,27 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/8870/library_600x900_2x.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "2013-03-25",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Irrational Games"
+    ],
+    "publishers": [
+      "2K Games"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "FPP",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Story Rich",
+      "Atmospheric",
+      "Sci-fi",
+      "Classic",
+      "First-Person",
+      "Science",
+      "FPS",
+      "Shooter",
+      "Steampunk"
     ],
     "steamAppId": 8870,
     "reviewSummary": {
@@ -962,8 +1356,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "steam-8850",
-    "title": "BioShock\u00ae 2",
-    "sortTitle": "BioShock\u00ae 2",
+    "title": "BioShock® 2",
+    "sortTitle": "BioShock® 2",
     "platforms": [
       {
         "platformId": "gog",
@@ -976,14 +1370,35 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/8850/library_600x900_2x.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "2010-02-09",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "2K Marin",
+      "2K China",
+      "Digital Extremes",
+      "2K Australia",
+      "Blind Squirrel"
+    ],
+    "publishers": [
+      "2K Games"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "FPP",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Story Rich",
+      "Atmospheric",
+      "Sci-fi",
+      "Classic",
+      "First-Person",
+      "Science",
+      "Dark",
+      "Horror",
+      "FPS",
+      "Shooter",
+      "Dystopian",
+      "Steampunk",
+      "Underwater"
     ],
     "steamAppId": 8850,
     "reviewSummary": {
@@ -997,8 +1412,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "steam-7670",
-    "title": "BioShock\u2122",
-    "sortTitle": "BioShock\u2122",
+    "title": "BioShock™",
+    "sortTitle": "BioShock™",
     "platforms": [
       {
         "platformId": "gog",
@@ -1011,14 +1426,35 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/7670/library_600x900_2x.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "2007-08-21",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "2K Marin",
+      "2K China",
+      "Digital Extremes",
+      "2K Australia",
+      "Blind Squirrel"
+    ],
+    "publishers": [
+      "2K Games"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "FPP",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Story Rich",
+      "Atmospheric",
+      "Sci-fi",
+      "Classic",
+      "First-Person",
+      "Science",
+      "Dark",
+      "Horror",
+      "FPS",
+      "Shooter",
+      "Dystopian",
+      "Steampunk",
+      "Underwater"
     ],
     "steamAppId": 7670,
     "reviewSummary": {
@@ -1032,8 +1468,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "steam-409720",
-    "title": "BioShock\u2122 2 Remastered",
-    "sortTitle": "BioShock\u2122 2 Remastered",
+    "title": "BioShock™ 2 Remastered",
+    "sortTitle": "BioShock™ 2 Remastered",
     "platforms": [
       {
         "platformId": "gog",
@@ -1046,14 +1482,35 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/409720/library_600x900_2x.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "2016-09-16",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "2K Marin",
+      "2K China",
+      "Digital Extremes",
+      "2K Australia",
+      "Blind Squirrel"
+    ],
+    "publishers": [
+      "2K Games"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "FPP",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Story Rich",
+      "Atmospheric",
+      "Sci-fi",
+      "Classic",
+      "First-Person",
+      "Science",
+      "Dark",
+      "Horror",
+      "FPS",
+      "Shooter",
+      "Dystopian",
+      "Steampunk",
+      "Underwater"
     ],
     "steamAppId": 409720,
     "reviewSummary": {
@@ -1067,8 +1524,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "steam-409710",
-    "title": "BioShock\u2122 Remastered",
-    "sortTitle": "BioShock\u2122 Remastered",
+    "title": "BioShock™ Remastered",
+    "sortTitle": "BioShock™ Remastered",
     "platforms": [
       {
         "platformId": "gog",
@@ -1081,14 +1538,35 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/409710/library_600x900_2x.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "2016-09-16",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "2K Marin",
+      "2K China",
+      "Digital Extremes",
+      "2K Australia",
+      "Blind Squirrel"
+    ],
+    "publishers": [
+      "2K Games"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "FPP",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Story Rich",
+      "Atmospheric",
+      "Sci-fi",
+      "Classic",
+      "First-Person",
+      "Science",
+      "Dark",
+      "Horror",
+      "FPS",
+      "Shooter",
+      "Dystopian",
+      "Steampunk",
+      "Underwater"
     ],
     "steamAppId": 409710,
     "reviewSummary": {
@@ -1116,14 +1594,29 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1710170/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2021-10-07",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Rebel Act Studios",
+      "Fire Falcom",
+      "General Arcade"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Action",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Fantasy",
+      "Role-playing",
+      "Dark",
+      "Third Person",
+      "Violent",
+      "Gore",
+      "Hack and Slash",
+      "Souls-like"
     ],
     "steamAppId": 1710170,
     "reviewSummary": {
@@ -1152,19 +1645,24 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "1996-11-11",
     "developers": [
-      "Silicon Knights"
+      "Crystal Dynamics"
     ],
     "publishers": [
       "Crystal Dynamics"
     ],
     "genres": [
       "Action",
-      "Adventure"
+      "Adventure",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free",
-      "Classic"
+      "Adventure",
+      "Action",
+      "Fantasy",
+      "Classic",
+      "Top-Down",
+      "Good Old Game",
+      "Only On GOG"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -1191,14 +1689,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2056220/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2023-01-27",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Pun Intended"
+    ],
+    "publishers": [
+      "Pun Intended"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Comedy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Indie",
+      "Pixel Graphics",
+      "Funny",
+      "Gore",
+      "Top-Down",
+      "Comedy",
+      "Metroidvania",
+      "Bullet Hell",
+      "Souls-like",
+      "Twin Stick Shooter",
+      "Free Game"
     ],
     "steamAppId": 2056220,
     "reviewSummary": {
@@ -1226,14 +1741,33 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-3.gog-statics.com/5b0d3da8074c8dafb7c129fe4eac9feb47dce1f15fcaa325c1b420e21adc4273_glx_vertical_cover.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2008-08-26",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Revolution Software"
+    ],
+    "publishers": [
+      "Revolution Software"
+    ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Point-and-click",
+      "Detective-mystery"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Story Rich",
+      "Atmospheric",
+      "2D",
+      "Classic",
+      "Puzzle",
+      "Casual",
+      "Funny",
+      "Third Person",
+      "Mystery",
+      "Point&Click",
+      "Investigation",
+      "Detective-mystery",
+      "Hidden Object",
+      "Remake"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -1246,8 +1780,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "steam-1614440",
-    "title": "B\u014d: Path of the Teal Lotus",
-    "sortTitle": "B\u014d: Path of the Teal Lotus",
+    "title": "Bō: Path of the Teal Lotus",
+    "sortTitle": "Bō: Path of the Teal Lotus",
     "platforms": [
       {
         "platformId": "gog",
@@ -1260,14 +1794,29 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1614440/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2024-07-17",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Squid Shock Studios",
+      "Christopher Stair",
+      "Trevor Youngquist"
+    ],
+    "publishers": [
+      "Humble Games"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Platformer"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Atmospheric",
+      "2D",
+      "Exploration",
+      "Platformer",
+      "Cartoony",
+      "Metroidvania",
+      "Souls-like"
     ],
     "steamAppId": 1614440,
     "reviewSummary": {
@@ -1295,14 +1844,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3020/library_600x900_2x.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "2006-09-07",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Techland"
+    ],
+    "publishers": [
+      "Techland Publishing"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "Action",
+      "FPP"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Story Rich",
+      "Atmospheric",
+      "Classic",
+      "First-Person",
+      "Great Soundtrack",
+      "Open World",
+      "Multiplayer",
+      "Violent",
+      "FPS",
+      "Shooter",
+      "Stealth",
+      "Western"
     ],
     "steamAppId": 3020,
     "reviewSummary": {
@@ -1330,14 +1896,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/204450/library_600x900_2x.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "2013-05-22",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Techland"
+    ],
+    "publishers": [
+      "Techland Publishing"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "Action",
+      "FPP"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Story Rich",
+      "Atmospheric",
+      "Classic",
+      "First-Person",
+      "Funny",
+      "Historical",
+      "Violent",
+      "Gore",
+      "FPS",
+      "Shooter",
+      "Western"
     ],
     "steamAppId": 204450,
     "reviewSummary": {
@@ -1365,14 +1947,29 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3040220/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2025-05-06",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Seawolf Studio",
+      "General Arcade"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Naval"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Story Rich",
+      "Classic",
+      "Funny",
+      "Third Person",
+      "Violent",
+      "Hack and Slash",
+      "Pirates",
+      "Naval"
     ],
     "steamAppId": 3040220,
     "reviewSummary": {
@@ -1400,14 +1997,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/532840/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2017-01-24",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "The Brotherhood"
+    ],
+    "publishers": [
+      "The Brotherhood"
+    ],
     "genres": [
-      "Adventure"
+      "Horror",
+      "Adventure",
+      "Point-and-click"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Indie",
+      "Fantasy",
+      "Science",
+      "Female Protagonist",
+      "Dark",
+      "Horror",
+      "Point&Click",
+      "Violent",
+      "Gore",
+      "Isometric",
+      "Post-apocalyptic",
+      "Free Game"
     ],
     "steamAppId": 532840,
     "reviewSummary": {
@@ -1435,14 +2049,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1904620/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1990-01-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Strategic Simulations"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Strategy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Turn-Based",
+      "Classic",
+      "D&D",
+      "Fantasy",
+      "Party-Based"
     ],
     "steamAppId": 1904620,
     "reviewSummary": {
@@ -1470,14 +2092,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2061230/library_600x900_2x.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "2022-10-10",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Action Forms",
+      "General Arcade"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "FPP",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Fantasy",
+      "Atmospheric",
+      "Sci-fi",
+      "Classic",
+      "First-Person",
+      "Dark",
+      "Violent",
+      "Gore",
+      "Retro",
+      "FPS",
+      "Shooter"
     ],
     "steamAppId": 2061230,
     "reviewSummary": {
@@ -1505,14 +2143,27 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-3.gog-statics.com/5f4bcd273836fff17a71097190ad800f3ddd3f221950b7d7f199f715015d3e13_glx_vertical_cover.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "2026-04-30",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Virtual Design"
+    ],
+    "publishers": [
+      "Virtual Design"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "FPP",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Sci-fi",
+      "First-Person",
+      "Pixel Graphics",
+      "Retro",
+      "Shooter",
+      "Good Old Game",
+      "Remake"
     ],
     "reviewSummary": {
       "reviewScore": 3,
@@ -1539,14 +2190,29 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/968870/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2020-05-05",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Storm in a Teacup"
+    ],
+    "publishers": [
+      "Wired Productions"
+    ],
     "genres": [
+      "FPP",
+      "Sci-fi",
       "Adventure"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Sci-fi",
+      "First-Person",
+      "Science",
+      "Female Protagonist",
+      "Horror",
+      "Violent",
+      "Gore",
+      "FPS",
+      "Walking Simulator",
+      "Steampunk"
     ],
     "steamAppId": 968870,
     "reviewSummary": {
@@ -1574,14 +2240,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/870780/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2020-09-10",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Remedy Entertainment"
+    ],
+    "publishers": [
+      "Remedy Entertainment"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Story Rich",
+      "Atmospheric",
+      "Sci-fi",
+      "Science",
+      "Female Protagonist",
+      "Horror",
+      "Third Person",
+      "Psychological Horror",
+      "Surreal",
+      "Supernatural"
     ],
     "steamAppId": 870780,
     "reviewSummary": {
@@ -1609,14 +2291,27 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/203770/library_600x900_2x.jpg",
     "shortDescription": "Strategy on GOG.com (DRM-Free)",
     "releaseDate": "2012-02-14",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Paradox Development Studio"
+    ],
+    "publishers": [
+      "Paradox Interactive"
+    ],
     "genres": [
-      "Strategy"
+      "Strategy",
+      "Simulation",
+      "Historical"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Strategy",
+      "Classic",
+      "Simulation",
+      "Great Soundtrack",
+      "Sandbox",
+      "Historical",
+      "Medieval",
+      "Grand Strategy",
+      "Politics"
     ],
     "steamAppId": 203770,
     "reviewSummary": {
@@ -1644,14 +2339,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1904520/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1989-01-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Strategic Simulations"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Strategy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Turn-Based",
+      "Classic",
+      "D&D",
+      "Fantasy",
+      "Party-Based"
     ],
     "steamAppId": 1904520,
     "reviewSummary": {
@@ -1679,14 +2382,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-1.gog-statics.com/0a12c6d08925b4e567dd56bd3cd70b3a0667ea484539bada5b8698f4add72dcf_glx_vertical_cover.jpg",
     "shortDescription": " on GOG.com (DRM-Free)",
     "releaseDate": "",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "CD PROJEKT RED"
+    ],
+    "publishers": [
+      "CD PROJEKT RED"
+    ],
     "genres": [
+      "Role-playing",
       "Action"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Cyberpunk",
+      "Open World",
+      "Sci-fi",
+      "First-Person"
     ],
     "reviewSummary": {
       "reviewScore": 5,
@@ -1713,14 +2423,28 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2464690/library_600x900_2x.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "1994-11-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Raven Software"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "Action",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Sci-fi",
+      "Classic",
+      "First-Person",
+      "Violent",
+      "Gore",
+      "Retro",
+      "FPS",
+      "Shooter",
+      "Stealth"
     ],
     "steamAppId": 2464690,
     "reviewSummary": {
@@ -1748,14 +2472,27 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-4.gog-statics.com/e329f224694547ec95f6bcb67b8148ff16eae0c939d9daf1495922246fb016f5_glx_vertical_cover.jpg",
     "shortDescription": "Strategy on GOG.com (DRM-Free)",
     "releaseDate": "1993-01-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Stormfront Studios"
+    ],
+    "publishers": [
+      "Wizards of the Coast",
+      "SNEG"
+    ],
     "genres": [
-      "Strategy"
+      "Strategy",
+      "Real-time",
+      "Managerial"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Fantasy",
+      "Strategy",
+      "Classic",
+      "Management",
+      "Real-Time",
+      "Resource Management",
+      "Managerial",
+      "City builder"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -1782,14 +2519,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-4.gog-statics.com/0878e7c7a9c1bcce30c589a715f09c13785da1539615e73b27a15fd463b6ef7b_glx_vertical_cover.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2022-06-15",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Daggerfall Workshop"
+    ],
+    "publishers": [
+      "Bethesda Softworks"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Action"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Open World",
+      "First-Person",
+      "Classic",
+      "Fantasy",
+      "Mod"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -1816,14 +2561,33 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1481400/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2021-09-24",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Bit Golem"
+    ],
+    "publishers": [
+      "Bit Golem"
+    ],
     "genres": [
-      "Adventure"
+      "Horror",
+      "Adventure",
+      "Point-and-click"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Indie",
+      "First-Person",
+      "Dark",
+      "Horror",
+      "Mystery",
+      "Visual Novel",
+      "Point&Click",
+      "Real-Time",
+      "Emotional",
+      "Choose Your Own Adventure",
+      "Psychological Horror",
+      "Walking Simulator",
+      "Lovecraftian",
+      "Text-Based"
     ],
     "steamAppId": 1481400,
     "reviewSummary": {
@@ -1851,14 +2615,29 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/945770/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2023-10-24",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Event Horizon"
+    ],
+    "publishers": [
+      "Event Horizon"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Fantasy",
+      "Strategy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Fantasy",
+      "Story Rich",
+      "Atmospheric",
+      "Strategy",
+      "Role-playing",
+      "Dark",
+      "Open World",
+      "Top-Down",
+      "Local Co-Op",
+      "Tactical RPG",
+      "Steampunk"
     ],
     "steamAppId": 945770,
     "reviewSummary": {
@@ -1886,14 +2665,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1904600/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1993-01-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Strategic Simulations"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Strategy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Turn-Based",
+      "Classic",
+      "D&D",
+      "Post-apocalyptic",
+      "Fantasy"
     ],
     "steamAppId": 1904600,
     "reviewSummary": {
@@ -1921,14 +2708,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1904601/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1994-01-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Strategic Simulations"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Strategy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Turn-Based",
+      "Classic",
+      "D&D",
+      "Post-apocalyptic",
+      "Fantasy"
     ],
     "steamAppId": 1904601,
     "reviewSummary": {
@@ -1956,14 +2751,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1904621/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1991-01-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Strategic Simulations"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Strategy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Turn-Based",
+      "Classic",
+      "D&D",
+      "Fantasy",
+      "Party-Based"
     ],
     "steamAppId": 1904621,
     "reviewSummary": {
@@ -1991,14 +2794,27 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/471810/library_600x900_2x.jpg",
     "shortDescription": "Strategy on GOG.com (DRM-Free)",
     "releaseDate": "2017-03-14",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "SMG Studio"
+    ],
+    "publishers": [
+      "SMG Studio"
+    ],
     "genres": [
-      "Strategy"
+      "Strategy",
+      "Tactical",
+      "Puzzle"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Indie",
+      "Strategy",
+      "Puzzle",
+      "Funny",
+      "Tactical",
+      "Family Friendly",
+      "Logic",
+      "Local Co-Op",
+      "Robots"
     ],
     "steamAppId": 471810,
     "reviewSummary": {
@@ -2026,14 +2842,26 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2350540/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1995-11-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Lion Entertainment"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Adventure",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Fantasy",
+      "Role-playing",
+      "Classic",
+      "First-Person",
+      "Mystery",
+      "Medieval",
+      "Dungeon Crawler"
     ],
     "steamAppId": 2350540,
     "reviewSummary": {
@@ -2061,14 +2889,33 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/698640/library_600x900_2x.jpg",
     "shortDescription": "Strategy on GOG.com (DRM-Free)",
     "releaseDate": "2018-09-26",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Snowhound Games"
+    ],
+    "publishers": [
+      "Fulqrum Publishing"
+    ],
     "genres": [
-      "Strategy"
+      "Strategy",
+      "Sci-fi",
+      "Role-playing"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Indie",
+      "Atmospheric",
+      "Strategy",
+      "Role-playing",
+      "Sci-fi",
+      "Turn-Based",
+      "Science",
+      "Great Soundtrack",
+      "Tactical",
+      "Roguelike",
+      "Space",
+      "Roguelite",
+      "Dungeon Crawler",
+      "Card Game",
+      "Deckbuilding"
     ],
     "steamAppId": 698640,
     "reviewSummary": {
@@ -2096,14 +2943,25 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1305720/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2020-05-09",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Terrible Toybox"
+    ],
+    "publishers": [
+      "Terrible Toybox"
+    ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Point-and-click",
+      "Puzzle"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Puzzle",
+      "Mystery",
+      "Point&Click",
+      "Logic",
+      "Remake",
+      "Free Game"
     ],
     "steamAppId": 1305720,
     "reviewSummary": {
@@ -2132,18 +2990,29 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "shortDescription": "Wreak havoc in Clone Carnage! This standalone DLC comes with 4 modes, 6 maps, and up to 4-player multiplayer. Split-screen lets you double the damage in local 2-player multiplayer. Unleash your wild side in Rampage, Armageddon, Race, and Abduction modes!",
     "releaseDate": "1 Jun, 2022",
     "developers": [
-      "THQ Nordic"
+      "THQ Nordic GmbH"
     ],
     "publishers": [
-      "THQ Nordic"
+      "THQ Nordic GmbH"
     ],
     "genres": [
       "Action",
-      "Adventure"
+      "Adventure",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Sci-fi",
+      "Science",
+      "Funny",
+      "Third Person",
+      "Open World",
+      "Sandbox",
+      "Violent",
+      "Gore",
+      "Dark Comedy",
+      "Remake"
     ],
     "steamAppId": 1872550,
     "reviewSummary": {
@@ -2171,14 +3040,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-1.gog-statics.com/3f580ea4bcf6f4df3b9a1a460c056a6a83420b07298751d65771f424d823068a_glx_vertical_cover.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2003-12-02",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Ion Storm Inc."
+    ],
+    "publishers": [
+      "Eidos Interactive Corporation"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Sci-fi",
+      "Role-playing"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Story Rich",
+      "Atmospheric",
+      "Role-playing",
+      "Sci-fi",
+      "Classic",
+      "First-Person",
+      "Science",
+      "FPS",
+      "Stealth",
+      "Cyberpunk",
+      "Dystopian"
     ],
     "reviewSummary": {
       "reviewScore": 3,
@@ -2191,8 +3076,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "gog-1370227705",
-    "title": "Deus Ex: Human Revolution - Director\u2019s Cut",
-    "sortTitle": "Deus Ex: Human Revolution - Director\u2019s Cut",
+    "title": "Deus Ex: Human Revolution - Director’s Cut",
+    "sortTitle": "Deus Ex: Human Revolution - Director’s Cut",
     "platforms": [
       {
         "platformId": "gog",
@@ -2205,14 +3090,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-4.gog-statics.com/42c6aec0e9ae93304d487ebb9ec40eb5fd221d6c174f54b752a1d20915bde11f_glx_vertical_cover.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2013-10-25",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Eidos Montreal"
+    ],
+    "publishers": [
+      "Eidos Interactive Corporation"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Sci-fi",
+      "Role-playing"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Story Rich",
+      "Atmospheric",
+      "Role-playing",
+      "Sci-fi",
+      "Classic",
+      "First-Person",
+      "Science",
+      "Great Soundtrack",
+      "FPS",
+      "Stealth",
+      "Cyberpunk",
+      "Dystopian"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -2240,20 +3142,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "shortDescription": "You play as Adam Jensen, an experienced covert operative operating in a world that despises his kind: augmented humans. Choose from an arsenal of state-of-the-art weapons and augmentations to build your playstyle, and decide who you'll trust, to unravel a vast worldwide conspiracy.",
     "releaseDate": "23 Aug, 2016",
     "developers": [
-      "Eidos Montreal",
-      "Feral Interactive (Linux/Mac)"
+      "Eidos Montreal"
     ],
     "publishers": [
-      "Eidos Interactive Corp.",
-      "Feral Interactive (Linux/Mac)"
+      "Eidos Interactive Corporation"
     ],
     "genres": [
       "Action",
-      "RPG"
+      "Sci-fi",
+      "Role-playing"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Story Rich",
+      "Atmospheric",
+      "Role-playing",
+      "Sci-fi",
+      "Classic",
+      "First-Person",
+      "Science",
+      "Great Soundtrack",
+      "FPS",
+      "Stealth",
+      "Cyberpunk",
+      "Dystopian"
     ],
     "steamAppId": 337000,
     "reviewSummary": {
@@ -2267,8 +3179,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "gog-1207658995",
-    "title": "Deus Ex\u2122 GOTY Edition",
-    "sortTitle": "Deus Ex\u2122 GOTY Edition",
+    "title": "Deus Ex™ GOTY Edition",
+    "sortTitle": "Deus Ex™ GOTY Edition",
     "platforms": [
       {
         "platformId": "gog",
@@ -2281,14 +3193,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-2.gog-statics.com/79429e097ac499290497415f13c0a1747a07659fc7b53f8cc07f1b0afd569333_glx_vertical_cover.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2000-06-22",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Ion Storm Inc."
+    ],
+    "publishers": [
+      "Eidos Interactive Corporation"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "FPP",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Story Rich",
+      "Atmospheric",
+      "Role-playing",
+      "Sci-fi",
+      "Classic",
+      "First-Person",
+      "Science",
+      "Great Soundtrack",
+      "FPS",
+      "Stealth",
+      "Cyberpunk",
+      "Good Old Game",
+      "Dystopian"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -2315,14 +3244,25 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-2.gog-statics.com/fa31881af39436b62bef91cb325f462c8f288d6af2090a256d0f8a1e991ffa88_glx_vertical_cover.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "1997-01-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Robinson Technologies"
+    ],
+    "publishers": [
+      "Robinson Technologies"
+    ],
     "genres": [
-      "Adventure"
+      "Fantasy",
+      "Adventure",
+      "Role-playing"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Fantasy",
+      "Role-playing",
+      "Classic",
+      "Retro",
+      "Hack and Slash",
+      "Free Game"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -2349,14 +3289,33 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/205100/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2012-10-12",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Arkane Studios"
+    ],
+    "publishers": [
+      "Bethesda Softworks LLC"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "FPP",
+      "Stealth"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Story Rich",
+      "Atmospheric",
+      "Classic",
+      "First-Person",
+      "Dark",
+      "Great Soundtrack",
+      "Choices Matter",
+      "Violent",
+      "Gore",
+      "Magic",
+      "FPS",
+      "Stealth",
+      "Supernatural",
+      "Steampunk"
     ],
     "steamAppId": 205100,
     "reviewSummary": {
@@ -2384,14 +3343,35 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/403640/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2016-11-11",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Arkane Studios"
+    ],
+    "publishers": [
+      "Bethesda Softworks LLC"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "FPP",
+      "Stealth"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Story Rich",
+      "Atmospheric",
+      "Exploration",
+      "Classic",
+      "First-Person",
+      "Female Protagonist",
+      "Great Soundtrack",
+      "Choices Matter",
+      "Open World",
+      "Violent",
+      "Gore",
+      "Magic",
+      "Stealth",
+      "Supernatural",
+      "Dystopian",
+      "Steampunk"
     ],
     "steamAppId": 403640,
     "reviewSummary": {
@@ -2419,14 +3399,32 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-3.gog-statics.com/82a7cd303997644e10450fad1be3a3666f5cb0cfbc1fa44b38b429e607e64426_glx_vertical_cover.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "2016-05-13",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "id Software"
+    ],
+    "publishers": [
+      "Bethesda Softworks LLC"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "FPP",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Atmospheric",
+      "Sci-fi",
+      "Classic",
+      "First-Person",
+      "Science",
+      "Great Soundtrack",
+      "Horror",
+      "Multiplayer",
+      "Violent",
+      "Difficult",
+      "Gore",
+      "FPS",
+      "Shooter",
+      "Remake"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -2458,21 +3456,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
       "Nightdive Studios"
     ],
     "publishers": [
-      "Bethesda Softworks"
+      "Bethesda Softworks LLC"
     ],
     "genres": [
       "Shooter",
-      "Action",
-      "FPS"
+      "FPP",
+      "Sci-fi"
     ],
     "tags": [
-      "FPS",
+      "Atmospheric",
+      "Sci-fi",
       "Classic",
-      "Action",
-      "Retro",
+      "First-Person",
+      "Science",
+      "Dark",
+      "Great Soundtrack",
+      "Horror",
+      "Violent",
+      "Difficult",
+      "Gore",
+      "FPS",
+      "Space",
       "Shooter",
-      "GOG",
-      "DRM-Free"
+      "Survival Horror",
+      "Zombies"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -2503,14 +3510,27 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
       "id Software"
     ],
     "publishers": [
-      "id Software"
+      "Bethesda Softworks LLC"
     ],
     "genres": [
-      "Action"
+      "Shooter",
+      "FPP",
+      "Horror"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Atmospheric",
+      "Classic",
+      "First-Person",
+      "Dark",
+      "Great Soundtrack",
+      "Horror",
+      "Survival",
+      "Gore",
+      "FPS",
+      "Space",
+      "Shooter",
+      "Survival Horror",
+      "Zombies"
     ],
     "steamAppId": 9050,
     "reviewSummary": {
@@ -2538,14 +3558,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-4.gog-statics.com/f4d1eb73497af65e68515b5eaded352dd40c254b12a8cc6ee386d02f5936872c_glx_vertical_cover.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "2012-10-09",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "id Software"
+    ],
+    "publishers": [
+      "Bethesda Softworks"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "Action"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "FPS",
+      "Classic",
+      "Sci-fi",
+      "Horror",
+      "Action"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -2572,14 +3600,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-4.gog-statics.com/2cbe0fc4f6726cbbd35bc3578bcefc6d33fe7138ca5bfc35c795087d738dfbd0_glx_vertical_cover.jpg",
     "shortDescription": " on GOG.com (DRM-Free)",
     "releaseDate": "",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "id Software"
+    ],
+    "publishers": [
+      "Bethesda Softworks"
+    ],
     "genres": [
+      "Shooter",
       "Action"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "FPS",
+      "Classic",
+      "Action",
+      "Retro",
+      "Sci-fi"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -2606,14 +3642,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-3.gog-statics.com/c1f0858b5d431d7ff13ea7e577d52959e8f832ea8066d66035f86cb5bd8c80ff_glx_vertical_cover.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "1994-05-05",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "id Software"
+    ],
+    "publishers": [
+      "Bethesda Softworks"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "Action"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "FPS",
+      "Classic",
+      "Action",
+      "Retro",
+      "Sci-fi"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -2640,14 +3684,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-3.gog-statics.com/b8a290c8e8e0315715851722306c3494e67c58c1b928d07dcc233959d9c759ee_glx_vertical_cover.jpg",
     "shortDescription": " on GOG.com (DRM-Free)",
     "releaseDate": "",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "id Software"
+    ],
+    "publishers": [
+      "Bethesda Softworks"
+    ],
     "genres": [
+      "Shooter",
       "Action"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "FPS",
+      "Classic",
+      "Action",
+      "Retro",
+      "Sci-fi"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -2674,14 +3726,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-4.gog-statics.com/43b050c658e5c7c9757b15eee9b94f5800c27561aebd030e6a01e5b99ee83570_glx_vertical_cover.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2014-02-17",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Mike Singleton and Chris Wild"
+    ],
+    "publishers": [
+      "Chilli Hugger Software"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Fantasy",
+      "Strategy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Indie",
+      "Fantasy",
+      "Story Rich",
+      "Strategy",
+      "Role-playing",
+      "2D",
+      "Classic",
+      "Turn-Based",
+      "Tactical",
+      "Management",
+      "Medieval",
+      "Free Game"
     ],
     "reviewSummary": {
       "reviewScore": 3,
@@ -2708,14 +3776,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2350512/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Westwood Studios"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Action"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Classic",
+      "D&D",
+      "Fantasy",
+      "Side Scroller"
     ],
     "steamAppId": 2350512,
     "reviewSummary": {
@@ -2743,14 +3818,26 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2350520/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1990-01-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Westwood Associates",
+      "Strategic Simulations"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Adventure",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Fantasy",
+      "Role-playing",
+      "Classic",
+      "Pixel Graphics",
+      "Magic",
+      "Flight"
     ],
     "steamAppId": 2350520,
     "reviewSummary": {
@@ -2778,14 +3865,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1562430/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2023-03-30",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Black Salt Games"
+    ],
+    "publishers": [
+      "Team17 Digital LTD."
+    ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Role-playing",
+      "Exploration"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Story Rich",
+      "Atmospheric",
+      "Role-playing",
+      "Exploration",
+      "Horror",
+      "Open World",
+      "Mystery",
+      "Survival Horror",
+      "Psychological Horror",
+      "Lovecraftian",
+      "Fishing"
     ],
     "steamAppId": 1562430,
     "reviewSummary": {
@@ -2813,14 +3916,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1904551/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1993-01-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "DreamForge Intertainment"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Dungeon Crawler"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Classic",
+      "D&D",
+      "First-Person",
+      "Dungeon Crawler",
+      "Grid-Based"
     ],
     "steamAppId": 1904551,
     "reviewSummary": {
@@ -2848,14 +3959,34 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/727850/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2020-01-30",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Hyperstrange"
+    ],
+    "publishers": [
+      "Hyperstrange"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Combat",
+      "FPP"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Indie",
+      "Fantasy",
+      "Atmospheric",
+      "Exploration",
+      "Sci-fi",
+      "First-Person",
+      "Science",
+      "Dark",
+      "Difficult",
+      "Hack and Slash",
+      "Dungeon Crawler",
+      "Combat",
+      "Fighting",
+      "Souls-like",
+      "Perma Death"
     ],
     "steamAppId": 727850,
     "reviewSummary": {
@@ -2883,14 +4014,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2243110/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2023-10-16",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "CC ARTS"
+    ],
+    "publishers": [
+      "Hyperstrange"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Horror"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Horror"
     ],
     "steamAppId": 2243110,
     "reviewSummary": {
@@ -2918,14 +4056,26 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/25600/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2006-11-17",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Basilisk Games"
+    ],
+    "publishers": [
+      "Basilisk Games"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Turn-based",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Indie",
+      "Fantasy",
+      "Role-playing",
+      "Classic",
+      "Turn-Based",
+      "Isometric",
+      "CRPG",
+      "Free Game"
     ],
     "steamAppId": 25600,
     "reviewSummary": {
@@ -2953,14 +4103,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1425330/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1991-01-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Westwood Associates"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Dungeon Crawler"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Classic",
+      "D&D",
+      "First-Person",
+      "Dungeon Crawler",
+      "Grid-Based"
     ],
     "steamAppId": 1425330,
     "reviewSummary": {
@@ -2988,14 +4146,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1882261/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1991-12-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Westwood Associates"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Dungeon Crawler"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Classic",
+      "D&D",
+      "First-Person",
+      "Dungeon Crawler",
+      "Grid-Based"
     ],
     "steamAppId": 1882261,
     "reviewSummary": {
@@ -3023,14 +4189,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1882262/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1993-01-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Strategic Simulations"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Dungeon Crawler"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Classic",
+      "D&D",
+      "First-Person",
+      "Dungeon Crawler",
+      "Grid-Based"
     ],
     "steamAppId": 1882262,
     "reviewSummary": {
@@ -3058,14 +4232,27 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-2.gog-statics.com/255c13273d77d9791bec1c2a63a36b0aeb40bb865a6ae2db21c3a5f90eee80d2_glx_vertical_cover.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2022-08-24",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Critical Rabbit"
+    ],
+    "publishers": [
+      "Assemble Entertainment"
+    ],
     "genres": [
-      "Adventure"
+      "Platformer",
+      "Adventure",
+      "Puzzle"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Indie",
+      "Story Rich",
+      "Atmospheric",
+      "2D",
+      "Puzzle",
+      "Choices Matter",
+      "Platformer",
+      "Emotional"
     ],
     "reviewSummary": {
       "reviewScore": 3,
@@ -3093,14 +4280,34 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-4.gog-statics.com/0584f7fbcb480d39f317067ba81e78c76f6735d41c3d281b8db8b1bbe8d715d4_glx_vertical_cover.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1997-09-30",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Interplay"
+    ],
+    "publishers": [
+      "Bethesda Softworks LLC"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Turn-based",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Story Rich",
+      "Atmospheric",
+      "Role-playing",
+      "Exploration",
+      "Sci-fi",
+      "Classic",
+      "Turn-Based",
+      "Science",
+      "Tactical",
+      "Open World",
+      "Multiple Endings",
+      "Isometric",
+      "Post-apocalyptic",
+      "Tactical RPG",
+      "CRPG",
+      "Good Old Game"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -3128,14 +4335,33 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-2.gog-statics.com/e1fb495117c3c3c5b50c30db055acdc7545893b842111058d49c5039f2014680_glx_vertical_cover.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1998-09-30",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Interplay"
+    ],
+    "publishers": [
+      "Bethesda Softworks LLC"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Turn-based",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Story Rich",
+      "Atmospheric",
+      "Role-playing",
+      "Exploration",
+      "Sci-fi",
+      "Classic",
+      "Turn-Based",
+      "Science",
+      "Tactical",
+      "Open World",
+      "Isometric",
+      "Post-apocalyptic",
+      "Tactical RPG",
+      "CRPG",
+      "Good Old Game"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -3162,14 +4388,29 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/22370/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2009-10-13",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Bethesda Game Studios"
+    ],
+    "publishers": [
+      "Bethesda Softworks LLC"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "FPP",
+      "Open World"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Story Rich",
+      "Role-playing",
+      "Sci-fi",
+      "Classic",
+      "First-Person",
+      "Science",
+      "Third Person",
+      "Open World",
+      "Sandbox",
+      "FPS",
+      "Post-apocalyptic"
     ],
     "steamAppId": 22370,
     "reviewSummary": {
@@ -3198,14 +4439,32 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-3.gog-statics.com/4970369a94834801c5b15def214e62a281f495b665261a39b6de5d52a9d04735_glx_vertical_cover.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2001-03-15",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "14° East"
+    ],
+    "publishers": [
+      "Bethesda Softworks LLC"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Turn-based",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Story Rich",
+      "Atmospheric",
+      "Role-playing",
+      "Exploration",
+      "Sci-fi",
+      "Classic",
+      "Turn-Based",
+      "Science",
+      "Tactical",
+      "Open World",
+      "Isometric",
+      "Post-apocalyptic",
+      "Tactical RPG",
+      "CRPG"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -3232,14 +4491,33 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-3.gog-statics.com/40a45333c40f66a48c507c23590ade8c64e64c7786e135e2e2ab9933e373b9d9_glx_vertical_cover.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2024-07-25",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Team FOLON®"
+    ],
+    "publishers": [
+      "Team FOLON®"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Action",
+      "Open World"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Story Rich",
+      "Atmospheric",
+      "Role-playing",
+      "Exploration",
+      "Sci-fi",
+      "First-Person",
+      "Great Soundtrack",
+      "Third Person",
+      "Open World",
+      "Sandbox",
+      "Survival",
+      "FPS",
+      "Post-apocalyptic",
+      "Survival Horror"
     ],
     "reviewSummary": {
       "reviewScore": 3,
@@ -3270,15 +4548,32 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
       "Obsidian Entertainment"
     ],
     "publishers": [
-      "Bethesda Softworks"
+      "Bethesda Softworks LLC"
     ],
     "genres": [
+      "Role-playing",
       "Action",
-      "RPG"
+      "Open World"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Story Rich",
+      "Atmospheric",
+      "Role-playing",
+      "Exploration",
+      "Sci-fi",
+      "Classic",
+      "First-Person",
+      "Great Soundtrack",
+      "Choices Matter",
+      "Third Person",
+      "Open World",
+      "Gore",
+      "FPS",
+      "Post-apocalyptic",
+      "Modern",
+      "Good Old Game",
+      "Western"
     ],
     "steamAppId": 22380,
     "reviewSummary": {
@@ -3306,14 +4601,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2350530/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1993-10-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Silicon Knights"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Adventure",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Fantasy",
+      "Atmospheric",
+      "Role-playing",
+      "Classic",
+      "Pixel Graphics",
+      "Mystery",
+      "Real-Time",
+      "Magic",
+      "Top-Down",
+      "War",
+      "RTS",
+      "Grand Strategy"
     ],
     "steamAppId": 2350530,
     "reviewSummary": {
@@ -3341,14 +4653,26 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1741120/library_600x900_2x.jpg",
     "shortDescription": "Strategy on GOG.com (DRM-Free)",
     "releaseDate": "1996-03-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Strategic Simulations"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Strategy"
+      "Strategy",
+      "Turn-based",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Fantasy",
+      "Strategy",
+      "2D",
+      "Classic",
+      "Turn-Based",
+      "Magic",
+      "War",
+      "Good Old Game"
     ],
     "steamAppId": 1741120,
     "reviewSummary": {
@@ -3376,14 +4700,23 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-4.gog-statics.com/6eab5cbbc9ecb873792c7f6d6e42e732b7cfbd270927a41660fc15266c5c1d69_glx_vertical_cover.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2005-05-18",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Pendulo Studios"
+    ],
+    "publishers": [
+      "Focus Entertainment"
+    ],
     "genres": [
-      "Role-playing"
+      "Action",
+      "Adventure",
+      "Detective-mystery"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Classic",
+      "Investigation",
+      "Detective-mystery"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -3410,14 +4743,32 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/276890/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2008-08-08",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "WildTangent"
+    ],
+    "publishers": [
+      "WildTangent"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Action",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Fantasy",
+      "Role-playing",
+      "Classic",
+      "Casual",
+      "Great Soundtrack",
+      "Roguelike",
+      "Isometric",
+      "Roguelite",
+      "Hack and Slash",
+      "Dungeon Crawler",
+      "Good Old Game",
+      "Fishing",
+      "Dog"
     ],
     "steamAppId": 276890,
     "reviewSummary": {
@@ -3445,14 +4796,29 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1360980/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2020-07-27",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "ViNovella Games"
+    ],
+    "publishers": [
+      "ViNovella Games"
+    ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Narrative",
+      "Visual Novel"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Visual Novel",
+      "Mature",
+      "Sexual Content",
+      "Nudity",
+      "NSFW",
+      "Narrative",
+      "Realistic",
+      "Romance",
+      "Dating Sim",
+      "Text-Based"
     ],
     "steamAppId": 1360980,
     "reviewSummary": {
@@ -3480,14 +4846,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-4.gog-statics.com/366a67d13a260dbafbc0b07d7080b148825bde15814547ae38a631ccace111c0_glx_vertical_cover.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "1996-05-31",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "id Software"
+    ],
+    "publishers": [
+      "Bethesda Softworks"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "Action"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "FPS",
+      "Classic",
+      "Action",
+      "Retro",
+      "Sci-fi"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -3514,14 +4888,25 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-1.gog-statics.com/09011753df7ead3ab93e9d0fbaaad9f4fe3ceb31f09b130742b35af300780150_glx_vertical_cover.jpg",
     "shortDescription": "Racing on GOG.com (DRM-Free)",
     "releaseDate": "2022-09-02",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Jujubee S.A."
+    ],
+    "publishers": [
+      "Salient Games"
+    ],
     "genres": [
-      "Racing"
+      "Racing",
+      "Combat",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Indie",
+      "Sci-fi",
+      "Casual",
+      "Combat",
+      "Cyberpunk",
+      "Flight",
+      "Racing"
     ],
     "reviewSummary": {
       "reviewScore": 3,
@@ -3548,14 +4933,28 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-2.gog-statics.com/23f2b3ea51d94d412516374660aa231561f5d25bd99947c5b49e8f255119a185_glx_vertical_cover.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "1995-10-25",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Interactive Binary Illusions"
+    ],
+    "publishers": [
+      "Red Sprite Studios"
+    ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Point-and-click",
+      "Puzzle"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Story Rich",
+      "2D",
+      "Classic",
+      "Puzzle",
+      "Choices Matter",
+      "Point&Click",
+      "Logic",
+      "Puzzle Platformer",
+      "Free Game"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -3582,14 +4981,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-1.gog-statics.com/105315d52a96ac2dc98c9de77c99f90734a30cd9f02b64b4d035906613c8a4d3_glx_vertical_cover.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1993-01-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "MicroMagic"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Strategy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Classic",
+      "D&D",
+      "Turn-Based",
+      "Fantasy"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -3616,14 +5022,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1931730/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2023-08-22",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Fallen Leaf",
+      "Black Drakkar Games"
+    ],
+    "publishers": [
+      "Dear Villagers"
+    ],
     "genres": [
+      "Simulation",
+      "Sci-fi",
       "Adventure"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Story Rich",
+      "Exploration",
+      "Sci-fi",
+      "Simulation",
+      "Dark",
+      "Third Person",
+      "Mystery",
+      "Space",
+      "Realistic",
+      "Walking Simulator",
+      "Thriller"
     ],
     "steamAppId": 1931730,
     "reviewSummary": {
@@ -3651,14 +5074,28 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/322450/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2018-05-17",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Loveshack Entertainment"
+    ],
+    "publishers": [
+      "Fellow Traveller"
+    ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Point-and-click",
+      "Puzzle"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Indie",
+      "2D",
+      "Puzzle",
+      "Casual",
+      "Great Soundtrack",
+      "Platformer",
+      "Point&Click",
+      "Family Friendly",
+      "Noir"
     ],
     "steamAppId": 322450,
     "reviewSummary": {
@@ -3686,14 +5123,29 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2484130/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2024-10-08",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Krillbite Studio"
+    ],
+    "publishers": [
+      "Krillbite Studio",
+      "iterco"
+    ],
     "genres": [
-      "Adventure"
+      "Simulation",
+      "Adventure",
+      "Sandbox"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Indie",
+      "Exploration",
+      "Casual",
+      "First-Person",
+      "Management",
+      "Open World",
+      "Sandbox",
+      "Family Friendly",
+      "Relaxing",
+      "Crafting"
     ],
     "steamAppId": 2484130,
     "reviewSummary": {
@@ -3721,14 +5173,35 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-1.gog-statics.com/409843a41bcb1ccaa7a6124299395526714aa598cd281e526fcdba0cfe0fb548_glx_vertical_cover.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2021-09-16",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Anshar Studios"
+    ],
+    "publishers": [
+      "Anshar Publishing"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Adventure",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Story Rich",
+      "Atmospheric",
+      "Role-playing",
+      "Exploration",
+      "Sci-fi",
+      "Science",
+      "Choices Matter",
+      "Mystery",
+      "Multiple Endings",
+      "Isometric",
+      "Investigation",
+      "Choose Your Own Adventure",
+      "Cyberpunk",
+      "CRPG",
+      "Noir",
+      "Text-Based"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -3755,14 +5228,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1904523/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1991-01-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Beyond Software"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Strategy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Classic",
+      "D&D",
+      "Turn-Based",
+      "Fantasy"
     ],
     "steamAppId": 1904523,
     "reviewSummary": {
@@ -3792,19 +5272,28 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2020-10-27",
     "developers": [
-      "One More Level",
-      "3D Realms",
-      "Slipgate Ironworks™"
+      "One More Level"
     ],
     "publishers": [
       "505 Games"
     ],
     "genres": [
-      "Action"
+      "Action",
+      "FPP",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Sci-fi",
+      "First-Person",
+      "Violent",
+      "Difficult",
+      "Gore",
+      "FPS",
+      "Hack and Slash",
+      "Post-apocalyptic",
+      "Cyberpunk",
+      "Fishing"
     ],
     "steamAppId": 1139900,
     "reviewSummary": {
@@ -3832,14 +5321,34 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/488730/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2019-04-19",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "One More Level"
+    ],
+    "publishers": [
+      "Techland Publishing"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Roguelike",
+      "Puzzle"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "2D",
+      "Puzzle",
+      "Platformer",
+      "Violent",
+      "Difficult",
+      "Gore",
+      "Roguelike",
+      "Top-Down",
+      "Cartoony",
+      "Roguelite",
+      "Hack and Slash",
+      "Local Co-Op",
+      "Fighting",
+      "Shoot'EmUp",
+      "Twin Stick Shooter"
     ],
     "steamAppId": 488730,
     "reviewSummary": {
@@ -3867,14 +5376,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/431240/library_600x900_2x.jpg",
     "shortDescription": "Sports on GOG.com (DRM-Free)",
     "releaseDate": "2020-05-19",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Blacklight Interactive",
+      "Team17"
+    ],
+    "publishers": [
+      "Team17"
+    ],
     "genres": [
+      "Simulation",
+      "Tactical",
       "Sports"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Indie",
+      "Simulation",
+      "Casual",
+      "Great Soundtrack",
+      "Funny",
+      "Tactical",
+      "Multiplayer",
+      "Difficult",
+      "Family Friendly",
+      "Local Multiplayer",
+      "Physics",
+      "Sports"
     ],
     "steamAppId": 431240,
     "reviewSummary": {
@@ -3902,14 +5428,32 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/606880/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2019-09-10",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Spiders"
+    ],
+    "publishers": [
+      "Focus Entertainment"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Adventure",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Fantasy",
+      "Story Rich",
+      "Atmospheric",
+      "Role-playing",
+      "Choices Matter",
+      "Third Person",
+      "Open World",
+      "Mature",
+      "Sexual Content",
+      "Nudity",
+      "Magic",
+      "LGBTQ+",
+      "Souls-like"
     ],
     "steamAppId": 606880,
     "reviewSummary": {
@@ -3937,14 +5481,32 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/316790/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2015-01-27",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Double Fine Productions"
+    ],
+    "publishers": [
+      "Double Fine Productions"
+    ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Point-and-click",
+      "Detective-mystery"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Story Rich",
+      "Atmospheric",
+      "Classic",
+      "Puzzle",
+      "Great Soundtrack",
+      "Funny",
+      "Third Person",
+      "Point&Click",
+      "Difficult",
+      "Investigation",
+      "Detective-mystery",
+      "Noir",
+      "Remake"
     ],
     "steamAppId": 316790,
     "reviewSummary": {
@@ -3972,14 +5534,26 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-4.gog-statics.com/dc021a1d14c25002ea4eaae039810aa48ce4f6626bd562b939e1cdbb28c8cbd2_glx_vertical_cover.jpg",
     "shortDescription": "Racing on GOG.com (DRM-Free)",
     "releaseDate": "2018-11-06",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Caged Element Inc."
+    ],
+    "publishers": [
+      "Wired Productions"
+    ],
     "genres": [
-      "Racing"
+      "Racing",
+      "Action",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Sci-fi",
+      "Science",
+      "Multiplayer",
+      "Local Multiplayer",
+      "Racing",
+      "Split Screen",
+      "VR"
     ],
     "reviewSummary": {
       "reviewScore": 3,
@@ -4006,14 +5580,26 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1284410/library_600x900_2x.jpg",
     "shortDescription": "Strategy on GOG.com (DRM-Free)",
     "releaseDate": "2018-10-23",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "CD PROJEKT RED"
+    ],
+    "publishers": [
+      "CD PROJEKT RED"
+    ],
     "genres": [
-      "Strategy"
+      "Strategy",
+      "Turn-based",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Fantasy",
+      "Strategy",
+      "Turn-Based",
+      "Card Game",
+      "Deckbuilding",
+      "Board Game",
+      "Free Game",
+      "Online-only"
     ],
     "steamAppId": 1284410,
     "reviewSummary": {
@@ -4041,14 +5627,23 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1282410/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2022-08-04",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Ice Code Games"
+    ],
+    "publishers": [
+      "Good Shepherd Entertainment\t"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Tactical",
+      "Strategy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Strategy",
+      "Role-playing",
+      "Turn-Based",
+      "Tactical",
+      "Western"
     ],
     "steamAppId": 1282410,
     "reviewSummary": {
@@ -4076,14 +5671,35 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/924750/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2024-04-16",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Slow Bros."
+    ],
+    "publishers": [
+      "Slow Bros."
+    ],
     "genres": [
-      "Adventure"
+      "Simulation",
+      "Adventure",
+      "Exploration"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Indie",
+      "Story Rich",
+      "Atmospheric",
+      "Exploration",
+      "Sci-fi",
+      "Simulation",
+      "Casual",
+      "Great Soundtrack",
+      "Funny",
+      "Third Person",
+      "Mystery",
+      "Relaxing",
+      "Narrative",
+      "Emotional",
+      "Walking Simulator",
+      "Non Violent"
     ],
     "steamAppId": 924750,
     "reviewSummary": {
@@ -4111,14 +5727,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1549550/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2021-08-05",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Fabien Weibel"
+    ],
+    "publishers": [
+      "Fabien Weibel",
+      "Mooneye Studios"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Role-playing",
+      "Exploration"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Indie",
+      "Role-playing",
+      "Exploration",
+      "Puzzle",
+      "Third Person",
+      "Family Friendly",
+      "Relaxing",
+      "Top-Down",
+      "Nature",
+      "Cozy",
+      "Short"
     ],
     "steamAppId": 1549550,
     "reviewSummary": {
@@ -4146,14 +5779,25 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/681330/library_600x900_2x.jpg",
     "shortDescription": "Simulation on GOG.com (DRM-Free)",
     "releaseDate": "2018-10-11",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Deimos Games"
+    ],
+    "publishers": [
+      "Deimos Games"
+    ],
     "genres": [
-      "Simulation"
+      "Simulation",
+      "Sci-fi",
+      "Economic"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Exploration",
+      "Sci-fi",
+      "Simulation",
+      "Science",
+      "Space",
+      "Economic",
+      "Trading"
     ],
     "steamAppId": 681330,
     "reviewSummary": {
@@ -4181,14 +5825,36 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-3.gog-statics.com/818658294fc9ed5ce966acf2792e93aa8cb6d4776813071c6774b93c73d0f6f5_glx_vertical_cover.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2017-08-29",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Dynamic Pixels"
+    ],
+    "publishers": [
+      "tinyBuild"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Stealth"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Indie",
+      "Puzzle",
+      "First-Person",
+      "Horror",
+      "Mystery",
+      "Sandbox",
+      "Cartoony",
+      "Investigation",
+      "Procedural Generation",
+      "Stealth",
+      "Survival Horror",
+      "Surreal",
+      "Demo",
+      "Physics",
+      "Thriller",
+      "Free Game"
     ],
     "reviewSummary": {
       "reviewScore": 3,
@@ -4215,14 +5881,35 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/628670/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2020-07-30",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Cradle Games"
+    ],
+    "publishers": [
+      "tinyBuild"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Action",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Indie",
+      "Atmospheric",
+      "Role-playing",
+      "Sci-fi",
+      "Science",
+      "Dark",
+      "Horror",
+      "Third Person",
+      "Multiplayer",
+      "Difficult",
+      "Hack and Slash",
+      "Local Co-Op",
+      "Psychological Horror",
+      "Lovecraftian",
+      "Souls-like",
+      "Split Screen"
     ],
     "steamAppId": 628670,
     "reviewSummary": {
@@ -4250,14 +5937,35 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1243140/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2020-02-20",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Cradle Games"
+    ],
+    "publishers": [
+      "tinyBuild"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Action",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Indie",
+      "Atmospheric",
+      "Role-playing",
+      "Sci-fi",
+      "Science",
+      "Dark",
+      "Horror",
+      "Third Person",
+      "Multiplayer",
+      "Difficult",
+      "Hack and Slash",
+      "Local Co-Op",
+      "Psychological Horror",
+      "Lovecraftian",
+      "Souls-like",
+      "Split Screen"
     ],
     "steamAppId": 1243140,
     "reviewSummary": {
@@ -4285,14 +5993,35 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1590730/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2023-08-31",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "xRedGames"
+    ],
+    "publishers": [
+      "xRedGames"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Simulation",
+      "Narrative"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Indie",
+      "Story Rich",
+      "Role-playing",
+      "Simulation",
+      "Choices Matter",
+      "Visual Novel",
+      "Mature",
+      "Sexual Content",
+      "Nudity",
+      "Multiple Endings",
+      "NSFW",
+      "Narrative",
+      "Realistic",
+      "Choose Your Own Adventure",
+      "Romance",
+      "Dating Sim",
+      "Hentai"
     ],
     "steamAppId": 1590730,
     "reviewSummary": {
@@ -4320,14 +6049,32 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1656780/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2022-03-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Benjamin \"ThingOnItsOwn\" Hauer"
+    ],
+    "publishers": [
+      "Goblinz Publishing"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Turn-based"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Indie",
+      "Fantasy",
+      "Atmospheric",
+      "Role-playing",
+      "2D",
+      "Turn-Based",
+      "Pixel Graphics",
+      "Tactical",
+      "Management",
+      "Resource Management",
+      "Procedural Generation",
+      "Local Co-Op",
+      "Grand Strategy",
+      "4X",
+      "Auto Battler"
     ],
     "steamAppId": 1656780,
     "reviewSummary": {
@@ -4355,14 +6102,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2350511/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Strategic Simulations"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Action"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Classic",
+      "D&D",
+      "Fantasy",
+      "Platformer"
     ],
     "steamAppId": 2350511,
     "reviewSummary": {
@@ -4390,14 +6144,33 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-3.gog-statics.com/3699de957c16c9d8e442243f81edde06b9356d0a27e8aa9f3b1ad82ede6e01ea_glx_vertical_cover.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2015-05-16",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "07th Expansion"
+    ],
+    "publishers": [
+      "MangaGamer"
+    ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Mystery",
+      "Visual Novel"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Indie",
+      "Story Rich",
+      "Atmospheric",
+      "2D",
+      "Casual",
+      "Dark",
+      "Horror",
+      "Funny",
+      "Mystery",
+      "Visual Novel",
+      "Sexual Content",
+      "Emotional",
+      "Psychological Horror",
+      "Psychological"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -4424,14 +6197,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1904525/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1989-01-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Westwood Studios"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Action"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Classic",
+      "D&D",
+      "Minigames",
+      "Fantasy"
     ],
     "steamAppId": 1904525,
     "reviewSummary": {
@@ -4459,14 +6239,28 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/203140/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2012-11-20",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Io-Interactive"
+    ],
+    "publishers": [
+      "Io-Interactive"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "TPP",
+      "Stealth"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Story Rich",
+      "Atmospheric",
+      "Classic",
+      "Tactical",
+      "Third Person",
+      "Mature",
+      "Difficult",
+      "Stealth",
+      "Crime"
     ],
     "steamAppId": 203140,
     "reviewSummary": {
@@ -4494,14 +6288,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/833040/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2018-04-13",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "What Pumpkin Games, Inc."
+    ],
+    "publishers": [
+      "Fellow Traveller"
+    ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Comedy",
+      "Visual Novel"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Indie",
+      "Story Rich",
+      "Casual",
+      "First-Person",
+      "Funny",
+      "Visual Novel",
+      "Violent",
+      "Psychological Horror",
+      "LGBTQ+",
+      "Dating Sim",
+      "Comedy"
     ],
     "steamAppId": 833040,
     "reviewSummary": {
@@ -4529,14 +6339,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/892860/library_600x900_2x.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "2021-02-26",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Walk with Kings"
+    ],
+    "publishers": [
+      "Treasure Hunters FanClub"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "Action",
+      "Tactical"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Indie",
+      "Atmospheric",
+      "2D",
+      "Tactical",
+      "Real-Time",
+      "Difficult",
+      "Top-Down",
+      "Shooter",
+      "Realistic",
+      "Local Co-Op",
+      "Stealth",
+      "Crime"
     ],
     "steamAppId": 892860,
     "reviewSummary": {
@@ -4564,14 +6391,32 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-3.gog-statics.com/47d5b333fcd3736cd52e997b0b00c04b1cab1d1a3469720761234d7359c49ddf_glx_vertical_cover.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2015-02-18",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Dennaton Games"
+    ],
+    "publishers": [
+      "Devolver Digital"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Arcade",
+      "Fighting"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Indie",
+      "Atmospheric",
+      "2D",
+      "Pixel Graphics",
+      "Great Soundtrack",
+      "Violent",
+      "Difficult",
+      "Gore",
+      "Top-Down",
+      "Artbook",
+      "Arcade",
+      "Fighting",
+      "LevelEditor"
     ],
     "reviewSummary": {
       "reviewScore": 3,
@@ -4598,14 +6443,33 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/611790/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2022-07-16",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Eek! Games, LLC"
+    ],
+    "publishers": [
+      "Eek! Games, LLC"
+    ],
     "genres": [
-      "Adventure"
+      "Simulation",
+      "Adventure",
+      "Virtual life"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Story Rich",
+      "Simulation",
+      "First-Person",
+      "Choices Matter",
+      "Funny",
+      "Sandbox",
+      "Mature",
+      "Sexual Content",
+      "Nudity",
+      "Multiple Endings",
+      "NSFW",
+      "LGBTQ+",
+      "LifeSim",
+      "Virtual life"
     ],
     "steamAppId": 611790,
     "reviewSummary": {
@@ -4633,14 +6497,34 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/339800/library_600x900_2x.jpg",
     "shortDescription": "Simulation on GOG.com (DRM-Free)",
     "releaseDate": "2015-01-19",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "HuniePot"
+    ],
+    "publishers": [
+      "HuniePot"
+    ],
     "genres": [
-      "Simulation"
+      "Simulation",
+      "Puzzle",
+      "Role-playing"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Indie",
+      "Story Rich",
+      "Role-playing",
+      "2D",
+      "Puzzle",
+      "Simulation",
+      "Visual Novel",
+      "Mature",
+      "Sexual Content",
+      "Nudity",
+      "NSFW",
+      "Logic",
+      "Romance",
+      "Dating Sim",
+      "Puzzle Platformer",
+      "Match3"
     ],
     "steamAppId": 339800,
     "reviewSummary": {
@@ -4668,14 +6552,36 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/844590/library_600x900_2x.jpg",
     "shortDescription": "Simulation on GOG.com (DRM-Free)",
     "releaseDate": "2019-03-12",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Tendershoot",
+      "Michael Lasch",
+      "ThatWhichIs Media"
+    ],
+    "publishers": [
+      "No More Robots"
+    ],
     "genres": [
-      "Simulation"
+      "Simulation",
+      "Adventure",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Indie",
+      "Fantasy",
+      "Story Rich",
+      "Atmospheric",
+      "Sci-fi",
+      "Puzzle",
+      "Simulation",
+      "Science",
+      "Great Soundtrack",
+      "Funny",
+      "Mystery",
+      "Point&Click",
+      "Investigation",
+      "Surreal",
+      "Psychological"
     ],
     "steamAppId": 844590,
     "reviewSummary": {
@@ -4703,14 +6609,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/595140/library_600x900_2x.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "2017-04-25",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Crema Games"
+    ],
+    "publishers": [
+      "Crema Games"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "Action",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Indie",
+      "Fantasy",
+      "First-Person",
+      "Funny",
+      "Difficult",
+      "Roguelike",
+      "FPS",
+      "Shooter",
+      "Roguelite",
+      "Procedural Generation",
+      "Perma Death"
     ],
     "steamAppId": 595140,
     "reviewSummary": {
@@ -4738,14 +6660,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1172650/library_600x900_2x.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "2021-09-30",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Gaming Minds Studios"
+    ],
+    "publishers": [
+      "Kalypso Media"
+    ],
     "genres": [
-      "Shooter"
+      "Simulation",
+      "Strategy",
+      "Managerial"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Strategy",
+      "Simulation",
+      "Managerial"
     ],
     "steamAppId": 1172650,
     "reviewSummary": {
@@ -4773,14 +6702,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/807120/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2020-04-23",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Unfrozen"
+    ],
+    "publishers": [
+      "Daedalic Entertainment"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Turn-based",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Indie",
+      "Fantasy",
+      "Role-playing",
+      "2D",
+      "Turn-Based",
+      "Dark",
+      "Violent",
+      "Difficult",
+      "Gore",
+      "Roguelike",
+      "Roguelite",
+      "Dungeon Crawler",
+      "Lovecraftian"
     ],
     "steamAppId": 807120,
     "reviewSummary": {
@@ -4808,14 +6754,28 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1412170/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2020-09-25",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Onix Games"
+    ],
+    "publishers": [
+      "Retrovibe"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Metroidvania"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Indie",
+      "2D",
+      "Platformer",
+      "Family Friendly",
+      "Cartoony",
+      "Puzzle Platformer",
+      "Metroidvania",
+      "Free Game"
     ],
     "steamAppId": 1412170,
     "reviewSummary": {
@@ -4843,14 +6803,26 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-3.gog-statics.com/b6184bdfe32a6b50777057d0b599c4e00758a68e31ebdaad2d737839b0fb170d_glx_vertical_cover.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "1992-01-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Epic Games"
+    ],
+    "publishers": [
+      "Epic Games"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Arcade",
+      "Platformer"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "2D",
+      "Classic",
+      "Female Protagonist",
+      "Platformer",
+      "Arcade",
+      "Good Old Game",
+      "Free Game"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -4877,14 +6849,29 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/811320/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2019-08-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "ChaosForge "
+    ],
+    "publishers": [
+      "Hyperstrange"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Turn-based",
+      "Roguelike"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Role-playing",
+      "Turn-Based",
+      "Science",
+      "Great Soundtrack",
+      "Horror",
+      "Violent",
+      "Gore",
+      "Roguelike",
+      "Isometric",
+      "Top-Down",
+      "Procedural Generation"
     ],
     "steamAppId": 811320,
     "reviewSummary": {
@@ -4912,14 +6899,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/220200/library_600x900_2x.jpg",
     "shortDescription": "Simulation on GOG.com (DRM-Free)",
     "releaseDate": "2015-04-27",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Squad"
+    ],
+    "publishers": [
+      "Private Division"
+    ],
     "genres": [
-      "Simulation"
+      "Simulation",
+      "Sci-fi",
+      "Building"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Indie",
+      "Exploration",
+      "Sci-fi",
+      "Simulation",
+      "Science",
+      "Funny",
+      "Open World",
+      "Sandbox",
+      "Difficult",
+      "Space",
+      "Building",
+      "Physics",
+      "Education"
     ],
     "steamAppId": 220200,
     "reviewSummary": {
@@ -4933,8 +6937,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "gog-1139279216",
-    "title": "Lacuna \u2013 A Sci-Fi Noir Adventure",
-    "sortTitle": "Lacuna \u2013 A Sci-Fi Noir Adventure",
+    "title": "Lacuna – A Sci-Fi Noir Adventure",
+    "sortTitle": "Lacuna – A Sci-Fi Noir Adventure",
     "platforms": [
       {
         "platformId": "gog",
@@ -4947,14 +6951,34 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-3.gog-statics.com/2d11a18cae6d1b130c9af66b5f83baab54f198be694e8d05976543c21d54d487_glx_vertical_cover.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2021-05-20",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "DigiTales Interactive"
+    ],
+    "publishers": [
+      "Assemble Entertainment"
+    ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Adventure",
+      "Detective-mystery"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Indie",
+      "Story Rich",
+      "2D",
+      "Sci-fi",
+      "Science",
+      "Pixel Graphics",
+      "Choices Matter",
+      "Multiple Endings",
+      "Investigation",
+      "Cyberpunk",
+      "Detective-mystery",
+      "Thriller",
+      "Crime",
+      "Noir",
+      "Text-Based"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -4981,14 +7005,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-1.gog-statics.com/f68062ce060563f1a0fb50657d4bea367992d53d0884bec5ffa8da15b1b079c4_glx_vertical_cover.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2022-02-11",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "DriftyGames"
+    ],
+    "publishers": [
+      "DriftyGames"
+    ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Narrative",
+      "Visual Novel"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Indie",
+      "Story Rich",
+      "Choices Matter",
+      "Visual Novel",
+      "Mature",
+      "Sexual Content",
+      "Nudity",
+      "NSFW",
+      "Narrative",
+      "Emotional",
+      "LGBTQ+",
+      "Dating Sim"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -5015,14 +7056,32 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1469300/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2020-12-31",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Andrealphus Games"
+    ],
+    "publishers": [
+      "Andrealphus Games"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Fantasy",
+      "Visual Novel"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Fantasy",
+      "Story Rich",
+      "Role-playing",
+      "Casual",
+      "Choices Matter",
+      "Management",
+      "Visual Novel",
+      "Mature",
+      "Sexual Content",
+      "Nudity",
+      "NSFW",
+      "Dating Sim",
+      "Hentai",
+      "Text-Based"
     ],
     "steamAppId": 1469300,
     "reviewSummary": {
@@ -5050,14 +7109,24 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/242960/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2002-03-20",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Crystal Dynamics"
+    ],
+    "publishers": [
+      "Crystal Dynamics"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "TPP",
+      "Platformer"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Classic",
+      "Third Person",
+      "Platformer",
+      "Violent",
+      "Gore"
     ],
     "steamAppId": 242960,
     "reviewSummary": {
@@ -5085,14 +7154,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/224300/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2003-12-17",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Crystal Dynamics"
+    ],
+    "publishers": [
+      "Crystal Dynamics"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "TPP",
+      "Platformer"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Fantasy",
+      "Story Rich",
+      "Atmospheric",
+      "2D",
+      "Classic",
+      "Dark",
+      "Third Person",
+      "Platformer",
+      "Hack and Slash",
+      "Good Old Game",
+      "Vampire"
     ],
     "steamAppId": 224300,
     "reviewSummary": {
@@ -5106,8 +7191,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "gog-1731318270",
-    "title": "LEGO\u00ae Star Wars\u2122 - The Complete Saga",
-    "sortTitle": "LEGO\u00ae Star Wars\u2122 - The Complete Saga",
+    "title": "LEGO® Star Wars™ - The Complete Saga",
+    "sortTitle": "LEGO® Star Wars™ - The Complete Saga",
     "platforms": [
       {
         "platformId": "gog",
@@ -5120,14 +7205,32 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-1.gog-statics.com/de223675d11d6298a77cbc289c56096577f3fde8eb40a3f1a5a04ed319f61e95_glx_vertical_cover.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2009-11-13",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Traveller's Tales"
+    ],
+    "publishers": [
+      "Disney"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Comedy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Sci-fi",
+      "Classic",
+      "Puzzle",
+      "Casual",
+      "Science",
+      "Great Soundtrack",
+      "Funny",
+      "Open World",
+      "Family Friendly",
+      "Space",
+      "Local Co-Op",
+      "Comedy"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -5140,8 +7243,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "gog-2119193622",
-    "title": "LEGO\u00ae Star Wars\u2122 III - The Clone Wars\u2122",
-    "sortTitle": "LEGO\u00ae Star Wars\u2122 III - The Clone Wars\u2122",
+    "title": "LEGO® Star Wars™ III - The Clone Wars™",
+    "sortTitle": "LEGO® Star Wars™ III - The Clone Wars™",
     "platforms": [
       {
         "platformId": "gog",
@@ -5154,14 +7257,33 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-3.gog-statics.com/835a0947eda2ed8f1d6b6d6f656c2cbe21da54857376fcdb279989bd5b89fc9c_glx_vertical_cover.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2011-03-22",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Traveller's Tales"
+    ],
+    "publishers": [
+      "Disney"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Comedy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Fantasy",
+      "Classic",
+      "Puzzle",
+      "Science",
+      "Funny",
+      "Third Person",
+      "Open World",
+      "Multiplayer",
+      "Family Friendly",
+      "Space",
+      "RTS",
+      "Local Co-Op",
+      "Comedy"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -5174,8 +7296,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "steam-285160",
-    "title": "LEGO\u00ae The Hobbit\u2122",
-    "sortTitle": "LEGO\u00ae The Hobbit\u2122",
+    "title": "LEGO® The Hobbit™",
+    "sortTitle": "LEGO® The Hobbit™",
     "platforms": [
       {
         "platformId": "gog",
@@ -5188,14 +7310,32 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/285160/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2014-04-10",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Traveller's Tales"
+    ],
+    "publishers": [
+      "Warner Bros. Interactive Entertainment"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Comedy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Fantasy",
+      "Atmospheric",
+      "Puzzle",
+      "Funny",
+      "Third Person",
+      "Open World",
+      "Multiplayer",
+      "Family Friendly",
+      "Local Co-Op",
+      "Comedy",
+      "Good Old Game",
+      "Split Screen"
     ],
     "steamAppId": 285160,
     "reviewSummary": {
@@ -5209,8 +7349,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "steam-214510",
-    "title": "LEGO\u00ae The Lord of the Rings\u2122",
-    "sortTitle": "LEGO\u00ae The Lord of the Rings\u2122",
+    "title": "LEGO® The Lord of the Rings™",
+    "sortTitle": "LEGO® The Lord of the Rings™",
     "platforms": [
       {
         "platformId": "gog",
@@ -5223,14 +7363,35 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/214510/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2012-11-27",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Traveller's Tales"
+    ],
+    "publishers": [
+      "Warner Bros. Interactive Entertainment"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Comedy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Fantasy",
+      "Classic",
+      "Puzzle",
+      "Casual",
+      "Funny",
+      "Third Person",
+      "Open World",
+      "Multiplayer",
+      "Platformer",
+      "Family Friendly",
+      "Local Co-Op",
+      "Local Multiplayer",
+      "Comedy",
+      "Good Old Game",
+      "Split Screen"
     ],
     "steamAppId": 214510,
     "reviewSummary": {
@@ -5258,14 +7419,32 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/946660/library_600x900_2x.jpg",
     "shortDescription": "Strategy on GOG.com (DRM-Free)",
     "releaseDate": "2018-11-27",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Black Eye Games"
+    ],
+    "publishers": [
+      "Ravenscourt"
+    ],
     "genres": [
-      "Strategy"
+      "Strategy",
+      "Managerial",
+      "Survival"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Strategy",
+      "Choices Matter",
+      "Management",
+      "Historical",
+      "Survival",
+      "Resource Management",
+      "Isometric",
+      "Medieval",
+      "War",
+      "Crafting",
+      "Base Building",
+      "Managerial",
+      "City builder",
+      "Stealth"
     ],
     "steamAppId": 946660,
     "reviewSummary": {
@@ -5293,14 +7472,27 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-3.gog-statics.com/c142bc01845e073ea337341303cee07a8e9e980434cd1d148bf1f43e8634c734_glx_vertical_cover.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "1992-04-12",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Revolution Software"
+    ],
+    "publishers": [
+      "Revolution Software"
+    ],
     "genres": [
-      "Adventure"
+      "Fantasy",
+      "Adventure",
+      "Point-and-click"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Fantasy",
+      "2D",
+      "Classic",
+      "Dark",
+      "Point&Click",
+      "Medieval",
+      "Only On GOG",
+      "Free Game"
     ],
     "reviewSummary": {
       "reviewScore": 3,
@@ -5327,14 +7519,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-2.gog-statics.com/21c5c15dcd6cff7b33d052cb4b70d4076fc1ccdb544b13b4446c8e3659bf25af_glx_vertical_cover.jpg",
     "shortDescription": "Simulation on GOG.com (DRM-Free)",
     "releaseDate": "2022-03-19",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Inceton games"
+    ],
+    "publishers": [
+      "Inceton games"
+    ],
     "genres": [
-      "Simulation"
+      "Simulation",
+      "Narrative",
+      "Visual Novel"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Story Rich",
+      "Simulation",
+      "Choices Matter",
+      "Funny",
+      "Visual Novel",
+      "Mature",
+      "Sexual Content",
+      "Nudity",
+      "NSFW",
+      "Narrative",
+      "Romance",
+      "Dating Sim"
     ],
     "reviewSummary": {
       "reviewScore": 3,
@@ -5361,14 +7569,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/50130/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2011-03-22",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "2K Czech"
+    ],
+    "publishers": [
+      "2K Games"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Open World",
+      "Crime",
+      "Story Rich",
+      "Third-Person Shooter",
+      "Atmospheric"
     ],
     "steamAppId": 50130,
     "reviewSummary": {
@@ -5396,14 +7612,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-1.gog-statics.com/ec9894ec739bdfd6a68b6cf2d8a51138272f75a382fd703ece336bb89e7c49a9_glx_vertical_cover.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2020-05-19",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Hangar 13"
+    ],
+    "publishers": [
+      "2K Games"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Open World"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Story Rich",
+      "Great Soundtrack",
+      "Third Person",
+      "Open World",
+      "Mature",
+      "Sexual Content",
+      "Nudity",
+      "Violent",
+      "Gore",
+      "Crime",
+      "Noir"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -5430,14 +7663,33 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-2.gog-statics.com/675f7bf7c242b6c80cb8e91834d01cfc2bc0ac1bb47c7184c8ccf4966ca22423_glx_vertical_cover.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2020-05-19",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Hangar 13"
+    ],
+    "publishers": [
+      "2K Games"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Open World"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Story Rich",
+      "Atmospheric",
+      "Great Soundtrack",
+      "Third Person",
+      "Open World",
+      "Sandbox",
+      "Mature",
+      "Nudity",
+      "Violent",
+      "Gore",
+      "FPS",
+      "Stealth",
+      "Crime"
     ],
     "reviewSummary": {
       "reviewScore": 3,
@@ -5462,21 +7714,33 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     ],
     "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/40990/header.jpg",
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/40990/library_600x900_2x.jpg",
-    "shortDescription": "It\u2019s 1930. After an inadvertent brush with the mafia, cabdriver Tommy Angelo is reluctantly thrust into the world of organized crime. Initially, he is uneasy about falling in with the Salieri family, but soon the rewards become too big to ignore.",
+    "shortDescription": "It’s 1930. After an inadvertent brush with the mafia, cabdriver Tommy Angelo is reluctantly thrust into the world of organized crime. Initially, he is uneasy about falling in with the Salieri family, but soon the rewards become too big to ignore.",
     "releaseDate": "28 Aug, 2002",
     "developers": [
-      "Illusion Softworks"
+      "Hangar 13"
     ],
     "publishers": [
-      "2K"
+      "2K Games"
     ],
     "genres": [
       "Action",
-      "Adventure"
+      "Adventure",
+      "Open World"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Story Rich",
+      "Great Soundtrack",
+      "Third Person",
+      "Open World",
+      "Mature",
+      "Sexual Content",
+      "Violent",
+      "Gore",
+      "Crime",
+      "Noir",
+      "Remake"
     ],
     "steamAppId": 40990,
     "reviewSummary": {
@@ -5504,14 +7768,24 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1712390/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2021-12-23",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "FIXER"
+    ],
+    "publishers": [
+      "FIXER"
+    ],
     "genres": [
-      "Adventure"
+      "Historical",
+      "Adventure",
+      "Visual Novel"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "2D",
+      "Choices Matter",
+      "Historical",
+      "Multiple Endings",
+      "Free Game"
     ],
     "steamAppId": 1712390,
     "reviewSummary": {
@@ -5539,14 +7813,34 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/606030/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2017-03-29",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Orangepixel"
+    ],
+    "publishers": [
+      "Orangepixel",
+      "THQ Nordic Mobile GmbH"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Arcade",
+      "Metroidvania"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Indie",
+      "2D",
+      "Pixel Graphics",
+      "Platformer",
+      "Difficult",
+      "Retro",
+      "Roguelike",
+      "Space",
+      "Roguelite",
+      "Procedural Generation",
+      "Arcade",
+      "Dungeon Crawler",
+      "Metroidvania",
+      "Perma Death"
     ],
     "steamAppId": 606030,
     "reviewSummary": {
@@ -5574,14 +7868,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1904550/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1994-01-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "DreamForge Intertainment"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Dungeon Crawler"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Classic",
+      "D&D",
+      "First-Person",
+      "Dungeon Crawler"
     ],
     "steamAppId": 1904550,
     "reviewSummary": {
@@ -5607,7 +7908,7 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     ],
     "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/287390/header.jpg",
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/287390/library_600x900_2x.jpg",
-    "shortDescription": "It is the year 2034. Beneath the ruins of post-apocalyptic Moscow, in the tunnels of the Metro, the remnants of mankind are besieged by deadly threats from outside \u2013 and within. Mutants stalk the catacombs beneath the desolate surface, and hunt amidst the poisoned skies above.",
+    "shortDescription": "It is the year 2034. Beneath the ruins of post-apocalyptic Moscow, in the tunnels of the Metro, the remnants of mankind are besieged by deadly threats from outside – and within. Mutants stalk the catacombs beneath the desolate surface, and hunt amidst the poisoned skies above.",
     "releaseDate": "27 Aug, 2014",
     "developers": [
       "4A Games"
@@ -5616,11 +7917,29 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
       "Deep Silver"
     ],
     "genres": [
-      "Action"
+      "Shooter",
+      "FPP",
+      "Survival"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Story Rich",
+      "Atmospheric",
+      "Classic",
+      "First-Person",
+      "Science",
+      "Horror",
+      "Mature",
+      "Nudity",
+      "Survival",
+      "Violent",
+      "Gore",
+      "FPS",
+      "Shooter",
+      "Post-apocalyptic",
+      "Stealth",
+      "Survival Horror",
+      "Psychological Horror",
+      "Remake"
     ],
     "steamAppId": 287390,
     "reviewSummary": {
@@ -5634,8 +7953,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "steam-241930",
-    "title": "Middle-earth\u2122: Shadow of Mordor\u2122 Game of the Year Edition",
-    "sortTitle": "Middle-earth\u2122: Shadow of Mordor\u2122 Game of the Year Edition",
+    "title": "Middle-earth™: Shadow of Mordor™ Game of the Year Edition",
+    "sortTitle": "Middle-earth™: Shadow of Mordor™ Game of the Year Edition",
     "platforms": [
       {
         "platformId": "gog",
@@ -5648,14 +7967,32 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/241930/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2014-09-30",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Monolith Productions"
+    ],
+    "publishers": [
+      "Warner Bros. Interactive Entertainment"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Fantasy",
+      "Story Rich",
+      "Atmospheric",
+      "Classic",
+      "Dark",
+      "Third Person",
+      "Open World",
+      "Gore",
+      "Magic",
+      "Hack and Slash",
+      "Stealth",
+      "Good Old Game"
     ],
     "steamAppId": 241930,
     "reviewSummary": {
@@ -5669,8 +8006,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "steam-356190",
-    "title": "Middle-earth\u2122: Shadow of War\u2122",
-    "sortTitle": "Middle-earth\u2122: Shadow of War\u2122",
+    "title": "Middle-earth™: Shadow of War™",
+    "sortTitle": "Middle-earth™: Shadow of War™",
     "platforms": [
       {
         "platformId": "gog",
@@ -5683,14 +8020,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/356190/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2017-10-10",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Monolith Productions"
+    ],
+    "publishers": [
+      "WB Games"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Fantasy",
+      "Story Rich",
+      "Atmospheric",
+      "Dark",
+      "Third Person",
+      "Open World",
+      "Gore",
+      "Magic",
+      "Hack and Slash",
+      "Stealth"
     ],
     "steamAppId": 356190,
     "reviewSummary": {
@@ -5716,7 +8069,7 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     ],
     "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/606150/header.jpg",
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/606150/library_600x900_2x.jpg",
-    "shortDescription": "Moonlighter is an Action RPG with rogue-lite elements that demonstrates two sides of the coin \u2013 revealing everyday routines of Will, an adventurous shopkeeper that secretly dreams of becoming a hero.",
+    "shortDescription": "Moonlighter is an Action RPG with rogue-lite elements that demonstrates two sides of the coin – revealing everyday routines of Will, an adventurous shopkeeper that secretly dreams of becoming a hero.",
     "releaseDate": "29 May, 2018",
     "developers": [
       "Digital Sun"
@@ -5727,11 +8080,23 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "genres": [
       "Action",
       "Adventure",
-      "Indie"
+      "Managerial"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Indie",
+      "Fantasy",
+      "2D",
+      "Pixel Graphics",
+      "Great Soundtrack",
+      "Management",
+      "Roguelike",
+      "Top-Down",
+      "Roguelite",
+      "Managerial",
+      "Procedural Generation",
+      "Dungeon Crawler"
     ],
     "steamAppId": 606150,
     "reviewSummary": {
@@ -5759,14 +8124,29 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/276810/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2015-11-19",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Rogue Factor"
+    ],
+    "publishers": [
+      "Nacon"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Turn-based",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Indie",
+      "Fantasy",
+      "Role-playing",
+      "Turn-Based",
+      "Dark",
+      "Tactical",
+      "Medieval",
+      "Procedural Generation",
+      "Tactical RPG",
+      "Perma Death",
+      "Board Game"
     ],
     "steamAppId": 276810,
     "reviewSummary": {
@@ -5794,14 +8174,35 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1080750/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2019-09-19",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Die Gute Fabrik"
+    ],
+    "publishers": [
+      "Akupara Games"
+    ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Role-playing",
+      "Narrative"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Story Rich",
+      "Atmospheric",
+      "Role-playing",
+      "2D",
+      "Exploration",
+      "Female Protagonist",
+      "Dark",
+      "Great Soundtrack",
+      "Mystery",
+      "Point&Click",
+      "Relaxing",
+      "Narrative",
+      "Walking Simulator",
+      "Supernatural",
+      "Nature",
+      "Cozy"
     ],
     "steamAppId": 1080750,
     "reviewSummary": {
@@ -5829,14 +8230,34 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2852980/library_600x900_2x.jpg",
     "shortDescription": "Strategy on GOG.com (DRM-Free)",
     "releaseDate": "2024-09-04",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "KORO.GAMES"
+    ],
+    "publishers": [
+      "Alawar"
+    ],
     "genres": [
-      "Strategy"
+      "Strategy",
+      "Roguelike",
+      "Card Game"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Indie",
+      "Fantasy",
+      "Strategy",
+      "Pixel Graphics",
+      "Dark",
+      "Tactical",
+      "Management",
+      "Difficult",
+      "Roguelike",
+      "Magic",
+      "Roguelite",
+      "Card Game",
+      "Dark Comedy",
+      "Deckbuilding",
+      "Auto Battler"
     ],
     "steamAppId": 2852980,
     "reviewSummary": {
@@ -5864,14 +8285,29 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/794540/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2019-10-03",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Chance Agency"
+    ],
+    "publishers": [
+      "Fellow Traveller"
+    ],
     "genres": [
-      "Adventure"
+      "Sci-fi",
+      "Adventure",
+      "Role-playing"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Story Rich",
+      "Atmospheric",
+      "Role-playing",
+      "Sci-fi",
+      "Choices Matter",
+      "Visual Novel",
+      "Multiple Endings",
+      "Emotional",
+      "Cyberpunk",
+      "Noir"
     ],
     "steamAppId": 794540,
     "reviewSummary": {
@@ -5899,14 +8335,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-3.gog-statics.com/690e76916523b140d297f86906c67e2816b27005ee1b6743b53332c9583b2654_glx_vertical_cover.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2005-11-03",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "BioWare"
+    ],
+    "publishers": [
+      "Electronic Arts"
+    ],
     "genres": [
       "Role-playing"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Classic",
+      "D&D",
+      "Isometric",
+      "Fantasy",
+      "Party-Based"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -5933,14 +8376,29 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/704450/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2018-03-27",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Beamdog"
+    ],
+    "publishers": [
+      "Beamdog"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Adventure",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Fantasy",
+      "Story Rich",
+      "Atmospheric",
+      "Role-playing",
+      "Female Protagonist",
+      "Multiplayer",
+      "Real-Time",
+      "Retro",
+      "Magic",
+      "CRPG"
     ],
     "steamAppId": 704450,
     "reviewSummary": {
@@ -5968,14 +8426,28 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/6420/library_600x900_2x.jpg",
     "shortDescription": "Strategy on GOG.com (DRM-Free)",
     "releaseDate": "2004-11-05",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Mithis Entertainment"
+    ],
+    "publishers": [
+      "THQ Nordic Mobile GmbH"
+    ],
     "genres": [
-      "Strategy"
+      "Strategy",
+      "Real-time",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Atmospheric",
+      "Strategy",
+      "Sci-fi",
+      "Classic",
+      "Science",
+      "Tactical",
+      "Multiplayer",
+      "Real-Time",
+      "Space",
+      "RTS"
     ],
     "steamAppId": 6420,
     "reviewSummary": {
@@ -6003,14 +8475,28 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1400520/library_600x900_2x.jpg",
     "shortDescription": "Strategy on GOG.com (DRM-Free)",
     "releaseDate": "2020-12-07",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Star Drifters"
+    ],
+    "publishers": [
+      "Star Drifters"
+    ],
     "genres": [
-      "Strategy"
+      "Strategy",
+      "Real-time",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Fantasy",
+      "Strategy",
+      "Real-Time",
+      "Magic",
+      "Top-Down",
+      "Realistic",
+      "RTS",
+      "Flight",
+      "LevelEditor",
+      "Time Manipulation"
     ],
     "steamAppId": 1400520,
     "reviewSummary": {
@@ -6038,14 +8524,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1348690/library_600x900_2x.jpg",
     "shortDescription": "Strategy on GOG.com (DRM-Free)",
     "releaseDate": "2022-05-03",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Laki Studios"
+    ],
+    "publishers": [
+      "Goblinz Publishing"
+    ],
     "genres": [
-      "Strategy"
+      "Strategy",
+      "Turn-based",
+      "Roguelike"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Fantasy",
+      "Atmospheric",
+      "Strategy",
+      "Turn-Based",
+      "Tactical",
+      "Roguelike",
+      "Magic",
+      "Roguelite",
+      "Card Game",
+      "Deckbuilding",
+      "Board Game",
+      "Tabletop"
     ],
     "steamAppId": 1348690,
     "reviewSummary": {
@@ -6071,7 +8573,7 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     ],
     "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/15700/header.jpg",
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/15700/library_600x900_2x.jpg",
-    "shortDescription": "Selected by the fickle finger of fate, Abe\u2122, floor-waxer first class for RuptureFarms, was catapulted into a life of adventure when he overheard plans by his boss, Molluck the Glukkon\u2122, to turn Abe and his fellow Mudokons into Tasty Treats as part of a last-ditch effort to rescue Molluck's failing meat-packing empire.",
+    "shortDescription": "Selected by the fickle finger of fate, Abe™, floor-waxer first class for RuptureFarms, was catapulted into a life of adventure when he overheard plans by his boss, Molluck the Glukkon™, to turn Abe and his fellow Mudokons into Tasty Treats as part of a last-ditch effort to rescue Molluck's failing meat-packing empire.",
     "releaseDate": "28 Aug, 2008",
     "developers": [
       "Oddworld Inhabitants"
@@ -6080,11 +8582,23 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
       "Oddworld Inhabitants"
     ],
     "genres": [
-      "Adventure"
+      "Action",
+      "Adventure",
+      "Platformer"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Fantasy",
+      "Atmospheric",
+      "2D",
+      "Classic",
+      "Puzzle",
+      "Dark",
+      "Funny",
+      "Platformer",
+      "Difficult",
+      "Puzzle Platformer"
     ],
     "steamAppId": 15700,
     "reviewSummary": {
@@ -6112,14 +8626,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1536610/library_600x900_2x.jpg",
     "shortDescription": "Simulation on GOG.com (DRM-Free)",
     "releaseDate": "2004-03-14",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "OpenTTD"
+    ],
+    "publishers": [
+      "OpenTTD"
+    ],
     "genres": [
-      "Simulation"
+      "Simulation",
+      "Economic",
+      "Sandbox"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Indie",
+      "Classic",
+      "Simulation",
+      "Management",
+      "Multiplayer",
+      "Sandbox",
+      "Resource Management",
+      "Isometric",
+      "City builder",
+      "Economic",
+      "Trains",
+      "Transportation",
+      "Free Game"
     ],
     "steamAppId": 1536610,
     "reviewSummary": {
@@ -6147,14 +8678,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1129190/library_600x900_2x.jpg",
     "shortDescription": "Simulation on GOG.com (DRM-Free)",
     "releaseDate": "2020-11-16",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "GB Patch Games"
+    ],
+    "publishers": [
+      "GB Patch Games"
+    ],
     "genres": [
-      "Simulation"
+      "Simulation",
+      "Visual Novel"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Indie",
+      "Simulation",
+      "Casual",
+      "Choices Matter",
+      "Funny",
+      "Visual Novel",
+      "Multiple Endings",
+      "Relaxing",
+      "Choose Your Own Adventure",
+      "Romance",
+      "LGBTQ+",
+      "Dating Sim",
+      "Free Game"
     ],
     "steamAppId": 1129190,
     "reviewSummary": {
@@ -6182,14 +8729,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/448510/library_600x900_2x.jpg",
     "shortDescription": "Simulation on GOG.com (DRM-Free)",
     "releaseDate": "2018-08-07",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Ghost Town Games Ltd.",
+      "Team17"
+    ],
+    "publishers": [
+      "Team17 Digital LTD."
+    ],
     "genres": [
-      "Simulation"
+      "Simulation",
+      "Action",
+      "Comedy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Simulation",
+      "Casual",
+      "Great Soundtrack",
+      "Funny",
+      "Multiplayer",
+      "Difficult",
+      "Family Friendly",
+      "Local Co-Op",
+      "Local Multiplayer",
+      "Comedy",
+      "Cooking"
     ],
     "steamAppId": 448510,
     "reviewSummary": {
@@ -6217,14 +8781,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-3.gog-statics.com/3de511f611d938f1a877fb2d244e1c9403ce41bc6007263fc440c80ecb75df9b_glx_vertical_cover.jpg",
     "shortDescription": "Simulation on GOG.com (DRM-Free)",
     "releaseDate": "2016-08-03",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Ghost Town Games Ltd."
+    ],
+    "publishers": [
+      "Team17 Digital LTD."
+    ],
     "genres": [
-      "Simulation"
+      "Simulation",
+      "Action",
+      "Comedy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Indie",
+      "Classic",
+      "Simulation",
+      "Casual",
+      "Great Soundtrack",
+      "Funny",
+      "Difficult",
+      "Family Friendly",
+      "Local Co-Op",
+      "Local Multiplayer",
+      "Comedy",
+      "Cooking"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -6251,14 +8832,28 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-3.gog-statics.com/b7272e6bb4022f3838c91a37cc403d99673fb657d57fad34f53dfa2dd4a2cafd_glx_vertical_cover.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2016-03-08",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Revival Productions, LLC"
+    ],
+    "publishers": [
+      "Revival Productions, LLC"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "FPP",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Sci-fi",
+      "First-Person",
+      "Science",
+      "Multiplayer",
+      "FPS",
+      "Space",
+      "Demo",
+      "Free Game",
+      "VR"
     ],
     "reviewSummary": {
       "reviewScore": 3,
@@ -6285,14 +8880,38 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/388880/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2016-01-15",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Night School Studios"
+    ],
+    "publishers": [
+      "Night School Studios"
+    ],
     "genres": [
-      "Adventure"
+      "Horror",
+      "Adventure",
+      "Point-and-click"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Story Rich",
+      "Atmospheric",
+      "2D",
+      "Classic",
+      "Female Protagonist",
+      "Dark",
+      "Great Soundtrack",
+      "Horror",
+      "Choices Matter",
+      "Mystery",
+      "Point&Click",
+      "Multiple Endings",
+      "Psychological Horror",
+      "Walking Simulator",
+      "Supernatural",
+      "Lovecraftian",
+      "Thriller",
+      "Cozy",
+      "Short"
     ],
     "steamAppId": 388880,
     "reviewSummary": {
@@ -6320,14 +8939,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1768280/library_600x900_2x.jpg",
     "shortDescription": "Simulation on GOG.com (DRM-Free)",
     "releaseDate": "2022-10-11",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "The Secret Games Company"
+    ],
+    "publishers": [
+      "Goblinz Publishing"
+    ],
     "genres": [
-      "Simulation"
+      "Simulation",
+      "Turn-based",
+      "Historical"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Indie",
+      "2D",
+      "Turn-Based",
+      "Simulation",
+      "Management",
+      "Multiplayer",
+      "Sandbox",
+      "Historical",
+      "Resource Management",
+      "Military",
+      "4X",
+      "Board Game"
     ],
     "steamAppId": 1768280,
     "reviewSummary": {
@@ -6355,14 +8990,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1374290/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2020-10-14",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "mc2games"
+    ],
+    "publishers": [
+      "mc2games"
+    ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Point-and-click",
+      "Puzzle"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Indie",
+      "Story Rich",
+      "Atmospheric",
+      "Sci-fi",
+      "Puzzle",
+      "Casual",
+      "First-Person",
+      "Mystery",
+      "Investigation",
+      "Walking Simulator",
+      "Thriller",
+      "Psychological",
+      "Hidden Object"
     ],
     "steamAppId": 1374290,
     "reviewSummary": {
@@ -6390,14 +9042,29 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2702050/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2023-12-19",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Strategic Simulations",
+      "Doug Wood"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Turn-based",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Fantasy",
+      "Atmospheric",
+      "Role-playing",
+      "Exploration",
+      "Classic",
+      "Turn-Based",
+      "Tactical",
+      "Retro",
+      "Top-Down",
+      "Tactical RPG"
     ],
     "steamAppId": 2702050,
     "reviewSummary": {
@@ -6425,14 +9092,35 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/431650/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2017-02-07",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "ION LANDS"
+    ],
+    "publishers": [
+      "ION LANDS"
+    ],
     "genres": [
-      "Adventure"
+      "Action",
+      "Adventure",
+      "Survival"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Indie",
+      "Story Rich",
+      "Atmospheric",
+      "Exploration",
+      "Sci-fi",
+      "Puzzle",
+      "Science",
+      "Great Soundtrack",
+      "Third Person",
+      "Open World",
+      "Mystery",
+      "Survival",
+      "Crafting",
+      "Nature",
+      "Robots"
     ],
     "steamAppId": 431650,
     "reviewSummary": {
@@ -6460,14 +9148,32 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2601940/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2024-10-02",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Apparition Games"
+    ],
+    "publishers": [
+      "indie.io"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Arcade",
+      "Pinball"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Atmospheric",
+      "2D",
+      "Exploration",
+      "Puzzle",
+      "Pixel Graphics",
+      "Platformer",
+      "Retro",
+      "Top-Down",
+      "Arcade",
+      "Puzzle Platformer",
+      "Metroidvania",
+      "Physics",
+      "Pinball"
     ],
     "steamAppId": 2601940,
     "reviewSummary": {
@@ -6495,14 +9201,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1608230/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2023-05-23",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Wishfully"
+    ],
+    "publishers": [
+      "Thunderful Publishing"
+    ],
     "genres": [
-      "Adventure"
+      "Platformer",
+      "Adventure",
+      "Puzzle"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Indie",
+      "Story Rich",
+      "Atmospheric",
+      "2D",
+      "Sci-fi",
+      "Puzzle",
+      "Casual",
+      "Female Protagonist",
+      "Platformer",
+      "Emotional",
+      "Puzzle Platformer"
     ],
     "steamAppId": 1608230,
     "reviewSummary": {
@@ -6530,14 +9253,26 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1882370/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1988-01-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Stormfront Studios"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Turn-based",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Fantasy",
+      "Story Rich",
+      "Turn-Based",
+      "Magic",
+      "Isometric",
+      "Dungeon Crawler",
+      "Combat",
+      "CRPG"
     ],
     "steamAppId": 1882370,
     "reviewSummary": {
@@ -6565,14 +9300,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1904522/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1991-01-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Strategic Simulations"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Strategy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Classic",
+      "D&D",
+      "Turn-Based",
+      "Fantasy"
     ],
     "steamAppId": 1904522,
     "reviewSummary": {
@@ -6600,14 +9342,27 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/223470/library_600x900_2x.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "2003-04-14",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Running With Scissors"
+    ],
+    "publishers": [
+      "Running With Scissors"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "Action",
+      "Modern"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Classic",
+      "Mature",
+      "Violent",
+      "Gore",
+      "NSFW",
+      "Shooter",
+      "Modern",
+      "Good Old Game"
     ],
     "steamAppId": 223470,
     "reviewSummary": {
@@ -6635,14 +9390,32 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-3.gog-statics.com/d916d3bbf261e1548ade8e92b20f207886cf7483a9c360f998ad491b695a0332_glx_vertical_cover.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "2003-08-29",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Running With Scissors"
+    ],
+    "publishers": [
+      "Running With Scissors"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "Action",
+      "Horror"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Classic",
+      "Dark",
+      "Horror",
+      "Difficult",
+      "Isometric",
+      "NSFW",
+      "Top-Down",
+      "Shooter",
+      "Psychological Horror",
+      "Surreal",
+      "Good Old Game",
+      "Dark Comedy",
+      "Free Game"
     ],
     "reviewSummary": {
       "reviewScore": 3,
@@ -6669,14 +9442,33 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/474960/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2017-05-04",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Arkane Studios"
+    ],
+    "publishers": [
+      "Bethesda Softworks LLC"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "FPP",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Story Rich",
+      "Atmospheric",
+      "Exploration",
+      "Sci-fi",
+      "First-Person",
+      "Science",
+      "Great Soundtrack",
+      "Horror",
+      "Open World",
+      "FPS",
+      "Space",
+      "Stealth",
+      "Survival Horror",
+      "Psychological Horror"
     ],
     "steamAppId": 474960,
     "reviewSummary": {
@@ -6704,14 +9496,28 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2833640/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2024-12-05",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "mc2games"
+    ],
+    "publishers": [
+      "mc2games"
+    ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Point-and-click",
+      "Puzzle"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Sci-fi",
+      "Puzzle",
+      "Casual",
+      "Mystery",
+      "Historical",
+      "Family Friendly",
+      "Logic",
+      "Investigation",
+      "Walking Simulator",
+      "Hidden Object"
     ],
     "steamAppId": 2833640,
     "reviewSummary": {
@@ -6739,14 +9545,25 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2210/library_600x900_2x.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "2005-10-18",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "RavenSoft",
+      "id Software"
+    ],
+    "publishers": [
+      "Bethesda Softworks LLC"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "FPP",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Sci-fi",
+      "Classic",
+      "First-Person",
+      "Science",
+      "FPS",
+      "Shooter"
     ],
     "steamAppId": 2210,
     "reviewSummary": {
@@ -6772,7 +9589,7 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     ],
     "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2320/header.jpg",
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2320/library_600x900_2x.jpg",
-    "shortDescription": "You are humanity\u2019s last hope to stop the Strogg, a hostile alien race waging war against Earth. Play this military sci-fi FPS, now upgraded for modern platforms with improved visuals, new campaign content, online multiplayer/co-op, and more.",
+    "shortDescription": "You are humanity’s last hope to stop the Strogg, a hostile alien race waging war against Earth. Play this military sci-fi FPS, now upgraded for modern platforms with improved visuals, new campaign content, online multiplayer/co-op, and more.",
     "releaseDate": "3 Aug, 2007",
     "developers": [
       "id Software",
@@ -6780,14 +9597,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
       "MachineGames"
     ],
     "publishers": [
-      "Bethesda Softworks"
+      "Bethesda Softworks LLC"
     ],
     "genres": [
-      "Action"
+      "Shooter",
+      "Action",
+      "Horror"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Classic",
+      "First-Person",
+      "Dark",
+      "Horror",
+      "FPS",
+      "Shooter"
     ],
     "steamAppId": 2320,
     "reviewSummary": {
@@ -6815,14 +9639,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-1.gog-statics.com/319eb7a1947f6623c2069251c83236df7b90805434910b0c27b3e9447062ba26_glx_vertical_cover.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "1997-12-09",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "id Software"
+    ],
+    "publishers": [
+      "Bethesda Softworks"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "Action"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "FPS",
+      "Classic",
+      "Sci-fi",
+      "Action"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -6847,21 +9678,25 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     ],
     "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1089130/header.jpg",
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1089130/library_600x900_2x.jpg",
-    "shortDescription": "Quake II RTX is a cutting-edge, ray-traced reimagining of id software\u2019s old school classic, by NVIDIA\u2019s Lightspeed Studios. Global lighting effects, including realistic reflections, refraction, shadows, ambient occlusion and global illumination are a result of the path-traced simulation of light.",
+    "shortDescription": "Quake II RTX is a cutting-edge, ray-traced reimagining of id software’s old school classic, by NVIDIA’s Lightspeed Studios. Global lighting effects, including realistic reflections, refraction, shadows, ambient occlusion and global illumination are a result of the path-traced simulation of light.",
     "releaseDate": "6 Jun, 2019",
     "developers": [
-      "Lightspeed Studios\u2122"
+      "Lightspeed Studios™"
     ],
     "publishers": [
       "NVIDIA"
     ],
     "genres": [
-      "Action",
-      "Free To Play"
+      "Shooter",
+      "FPP",
+      "Horror"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "First-Person",
+      "Dark",
+      "Horror",
+      "FPS",
+      "Shooter"
     ],
     "steamAppId": 1089130,
     "reviewSummary": {
@@ -6889,14 +9724,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/290300/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2015-10-20",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Double Damage Games"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Open World"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Atmospheric",
+      "2D",
+      "Exploration",
+      "Science",
+      "Great Soundtrack",
+      "Third Person",
+      "Open World",
+      "Sandbox",
+      "Space",
+      "Trading"
     ],
     "steamAppId": 290300,
     "reviewSummary": {
@@ -6924,14 +9775,28 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/910830/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2020-09-22",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Double Damage Games"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Sci-fi",
+      "Role-playing"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Indie",
+      "Role-playing",
+      "Sci-fi",
+      "First-Person",
+      "Science",
+      "Third Person",
+      "Space",
+      "Robots",
+      "Flight"
     ],
     "steamAppId": 910830,
     "reviewSummary": {
@@ -6959,14 +9824,26 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1142390/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2020-10-13",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Stormind Games"
+    ],
+    "publishers": [
+      "Stormind Games"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Horror"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Dark",
+      "Horror",
+      "Violent",
+      "Stealth",
+      "Survival Horror",
+      "LGBTQ+"
     ],
     "steamAppId": 1142390,
     "reviewSummary": {
@@ -6994,14 +9871,28 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1290780/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2021-09-09",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Orangepixel"
+    ],
+    "publishers": [
+      "THQ Nordic Mobile GmbH"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Platformer"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "2D",
+      "Science",
+      "Platformer",
+      "Survival",
+      "Cartoony",
+      "Roguelite",
+      "Crafting",
+      "Puzzle Platformer"
     ],
     "steamAppId": 1290780,
     "reviewSummary": {
@@ -7029,14 +9920,28 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1299710/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "1993-09-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "MPS Labs"
+    ],
+    "publishers": [
+      "Ziggurat Interactive"
+    ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Point-and-click",
+      "Detective-mystery"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Atmospheric",
+      "Classic",
+      "Horror",
+      "Mystery",
+      "Point&Click",
+      "Historical",
+      "Investigation",
+      "Detective-mystery",
+      "Thriller"
     ],
     "steamAppId": 1299710,
     "reviewSummary": {
@@ -7064,14 +9969,29 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/9480/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2009-01-07",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Volition"
+    ],
+    "publishers": [
+      "Deep Silver"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "TPP",
+      "Modern"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Classic",
+      "Female Protagonist",
+      "Great Soundtrack",
+      "Funny",
+      "Third Person",
+      "Open World",
+      "Multiplayer",
+      "Sandbox",
+      "Modern",
+      "Crime"
     ],
     "steamAppId": 9480,
     "reviewSummary": {
@@ -7099,14 +10019,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/206420/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2013-08-22",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Deep Silver Volition"
+    ],
+    "publishers": [
+      "Deep Silver"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "TPP",
+      "Open World"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Classic",
+      "Third Person",
+      "Open World"
     ],
     "steamAppId": 206420,
     "reviewSummary": {
@@ -7134,14 +10062,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/301910/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2015-01-22",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Deep Silver Volition",
+      "High Voltage Software"
+    ],
+    "publishers": [
+      "Deep Silver"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "TPP",
+      "Open World"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Atmospheric",
+      "First-Person",
+      "Female Protagonist",
+      "Funny",
+      "Third Person",
+      "Open World",
+      "Multiplayer",
+      "Sandbox",
+      "Mature",
+      "Gore"
     ],
     "steamAppId": 301910,
     "reviewSummary": {
@@ -7155,8 +10099,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "steam-978300",
-    "title": "Saints Row\u00ae: The Third\u2122 Remastered",
-    "sortTitle": "Saints Row\u00ae: The Third\u2122 Remastered",
+    "title": "Saints Row®: The Third™ Remastered",
+    "sortTitle": "Saints Row®: The Third™ Remastered",
     "platforms": [
       {
         "platformId": "gog",
@@ -7169,14 +10113,23 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/978300/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2021-05-22",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Deep Silver Volition",
+      "Sperasoft"
+    ],
+    "publishers": [
+      "Deep Silver"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "TPP",
+      "Modern"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Classic",
+      "Third Person",
+      "Modern"
     ],
     "steamAppId": 978300,
     "reviewSummary": {
@@ -7204,14 +10157,29 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1580970/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2021-05-20",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Amanita Design"
+    ],
+    "publishers": [
+      "Amanita Design"
+    ],
     "genres": [
-      "Adventure"
+      "Fantasy",
+      "Adventure",
+      "Point-and-click"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Fantasy",
+      "Puzzle",
+      "Point&Click",
+      "Family Friendly",
+      "Relaxing",
+      "Space",
+      "Surreal",
+      "Nature",
+      "Short",
+      "Free Game"
     ],
     "steamAppId": 1580970,
     "reviewSummary": {
@@ -7239,14 +10207,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/227220/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2013-03-15",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Artifice Studio"
+    ],
+    "publishers": [
+      "Artifice Studio"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Strategy",
+      "Horror"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Indie",
+      "Atmospheric",
+      "Strategy",
+      "Classic",
+      "Dark",
+      "Great Soundtrack",
+      "Horror",
+      "Third Person",
+      "Tower Defense",
+      "Free Game",
+      "Werewolves"
     ],
     "steamAppId": 227220,
     "reviewSummary": {
@@ -7274,14 +10258,27 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1526900/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2023-10-06",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Kinky Fridays"
+    ],
+    "publishers": [
+      "Kinky Fridays"
+    ],
     "genres": [
-      "Adventure"
+      "TPP",
+      "Adventure",
+      "Exploration"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Exploration",
+      "Third Person",
+      "Mature",
+      "Sexual Content",
+      "Nudity",
+      "NSFW",
+      "Cartoony",
+      "Hentai"
     ],
     "steamAppId": 1526900,
     "reviewSummary": {
@@ -7309,14 +10306,35 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/698670/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2022-10-14",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Ebb Software"
+    ],
+    "publishers": [
+      "Kepler Interactive"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Horror"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Indie",
+      "Atmospheric",
+      "Sci-fi",
+      "First-Person",
+      "Dark",
+      "Horror",
+      "Sexual Content",
+      "Nudity",
+      "Violent",
+      "Gore",
+      "Survival Horror",
+      "Psychological Horror",
+      "Surreal",
+      "Lovecraftian",
+      "Steampunk"
     ],
     "steamAppId": 698670,
     "reviewSummary": {
@@ -7344,14 +10362,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1904521/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1990-01-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Strategic Simulations"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Strategy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Classic",
+      "D&D",
+      "Turn-Based",
+      "Fantasy"
     ],
     "steamAppId": 1904521,
     "reviewSummary": {
@@ -7379,14 +10404,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2350510/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "U.S. Gold"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Strategy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Classic",
+      "D&D",
+      "Isometric",
+      "Fantasy"
     ],
     "steamAppId": 2350510
   },
@@ -7406,14 +10438,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/324800/library_600x900_2x.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "2016-10-13",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Flying Wild Hog"
+    ],
+    "publishers": [
+      "Devolver Digital"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "FPP",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Sci-fi",
+      "Classic",
+      "First-Person",
+      "Science",
+      "Funny",
+      "Open World",
+      "Multiplayer",
+      "Gore",
+      "FPS",
+      "Shooter",
+      "Hack and Slash",
+      "Looter Shooter",
+      "Ninja"
     ],
     "steamAppId": 324800,
     "reviewSummary": {
@@ -7441,14 +10490,29 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-3.gog-statics.com/68242319701d590dce72be3f0e2fe7fd716c98e958e69dda7ea9f9c8eb6e09f2_glx_vertical_cover.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "1997-05-13",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "3D Realms Entertainment"
+    ],
+    "publishers": [
+      "Devolver Digital"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "FPP",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Sci-fi",
+      "Classic",
+      "First-Person",
+      "Science",
+      "Multiplayer",
+      "Nudity",
+      "Gore",
+      "FPS",
+      "Shooter",
+      "Free Game",
+      "Ninja"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -7475,14 +10539,32 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-3.gog-statics.com/fcc90f964947d19b0bc49825d55cd181fea2389cd1312a5619ac731fc1c64208_glx_vertical_cover.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2015-08-20",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Harebrained Schemes"
+    ],
+    "publishers": [
+      "Paradox Interactive"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Turn-based",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Indie",
+      "Fantasy",
+      "Story Rich",
+      "Atmospheric",
+      "Role-playing",
+      "Sci-fi",
+      "Turn-Based",
+      "Science",
+      "Female Protagonist",
+      "Great Soundtrack",
+      "Tactical",
+      "Isometric",
+      "Cyberpunk",
+      "CRPG"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -7516,14 +10598,26 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
       "Paradox Interactive"
     ],
     "genres": [
-      "Adventure",
-      "Indie",
-      "RPG",
-      "Strategy"
+      "Role-playing",
+      "Turn-based",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Indie",
+      "Fantasy",
+      "Story Rich",
+      "Atmospheric",
+      "Role-playing",
+      "Sci-fi",
+      "Classic",
+      "Turn-Based",
+      "Science",
+      "Female Protagonist",
+      "Tactical",
+      "Isometric",
+      "Cyberpunk",
+      "CRPG",
+      "Dystopian"
     ],
     "steamAppId": 234650,
     "reviewSummary": {
@@ -7551,14 +10645,32 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-3.gog-statics.com/3151b8deaeff59ad905af2bf37cfca592d615cd1615fbe48d893ac6f797140ad_glx_vertical_cover.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2014-09-18",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Harebrained Schemes"
+    ],
+    "publishers": [
+      "Paradox Interactive"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Turn-based",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Indie",
+      "Fantasy",
+      "Story Rich",
+      "Atmospheric",
+      "Role-playing",
+      "Sci-fi",
+      "Classic",
+      "Turn-Based",
+      "Science",
+      "Female Protagonist",
+      "Tactical",
+      "Isometric",
+      "Cyberpunk",
+      "CRPG"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -7585,14 +10697,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/585450/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2018-08-31",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Games Farm"
+    ],
+    "publishers": [
+      "Kalypso Media Digital"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Fantasy",
+      "Role-playing"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Fantasy",
+      "Role-playing"
     ],
     "steamAppId": 585450,
     "reviewSummary": {
@@ -7620,14 +10739,27 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2084000/library_600x900_2x.jpg",
     "shortDescription": "Strategy on GOG.com (DRM-Free)",
     "releaseDate": "2024-09-05",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Roboatino"
+    ],
+    "publishers": [
+      "Goblinz Publishing"
+    ],
     "genres": [
-      "Strategy"
+      "Strategy",
+      "Turn-based",
+      "Roguelike"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Strategy",
+      "2D",
+      "Turn-Based",
+      "Pixel Graphics",
+      "Tactical",
+      "Roguelike",
+      "Card Game",
+      "Deckbuilding",
+      "Ninja"
     ],
     "steamAppId": 2084000,
     "reviewSummary": {
@@ -7655,14 +10787,23 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-4.gog-statics.com/aa485936254a93b3a2ed0f780d3e64609413aee0ebe23c40b3e10e91b947e0ef_glx_vertical_cover.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2021-03-22",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Vallynne"
+    ],
+    "publishers": [
+      "Hitcents"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Tactical",
+      "Strategy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Indie",
+      "Strategy",
+      "Role-playing",
+      "Tactical",
+      "Demo"
     ],
     "reviewSummary": {
       "reviewScore": 2,
@@ -7689,14 +10830,27 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1155330/library_600x900_2x.jpg",
     "shortDescription": "Strategy on GOG.com (DRM-Free)",
     "releaseDate": "2023-05-02",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Artificer"
+    ],
+    "publishers": [
+      "Good Shepherd Entertainment\t"
+    ],
     "genres": [
-      "Strategy"
+      "Strategy",
+      "Turn-based",
+      "Tactical"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Atmospheric",
+      "Strategy",
+      "Exploration",
+      "Turn-Based",
+      "Dark",
+      "Choices Matter",
+      "Tactical",
+      "Top-Down",
+      "Dystopian"
     ],
     "steamAppId": 1155330,
     "reviewSummary": {
@@ -7710,8 +10864,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "gog-1760534591",
-    "title": "Sid Meier's Civilization IV\u00ae: The Complete Edition",
-    "sortTitle": "Sid Meier's Civilization IV\u00ae: The Complete Edition",
+    "title": "Sid Meier's Civilization IV®: The Complete Edition",
+    "sortTitle": "Sid Meier's Civilization IV®: The Complete Edition",
     "platforms": [
       {
         "platformId": "gog",
@@ -7724,14 +10878,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-3.gog-statics.com/37ac843afc2b6d5f3b3b600483948cfc0f849a7c20a95adfcefe5c2b73caa4e7_glx_vertical_cover.jpg",
     "shortDescription": "Strategy on GOG.com (DRM-Free)",
     "releaseDate": "2005-10-20",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Firaxis Games"
+    ],
+    "publishers": [
+      "2K Games"
+    ],
     "genres": [
-      "Strategy"
+      "Strategy",
+      "Turn-based",
+      "Modern"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Strategy",
+      "Classic",
+      "Turn-Based",
+      "Modern"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -7744,8 +10906,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "steam-3910",
-    "title": "Sid Meier's Civilization\u00ae III Complete",
-    "sortTitle": "Sid Meier's Civilization\u00ae III Complete",
+    "title": "Sid Meier's Civilization® III Complete",
+    "sortTitle": "Sid Meier's Civilization® III Complete",
     "platforms": [
       {
         "platformId": "gog",
@@ -7758,14 +10920,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3910/library_600x900_2x.jpg",
     "shortDescription": "Strategy on GOG.com (DRM-Free)",
     "releaseDate": "2001-10-30",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Firaxis Games"
+    ],
+    "publishers": [
+      "2K Games"
+    ],
     "genres": [
-      "Strategy"
+      "Strategy",
+      "Turn-based",
+      "Modern"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Strategy",
+      "Exploration",
+      "Classic",
+      "Turn-Based",
+      "Multiplayer",
+      "Historical",
+      "Isometric",
+      "War",
+      "City builder",
+      "Military",
+      "Grand Strategy",
+      "Modern",
+      "4X"
     ],
     "steamAppId": 3910,
     "reviewSummary": {
@@ -7793,14 +10972,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1558990/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2001-09-17",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Digital Tome",
+      "General Arcade",
+      "Steffen Nyeland"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Action",
+      "Exploration"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Fantasy",
+      "Role-playing",
+      "Exploration",
+      "Classic",
+      "Isometric",
+      "Medieval",
+      "War",
+      "Hack and Slash",
+      "CRPG",
+      "Western"
     ],
     "steamAppId": 1558990,
     "reviewSummary": {
@@ -7828,14 +11024,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-1.gog-statics.com/b356d14cf18812bfa70d1d6cf23139434d71e89a92eae68b88170fcdfc015cfb_glx_vertical_cover.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2019-04-11",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "goonswarm"
+    ],
+    "publishers": [
+      "Black Tower Basement"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Roguelike"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Dark Fantasy",
+      "Turn-Based",
+      "Pixel Graphics",
+      "Party-Based"
     ],
     "reviewSummary": {
       "reviewScore": 3,
@@ -7862,14 +11065,24 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1811040/library_600x900_2x.jpg",
     "shortDescription": " on GOG.com (DRM-Free)",
     "releaseDate": "2022-08-03",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "State of Play Games"
+    ],
+    "publishers": [
+      "11 bit studios"
+    ],
     "genres": [
-      "Action"
+      "Adventure",
+      "Point-and-click",
+      "Narrative"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Story Rich",
+      "Point&Click",
+      "Historical",
+      "Narrative",
+      "Emotional"
     ],
     "steamAppId": 1811040,
     "reviewSummary": {
@@ -7897,14 +11110,33 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/371430/library_600x900_2x.jpg",
     "shortDescription": "Strategy on GOG.com (DRM-Free)",
     "releaseDate": "2016-01-12",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Orangepixel"
+    ],
+    "publishers": [
+      "Orangepixel",
+      "THQ Nordic Mobile GmbH"
+    ],
     "genres": [
-      "Strategy"
+      "Strategy",
+      "Turn-based",
+      "Roguelike"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Indie",
+      "Strategy",
+      "Role-playing",
+      "Sci-fi",
+      "Classic",
+      "Turn-Based",
+      "Pixel Graphics",
+      "Retro",
+      "Roguelike",
+      "Top-Down",
+      "Space",
+      "Roguelite",
+      "Perma Death"
     ],
     "steamAppId": 371430,
     "reviewSummary": {
@@ -7932,14 +11164,33 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-4.gog-statics.com/4b861d6e5a0ab352cae8572e27b62859e8a3e2b8659a7ab47ab1dcaad5c71567_glx_vertical_cover.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2018-05-22",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Streum On Studio"
+    ],
+    "publishers": [
+      "Focus Entertainment"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Atmospheric",
+      "Sci-fi",
+      "First-Person",
+      "Science",
+      "Dark",
+      "Horror",
+      "Multiplayer",
+      "Mature",
+      "Violent",
+      "Gore",
+      "FPS",
+      "Space",
+      "Looter Shooter"
     ],
     "reviewSummary": {
       "reviewScore": 3,
@@ -7966,14 +11217,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2350550/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1992-01-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Cybertech"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Adventure",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Fantasy",
+      "Atmospheric",
+      "Role-playing",
+      "Exploration",
+      "Classic",
+      "Turn-Based",
+      "Pixel Graphics",
+      "Tactical",
+      "Space",
+      "Tactical RPG",
+      "Pirates"
     ],
     "steamAppId": 2350550,
     "reviewSummary": {
@@ -8001,14 +11268,32 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/239350/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2013-08-08",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Mossmouth"
+    ],
+    "publishers": [
+      "Mossmouth"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Platformer"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Indie",
+      "2D",
+      "Classic",
+      "Great Soundtrack",
+      "Platformer",
+      "Difficult",
+      "Roguelike",
+      "Roguelite",
+      "Procedural Generation",
+      "Local Co-Op",
+      "Local Multiplayer",
+      "Perma Death"
     ],
     "steamAppId": 239350,
     "reviewSummary": {
@@ -8022,8 +11307,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "steam-6060",
-    "title": "STAR WARS\u2122 Battlefront\u2122 II (Classic, 2005)",
-    "sortTitle": "STAR WARS\u2122 Battlefront\u2122 II (Classic, 2005)",
+    "title": "STAR WARS™ Battlefront™ II (Classic, 2005)",
+    "sortTitle": "STAR WARS™ Battlefront™ II (Classic, 2005)",
     "platforms": [
       {
         "platformId": "gog",
@@ -8036,14 +11321,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/6060/library_600x900_2x.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "2005-10-31",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Lucasfilm"
+    ],
+    "publishers": [
+      "Disney"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "FPP",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Sci-fi",
+      "Classic",
+      "First-Person",
+      "Science",
+      "Great Soundtrack",
+      "Tactical",
+      "Third Person",
+      "Multiplayer",
+      "FPS",
+      "Space",
+      "Shooter",
+      "Military"
     ],
     "steamAppId": 6060,
     "reviewSummary": {
@@ -8057,8 +11358,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "steam-356500",
-    "title": "STAR WARS\u2122 Galactic Battlegrounds Saga",
-    "sortTitle": "STAR WARS\u2122 Galactic Battlegrounds Saga",
+    "title": "STAR WARS™ Galactic Battlegrounds Saga",
+    "sortTitle": "STAR WARS™ Galactic Battlegrounds Saga",
     "platforms": [
       {
         "platformId": "gog",
@@ -8071,14 +11372,28 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/356500/library_600x900_2x.jpg",
     "shortDescription": "Strategy on GOG.com (DRM-Free)",
     "releaseDate": "2001-11-09",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Lucasfilm"
+    ],
+    "publishers": [
+      "Disney"
+    ],
     "genres": [
-      "Strategy"
+      "Strategy",
+      "Real-time",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Strategy",
+      "2D",
+      "Sci-fi",
+      "Classic",
+      "Science",
+      "Multiplayer",
+      "Real-Time",
+      "Realistic",
+      "Base Building",
+      "RTS"
     ],
     "steamAppId": 356500,
     "reviewSummary": {
@@ -8092,8 +11407,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "steam-32380",
-    "title": "STAR WARS\u2122 Jedi Knight: Dark Forces II",
-    "sortTitle": "STAR WARS\u2122 Jedi Knight: Dark Forces II",
+    "title": "STAR WARS™ Jedi Knight: Dark Forces II",
+    "sortTitle": "STAR WARS™ Jedi Knight: Dark Forces II",
     "platforms": [
       {
         "platformId": "gog",
@@ -8106,14 +11421,24 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/32380/library_600x900_2x.jpg",
     "shortDescription": " on GOG.com (DRM-Free)",
     "releaseDate": "1997-09-30",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Lucasfilm"
+    ],
+    "publishers": [
+      "Disney"
+    ],
     "genres": [
-      "Action"
+      "Shooter",
+      "FPP",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Sci-fi",
+      "Classic",
+      "First-Person",
+      "Science",
+      "FPS",
+      "Shooter"
     ],
     "steamAppId": 32380,
     "reviewSummary": {
@@ -8127,8 +11452,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "gog-1422285784",
-    "title": "STAR WARS\u2122 Jedi Knight: Dark Forces II - Mysteries of the Sith",
-    "sortTitle": "STAR WARS\u2122 Jedi Knight: Dark Forces II - Mysteries of the Sith",
+    "title": "STAR WARS™ Jedi Knight: Dark Forces II - Mysteries of the Sith",
+    "sortTitle": "STAR WARS™ Jedi Knight: Dark Forces II - Mysteries of the Sith",
     "platforms": [
       {
         "platformId": "gog",
@@ -8141,14 +11466,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-2.gog-statics.com/9167e6c841f5a5803e0876454dd2fb0bf0a42d9564edd69a19fea409b0674da9_glx_vertical_cover.jpg",
     "shortDescription": " on GOG.com (DRM-Free)",
     "releaseDate": "1997-09-30",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "LucasArts"
+    ],
+    "publishers": [
+      "Lucasfilm Games, Disney"
+    ],
     "genres": [
+      "Shooter",
       "Action"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Classic",
+      "Star Wars",
+      "FPS",
+      "Sci-fi"
     ],
     "reviewSummary": {
       "reviewScore": 3,
@@ -8161,8 +11493,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "gog-1421404828",
-    "title": "STAR WARS\u2122 Rebellion",
-    "sortTitle": "STAR WARS\u2122 Rebellion",
+    "title": "STAR WARS™ Rebellion",
+    "sortTitle": "STAR WARS™ Rebellion",
     "platforms": [
       {
         "platformId": "gog",
@@ -8175,14 +11507,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-2.gog-statics.com/4d7f5160a916c856a85ece512235dbe4ec4612ba1ef1bf6207e2b97028f24c67_glx_vertical_cover.jpg",
     "shortDescription": "Strategy on GOG.com (DRM-Free)",
     "releaseDate": "1998-02-28",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Coolhand Interactive"
+    ],
+    "publishers": [
+      "Lucasfilm Games, Disney"
+    ],
     "genres": [
       "Strategy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Star Wars",
+      "Classic",
+      "4X",
+      "Space",
+      "Strategy"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -8195,8 +11534,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "steam-2419090",
-    "title": "STAR WARS\u2122: Bounty Hunter\u2122",
-    "sortTitle": "STAR WARS\u2122: Bounty Hunter\u2122",
+    "title": "STAR WARS™: Bounty Hunter™",
+    "sortTitle": "STAR WARS™: Bounty Hunter™",
     "platforms": [
       {
         "platformId": "gog",
@@ -8209,14 +11548,25 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2419090/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2024-08-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Aspyr"
+    ],
+    "publishers": [
+      "Aspyr"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Sci-fi",
+      "Third Person",
+      "Platformer",
+      "Space",
+      "Robots"
     ],
     "steamAppId": 2419090,
     "reviewSummary": {
@@ -8244,14 +11594,26 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/358390/library_600x900_2x.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "1996-11-19",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Apogee Entertainment"
+    ],
+    "publishers": [
+      "Apogee Entertainment"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "Arcade",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Sci-fi",
+      "Classic",
+      "Science",
+      "Shooter",
+      "Arcade",
+      "Good Old Game",
+      "Shoot'EmUp",
+      "Free Game"
     ],
     "steamAppId": 358390,
     "reviewSummary": {
@@ -8279,14 +11641,34 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/380150/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2015-08-31",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "The Brotherhood"
+    ],
+    "publishers": [
+      "The Brotherhood"
+    ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Point-and-click",
+      "Horror"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Indie",
+      "Fantasy",
+      "Story Rich",
+      "Atmospheric",
+      "2D",
+      "Puzzle",
+      "Science",
+      "Dark",
+      "Horror",
+      "Point&Click",
+      "Gore",
+      "Isometric",
+      "Space",
+      "Post-apocalyptic",
+      "Psychological Horror"
     ],
     "steamAppId": 380150,
     "reviewSummary": {
@@ -8314,14 +11696,34 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/437630/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2018-08-15",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Daedalic Entertainment"
+    ],
+    "publishers": [
+      "Daedalic Entertainment"
+    ],
     "genres": [
+      "Action",
+      "Sci-fi",
       "Adventure"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Indie",
+      "Story Rich",
+      "Atmospheric",
+      "Sci-fi",
+      "Science",
+      "Dark",
+      "Great Soundtrack",
+      "Third Person",
+      "Open World",
+      "Visual Novel",
+      "Sexual Content",
+      "Cyberpunk",
+      "Dystopian",
+      "Robots"
     ],
     "steamAppId": 437630,
     "reviewSummary": {
@@ -8349,14 +11751,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/322190/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2016-06-07",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Image and Form"
+    ],
+    "publishers": [
+      "Image and Form"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Sci-fi",
+      "Strategy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Indie",
+      "Atmospheric",
+      "Strategy",
+      "Role-playing",
+      "2D",
+      "Sci-fi",
+      "Classic",
+      "Turn-Based",
+      "Science",
+      "Female Protagonist",
+      "Great Soundtrack",
+      "Robots",
+      "Steampunk"
     ],
     "steamAppId": 322190,
     "reviewSummary": {
@@ -8384,14 +11803,32 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/804010/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2019-05-31",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Image and Form"
+    ],
+    "publishers": [
+      "Thunderful Publishing"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Turn-based",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Indie",
+      "Fantasy",
+      "Atmospheric",
+      "Role-playing",
+      "2D",
+      "Turn-Based",
+      "Casual",
+      "Great Soundtrack",
+      "Magic",
+      "Cartoony",
+      "Card Game",
+      "Robots",
+      "Deckbuilding",
+      "Steampunk"
     ],
     "steamAppId": 804010,
     "reviewSummary": {
@@ -8419,14 +11856,33 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1920780/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2023-08-10",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Summerfall Studios"
+    ],
+    "publishers": [
+      "Humble Games"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Adventure",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Fantasy",
+      "Story Rich",
+      "Atmospheric",
+      "Role-playing",
+      "Female Protagonist",
+      "Choices Matter",
+      "Funny",
+      "Visual Novel",
+      "Multiple Endings",
+      "Cartoony",
+      "Choose Your Own Adventure",
+      "Romance",
+      "LGBTQ+",
+      "Mythology"
     ],
     "steamAppId": 1920780,
     "reviewSummary": {
@@ -8454,14 +11910,33 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/242640/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2014-10-07",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Cyanide Studio"
+    ],
+    "publishers": [
+      "Nacon"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Stealth",
+      "Role-playing"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Fantasy",
+      "Story Rich",
+      "Atmospheric",
+      "Role-playing",
+      "Classic",
+      "Great Soundtrack",
+      "Third Person",
+      "Open World",
+      "Multiplayer",
+      "Difficult",
+      "Gore",
+      "Magic",
+      "Stealth",
+      "Steampunk"
     ],
     "steamAppId": 242640,
     "reviewSummary": {
@@ -8489,14 +11964,26 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/355790/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2017-03-14",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Cyanide Studio"
+    ],
+    "publishers": [
+      "Nacon"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Stealth"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Fantasy",
+      "Third Person",
+      "Multiplayer",
+      "Violent",
+      "Stealth",
+      "Steampunk"
     ],
     "steamAppId": 355790,
     "reviewSummary": {
@@ -8524,14 +12011,35 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-4.gog-statics.com/ea1c64b772b7f5fd3e1a16ccf182c5c1319e7765b088529759cff3117af4ee85_glx_vertical_cover.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2024-05-10",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "OceanAVN"
+    ],
+    "publishers": [
+      "OceanAVN"
+    ],
     "genres": [
-      "Adventure"
+      "Simulation",
+      "Adventure",
+      "Mystery"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Indie",
+      "Story Rich",
+      "Atmospheric",
+      "Strategy",
+      "Simulation",
+      "First-Person",
+      "Mystery",
+      "Visual Novel",
+      "Mature",
+      "Sexual Content",
+      "Nudity",
+      "NSFW",
+      "Realistic",
+      "Emotional",
+      "Romance",
+      "Dating Sim"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -8558,14 +12066,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/313730/library_600x900_2x.jpg",
     "shortDescription": "Strategy on GOG.com (DRM-Free)",
     "releaseDate": "2014-07-02",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Love in Space"
+    ],
+    "publishers": [
+      "Sekai Project"
+    ],
     "genres": [
-      "Strategy"
+      "Strategy",
+      "Sci-fi",
+      "Visual Novel"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Story Rich",
+      "Strategy",
+      "Sci-fi",
+      "Classic",
+      "Turn-Based",
+      "Science",
+      "Tactical",
+      "Visual Novel",
+      "Nudity",
+      "Space",
+      "Romance",
+      "Free Game"
     ],
     "steamAppId": 313730,
     "reviewSummary": {
@@ -8601,11 +12125,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     ],
     "genres": [
       "Adventure",
-      "Casual"
+      "Point-and-click",
+      "Detective-mystery"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Story Rich",
+      "Atmospheric",
+      "Exploration",
+      "Puzzle",
+      "Female Protagonist",
+      "Mystery",
+      "Point&Click",
+      "Logic",
+      "Emotional",
+      "Investigation",
+      "Detective-mystery"
     ],
     "steamAppId": 46500,
     "reviewSummary": {
@@ -8640,11 +12175,28 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
       "Microids"
     ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Point-and-click",
+      "Detective-mystery"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Story Rich",
+      "Atmospheric",
+      "Exploration",
+      "Classic",
+      "Puzzle",
+      "Female Protagonist",
+      "Great Soundtrack",
+      "Third Person",
+      "Mystery",
+      "Point&Click",
+      "Logic",
+      "Emotional",
+      "Investigation",
+      "Detective-mystery",
+      "Hidden Object",
+      "Steampunk"
     ],
     "steamAppId": 46510,
     "reviewSummary": {
@@ -8672,14 +12224,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1410640/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Microids Studio Paris"
+    ],
+    "publishers": [
+      "Microids"
+    ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Puzzle",
+      "Exploration"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Story Rich",
+      "Atmospheric",
+      "Exploration",
+      "Puzzle",
+      "Female Protagonist",
+      "Mystery",
+      "Point&Click",
+      "Logic",
+      "Emotional",
+      "Investigation",
+      "Steampunk"
     ],
     "steamAppId": 1410640,
     "reviewSummary": {
@@ -8707,14 +12275,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-4.gog-statics.com/b3e0bc00ddf8d56fbdf5c60189bd04d2d152dc2b65cf185933b10f9e448117b3_glx_vertical_cover.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2020-05-30",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "ISART Digital"
+    ],
+    "publishers": [
+      "ISART Digital"
+    ],
     "genres": [
-      "Action"
+      "Platformer",
+      "Adventure"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "2D",
+      "Music",
+      "Atmospheric",
+      "Hand-drawn"
     ],
     "reviewSummary": {
       "reviewScore": 3,
@@ -8727,8 +12302,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "gog-1207658992",
-    "title": "Syndicate Plus\u2122",
-    "sortTitle": "Syndicate Plus\u2122",
+    "title": "Syndicate Plus™",
+    "sortTitle": "Syndicate Plus™",
     "platforms": [
       {
         "platformId": "gog",
@@ -8741,14 +12316,23 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-4.gog-statics.com/73599010340e1630b66dadcdbf922049c99deeeb40eeaf2fc83ace6c3792e05a_glx_vertical_cover.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "1993-06-06",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Bullfrog Productions"
+    ],
+    "publishers": [
+      "Electronic Arts"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Real-time",
+      "Tactical"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Classic",
+      "Tactical",
+      "Real-Time",
+      "Good Old Game"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -8761,8 +12345,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "gog-1207659193",
-    "title": "Syndicate Wars\u2122",
-    "sortTitle": "Syndicate Wars\u2122",
+    "title": "Syndicate Wars™",
+    "sortTitle": "Syndicate Wars™",
     "platforms": [
       {
         "platformId": "gog",
@@ -8775,14 +12359,23 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-3.gog-statics.com/6385eb91c19cdb3df180903dcfd570657cef6a7ea58bf1fd725aaa94f72aecc3_glx_vertical_cover.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "1996-10-31",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Bullfrog Productions"
+    ],
+    "publishers": [
+      "Electronic Arts"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Sci-fi",
+      "Strategy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Strategy",
+      "Sci-fi",
+      "Classic",
+      "Science"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -8809,14 +12402,25 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-4.gog-statics.com/83440dfe39a478e559a6c71d70ba33b66a28796a822d6c4d7f8de28368339b62_glx_vertical_cover.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "1994-02-26",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Metropolis Software"
+    ],
+    "publishers": [
+      "Metropolis Software"
+    ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Point-and-click",
+      "Detective-mystery"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Classic",
+      "Point&Click",
+      "Investigation",
+      "Detective-mystery",
+      "Good Old Game",
+      "Free Game"
     ],
     "reviewSummary": {
       "reviewScore": 3,
@@ -8843,14 +12447,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1483780/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2021-02-24",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "mc2games"
+    ],
+    "publishers": [
+      "mc2games"
+    ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Point-and-click",
+      "Puzzle"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Story Rich",
+      "Atmospheric",
+      "Exploration",
+      "Puzzle",
+      "Casual",
+      "Science",
+      "Dark",
+      "Realistic",
+      "Investigation",
+      "Walking Simulator",
+      "Thriller",
+      "Psychological",
+      "Hidden Object"
     ],
     "steamAppId": 1483780,
     "reviewSummary": {
@@ -8878,14 +12499,37 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/792300/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2019-10-17",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Illusion Ray Studio"
+    ],
+    "publishers": [
+      "Illusion Ray"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Horror"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Indie",
+      "Story Rich",
+      "Atmospheric",
+      "Exploration",
+      "First-Person",
+      "Dark",
+      "Great Soundtrack",
+      "Horror",
+      "Open World",
+      "Multiplayer",
+      "Survival",
+      "Violent",
+      "Real-Time",
+      "Gore",
+      "Survival Horror",
+      "Psychological Horror",
+      "Walking Simulator"
     ],
     "steamAppId": 792300,
     "reviewSummary": {
@@ -8913,14 +12557,27 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/203830/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2012-06-22",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Daedalic Entertainment"
+    ],
+    "publishers": [
+      "Daedalic Entertainment"
+    ],
     "genres": [
-      "Adventure"
+      "Fantasy",
+      "Adventure",
+      "Point-and-click"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Indie",
+      "Fantasy",
+      "Story Rich",
+      "2D",
+      "Classic",
+      "Puzzle",
+      "Great Soundtrack",
+      "Point&Click"
     ],
     "steamAppId": 203830,
     "reviewSummary": {
@@ -8948,14 +12605,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1904622/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1992-01-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Strategic Simulations"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Strategy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Classic",
+      "D&D",
+      "Turn-Based",
+      "Fantasy"
     ],
     "steamAppId": 1904622,
     "reviewSummary": {
@@ -8983,14 +12647,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-1.gog-statics.com/849f9229f0fac0c74fa8e8b32c111b96632e31260eed9d152fab2aafb5d2f972_glx_vertical_cover.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2021-10-14",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Trinity Team"
+    ],
+    "publishers": [
+      "101XP"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Platformer"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Platformer",
+      "Free Game"
     ],
     "reviewSummary": {
       "reviewScore": 3,
@@ -9017,14 +12689,24 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1812390/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1996-08-31",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Bethesda Softworks"
+    ],
+    "publishers": [
+      "Bethesda Softworks LLC"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Adventure",
+      "Open World"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Role-playing",
+      "Classic",
+      "Open World",
+      "Good Old Game",
+      "Free Game"
     ],
     "steamAppId": 1812390,
     "reviewSummary": {
@@ -9052,14 +12734,29 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/22320/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2003-11-07",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Bethesda Softworks"
+    ],
+    "publishers": [
+      "Bethesda Softworks LLC"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Adventure",
+      "Open World"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Fantasy",
+      "Role-playing",
+      "Classic",
+      "First-Person",
+      "Third Person",
+      "Open World",
+      "Sandbox",
+      "Magic",
+      "Medieval",
+      "Good Old Game"
     ],
     "steamAppId": 22320,
     "reviewSummary": {
@@ -9087,14 +12784,23 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1812290/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1994-03-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Bethesda Softworks"
+    ],
+    "publishers": [
+      "Bethesda Softworks LLC"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Action",
+      "Open World"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Role-playing",
+      "Classic",
+      "Open World",
+      "Free Game"
     ],
     "steamAppId": 1812290,
     "reviewSummary": {
@@ -9122,14 +12828,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/601430/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2017-10-12",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Tango Gameworks"
+    ],
+    "publishers": [
+      "Bethesda Softworks LLC"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Horror",
+      "Survival"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Story Rich",
+      "Atmospheric",
+      "Dark",
+      "Horror",
+      "Third Person",
+      "Survival",
+      "Violent",
+      "Gore",
+      "Stealth",
+      "Survival Horror",
+      "Psychological Horror"
     ],
     "steamAppId": 601430,
     "reviewSummary": {
@@ -9157,14 +12879,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-1.gog-statics.com/bbba2ce5901fe222dc2493997192189215e5c8e3b576dc37ed1c1023764ee995_glx_vertical_cover.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2002-01-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "SNK CORPORATION"
+    ],
+    "publishers": [
+      "SNK CORPORATION"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Arcade",
+      "Fighting"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Classic",
+      "Arcade",
+      "Fighting"
     ],
     "reviewSummary": {
       "reviewScore": 2,
@@ -9191,14 +12921,37 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1105670/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2023-03-09",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Ishtar Games"
+    ],
+    "publishers": [
+      "Nacon",
+      "The Arcade Crew"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Turn-based",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Indie",
+      "Fantasy",
+      "Strategy",
+      "Role-playing",
+      "2D",
+      "Turn-Based",
+      "Pixel Graphics",
+      "Dark",
+      "Tactical",
+      "Roguelike",
+      "Roguelite",
+      "Base Building",
+      "Post-apocalyptic",
+      "Combat",
+      "Tactical RPG",
+      "Perma Death",
+      "Tower Defense"
     ],
     "steamAppId": 1105670,
     "reviewSummary": {
@@ -9226,14 +12979,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-4.gog-statics.com/84909822081b1427ec628ebcd589e216258d838b50569a8b39e2ddbfd49e8a49_glx_vertical_cover.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2020-12-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Sever"
+    ],
+    "publishers": [
+      "101XP"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Simulation",
+      "Narrative"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Fantasy",
+      "Story Rich",
+      "Role-playing",
+      "Simulation",
+      "Choices Matter",
+      "Management",
+      "Visual Novel",
+      "Multiple Endings",
+      "Medieval",
+      "Narrative",
+      "Choose Your Own Adventure",
+      "Text-Based"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -9260,14 +13029,24 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-4.gog-statics.com/0cc8a987884c525bd57c5ac9f3fefc4eb85a6ec11d2ecfc618be5b100269ec5f_glx_vertical_cover.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2013-07-12",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Mike Singleton and Chris Wild"
+    ],
+    "publishers": [
+      "Chilli Hugger Software"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Fantasy",
+      "Strategy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Indie",
+      "Fantasy",
+      "Strategy",
+      "Role-playing",
+      "Classic",
+      "Free Game"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -9294,14 +13073,25 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2493180/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2024-04-30",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "1 Simple Game"
+    ],
+    "publishers": [
+      "Midwest Games"
+    ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Puzzle",
+      "Exploration"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Atmospheric",
+      "Exploration",
+      "Puzzle",
+      "Family Friendly",
+      "Relaxing",
+      "Logic"
     ],
     "steamAppId": 2493180,
     "reviewSummary": {
@@ -9329,14 +13119,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/578650/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2020-10-23",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Obsidian Entertainment",
+      "Virtuos Games"
+    ],
+    "publishers": [
+      "Obsidian Entertainment"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Role-playing",
+      "Open World"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Story Rich",
+      "Role-playing",
+      "Exploration",
+      "Sci-fi",
+      "First-Person",
+      "Choices Matter",
+      "Funny",
+      "Open World",
+      "FPS",
+      "Space",
+      "LGBTQ+"
     ],
     "steamAppId": 578650,
     "reviewSummary": {
@@ -9350,8 +13157,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "steam-1920490",
-    "title": "The Outer Worlds: Spacer\u2019s Choice Edition",
-    "sortTitle": "Outer Worlds: Spacer\u2019s Choice Edition",
+    "title": "The Outer Worlds: Spacer’s Choice Edition",
+    "sortTitle": "Outer Worlds: Spacer’s Choice Edition",
     "platforms": [
       {
         "platformId": "gog",
@@ -9364,14 +13171,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1920490/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2023-03-07",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Obsidian Entertainment",
+      "Virtuos Games"
+    ],
+    "publishers": [
+      "Obsidian Entertainment"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Role-playing",
+      "Open World"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Story Rich",
+      "Role-playing",
+      "Exploration",
+      "Sci-fi",
+      "First-Person",
+      "Choices Matter",
+      "Funny",
+      "Open World",
+      "FPS",
+      "Space",
+      "LGBTQ+"
     ],
     "steamAppId": 1920490,
     "reviewSummary": {
@@ -9399,14 +13223,29 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1266030/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2023-02-24",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Bellular Studios"
+    ],
+    "publishers": [
+      "Fellow Traveller"
+    ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Managerial",
+      "Visual Novel"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Dark",
+      "Choices Matter",
+      "Management",
+      "Mystery",
+      "Visual Novel",
+      "Survival",
+      "Emotional",
+      "Managerial",
+      "Choose Your Own Adventure",
+      "Psychological"
     ],
     "steamAppId": 1266030,
     "reviewSummary": {
@@ -9434,14 +13273,25 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/257510/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2014-12-11",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Croteam"
+    ],
+    "publishers": [
+      "Devolver Digital",
+      "Croteam"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Puzzle"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Indie",
+      "Puzzle",
+      "Logic",
+      "Puzzle Platformer"
     ],
     "steamAppId": 257510,
     "reviewSummary": {
@@ -9469,14 +13319,36 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/433100/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2016-02-26",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "LKA"
+    ],
+    "publishers": [
+      "Wired Productions"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Exploration"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Indie",
+      "Story Rich",
+      "Atmospheric",
+      "Exploration",
+      "First-Person",
+      "Female Protagonist",
+      "Great Soundtrack",
+      "Horror",
+      "Open World",
+      "Mystery",
+      "Nudity",
+      "Historical",
+      "Choose Your Own Adventure",
+      "Psychological Horror",
+      "Walking Simulator",
+      "Psychological"
     ],
     "steamAppId": 433100,
     "reviewSummary": {
@@ -9504,14 +13376,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-2.gog-statics.com/5175cf9ebd744a41f9ba0a2cca30ece6ba20281cafe72cce9fcf09e937f6867f_glx_vertical_cover.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "1995-04-30",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "id Software"
+    ],
+    "publishers": [
+      "Bethesda Softworks"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "Action"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "FPS",
+      "Classic",
+      "Action",
+      "Retro",
+      "Sci-fi"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -9538,14 +13418,27 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-3.gog-statics.com/edb6a64af4bf97e540bfce7cca178b11a05b7f15572d369a577d54046e220f2c_glx_vertical_cover.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2014-05-06",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Daedalic Entertainment"
+    ],
+    "publishers": [
+      "Daedalic Entertainment"
+    ],
     "genres": [
-      "Adventure"
+      "Fantasy",
+      "Adventure",
+      "Point-and-click"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Indie",
+      "Fantasy",
+      "Story Rich",
+      "Atmospheric",
+      "Classic",
+      "Puzzle",
+      "Great Soundtrack",
+      "Point&Click"
     ],
     "reviewSummary": {
       "reviewScore": 3,
@@ -9572,14 +13465,36 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2329580/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2021-12-16",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Studio Chien d'Or"
+    ],
+    "publishers": [
+      "Studio Chien d'Or"
+    ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Point-and-click",
+      "Horror"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Indie",
+      "Story Rich",
+      "Atmospheric",
+      "Exploration",
+      "Puzzle",
+      "First-Person",
+      "Dark",
+      "Horror",
+      "Mystery",
+      "Point&Click",
+      "Historical",
+      "Violent",
+      "Gore",
+      "Realistic",
+      "Psychological Horror",
+      "Supernatural",
+      "Lovecraftian"
     ],
     "steamAppId": 2329580,
     "reviewSummary": {
@@ -9611,16 +13526,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
       "CD PROJEKT RED"
     ],
     "publishers": [
-      "CD PROJEKT RED",
-      "1C-SoftClub"
+      "CD PROJEKT RED"
     ],
     "genres": [
+      "Role-playing",
       "Action",
-      "RPG"
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Fantasy",
+      "Story Rich",
+      "Atmospheric",
+      "Role-playing",
+      "Classic",
+      "Great Soundtrack",
+      "Choices Matter",
+      "Third Person",
+      "Open World",
+      "Mature",
+      "Nudity",
+      "Multiple Endings",
+      "Magic",
+      "Medieval",
+      "Good Old Game"
     ],
     "steamAppId": 20900,
     "reviewSummary": {
@@ -9648,14 +13577,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/239160/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2014-02-28",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Eidos Montreal"
+    ],
+    "publishers": [
+      "Eidos Interactive Corporation"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Stealth"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Classic",
+      "Stealth"
     ],
     "steamAppId": 239160,
     "reviewSummary": {
@@ -9669,8 +13606,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "gog-1207659001",
-    "title": "Thief\u2122 2: The Metal Age",
-    "sortTitle": "Thief\u2122 2: The Metal Age",
+    "title": "Thief™ 2: The Metal Age",
+    "sortTitle": "Thief™ 2: The Metal Age",
     "platforms": [
       {
         "platformId": "gog",
@@ -9683,14 +13620,32 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-1.gog-statics.com/9fee86856dec591d46e81ee8eba47c4945a980ce9730549581eae646330629d5_glx_vertical_cover.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2000-03-23",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Looking Glass Studios"
+    ],
+    "publishers": [
+      "Eidos Interactive Corporation"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Simulation",
+      "Stealth"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Fantasy",
+      "Story Rich",
+      "Atmospheric",
+      "Classic",
+      "Simulation",
+      "First-Person",
+      "Dark",
+      "Great Soundtrack",
+      "Horror",
+      "FPS",
+      "Medieval",
+      "Stealth",
+      "Steampunk"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -9703,8 +13658,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "gog-1207659036",
-    "title": "Thief\u2122 3: Deadly Shadows",
-    "sortTitle": "Thief\u2122 3: Deadly Shadows",
+    "title": "Thief™ 3: Deadly Shadows",
+    "sortTitle": "Thief™ 3: Deadly Shadows",
     "platforms": [
       {
         "platformId": "gog",
@@ -9717,14 +13672,33 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-4.gog-statics.com/30c6d68f5d0c8bbe9c2eb47f8781ec621a2f0ce40704c7dfe510533ca3a29f9e_glx_vertical_cover.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2004-05-25",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Ion Storm Inc."
+    ],
+    "publishers": [
+      "Eidos Interactive Corporation"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Simulation",
+      "Stealth"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Fantasy",
+      "Story Rich",
+      "Atmospheric",
+      "Classic",
+      "Simulation",
+      "First-Person",
+      "Dark",
+      "Horror",
+      "Third Person",
+      "Open World",
+      "FPS",
+      "Medieval",
+      "Stealth",
+      "Steampunk"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -9737,8 +13711,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "steam-211600",
-    "title": "Thief\u2122 Gold",
-    "sortTitle": "Thief\u2122 Gold",
+    "title": "Thief™ Gold",
+    "sortTitle": "Thief™ Gold",
     "platforms": [
       {
         "platformId": "gog",
@@ -9751,14 +13725,32 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/211600/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "1998-11-30",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Looking Glass Studios"
+    ],
+    "publishers": [
+      "Eidos Interactive Corporation"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Simulation",
+      "Stealth"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Fantasy",
+      "Story Rich",
+      "Atmospheric",
+      "Exploration",
+      "Classic",
+      "Simulation",
+      "First-Person",
+      "Dark",
+      "Horror",
+      "Medieval",
+      "Stealth",
+      "Good Old Game",
+      "Steampunk"
     ],
     "steamAppId": 211600,
     "reviewSummary": {
@@ -9786,14 +13778,35 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/973760/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2018-10-23",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "CD PROJEKT RED"
+    ],
+    "publishers": [
+      "CD PROJEKT RED"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Fantasy",
+      "Strategy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Fantasy",
+      "Story Rich",
+      "Atmospheric",
+      "Strategy",
+      "Role-playing",
+      "Turn-Based",
+      "Puzzle",
+      "Female Protagonist",
+      "Great Soundtrack",
+      "Choices Matter",
+      "Open World",
+      "Multiplayer",
+      "Mature",
+      "Sexual Content",
+      "Isometric",
+      "Medieval",
+      "Card Game"
     ],
     "steamAppId": 973760,
     "reviewSummary": {
@@ -9821,14 +13834,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-1.gog-statics.com/ec2493f50e8945e04ccf2f5708fced7bd38606cc47bc68ced58d410fff21b120_glx_vertical_cover.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2021-09-17",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Something We Made"
+    ],
+    "publishers": [
+      "Something We Made"
+    ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Puzzle",
+      "Exploration"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Exploration",
+      "Puzzle",
+      "Logic"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -9855,14 +13876,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-3.gog-statics.com/d0c69608e1023e8dc4eb4c7e5aaa453406a9fe59e3ddf7b71909706854d88dc9_glx_vertical_cover.jpg",
     "shortDescription": " on GOG.com (DRM-Free)",
     "releaseDate": "1999-11-24",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Core Design"
+    ],
+    "publishers": [
+      "Crystal Dynamics"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Platformer"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Classic",
+      "Platformer"
     ],
     "reviewSummary": {
       "reviewScore": 3,
@@ -9889,14 +13918,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-4.gog-statics.com/05750641e3178b5a22c93e756c9efbf08a4356b48ef01f576122fad567acec01_glx_vertical_cover.jpg",
     "shortDescription": " on GOG.com (DRM-Free)",
     "releaseDate": "1999-11-24",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Core Design"
+    ],
+    "publishers": [
+      "Crystal Dynamics"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Classic",
+      "Female Protagonist",
+      "Platformer",
+      "Third Person"
     ],
     "reviewSummary": {
       "reviewScore": 2,
@@ -9923,14 +13959,24 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-1.gog-statics.com/74ef44a280dd89f7764b2e31a3356cb7fa90f89a0227038191e2714ccfd3cbdb_glx_vertical_cover.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2013-03-05",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Crystal Dynamics"
+    ],
+    "publishers": [
+      "Crystal Dynamics"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Survival"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Classic",
+      "Survival",
+      "Survival Horror",
+      "Good Old Game"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -9957,14 +14003,28 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2478970/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2024-02-14",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Aspyr",
+      "Crystal Dynamics"
+    ],
+    "publishers": [
+      "Aspyr"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Exploration"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Atmospheric",
+      "Exploration",
+      "Classic",
+      "Puzzle",
+      "Female Protagonist",
+      "Violent",
+      "Remake"
     ],
     "steamAppId": 2478970,
     "reviewSummary": {
@@ -9992,14 +14052,24 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/8000/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2007-06-05",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Crystal Dynamics"
+    ],
+    "publishers": [
+      "Crystal Dynamics"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Platformer"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "2D",
+      "Classic",
+      "Platformer",
+      "Good Old Game"
     ],
     "steamAppId": 8000,
     "reviewSummary": {
@@ -10027,14 +14097,23 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/7000/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2006-04-07",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Crystal Dynamics"
+    ],
+    "publishers": [
+      "Crystal Dynamics"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Platformer"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "Classic",
+      "Platformer",
+      "Good Old Game"
     ],
     "steamAppId": 7000,
     "reviewSummary": {
@@ -10062,14 +14141,23 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/225020/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2003-06-20",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Core Design"
+    ],
+    "publishers": [
+      "Crystal Dynamics"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Platformer"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "2D",
+      "Classic",
+      "Platformer"
     ],
     "steamAppId": 225020,
     "reviewSummary": {
@@ -10097,14 +14185,24 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/8140/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "2008-11-21",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Crystal Dynamics"
+    ],
+    "publishers": [
+      "Crystal Dynamics"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Adventure",
+      "Platformer"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Action",
+      "2D",
+      "Classic",
+      "Platformer",
+      "Good Old Game"
     ],
     "steamAppId": 8140,
     "reviewSummary": {
@@ -10132,14 +14230,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/617480/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2018-04-12",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Event Horizon"
+    ],
+    "publishers": [
+      "Event Horizon"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Fantasy",
+      "Strategy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Indie",
+      "Fantasy",
+      "Story Rich",
+      "Atmospheric",
+      "Strategy",
+      "Role-playing",
+      "Turn-Based",
+      "Great Soundtrack",
+      "Real-Time",
+      "Isometric",
+      "Realistic",
+      "Dungeon Crawler",
+      "CRPG"
     ],
     "steamAppId": 617480,
     "reviewSummary": {
@@ -10167,14 +14282,30 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/863940/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2011-11-26",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Robit Studios"
+    ],
+    "publishers": [
+      "Robit Studios"
+    ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Role-playing",
+      "Platformer"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Indie",
+      "Fantasy",
+      "Role-playing",
+      "2D",
+      "Classic",
+      "Platformer",
+      "Family Friendly",
+      "Cartoony",
+      "Puzzle Platformer",
+      "Metroidvania",
+      "Free Game"
     ],
     "steamAppId": 863940,
     "reviewSummary": {
@@ -10202,14 +14333,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1737100/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2022-02-16",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "NLT Media"
+    ],
+    "publishers": [
+      "NLT Media"
+    ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Puzzle",
+      "Visual Novel"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Story Rich",
+      "Puzzle",
+      "Mystery",
+      "Visual Novel",
+      "Point&Click",
+      "Mature",
+      "Sexual Content",
+      "Nudity",
+      "NSFW",
+      "Romance",
+      "Dating Sim",
+      "Hentai"
     ],
     "steamAppId": 1737100,
     "reviewSummary": {
@@ -10237,14 +14385,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1904524/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1992-01-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Beyond Software"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Strategy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Classic",
+      "D&D",
+      "Turn-Based",
+      "Fantasy"
     ],
     "steamAppId": 1904524,
     "reviewSummary": {
@@ -10272,14 +14427,34 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/440420/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2016-10-19",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Goblinz Enterprises Ltd"
+    ],
+    "publishers": [
+      "The Digital Lounge"
+    ],
     "genres": [
-      "Adventure"
+      "Adventure",
+      "Puzzle",
+      "Hidden Object"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Story Rich",
+      "Atmospheric",
+      "Classic",
+      "Puzzle",
+      "Casual",
+      "First-Person",
+      "Female Protagonist",
+      "Dark",
+      "Horror",
+      "Mystery",
+      "Point&Click",
+      "Logic",
+      "Survival Horror",
+      "Psychological Horror",
+      "Hidden Object"
     ],
     "steamAppId": 440420,
     "reviewSummary": {
@@ -10307,14 +14482,25 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-4.gog-statics.com/346da67f4079d2d4e64ab0e7c310ee81218734d4bde4d74d3a3f074510cf6fa5_glx_vertical_cover.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "1999-11-30",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Eclipse Productions"
+    ],
+    "publishers": [
+      "Eclipse Productions"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "Action",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Sci-fi",
+      "Classic",
+      "Science",
+      "Shooter",
+      "Good Old Game",
+      "Free Game"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -10327,8 +14513,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "gog-1207662463",
-    "title": "Ultima\u2122  Underworld I",
-    "sortTitle": "Ultima\u2122  Underworld I",
+    "title": "Ultima™  Underworld I",
+    "sortTitle": "Ultima™  Underworld I",
     "platforms": [
       {
         "platformId": "gog",
@@ -10341,14 +14527,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-1.gog-statics.com/aded25b118381e697e520542c45de23766a71425646db6a72b0e19ac574dd79d_glx_vertical_cover.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1992-03-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Blue Sky Productions"
+    ],
+    "publishers": [
+      "Electronic Arts"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Dungeon Crawler"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Classic",
+      "First-Person",
+      "Dungeon Crawler",
+      "Immersive Sim"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -10361,8 +14554,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "gog-1207662473",
-    "title": "Ultima\u2122  Underworld II",
-    "sortTitle": "Ultima\u2122  Underworld II",
+    "title": "Ultima™  Underworld II",
+    "sortTitle": "Ultima™  Underworld II",
     "platforms": [
       {
         "platformId": "gog",
@@ -10375,14 +14568,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-3.gog-statics.com/ccb50e17fe3af2ab43892f1821265020f962f33144c87d23446099cd00b2146f_glx_vertical_cover.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1992-03-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Looking Glass Studios"
+    ],
+    "publishers": [
+      "Electronic Arts"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Dungeon Crawler"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Classic",
+      "First-Person",
+      "Dungeon Crawler",
+      "Immersive Sim"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -10395,8 +14595,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "gog-1207658962",
-    "title": "Ultima\u2122 IV: Quest of the Avatar",
-    "sortTitle": "Ultima\u2122 IV: Quest of the Avatar",
+    "title": "Ultima™ IV: Quest of the Avatar",
+    "sortTitle": "Ultima™ IV: Quest of the Avatar",
     "platforms": [
       {
         "platformId": "gog",
@@ -10409,14 +14609,24 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-2.gog-statics.com/cb10216b4721fc46db91a79af4bee55dc90123c13ebcc11a50980d384ca1a4a1_glx_vertical_cover.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1985-09-16",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Origin Systems"
+    ],
+    "publishers": [
+      "Electronic Arts"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Adventure",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Fantasy",
+      "Role-playing",
+      "Classic",
+      "Good Old Game",
+      "Free Game"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -10429,8 +14639,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "gog-1207659062",
-    "title": "Ultima\u2122 Worlds of Adventure 2: Martian Dreams",
-    "sortTitle": "Ultima\u2122 Worlds of Adventure 2: Martian Dreams",
+    "title": "Ultima™ Worlds of Adventure 2: Martian Dreams",
+    "sortTitle": "Ultima™ Worlds of Adventure 2: Martian Dreams",
     "platforms": [
       {
         "platformId": "gog",
@@ -10443,14 +14653,26 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-1.gog-statics.com/10f120bcf0bf4b9bbd7552a413c084f891ed3cd5f7e3e562f9e856271fd98bc2_glx_vertical_cover.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1991-12-31",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Origin Systems"
+    ],
+    "publishers": [
+      "Electronic Arts"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Adventure",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Role-playing",
+      "Sci-fi",
+      "Classic",
+      "Science",
+      "Good Old Game",
+      "Only On GOG",
+      "Free Game"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -10477,14 +14699,25 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1785820/library_600x900_2x.jpg",
     "shortDescription": "Strategy on GOG.com (DRM-Free)",
     "releaseDate": "2022-03-10",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Estudios Kremlinois"
+    ],
+    "publishers": [
+      "RockGame S.A."
+    ],
     "genres": [
-      "Strategy"
+      "Strategy",
+      "Building",
+      "Managerial"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Strategy",
+      "Management",
+      "Isometric",
+      "Building",
+      "Base Building",
+      "Managerial",
+      "City builder"
     ],
     "steamAppId": 1785820,
     "reviewSummary": {
@@ -10512,14 +14745,33 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/904380/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2019-05-28",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Devespresso Games"
+    ],
+    "publishers": [
+      "Headup"
+    ],
     "genres": [
-      "Adventure"
+      "Fantasy",
+      "Adventure",
+      "Role-playing"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Fantasy",
+      "Story Rich",
+      "Atmospheric",
+      "Role-playing",
+      "2D",
+      "Exploration",
+      "Turn-Based",
+      "Female Protagonist",
+      "Dark",
+      "Survival",
+      "Difficult",
+      "Roguelike",
+      "Roguelite",
+      "Dungeon Crawler"
     ],
     "steamAppId": 904380,
     "reviewSummary": {
@@ -10547,14 +14799,31 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2414320/library_600x900_2x.jpg",
     "shortDescription": "Action on GOG.com (DRM-Free)",
     "releaseDate": "1993-03-01",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Event Horizon Software"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Action"
+      "Action",
+      "Fantasy",
+      "Role-playing"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Action",
+      "Fantasy",
+      "Story Rich",
+      "Atmospheric",
+      "Role-playing",
+      "Exploration",
+      "Classic",
+      "Pixel Graphics",
+      "Horror",
+      "Mystery",
+      "Retro",
+      "Isometric",
+      "Vampire"
     ],
     "steamAppId": 2414320,
     "reviewSummary": {
@@ -10582,14 +14851,21 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2350513/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Strategic Simulations"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Role-playing"
+      "Strategy",
+      "Wargame"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Classic",
+      "Turn-Based",
+      "Fantasy",
+      "D&D"
     ],
     "steamAppId": 2350513,
     "reviewSummary": {
@@ -10617,14 +14893,29 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1741140/library_600x900_2x.jpg",
     "shortDescription": "Strategy on GOG.com (DRM-Free)",
     "releaseDate": "1996-09-23",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "DreamForge Intertainment"
+    ],
+    "publishers": [
+      "SNEG"
+    ],
     "genres": [
-      "Strategy"
+      "Strategy",
+      "Real-time",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Fantasy",
+      "Strategy",
+      "Classic",
+      "Tactical",
+      "Real-Time",
+      "Magic",
+      "Isometric",
+      "War",
+      "Base Building",
+      "RTS",
+      "Free Game"
     ],
     "steamAppId": 1741140,
     "reviewSummary": {
@@ -10650,7 +14941,7 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     ],
     "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/489630/header.jpg",
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/489630/library_600x900_2x.jpg",
-    "shortDescription": "Warhammer 40,000: Gladius \u2013 Relics of War brings you to a world of terror and violence. Four factions will engage in a brutal war for dominance over the planet\u2019s resources. In the first turn-based 4X strategy game set in Warhammer 40,000 you will lead one of four unique factions.",
+    "shortDescription": "Warhammer 40,000: Gladius – Relics of War brings you to a world of terror and violence. Four factions will engage in a brutal war for dominance over the planet’s resources. In the first turn-based 4X strategy game set in Warhammer 40,000 you will lead one of four unique factions.",
     "releaseDate": "12 Jul, 2018",
     "developers": [
       "Proxy Studios"
@@ -10659,11 +14950,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
       "Slitherine Ltd."
     ],
     "genres": [
-      "Strategy"
+      "Strategy",
+      "Turn-based",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Strategy",
+      "Sci-fi",
+      "Turn-Based",
+      "Science",
+      "Great Soundtrack",
+      "Tactical",
+      "Multiplayer",
+      "War",
+      "Military",
+      "Grand Strategy",
+      "4X"
     ],
     "steamAppId": 489630,
     "reviewSummary": {
@@ -10691,14 +14993,28 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1072620/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2020-03-04",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Punk Notion"
+    ],
+    "publishers": [
+      "Anshar Publishing"
+    ],
     "genres": [
-      "Adventure"
+      "Platformer",
+      "Adventure",
+      "Puzzle"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Indie",
+      "Fantasy",
+      "Story Rich",
+      "Atmospheric",
+      "Puzzle",
+      "Casual",
+      "Family Friendly",
+      "Relaxing",
+      "Emotional",
+      "Short"
     ],
     "steamAppId": 1072620,
     "reviewSummary": {
@@ -10726,14 +15042,28 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/288060/library_600x900_2x.jpg",
     "shortDescription": "Adventure on GOG.com (DRM-Free)",
     "releaseDate": "2014-07-09",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Night Light Interactive"
+    ],
+    "publishers": [
+      "Akupara Games"
+    ],
     "genres": [
-      "Adventure"
+      "Horror",
+      "Adventure",
+      "Puzzle"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Classic",
+      "Puzzle",
+      "Female Protagonist",
+      "Dark",
+      "Horror",
+      "Mystery",
+      "Point&Click",
+      "Logic",
+      "Supernatural"
     ],
     "steamAppId": 288060,
     "reviewSummary": {
@@ -10761,14 +15091,25 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/201810/library_600x900_2x.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "2014-05-20",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Machine Games"
+    ],
+    "publishers": [
+      "Bethesda Softworks LLC"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "FPP",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Sci-fi",
+      "Classic",
+      "First-Person",
+      "Science",
+      "Gore",
+      "FPS",
+      "Shooter"
     ],
     "steamAppId": 201810,
     "reviewSummary": {
@@ -10782,8 +15123,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "gog-1207659061",
-    "title": "Worlds of Ultima\u2122: The Savage Empire",
-    "sortTitle": "Worlds of Ultima\u2122: The Savage Empire",
+    "title": "Worlds of Ultima™: The Savage Empire",
+    "sortTitle": "Worlds of Ultima™: The Savage Empire",
     "platforms": [
       {
         "platformId": "gog",
@@ -10796,14 +15137,25 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-4.gog-statics.com/07c86c0a10902cd350ff5476ed7f27f5290246016bd1a3ab3d52cda5759663ce_glx_vertical_cover.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "1990-12-30",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Origin Systems"
+    ],
+    "publishers": [
+      "Electronic Arts"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Adventure",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Adventure",
+      "Fantasy",
+      "Role-playing",
+      "Classic",
+      "Good Old Game",
+      "Only On GOG",
+      "Free Game"
     ],
     "reviewSummary": {
       "reviewScore": 3,
@@ -10830,14 +15182,26 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/200170/library_600x900_2x.jpg",
     "shortDescription": "Strategy on GOG.com (DRM-Free)",
     "releaseDate": "2012-10-12",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Team17 Digital Ltd."
+    ],
+    "publishers": [
+      "Team17 Digital LTD."
+    ],
     "genres": [
-      "Strategy"
+      "Strategy",
+      "Turn-based",
+      "Fighting"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Strategy",
+      "Classic",
+      "Turn-Based",
+      "Local Co-Op",
+      "Fighting",
+      "Local Multiplayer",
+      "LevelEditor",
+      "Party Game"
     ],
     "steamAppId": 200170,
     "reviewSummary": {
@@ -10865,14 +15229,23 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-2.gog-statics.com/a4b4a072ce88cb4c8b8a34a45ed283e1a773955c1992f03a83531a66223c15cb_glx_vertical_cover.jpg",
     "shortDescription": "Strategy on GOG.com (DRM-Free)",
     "releaseDate": "2014-03-07",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Firaxis Games"
+    ],
+    "publishers": [
+      "2K Games"
+    ],
     "genres": [
-      "Strategy"
+      "Strategy",
+      "Turn-based",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Strategy",
+      "Sci-fi",
+      "Classic",
+      "Turn-Based",
+      "Science"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -10885,8 +15258,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "steam-268500",
-    "title": "XCOM\u00ae 2",
-    "sortTitle": "XCOM\u00ae 2",
+    "title": "XCOM® 2",
+    "sortTitle": "XCOM® 2",
     "platforms": [
       {
         "platformId": "gog",
@@ -10900,21 +15273,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "shortDescription": "XCOM 2 is the sequel to XCOM: Enemy Unknown, the 2012 award-winning strategy game of the year. Earth has changed and is now under alien rule. Facing impossible odds you must rebuild XCOM, and ignite a global resistance to reclaim our world and save humanity.",
     "releaseDate": "4 Feb, 2016",
     "developers": [
-      "Firaxis Games",
-      "Feral Interactive (Mac)",
-      "Feral Interactive (Linux)"
+      "Firaxis Games"
     ],
     "publishers": [
-      "2K",
-      "Feral Interactive (Mac)",
-      "Feral Interactive (Linux)"
+      "2K Games"
     ],
     "genres": [
-      "Strategy"
+      "Strategy",
+      "Turn-based",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Strategy",
+      "Sci-fi",
+      "Turn-Based",
+      "Science",
+      "Tactical"
     ],
     "steamAppId": 268500,
     "reviewSummary": {
@@ -10928,8 +15302,8 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
   },
   {
     "id": "steam-882100",
-    "title": "XCOM\u00ae: Chimera Squad",
-    "sortTitle": "XCOM\u00ae: Chimera Squad",
+    "title": "XCOM®: Chimera Squad",
+    "sortTitle": "XCOM®: Chimera Squad",
     "platforms": [
       {
         "platformId": "gog",
@@ -10942,14 +15316,22 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/882100/library_600x900_2x.jpg",
     "shortDescription": "Strategy on GOG.com (DRM-Free)",
     "releaseDate": "2020-04-24",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Firaxis Games"
+    ],
+    "publishers": [
+      "2K Games"
+    ],
     "genres": [
-      "Strategy"
+      "Strategy",
+      "Turn-based",
+      "Sci-fi"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Strategy",
+      "Sci-fi",
+      "Turn-Based",
+      "Science"
     ],
     "steamAppId": 882100,
     "reviewSummary": {
@@ -10977,14 +15359,26 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://images-4.gog-statics.com/c961f804cf039a4a1aecb56acbf51788f2cc0f7c5bc04fa1283ac37eceff89fc_glx_vertical_cover.jpg",
     "shortDescription": "Shooter on GOG.com (DRM-Free)",
     "releaseDate": "2003-10-09",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Ubisoft Paris Studios"
+    ],
+    "publishers": [
+      "Microids"
+    ],
     "genres": [
-      "Shooter"
+      "Shooter",
+      "FPP",
+      "Espionage"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Classic",
+      "First-Person",
+      "Violent",
+      "Gore",
+      "FPS",
+      "Shooter",
+      "Stealth",
+      "Espionage"
     ],
     "reviewSummary": {
       "reviewScore": 4,
@@ -11011,14 +15405,28 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
     "capsuleImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1159090/library_600x900_2x.jpg",
     "shortDescription": "Role-playing on GOG.com (DRM-Free)",
     "releaseDate": "2024-03-07",
-    "developers": [],
-    "publishers": [],
+    "developers": [
+      "Tiny Trinket Games"
+    ],
+    "publishers": [
+      "Anshar Publishing"
+    ],
     "genres": [
-      "Role-playing"
+      "Role-playing",
+      "Turn-based",
+      "Fantasy"
     ],
     "tags": [
-      "GOG",
-      "DRM-Free"
+      "Fantasy",
+      "Story Rich",
+      "Atmospheric",
+      "Role-playing",
+      "Exploration",
+      "Turn-Based",
+      "Tactical",
+      "Base Building",
+      "Dungeon Crawler",
+      "CRPG"
     ],
     "steamAppId": 1159090,
     "reviewSummary": {

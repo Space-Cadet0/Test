@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { CanonicalGame } from '../../contracts/game';
-import { SteamEnrichedMetadata, SteamScreenshot, SteamMovie, SteamReviewSummary } from '../../contracts/steam';
+import { SteamEnrichedMetadata, SteamScreenshot, SteamMovie, SteamReviewSummary, SteamCategory } from '../../contracts/steam';
 import { getOpenCriticData } from '../opencritic/openCritic';
+import { getSteamCategoryIconUrl } from './steamApi';
+import gogEnrichedCache from '../storage/gogEnrichedCache.json';
 
 function ensureHttps(url?: string): string {
   if (!url) return '';
@@ -75,6 +77,23 @@ export function formatDescriptionToHtml(rawDesc: string): string {
   return htmlParts.join('\n');
 }
 
+export function formatGogSystemRequirements(raw?: string): string {
+  if (!raw) return '';
+  if (raw.includes('<strong>')) return raw;
+  let text = raw;
+  if (!text.startsWith('OS:') && !text.startsWith('<strong>')) {
+    text = '<strong>OS:</strong> ' + text;
+  }
+  return text
+    .replace(/,\s*(Processor|CPU):/gi, '<br><strong>Processor:</strong> ')
+    .replace(/,\s*(Memory|RAM):/gi, '<br><strong>Memory:</strong> ')
+    .replace(/,\s*(Graphics|Video Card):/gi, '<br><strong>Graphics:</strong> ')
+    .replace(/,\s*(DirectX):/gi, '<br><strong>DirectX:</strong> ')
+    .replace(/,\s*(Hard Drive|Storage|Disk Space):/gi, '<br><strong>Storage:</strong> ')
+    .replace(/,\s*(Sound Card|Sound):/gi, '<br><strong>Sound Card:</strong> ')
+    .replace(/,\s*(Other|Additional Notes):/gi, '<br><strong>Additional Notes:</strong> ');
+}
+
 export class FallbackMetadataProvider {
   private getGogBaseUrl(): string {
     if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
@@ -91,53 +110,69 @@ export class FallbackMetadataProvider {
   }
 
   /**
-   * Fetches rich metadata directly from GOG's official product API
+   * Fetches rich metadata directly from GOG's official product API and enriched catalog
    */
   async fetchGogProductMetadata(gogId: string): Promise<Partial<SteamEnrichedMetadata> | null> {
+    const cached = (gogEnrichedCache as Record<string, any>)[gogId];
+
+    let screenshots: SteamScreenshot[] = [];
+    let movies: SteamMovie[] = [];
+    let headerImage = cached?.coverHorizontal || cached?.coverVertical || '';
+    let capsuleImage = cached?.coverVertical || cached?.coverHorizontal || '';
+    let descriptionFull = cached?.aboutTheGame || cached?.detailedDescription || '';
+    let descriptionLead = cached?.shortDescription || '';
+    let releaseDate = cached?.releaseDate || 'TBA';
+
     try {
       const url = `${this.getGogBaseUrl()}/products/${encodeURIComponent(gogId)}?expand=description,screenshots,videos`;
       const res = await axios.get(url, { timeout: 8000 });
       const data = res.data;
-      if (!data) return null;
+      if (data) {
+        if (data.screenshots && Array.isArray(data.screenshots)) {
+          screenshots = data.screenshots.map((s: any, idx: number) => {
+            const fullImg =
+              s.formatted_images?.find((img: any) => img.formatter_name === 'ggvgl_2x')?.image_url ||
+              s.formatted_images?.find((img: any) => img.formatter_name === 'ggvgl')?.image_url ||
+              (s.formatter_template_url ? s.formatter_template_url.replace('{formatter}', 'ggvgl_2x') : '');
+            const thumbImg =
+              s.formatted_images?.find((img: any) => img.formatter_name === 'ggvgm')?.image_url || fullImg;
 
-      const screenshots: SteamScreenshot[] = (data.screenshots || []).map((s: any, idx: number) => {
-        const fullImg =
-          s.formatted_images?.find((img: any) => img.formatter_name === 'ggvgl_2x')?.image_url ||
-          s.formatted_images?.find((img: any) => img.formatter_name === 'ggvgl')?.image_url ||
-          (s.formatter_template_url ? s.formatter_template_url.replace('{formatter}', 'ggvgl_2x') : '');
-        const thumbImg =
-          s.formatted_images?.find((img: any) => img.formatter_name === 'ggvgm')?.image_url || fullImg;
+            return {
+              id: idx,
+              pathThumbnail: ensureHttps(thumbImg),
+              pathFull: ensureHttps(fullImg),
+            };
+          });
+        }
 
-        return {
-          id: idx,
-          pathThumbnail: ensureHttps(thumbImg),
-          pathFull: ensureHttps(fullImg),
-        };
-      });
+        if (data.videos && Array.isArray(data.videos)) {
+          movies = data.videos.map((v: any, idx: number) => ({
+            id: idx,
+            name: `Trailer ${idx + 1}`,
+            thumbnail: ensureHttps(v.thumbnail_url || ''),
+            webm: { 480: '', max: '' },
+            mp4: { 480: ensureHttps(v.video_url || ''), max: ensureHttps(v.video_url || '') },
+          }));
+        }
 
-      const movies: SteamMovie[] = (data.videos || []).map((v: any, idx: number) => ({
-        id: idx,
-        name: `Trailer ${idx + 1}`,
-        thumbnail: ensureHttps(v.thumbnail_url || ''),
-        webm: { 480: '', max: '' },
-        mp4: { 480: ensureHttps(v.video_url || ''), max: ensureHttps(v.video_url || '') },
-      }));
+        const apiHeader = ensureHttps(
+          data.images?.background || data.images?.logo2x || data.images?.icon || ''
+        );
+        if (apiHeader) headerImage = apiHeader;
 
-      const headerImage = ensureHttps(
-        data.images?.background || data.images?.logo2x || data.images?.icon || ''
-      );
+        const apiDescFull = data.description?.full || data.description?.lead || '';
+        const apiDescLead = data.description?.lead || '';
 
-      let descriptionFull = data.description?.full || data.description?.lead || '';
-      let descriptionLead = data.description?.lead || '';
+        // Check if GOG returned raw localization placeholders (e.g. product_description_1413291984)
+        const isPlaceholderDesc =
+          apiDescFull.includes('product_description_') ||
+          apiDescFull.includes('product_feature_') ||
+          !apiDescFull.trim();
 
-      // Check if GOG returned raw localization placeholders (e.g. product_description_1413291984)
-      const isPlaceholderDesc =
-        descriptionFull.includes('product_description_') ||
-        descriptionFull.includes('product_feature_') ||
-        !descriptionFull.trim();
-
-      if (isPlaceholderDesc) {
-        if (GOG_SPECIAL_DESCRIPTIONS[gogId]) {
+        if (!isPlaceholderDesc && apiDescFull) {
+          descriptionFull = apiDescFull;
+          descriptionLead = apiDescLead || descriptionLead;
+        } else if (GOG_SPECIAL_DESCRIPTIONS[gogId]) {
           descriptionLead = GOG_SPECIAL_DESCRIPTIONS[gogId].lead;
           descriptionFull = GOG_SPECIAL_DESCRIPTIONS[gogId].full;
         } else if (data.slug) {
@@ -162,26 +197,52 @@ export class FallbackMetadataProvider {
             console.warn(`[Fallback Provider] Store page scrape failed for ${data.slug}:`, scrapeErr?.message);
           }
         }
+
+        if (data.release_date && releaseDate === 'TBA') {
+          releaseDate = data.release_date.substring(0, 10);
+        }
       }
-
-      const releaseDate =
-        GOG_SPECIAL_DESCRIPTIONS[gogId]?.releaseDate ||
-        (data.release_date ? data.release_date.substring(0, 10) : 'TBA');
-
-      return {
-        aboutTheGame: descriptionFull,
-        detailedDescription: descriptionFull,
-        shortDescription: descriptionLead,
-        headerImage,
-        screenshots,
-        movies,
-        releaseDate,
-        achievements: gogId === '1413291984' ? { total: 34 } : undefined,
-      };
     } catch (err: any) {
-      console.warn(`[Fallback Provider] GOG product lookup failed for ${gogId}:`, err?.message);
-      return null;
+      console.warn(`[Fallback Provider] GOG live product lookup failed for ${gogId}:`, err?.message);
     }
+
+    if (screenshots.length === 0 && (cached?.coverHorizontal || cached?.coverVertical)) {
+      const img = cached.coverHorizontal || cached.coverVertical;
+      screenshots = [{ id: 0, pathThumbnail: ensureHttps(img), pathFull: ensureHttps(img) }];
+    }
+
+    const rawCategories = cached?.categories || [
+      { id: 2, description: 'Single-player' },
+    ];
+    const categories: SteamCategory[] = rawCategories.map((c: any) => ({
+      id: c.id,
+      description: c.description,
+      icon: getSteamCategoryIconUrl(c.id),
+    }));
+
+    const sysReqs = {
+      minimum: formatGogSystemRequirements(cached?.systemRequirements?.minimum),
+      recommended: formatGogSystemRequirements(cached?.systemRequirements?.recommended),
+    };
+
+    return {
+      aboutTheGame: descriptionFull,
+      detailedDescription: descriptionFull,
+      shortDescription: descriptionLead,
+      headerImage: ensureHttps(headerImage),
+      capsuleImage: ensureHttps(capsuleImage),
+      screenshots,
+      movies,
+      releaseDate: GOG_SPECIAL_DESCRIPTIONS[gogId]?.releaseDate || releaseDate,
+      developers: (cached?.developers && cached.developers.length > 0) ? cached.developers : undefined,
+      publishers: (cached?.publishers && cached.publishers.length > 0) ? cached.publishers : undefined,
+      genres: (cached?.genres && cached.genres.length > 0) ? cached.genres : undefined,
+      tags: (cached?.tags && cached.tags.length > 0) ? cached.tags : undefined,
+      categories,
+      supportedLanguages: cached?.supportedLanguages || 'English<strong>*</strong>',
+      systemRequirements: sysReqs,
+      achievements: gogId === '1413291984' ? { total: 34 } : (cached?.features?.includes('Achievements') ? { total: 20 } : undefined),
+    };
   }
 
   /**
@@ -361,6 +422,45 @@ export class FallbackMetadataProvider {
       positivePercent: ocData.score || 85,
     };
 
+    const devs =
+      (storeMetadata?.developers && storeMetadata.developers.length > 0)
+        ? storeMetadata.developers
+        : (game.developers && game.developers.length > 0)
+        ? game.developers
+        : [];
+
+    const pubs =
+      (storeMetadata?.publishers && storeMetadata.publishers.length > 0)
+        ? storeMetadata.publishers
+        : (game.publishers && game.publishers.length > 0)
+        ? game.publishers
+        : [];
+
+    const genres =
+      (storeMetadata?.genres && storeMetadata.genres.length > 0)
+        ? storeMetadata.genres
+        : (game.genres && game.genres.length > 0)
+        ? game.genres
+        : ['Action'];
+
+    const tags =
+      (storeMetadata?.tags && storeMetadata.tags.length > 0)
+        ? storeMetadata.tags
+        : (game.tags && game.tags.length > 0)
+        ? game.tags
+        : ['Store Exclusive'];
+
+    const categories =
+      (storeMetadata?.categories && storeMetadata.categories.length > 0)
+        ? storeMetadata.categories
+        : [
+            {
+              id: 2,
+              description: 'Single-player',
+              icon: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_singlePlayer.png',
+            },
+          ];
+
     return {
       appId: 0,
       name: game.title,
@@ -370,18 +470,13 @@ export class FallbackMetadataProvider {
       headerImage: ensureHttps(storeMetadata?.headerImage || game.headerImage),
       capsuleImage: ensureHttps(storeMetadata?.capsuleImage || game.capsuleImage || storeMetadata?.headerImage || game.headerImage),
       iconUrl: ensureHttps(storeMetadata?.iconUrl || game.iconUrl || ''),
-      developers: game.developers || [],
-      publishers: game.publishers || [],
+      developers: devs,
+      publishers: pubs,
       releaseDate: storeMetadata?.releaseDate || game.releaseDate || 'TBA',
-      genres: game.genres || ['Action'],
-      tags: game.tags || ['Store Exclusive'],
-      categories: [
-        {
-          id: 2,
-          description: 'Single-player',
-          icon: 'https://store.akamai.steamstatic.com/public/images/v6/ico/ico_singlePlayer.png',
-        },
-      ],
+      genres,
+      tags,
+      categories,
+      supportedLanguages: storeMetadata?.supportedLanguages,
       screenshots:
         storeMetadata?.screenshots && storeMetadata.screenshots.length > 0
           ? storeMetadata.screenshots

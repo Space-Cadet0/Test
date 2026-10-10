@@ -248,6 +248,12 @@ export function mergeStorefrontGames(
           ? `steam-${newGame.steamAppId}`
           : existing.id,
         platforms: updatedPlatforms,
+        developers: (existing.developers && existing.developers.length > 0) ? existing.developers : newGame.developers,
+        publishers: (existing.publishers && existing.publishers.length > 0) ? existing.publishers : newGame.publishers,
+        genres: (existing.genres && existing.genres.length > 0) ? existing.genres : newGame.genres,
+        tags: (existing.tags && existing.tags.length > 0) ? existing.tags : newGame.tags,
+        shortDescription: existing.shortDescription || newGame.shortDescription,
+        releaseDate: existing.releaseDate || newGame.releaseDate,
       };
     } else {
       merged.push({

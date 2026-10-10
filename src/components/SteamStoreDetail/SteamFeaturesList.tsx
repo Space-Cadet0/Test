@@ -15,7 +15,6 @@ interface SteamFeaturesListProps {
 
 // Category taxonomies according to Steam's official storefront specifications
 const CONTROLLER_INTERNAL_IDS = new Set([55, 56, 57, 58, 59, 60]);
-const CONTROLLER_STANDARD_IDS = new Set([18, 28]);
 const ACCESSIBILITY_IDS = new Set([
   64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80,
 ]);
@@ -59,8 +58,6 @@ export const SteamFeaturesList: React.FC<SteamFeaturesListProps> = ({
     if (CONTROLLER_INTERNAL_IDS.has(c.id)) return false;
     // Exclude accessibility items (rendered in Steam's accessibility section)
     if (ACCESSIBILITY_IDS.has(c.id)) return false;
-    // Exclude general controller support categories from specs list (rendered in dedicated controller block)
-    if (CONTROLLER_STANDARD_IDS.has(c.id)) return false;
 
     // Suppress generic umbrella categories when specific sub-categories exist
     if (c.id === 1 && hasSpecificMulti) return false; // Generic 'Multi-player'
