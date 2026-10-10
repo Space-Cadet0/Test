@@ -263,16 +263,16 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
   const ocColors = getTierColor(openCritic.tier);
 
   return (
-    <div className="bg-[#101822] border border-[#2a475e] rounded p-4 shadow-xl text-steam-text select-none">
-      <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
+    <div className="bg-[#101822] border border-[#2a475e] rounded p-3.5 xl:p-4 shadow-xl text-steam-text select-none">
+      <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 xl:gap-5">
         {/* Left: Action Button & Library Status */}
-        <div className="flex items-center gap-3 shrink-0 flex-nowrap py-0.5">
+        <div className="flex items-center gap-2 xl:gap-3 shrink-0 flex-nowrap py-0.5">
           {/* Main Action Button (Play / Install) */}
           <div className="flex items-center gap-1.5 shrink-0">
             {isInstalled ? (
               <button
                 onClick={handlePlayClick}
-                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded font-bold text-sm text-white tracking-wider uppercase transition-all shadow-md hover:brightness-110 active:scale-[0.99] shrink-0"
+                className="inline-flex items-center justify-center gap-1.5 xl:gap-2 px-4.5 xl:px-6 py-2 xl:py-2.5 rounded font-bold text-xs xl:text-sm text-white tracking-wider uppercase transition-all shadow-md hover:brightness-110 active:scale-[0.99] shrink-0"
                 style={{
                   background: 'linear-gradient(to right, #75b022 5%, #588a1b 95%)',
                   boxShadow: '0 0 16px rgba(91, 163, 43, 0.45)',
@@ -285,7 +285,7 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
             ) : (
               <button
                 onClick={handleInstallClick}
-                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded font-bold text-sm text-white tracking-wider uppercase transition-all shadow-md hover:brightness-110 active:scale-[0.99] shrink-0"
+                className="inline-flex items-center justify-center gap-1.5 xl:gap-2 px-4.5 xl:px-6 py-2 xl:py-2.5 rounded font-bold text-xs xl:text-sm text-white tracking-wider uppercase transition-all shadow-md hover:brightness-110 active:scale-[0.99] shrink-0"
                 style={{
                   background: 'linear-gradient(to right, #214b6b 0%, #123049 100%)',
                   border: '1px solid #3878a8',
@@ -302,7 +302,7 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
             {onToggleInstallStatus && (
               <button
                 onClick={onToggleInstallStatus}
-                className="p-2.5 rounded text-steam-subtext hover:text-white bg-[#16202d] hover:bg-[#1f2c3d] border border-steam-border/80 transition-colors shrink-0"
+                className="p-2 xl:p-2.5 rounded text-steam-subtext hover:text-white bg-[#16202d] hover:bg-[#1f2c3d] border border-steam-border/80 transition-colors shrink-0"
                 title={
                   isInstalled
                     ? 'Manually mark as uninstalled (cloud only)'
@@ -318,7 +318,7 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
           {onManageCollections && (
             <button
               onClick={onManageCollections}
-              className="inline-flex items-center gap-1.5 px-3 py-2 rounded text-xs font-semibold text-steam-text hover:text-white bg-[#1b2838] hover:bg-[#25394b] border border-[#2a475e] transition-colors shrink-0"
+              className="inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 xl:py-2 rounded text-xs font-semibold text-steam-text hover:text-white bg-[#1b2838] hover:bg-[#25394b] border border-[#2a475e] transition-colors shrink-0"
               title="Add or remove from user collections"
             >
               <Bookmark className="w-3.5 h-3.5 text-steam-accent" />
@@ -327,7 +327,7 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
           )}
 
           {/* Library Status Indicator */}
-          <div className="flex flex-col justify-center border-l border-[#2a475e]/60 pl-3.5 py-0.5 shrink-0 min-w-max">
+          <div className="flex flex-col justify-center border-l border-[#2a475e]/60 pl-2.5 xl:pl-3.5 py-0.5 shrink-0 min-w-max">
             <div className="flex items-center gap-1.5 text-xs font-semibold text-white whitespace-nowrap">
               {isInstalled ? (
                 <>
@@ -354,9 +354,9 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
         </div>
 
         {/* Right: Steam Library Stats Matrix */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:flex lg:items-start lg:justify-between gap-3 lg:gap-6 border-t lg:border-t-0 lg:border-l border-[#2a475e]/60 pt-3 lg:pt-0 lg:pl-6 flex-1 min-w-0">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:flex lg:items-start lg:justify-between gap-3 sm:gap-4 lg:gap-3 xl:gap-5 2xl:gap-6 border-t lg:border-t-0 lg:border-l border-[#2a475e]/60 pt-3 lg:pt-0 pl-0 lg:pl-3.5 xl:pl-6 flex-1 min-w-0">
           {/* Play Time */}
-          <div className="flex flex-col shrink-0 min-w-0">
+          <div className="flex flex-col min-w-0">
             <span className="text-[10px] font-semibold uppercase tracking-wider text-[#8f98a0] flex items-center gap-1 whitespace-nowrap">
               <Clock className="w-3 h-3 text-sky-400" />
               Play Time
@@ -385,7 +385,7 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
           </div>
 
           {/* Last Played */}
-          <div className="flex flex-col shrink-0 min-w-0">
+          <div className="flex flex-col min-w-0">
             <span className="text-[10px] font-semibold uppercase tracking-wider text-[#8f98a0] flex items-center gap-1 whitespace-nowrap">
               <Calendar className="w-3 h-3 text-sky-400" />
               Last Played
@@ -396,7 +396,7 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
           </div>
 
           {/* Space Required */}
-          <div className="flex flex-col shrink-0 min-w-0">
+          <div className="flex flex-col min-w-0">
             <span className="text-[10px] font-semibold uppercase tracking-wider text-[#8f98a0] flex items-center gap-1 whitespace-nowrap">
               <HardDrive className="w-3 h-3 text-sky-400" />
               Space Required
@@ -407,7 +407,7 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
           </div>
 
           {/* Achievements */}
-          <div className="flex flex-col shrink-0 min-w-0">
+          <div className="flex flex-col min-w-0">
             <div className="flex items-center gap-1.5 whitespace-nowrap">
               <span className="text-[10px] font-semibold uppercase tracking-wider text-[#8f98a0] flex items-center gap-1">
                 {isAnyMastered ? (
@@ -469,7 +469,7 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
           </div>
 
           {/* OpenCritic Score */}
-          <div className="flex flex-col shrink-0 min-w-0">
+          <div className="flex flex-col min-w-0">
             <span className="text-[10px] font-semibold uppercase tracking-wider text-[#8f98a0] flex items-center gap-1 whitespace-nowrap">
               <Award className="w-3 h-3 text-purple-400" />
               OpenCritic
