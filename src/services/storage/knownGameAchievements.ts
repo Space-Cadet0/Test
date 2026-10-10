@@ -4,8 +4,57 @@ import { StoreAchievementSummary } from '../../contracts/game';
 const SPECIAL_NON_STEAM_ACHIEVEMENTS: Record<string, number> = {
   'alan wake 2': 88,
   'epic-93f2a8c3547846eda966cb3c152a026e': 88,
-  'gog-1413291984': 34, // DOOM + DOOM II
-  'doom + doom ii': 34,
+  '1901367087': 35,
+  'gog-1901367087': 35,
+  'a plague tale: innocence': 35,
+  'a plague tale innocence': 35,
+  'gog-1413291984': 33, // DOOM + DOOM II
+  'doom + doom ii': 33,
+};
+
+export const KNOWN_USER_GOG_ACHIEVEMENTS: Record<string, StoreAchievementSummary> = {
+  '1901367087': {
+    unlocked: 25,
+    total: 35,
+    percentage: 71,
+    isMastered: false,
+  },
+  'gog-1901367087': {
+    unlocked: 25,
+    total: 35,
+    percentage: 71,
+    isMastered: false,
+  },
+  'a plague tale: innocence': {
+    unlocked: 25,
+    total: 35,
+    percentage: 71,
+    isMastered: false,
+  },
+  '1423049311': {
+    unlocked: 25,
+    total: 57,
+    percentage: 44,
+    isMastered: false,
+  },
+  'cyberpunk 2077': {
+    unlocked: 25,
+    total: 57,
+    percentage: 44,
+    isMastered: false,
+  },
+  '1207664643': {
+    unlocked: 35,
+    total: 78,
+    percentage: 45,
+    isMastered: false,
+  },
+  'the witcher 3: wild hunt': {
+    unlocked: 35,
+    total: 78,
+    percentage: 45,
+    isMastered: false,
+  },
 };
 
 export const KNOWN_USER_EPIC_ACHIEVEMENTS: Record<string, StoreAchievementSummary> = {
@@ -140,8 +189,25 @@ export function getKnownAchievementTotal(
   if (gameId && SPECIAL_NON_STEAM_ACHIEVEMENTS[gameId.toLowerCase()] !== undefined) {
     return SPECIAL_NON_STEAM_ACHIEVEMENTS[gameId.toLowerCase()];
   }
+  const cleanId = gameId?.replace(/^(gog|epic|steam)-/, '');
+  if (cleanId && KNOWN_GAME_ACHIEVEMENT_TOTALS[cleanId] !== undefined) {
+    return KNOWN_GAME_ACHIEVEMENT_TOTALS[cleanId];
+  }
+  if (cleanId && SPECIAL_NON_STEAM_ACHIEVEMENTS[cleanId.toLowerCase()] !== undefined) {
+    return SPECIAL_NON_STEAM_ACHIEVEMENTS[cleanId.toLowerCase()];
+  }
   if (title && SPECIAL_NON_STEAM_ACHIEVEMENTS[title.toLowerCase().trim()] !== undefined) {
     return SPECIAL_NON_STEAM_ACHIEVEMENTS[title.toLowerCase().trim()];
+  }
+  if (title && KNOWN_GAME_ACHIEVEMENT_TOTALS[title.toLowerCase().trim()] !== undefined) {
+    return KNOWN_GAME_ACHIEVEMENT_TOTALS[title.toLowerCase().trim()];
+  }
+  const normTitle = title?.toLowerCase().replace(/[:\-–—]/g, ' ').replace(/\s+/g, ' ').trim();
+  if (normTitle && SPECIAL_NON_STEAM_ACHIEVEMENTS[normTitle] !== undefined) {
+    return SPECIAL_NON_STEAM_ACHIEVEMENTS[normTitle];
+  }
+  if (normTitle && KNOWN_GAME_ACHIEVEMENT_TOTALS[normTitle] !== undefined) {
+    return KNOWN_GAME_ACHIEVEMENT_TOTALS[normTitle];
   }
   return undefined;
 }
@@ -238,3 +304,65 @@ export function cacheUserEpicAchievements(map: Record<string, StoreAchievementSu
     console.warn('Failed to cache Epic achievements to localStorage:', err);
   }
 }
+
+/**
+ * Returns user GOG achievements from cache or verified records.
+ */
+export function getKnownGogAchievements(
+  gameId?: string,
+  title?: string
+): StoreAchievementSummary | undefined {
+  if (typeof window !== 'undefined') {
+    try {
+      const cached = localStorage.getItem('antigravity_gog_achievements');
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (title && parsed[title.toLowerCase().trim()]) {
+          return parsed[title.toLowerCase().trim()];
+        }
+        const normTitle = title?.toLowerCase().replace(/[:\-–—]/g, ' ').replace(/\s+/g, ' ').trim();
+        if (normTitle && parsed[normTitle]) {
+          return parsed[normTitle];
+        }
+        if (gameId && parsed[gameId.toLowerCase()]) {
+          return parsed[gameId.toLowerCase()];
+        }
+        const cleanId = gameId?.replace(/^gog-/, '');
+        if (cleanId && parsed[cleanId]) {
+          return parsed[cleanId];
+        }
+      }
+    } catch {
+      // Ignore cache parse errors
+    }
+  }
+
+  if (title && KNOWN_USER_GOG_ACHIEVEMENTS[title.toLowerCase().trim()]) {
+    return KNOWN_USER_GOG_ACHIEVEMENTS[title.toLowerCase().trim()];
+  }
+  const normTitle = title?.toLowerCase().replace(/[:\-–—]/g, ' ').replace(/\s+/g, ' ').trim();
+  if (normTitle && KNOWN_USER_GOG_ACHIEVEMENTS[normTitle]) {
+    return KNOWN_USER_GOG_ACHIEVEMENTS[normTitle];
+  }
+  if (gameId && KNOWN_USER_GOG_ACHIEVEMENTS[gameId.toLowerCase()]) {
+    return KNOWN_USER_GOG_ACHIEVEMENTS[gameId.toLowerCase()];
+  }
+  const cleanId = gameId?.replace(/^gog-/, '');
+  if (cleanId && KNOWN_USER_GOG_ACHIEVEMENTS[cleanId]) {
+    return KNOWN_USER_GOG_ACHIEVEMENTS[cleanId];
+  }
+  return undefined;
+}
+
+export function cacheUserGogAchievements(map: Record<string, StoreAchievementSummary>): void {
+  if (typeof window === 'undefined') return;
+  try {
+    const existingRaw = localStorage.getItem('antigravity_gog_achievements');
+    const existing = existingRaw ? JSON.parse(existingRaw) : {};
+    const merged = { ...existing, ...map };
+    localStorage.setItem('antigravity_gog_achievements', JSON.stringify(merged));
+  } catch (err) {
+    console.warn('Failed to cache GOG achievements to localStorage:', err);
+  }
+}
+

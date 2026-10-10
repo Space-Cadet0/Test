@@ -25,6 +25,7 @@ import { parseTimestampMs, formatLastPlayedDate, formatPlaytime } from '../../ut
 import {
   getKnownAchievementTotal,
   getKnownEpicAchievements,
+  getKnownGogAchievements,
   getKnownSteamAchievements,
 } from '../../services/storage/knownGameAchievements';
 import { ActiveGameFilter } from '../../contracts/filter';
@@ -160,16 +161,24 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
     const reg = STOREFRONT_REGISTRY[p.platformId];
     const name = reg?.name || p.platformId;
 
-    if (p.achievements) {
+    let pAchievements = p.achievements;
+    if (p.platformId === 'gog') {
+      const gogKnown = getKnownGogAchievements(p.platformGameId || game.id, game.title);
+      if (gogKnown && (gogKnown.unlocked > (pAchievements?.unlocked ?? 0) || gogKnown.total > (pAchievements?.total ?? 0))) {
+        pAchievements = gogKnown;
+      }
+    }
+
+    if (pAchievements && (pAchievements.total > 0 || pAchievements.unlocked > 0)) {
       return {
         platformId: p.platformId,
         platformName: name,
-        unlocked: p.achievements.unlocked,
-        total: p.achievements.total,
-        percentage: p.achievements.percentage,
-        gamerscore: p.achievements.gamerscore,
-        xp: p.achievements.xp,
-        isMastered: !!p.achievements.isMastered || p.achievements.percentage >= 100,
+        unlocked: pAchievements.unlocked,
+        total: pAchievements.total,
+        percentage: pAchievements.percentage,
+        gamerscore: pAchievements.gamerscore,
+        xp: pAchievements.xp,
+        isMastered: !!pAchievements.isMastered || pAchievements.percentage >= 100,
       };
     }
 
@@ -187,12 +196,15 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
         }
       }
     } else if (p.platformId === 'gog') {
-      if (targetSteamAppId === 292030) {
-        // Witcher 3 on GOG verified user progress
-        unlocked = 35;
-      } else if (targetSteamAppId === 1091500) {
-        // Cyberpunk 2077 on GOG verified user progress
-        unlocked = 25;
+      const gogData = getKnownGogAchievements(p.platformGameId || game.id, game.title);
+      if (gogData) {
+        unlocked = gogData.unlocked;
+        if (gogData.total > 0) {
+          platTotal = gogData.total;
+        }
+      } else {
+        const gogTotal = getKnownAchievementTotal(targetSteamAppId, p.platformGameId || game.id, game.title);
+        if (gogTotal) platTotal = gogTotal;
       }
     } else if (p.platformId === 'epic') {
       const epicData = getKnownEpicAchievements(game.id, game.title);

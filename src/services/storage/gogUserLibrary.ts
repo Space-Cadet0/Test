@@ -60,7 +60,14 @@ export const GOG_USER_LIBRARY: CanonicalGame[] = [
         "platformId": "gog",
         "platformGameId": "1901367087",
         "installed": false,
-        "playtimeMinutes": 0
+        "playtimeMinutes": 955,
+        "lastPlayed": "2024-11-20T21:50:54+00:00",
+        "achievements": {
+          "unlocked": 25,
+          "total": 35,
+          "percentage": 71,
+          "isMastered": false
+        }
       }
     ],
     "headerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/752590/header.jpg",

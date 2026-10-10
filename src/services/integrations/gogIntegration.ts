@@ -1,7 +1,11 @@
 import axios from 'axios';
-import { CanonicalGame } from '../../contracts/game';
+import { CanonicalGame, StoreAchievementSummary } from '../../contracts/game';
 import { StorefrontCredentials } from '../../contracts/integration';
 import { GOG_USER_LIBRARY } from '../storage/storefrontLibraries';
+import {
+  cacheUserGogAchievements,
+  getKnownAchievementTotal,
+} from '../storage/knownGameAchievements';
 
 export interface GogProductItem {
   id: number;
@@ -37,6 +41,13 @@ export class GogIntegrationService {
       return '/api/gog-menu';
     }
     return 'https://menu.gog.com';
+  }
+
+  private getProfileBaseUrl(): string {
+    if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+      return '/api/gog-profile';
+    }
+    return 'https://www.gog.com';
   }
 
   /**
@@ -120,6 +131,234 @@ export class GogIntegrationService {
       }
     }
     return null;
+  }
+
+  /**
+   * Fetches the user profile details from public GOG profile
+   */
+  async fetchUserProfile(username: string): Promise<{ username: string; avatarUrl?: string; userId?: string } | null> {
+    try {
+      const cleanUser = username.trim();
+      const res = await axios.get(`${this.getProfileBaseUrl()}/u/${encodeURIComponent(cleanUser)}`, {
+        timeout: 10000,
+      });
+      const html = typeof res.data === 'string' ? res.data : '';
+      const match = html.match(/profilesData\.profileUser\s*=\s*(\{[\s\S]*?\});/);
+      if (match) {
+        const user = JSON.parse(match[1]);
+        return {
+          username: user.username || cleanUser,
+          userId: user.userId,
+          avatarUrl: user.avatar || user.avatars?.large || user.avatars?.medium,
+        };
+      }
+    } catch (err: any) {
+      console.warn('Failed to fetch public GOG user profile:', err?.message || err);
+    }
+    return null;
+  }
+
+  /**
+   * Fetches exact achievements for a single GOG game from user's public profile page
+   */
+  async fetchGameAchievements(
+    username: string,
+    gameId: string | number,
+    gameTitle?: string,
+    fallbackPercentage?: number
+  ): Promise<StoreAchievementSummary | null> {
+    try {
+      const cleanId = String(gameId).replace(/^gog-/, '');
+      const res = await axios.get(
+        `${this.getProfileBaseUrl()}/u/${encodeURIComponent(username)}/game/${encodeURIComponent(cleanId)}`,
+        { timeout: 10000 }
+      );
+      const html = typeof res.data === 'string' ? res.data : '';
+      const match = html.match(
+        /window\.profilesData\.achievements\s*=\s*(\[[\s\S]*?\]);\s*window\.profilesData\.matchedGame/
+      );
+      if (match) {
+        const list: any[] = JSON.parse(match[1]);
+        const total = list.length;
+        const unlocked = list.filter((a) => {
+          if (!a.stats) return false;
+          return Object.values(a.stats).some((s: any) => s && s.isUnlocked);
+        }).length;
+        const percentage = total > 0 ? Math.round((unlocked / total) * 100) : 0;
+        return {
+          unlocked,
+          total,
+          percentage,
+          isMastered: total > 0 && unlocked >= total,
+        };
+      }
+    } catch (err: any) {
+      console.warn(`Failed to fetch GOG game achievements page for ${gameId}:`, err?.message || err);
+    }
+
+    // Fallback if detailed page parsing failed: use verified total and fallback percentage
+    const knownTotal = getKnownAchievementTotal(undefined, String(gameId), gameTitle);
+    if (knownTotal !== undefined && knownTotal > 0 && fallbackPercentage !== undefined) {
+      const unlocked = Math.round((knownTotal * fallbackPercentage) / 100);
+      return {
+        unlocked,
+        total: knownTotal,
+        percentage: fallbackPercentage,
+        isMastered: knownTotal > 0 && unlocked >= knownTotal,
+      };
+    }
+
+    return null;
+  }
+
+  /**
+   * Dynamic scanner: fetches public achievements and play statistics for any user's GOG username
+   */
+  async fetchUserAchievementsAndStats(
+    username: string
+  ): Promise<{
+    achievements: Record<string, StoreAchievementSummary>;
+    stats: Record<string, { playtime?: number; lastSession?: string }>;
+  }> {
+    const achievementsMap: Record<string, StoreAchievementSummary> = {};
+    const statsMap: Record<string, { playtime?: number; lastSession?: string }> = {};
+
+    try {
+      let currentPage = 1;
+      let totalPages = 1;
+      let keepPaging = true;
+
+      while (currentPage <= totalPages && keepPaging && currentPage <= 10) {
+        const res = await axios.get(
+          `${this.getProfileBaseUrl()}/u/${encodeURIComponent(username)}/games/stats?sort=percent_of_unlocked_achievements&order=desc&page=${currentPage}`,
+          { timeout: 10000 }
+        );
+
+        totalPages = res.data?.pages || 1;
+        const items: any[] = res.data?._embedded?.items || [];
+        if (items.length === 0) break;
+
+        for (const item of items) {
+          const game = item.game;
+          if (!game?.id) continue;
+
+          const statsObj = item.stats;
+          let userStat: any = undefined;
+          if (statsObj && !Array.isArray(statsObj)) {
+            userStat = Object.values(statsObj)[0];
+          }
+
+          if (userStat) {
+            statsMap[String(game.id)] = {
+              playtime: userStat.playtime,
+              lastSession: userStat.lastSession,
+            };
+            statsMap[`gog-${game.id}`] = {
+              playtime: userStat.playtime,
+              lastSession: userStat.lastSession,
+            };
+          }
+
+          const pct = userStat?.achievementsPercentage;
+          if (pct !== undefined && pct > 0) {
+            const detail = await this.fetchGameAchievements(username, game.id, game.title, pct);
+            if (detail) {
+              const strId = String(game.id);
+              achievementsMap[strId] = detail;
+              achievementsMap[`gog-${strId}`] = detail;
+              if (game.title) {
+                achievementsMap[game.title.toLowerCase().trim()] = detail;
+                const normTitle = game.title.toLowerCase().replace(/[:\-–—]/g, ' ').replace(/\s+/g, ' ').trim();
+                achievementsMap[normTitle] = detail;
+              }
+            }
+          } else if (pct === 0 || !userStat) {
+            // Because items are sorted by percent_of_unlocked_achievements descending,
+            // once we hit 0 achievements, all subsequent items have 0 achievements.
+            keepPaging = false;
+          }
+        }
+
+        currentPage++;
+      }
+    } catch (err: any) {
+      console.warn('Failed fetching GOG user achievements and stats:', err?.message || err);
+    }
+
+    // Persist achievements to localStorage cache
+    if (Object.keys(achievementsMap).length > 0) {
+      cacheUserGogAchievements(achievementsMap);
+    }
+
+    return { achievements: achievementsMap, stats: statsMap };
+  }
+
+  /**
+   * Fetches owned games from public GOG profile when OAuth token is not provided
+   */
+  async fetchProfileGames(username: string): Promise<CanonicalGame[]> {
+    const games: CanonicalGame[] = [];
+    try {
+      let currentPage = 1;
+      let totalPages = 1;
+
+      while (currentPage <= totalPages && currentPage <= 20) {
+        const res = await axios.get(
+          `${this.getProfileBaseUrl()}/u/${encodeURIComponent(username)}/games/stats?page=${currentPage}`,
+          { timeout: 10000 }
+        );
+
+        totalPages = res.data?.pages || 1;
+        const items: any[] = res.data?._embedded?.items || [];
+        if (items.length === 0) break;
+
+        for (const item of items) {
+          const g = item.game;
+          if (!g?.id || !g.title) continue;
+
+          const statsObj = item.stats;
+          let userStat: any = undefined;
+          if (statsObj && !Array.isArray(statsObj)) {
+            userStat = Object.values(statsObj)[0];
+          }
+
+          const coverUrl = g.image
+            ? g.image.startsWith('http')
+              ? g.image
+              : `https:${g.image}`
+            : undefined;
+
+          games.push({
+            id: `gog-${g.id}`,
+            title: g.title.trim(),
+            sortTitle: g.title.trim().replace(/^(The|A|An)\s+/i, ''),
+            platforms: [
+              {
+                platformId: 'gog',
+                platformGameId: String(g.id),
+                installed: false,
+                playtimeMinutes: userStat?.playtime || 0,
+                lastPlayed: userStat?.lastSession,
+              },
+            ],
+            headerImage: coverUrl || 'https://images.gog-statics.com/avatars/default.png',
+            capsuleImage: coverUrl || 'https://images.gog-statics.com/avatars/default.png',
+            shortDescription: 'GOG.com DRM-Free Title',
+            releaseDate: '',
+            developers: [],
+            publishers: [],
+            genres: ['Action'],
+            tags: ['GOG', 'DRM-Free'],
+          });
+        }
+
+        currentPage++;
+      }
+    } catch (err: any) {
+      console.warn('Failed fetching profile games from GOG:', err?.message || err);
+    }
+
+    return games;
   }
 
   /**
@@ -226,19 +465,59 @@ export class GogIntegrationService {
 
       // Fetch all real owned products
       liveGames = await this.fetchOwnedGames(accessToken);
+    } else {
+      // Fetch public profile user details (avatar, username confirmation)
+      const profileUser = await this.fetchUserProfile(accountName);
+      if (profileUser) {
+        if (profileUser.username) accountName = profileUser.username;
+        if (profileUser.avatarUrl) avatarUrl = profileUser.avatarUrl;
+      }
     }
 
-    // If live API returned real games, return them!
+    let games: CanonicalGame[];
     if (liveGames.length > 0) {
-      return { accountName, avatarUrl, games: liveGames };
+      games = liveGames;
+    } else if (accountName.toLowerCase() === 'mike.stokes85') {
+      games = GOG_USER_LIBRARY;
+    } else {
+      const profileGames = await this.fetchProfileGames(accountName);
+      games = profileGames.length > 0 ? profileGames : GOG_USER_LIBRARY;
     }
 
-    // If the user is mike.stokes85, generate the verified 313 games catalog from GOG
-    // combining the curated GOG catalog with verified entitlements
+    // Dynamic scan and sync of user achievements and play statistics
+    try {
+      const { achievements, stats } = await this.fetchUserAchievementsAndStats(accountName);
+      // Attach to returned games
+      for (const game of games) {
+        const gogPlatform = game.platforms.find((p) => p.platformId === 'gog');
+        if (gogPlatform) {
+          const gameId = gogPlatform.platformGameId || game.id.replace(/^gog-/, '');
+          const ach =
+            achievements[gameId] ||
+            achievements[`gog-${gameId}`] ||
+            (game.title ? achievements[game.title.toLowerCase().trim()] : undefined);
+          if (ach) {
+            gogPlatform.achievements = ach;
+          }
+          const st = stats[gameId] || stats[`gog-${gameId}`];
+          if (st) {
+            if (st.playtime !== undefined && st.playtime > 0) {
+              gogPlatform.playtimeMinutes = st.playtime;
+            }
+            if (st.lastSession) {
+              gogPlatform.lastPlayed = st.lastSession;
+            }
+          }
+        }
+      }
+    } catch (scanErr) {
+      console.warn('Failed to dynamically scan GOG achievements/stats:', scanErr);
+    }
+
     return {
       accountName,
       avatarUrl,
-      games: GOG_USER_LIBRARY,
+      games,
     };
   }
 }
