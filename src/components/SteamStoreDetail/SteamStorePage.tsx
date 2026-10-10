@@ -20,9 +20,11 @@ import {
   ArrowLeft,
 } from 'lucide-react';
 import { ActiveGameFilter } from '../../contracts/filter';
+import { GameCollection } from '../../contracts/collection';
 
 interface SteamStorePageProps {
   game: CanonicalGame;
+  collections?: GameCollection[];
   onBackToLibrary?: () => void;
   onManageCollections?: () => void;
   onToggleInstallStatus?: () => void;
@@ -31,6 +33,7 @@ interface SteamStorePageProps {
 
 export const SteamStorePage: React.FC<SteamStorePageProps> = ({
   game,
+  collections,
   onBackToLibrary,
   onManageCollections,
   onToggleInstallStatus,
@@ -192,6 +195,7 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
         <SteamLibraryActionBar
           game={game}
           metadata={metadata}
+          collections={collections}
           onManageCollections={onManageCollections}
           onToggleInstallStatus={onToggleInstallStatus}
           onApplyFilter={onApplyFilter}

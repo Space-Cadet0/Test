@@ -743,6 +743,7 @@ export function App() {
             <SteamStorePage
               key={`${selectedGame.id}-${gameRefreshKey}`}
               game={selectedGame}
+              collections={collections}
               onBackToLibrary={navigateHome}
               onManageCollections={() => handleOpenManageCollections(selectedGame)}
               onToggleInstallStatus={() => handleToggleInstallStatus(selectedGame)}

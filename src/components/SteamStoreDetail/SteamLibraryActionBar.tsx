@@ -29,6 +29,8 @@ import {
   getKnownSteamAchievements,
 } from '../../services/storage/knownGameAchievements';
 import { ActiveGameFilter } from '../../contracts/filter';
+import { GameCollection } from '../../contracts/collection';
+import { loadCollections } from '../../services/storage/collectionStorage';
 
 // Known install sizes for popular games
 const KNOWN_INSTALL_SIZES: Record<number, string> = {
@@ -72,6 +74,7 @@ const KNOWN_INSTALL_SIZES: Record<number, string> = {
 interface SteamLibraryActionBarProps {
   game: CanonicalGame;
   metadata?: SteamEnrichedMetadata | null;
+  collections?: GameCollection[];
   onManageCollections?: () => void;
   onToggleInstallStatus?: () => void;
   onApplyFilter?: (filter: ActiveGameFilter) => void;
@@ -80,6 +83,7 @@ interface SteamLibraryActionBarProps {
 export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
   game,
   metadata,
+  collections,
   onManageCollections,
   onToggleInstallStatus,
   onApplyFilter,
@@ -87,6 +91,16 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
   const [showAchievementPopover, setShowAchievementPopover] = useState(false);
   const isInstalled = game.platforms.some((p) => p.installed);
   const primaryPlatform = game.platforms.find((p) => p.platformId === 'steam') || game.platforms[0];
+
+  // Determine if game belongs to at least 1 user collection
+  const allCollections = collections || loadCollections();
+  const targetGameIds = [game.id];
+  if (game.steamAppId) {
+    targetGameIds.push(`steam-${game.steamAppId}`, String(game.steamAppId));
+  }
+  const isInCollection = allCollections.some((col) =>
+    col.gameIds.some((id) => targetGameIds.includes(id))
+  );
 
   const handleInstallClick = () => {
     if (game.steamAppId) {
@@ -319,11 +333,20 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
           {onManageCollections && (
             <button
               onClick={onManageCollections}
-              className="inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 xl:py-2 rounded text-xs font-semibold text-steam-text hover:text-white bg-[#1b2838] hover:bg-[#25394b] border border-[#2a475e] transition-colors shrink-0"
-              title="Add or remove from user collections"
+              className={`p-2 xl:p-2.5 rounded transition-all shrink-0 ${
+                isInCollection
+                  ? 'bg-[#1b2b3d] text-steam-accent border border-steam-accent/60 shadow-[0_0_8px_rgba(102,192,244,0.3)] hover:brightness-110'
+                  : 'text-steam-subtext hover:text-white bg-[#16202d] hover:bg-[#1f2c3d] border border-steam-border/80'
+              }`}
+              title={isInCollection ? 'In Collection (click to manage)' : 'Add to Collections'}
             >
-              <Bookmark className="w-3.5 h-3.5 text-steam-accent" />
-              <span>Collections</span>
+              <Bookmark
+                className={`w-4 h-4 transition-transform active:scale-95 ${
+                  isInCollection
+                    ? 'text-steam-accent fill-steam-accent drop-shadow-[0_0_4px_rgba(102,192,244,0.6)]'
+                    : 'text-steam-subtext hover:text-white'
+                }`}
+              />
             </button>
           )}
 
@@ -338,7 +361,7 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
               ) : (
                 <>
                   <Cloud className="w-3.5 h-3.5 text-sky-400 shrink-0" />
-                  <span className="text-sky-300">In Library (Cloud)</span>
+                  <span className="text-sky-300">In Library</span>
                 </>
               )}
             </div>
@@ -408,9 +431,35 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
           </div>
 
           {/* Achievements */}
-          <div className="flex flex-col min-w-0">
+          <div
+            onClick={
+              platformAchievements.length > 1
+                ? () => setShowAchievementPopover((prev) => !prev)
+                : undefined
+            }
+            className={`flex flex-col min-w-0 ${
+              platformAchievements.length > 1
+                ? 'cursor-pointer group select-none'
+                : ''
+            }`}
+            title={
+              platformAchievements.length > 1
+                ? showAchievementPopover
+                  ? 'Click to hide per-store achievements breakdown'
+                  : 'Click to view per-store achievements breakdown'
+                : undefined
+            }
+          >
             <div className="flex items-center gap-1.5 whitespace-nowrap">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-[#8f98a0] flex items-center gap-1">
+              <span
+                className={`text-[10px] font-semibold uppercase tracking-wider flex items-center gap-1 transition-colors ${
+                  platformAchievements.length > 1
+                    ? showAchievementPopover
+                      ? 'text-steam-accent'
+                      : 'text-[#8f98a0] group-hover:text-white'
+                    : 'text-[#8f98a0]'
+                }`}
+              >
                 {isAnyMastered ? (
                   <span
                     className="relative inline-flex items-center justify-center w-3 h-3 shrink-0"
@@ -420,34 +469,42 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
                     <Sparkles className="w-2 h-2 text-yellow-200 absolute -top-1 -right-1 drop-shadow-[0_0_2px_rgba(255,255,255,0.9)] animate-pulse pointer-events-none" />
                   </span>
                 ) : (
-                  <Trophy className={`w-3 h-3 shrink-0 ${hasAchievements && bestAchievement.total > 0 ? 'text-amber-400' : 'text-[#8f98a0]'}`} />
+                  <Trophy
+                    className={`w-3 h-3 shrink-0 ${
+                      hasAchievements && bestAchievement.total > 0
+                        ? 'text-amber-400'
+                        : 'text-[#8f98a0]'
+                    }`}
+                  />
                 )}
-                Achievements
+                <span>Achievements</span>
+                {platformAchievements.length > 1 && (
+                  <ChevronDown
+                    className={`w-2.5 h-2.5 transition-transform duration-200 text-sky-400/80 group-hover:text-sky-300 ${
+                      showAchievementPopover ? 'rotate-180 text-steam-accent' : ''
+                    }`}
+                  />
+                )}
               </span>
-              {hasAchievements && platformAchievements.length > 1 && (
-                <button
-                  type="button"
-                  onClick={() => setShowAchievementPopover((prev) => !prev)}
-                  className={`text-[9px] font-semibold px-1.5 py-0.2 rounded transition-all flex items-center gap-0.5 cursor-pointer shrink-0 ${
-                    showAchievementPopover
-                      ? 'bg-steam-accent text-black font-bold shadow-sm'
-                      : 'bg-[#16202d] hover:bg-[#1f2c3d] text-sky-400 hover:text-white border border-steam-border/60'
-                  }`}
-                  title={showAchievementPopover ? 'Hide storefront achievements breakdown' : 'View per-store achievements breakdown'}
-                >
-                  <span>Stores</span>
-                  <ChevronDown className={`w-2.5 h-2.5 transition-transform duration-200 ${showAchievementPopover ? 'rotate-180' : ''}`} />
-                </button>
-              )}
             </div>
 
             {hasAchievements && bestAchievement.total > 0 ? (
               <>
                 <div className="flex items-center gap-1.5 mt-0.5 whitespace-nowrap">
-                  <span className="text-sm font-bold text-white">
+                  <span
+                    className={`text-sm font-bold text-white transition-colors ${
+                      platformAchievements.length > 1
+                        ? 'group-hover:text-steam-accent'
+                        : ''
+                    }`}
+                  >
                     {bestAchievement.unlocked} / {bestAchievement.total}
                   </span>
-                  <span className={`text-[11px] ${isAnyMastered ? 'text-amber-300 font-semibold' : 'text-[#8f98a0]'}`}>
+                  <span
+                    className={`text-[11px] ${
+                      isAnyMastered ? 'text-amber-300 font-semibold' : 'text-[#8f98a0]'
+                    }`}
+                  >
                     ({bestAchievement.percentage}%)
                   </span>
                 </div>
@@ -456,7 +513,9 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
                 <div className="w-full bg-[#1b2838] h-1 rounded-full mt-1 overflow-hidden">
                   <div
                     className={`h-full rounded-full transition-all ${
-                      isAnyMastered ? 'bg-gradient-to-r from-amber-400 to-yellow-300' : 'bg-amber-400'
+                      isAnyMastered
+                        ? 'bg-gradient-to-r from-amber-400 to-yellow-300'
+                        : 'bg-amber-400'
                     }`}
                     style={{ width: `${Math.min(100, bestAchievement.percentage)}%` }}
                   />
