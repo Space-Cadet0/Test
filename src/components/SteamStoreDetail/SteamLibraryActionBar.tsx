@@ -18,6 +18,7 @@ import {
   ChevronDown,
   X,
   ExternalLink,
+  Sparkles,
 } from 'lucide-react';
 import { getOpenCriticData, getTierColor } from '../../services/opencritic/openCritic';
 import { parseTimestampMs, formatLastPlayedDate, formatPlaytime } from '../../utils/dateUtils';
@@ -341,10 +342,10 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
         </div>
 
         {/* Right: Steam Library Stats Matrix */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 lg:gap-5 border-t lg:border-t-0 lg:border-l border-[#2a475e]/60 pt-3 lg:pt-0 lg:pl-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:flex lg:items-start lg:justify-between gap-3 lg:gap-6 border-t lg:border-t-0 lg:border-l border-[#2a475e]/60 pt-3 lg:pt-0 lg:pl-6 flex-1 min-w-0">
           {/* Play Time */}
-          <div className="flex flex-col">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-[#8f98a0] flex items-center gap-1">
+          <div className="flex flex-col shrink-0 min-w-0">
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-[#8f98a0] flex items-center gap-1 whitespace-nowrap">
               <Clock className="w-3 h-3 text-sky-400" />
               Play Time
             </span>
@@ -372,8 +373,8 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
           </div>
 
           {/* Last Played */}
-          <div className="flex flex-col">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-[#8f98a0] flex items-center gap-1">
+          <div className="flex flex-col shrink-0 min-w-0">
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-[#8f98a0] flex items-center gap-1 whitespace-nowrap">
               <Calendar className="w-3 h-3 text-sky-400" />
               Last Played
             </span>
@@ -383,8 +384,8 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
           </div>
 
           {/* Space Required */}
-          <div className="flex flex-col">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-[#8f98a0] flex items-center gap-1">
+          <div className="flex flex-col shrink-0 min-w-0">
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-[#8f98a0] flex items-center gap-1 whitespace-nowrap">
               <HardDrive className="w-3 h-3 text-sky-400" />
               Space Required
             </span>
@@ -394,17 +395,27 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
           </div>
 
           {/* Achievements */}
-          <div className="flex flex-col relative">
-            <div className="flex items-center justify-between">
+          <div className="flex flex-col shrink-0 min-w-0">
+            <div className="flex items-center gap-1.5 whitespace-nowrap">
               <span className="text-[10px] font-semibold uppercase tracking-wider text-[#8f98a0] flex items-center gap-1">
-                <Trophy className={`w-3 h-3 ${hasAchievements && bestAchievement.total > 0 ? 'text-amber-400' : 'text-[#8f98a0]'}`} />
+                {isAnyMastered ? (
+                  <span
+                    className="relative inline-flex items-center justify-center w-3 h-3 shrink-0"
+                    title="Mastered (100% Achievements Unlocked)"
+                  >
+                    <Trophy className="w-3 h-3 text-amber-300 fill-amber-400 drop-shadow-[0_0_4px_rgba(251,191,36,0.95)]" />
+                    <Sparkles className="w-2 h-2 text-yellow-200 absolute -top-1 -right-1 drop-shadow-[0_0_2px_rgba(255,255,255,0.9)] animate-pulse pointer-events-none" />
+                  </span>
+                ) : (
+                  <Trophy className={`w-3 h-3 shrink-0 ${hasAchievements && bestAchievement.total > 0 ? 'text-amber-400' : 'text-[#8f98a0]'}`} />
+                )}
                 Achievements
               </span>
               {hasAchievements && platformAchievements.length > 1 && (
                 <button
                   type="button"
                   onClick={() => setShowAchievementPopover((prev) => !prev)}
-                  className={`text-[9px] font-semibold px-2 py-0.5 rounded transition-all flex items-center gap-1 cursor-pointer ${
+                  className={`text-[9px] font-semibold px-1.5 py-0.2 rounded transition-all flex items-center gap-0.5 cursor-pointer shrink-0 ${
                     showAchievementPopover
                       ? 'bg-steam-accent text-black font-bold shadow-sm'
                       : 'bg-[#16202d] hover:bg-[#1f2c3d] text-sky-400 hover:text-white border border-steam-border/60'
@@ -419,21 +430,13 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
 
             {hasAchievements && bestAchievement.total > 0 ? (
               <>
-                <div className="flex items-center gap-2 mt-0.5 flex-wrap">
+                <div className="flex items-center gap-1.5 mt-0.5 whitespace-nowrap">
                   <span className="text-sm font-bold text-white">
                     {bestAchievement.unlocked} / {bestAchievement.total}
                   </span>
-                  <span className="text-[11px] text-[#8f98a0]">
+                  <span className={`text-[11px] ${isAnyMastered ? 'text-amber-300 font-semibold' : 'text-[#8f98a0]'}`}>
                     ({bestAchievement.percentage}%)
                   </span>
-                  {isAnyMastered && (
-                    <span
-                      className="inline-flex items-center gap-1 px-1.5 py-0.2 rounded text-[10px] font-black tracking-wide bg-gradient-to-r from-amber-500/25 to-yellow-500/25 text-amber-300 border border-amber-400/50 shadow-[0_0_10px_rgba(251,191,36,0.35)]"
-                      title="100% Completed on at least one storefront!"
-                    >
-                      ★ Mastered
-                    </span>
-                  )}
                 </div>
 
                 {/* Miniature progress bar */}
@@ -447,19 +450,19 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
                 </div>
               </>
             ) : (
-              <span className="text-sm font-medium text-steam-subtext mt-0.5">
+              <span className="text-sm font-medium text-steam-subtext mt-0.5 whitespace-nowrap">
                 No Achievements
               </span>
             )}
           </div>
 
           {/* OpenCritic Score */}
-          <div className="flex flex-col">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-[#8f98a0] flex items-center gap-1">
+          <div className="flex flex-col shrink-0 min-w-0">
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-[#8f98a0] flex items-center gap-1 whitespace-nowrap">
               <Award className="w-3 h-3 text-purple-400" />
               OpenCritic
             </span>
-            <div className="flex items-center gap-1.5 mt-0.5">
+            <div className="flex items-center gap-1.5 mt-0.5 whitespace-nowrap">
               <span className={`text-sm font-black ${ocColors.accentText}`}>
                 {openCritic.score}
               </span>
