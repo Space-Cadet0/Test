@@ -21,7 +21,7 @@ import {
 } from 'lucide-react';
 import { getOpenCriticData, getTierColor } from '../../services/opencritic/openCritic';
 import { parseTimestampMs, formatLastPlayedDate, formatPlaytime } from '../../utils/dateUtils';
-import { getKnownAchievementTotal } from '../../services/storage/knownGameAchievements';
+import { getKnownAchievementTotal, getKnownEpicAchievements } from '../../services/storage/knownGameAchievements';
 import { ActiveGameFilter } from '../../contracts/filter';
 
 interface SteamLibraryActionBarProps {
@@ -180,10 +180,12 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
       };
     }
 
-    const platTotal = effectiveTotal ?? 0;
+    let platTotal = effectiveTotal ?? 0;
 
     // Check user's verified unlocked achievements
     let unlocked = 0;
+    let customXp: { earned: number; total: number } | undefined = undefined;
+
     if (p.platformId === 'steam' && targetSteamAppId && KNOWN_USER_ACHIEVEMENTS[targetSteamAppId]) {
       unlocked = Math.min(platTotal, KNOWN_USER_ACHIEVEMENTS[targetSteamAppId].unlocked);
     } else if (p.platformId === 'gog') {
@@ -193,6 +195,13 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
       } else if (targetSteamAppId === 1091500) {
         // Cyberpunk 2077 on GOG verified user progress
         unlocked = 25;
+      }
+    } else if (p.platformId === 'epic') {
+      const epicData = getKnownEpicAchievements(game.id, game.title);
+      if (epicData) {
+        unlocked = epicData.unlocked;
+        if (!platTotal && epicData.total) platTotal = epicData.total;
+        if (epicData.xp) customXp = epicData.xp;
       }
     }
 
@@ -209,7 +218,7 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
     };
 
     if (p.platformId === 'epic' && platTotal > 0) {
-      res.xp = { earned: Math.round((percentage / 100) * 1000), total: 1000 };
+      res.xp = customXp || { earned: Math.round((percentage / 100) * 1000), total: 1000 };
     }
     if (p.platformId === 'xbox' && platTotal > 0) {
       res.gamerscore = { earned: Math.round((percentage / 100) * 1000), total: 1000 };

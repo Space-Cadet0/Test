@@ -284,7 +284,17 @@ export const EPIC_USER_LIBRARY: CanonicalGame[] = [
         "platformId": "epic",
         "platformGameId": "93f2a8c3547846eda966cb3c152a026e",
         "installed": false,
-        "playtimeMinutes": 0
+        "playtimeMinutes": 0,
+        "achievements": {
+          "unlocked": 59,
+          "total": 88,
+          "percentage": 67,
+          "xp": {
+            "earned": 830,
+            "total": 1360
+          },
+          "isMastered": false
+        }
       }
     ],
     "headerImage": "https://cdn2.unrealengine.com/egs-alanwake2-remedyentertainment-s1-2560x1440-309c7412b7bc.jpg",

@@ -8,4 +8,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
   scanLocalGames: () => ipcRenderer.invoke('scan:steam-installed'),
   openExternal: (url) => ipcRenderer.invoke('shell:open-external', url),
   searchHltb: (title) => ipcRenderer.invoke('hltb:search', title),
+  fetchEpicAchievements: (accountId, accessToken) =>
+    ipcRenderer.invoke('epic:fetch-achievements', { accountId, accessToken }),
 });

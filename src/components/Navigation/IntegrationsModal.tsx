@@ -763,12 +763,12 @@ export const IntegrationsModal: React.FC<IntegrationsModalProps> = ({
                     {selectedTab === 'epic' && (
                       <div className="space-y-3">
                         <div>
-                          <label className="block text-[11px] font-semibold text-white mb-1">Epic Display Name / Account ID</label>
+                          <label className="block text-[11px] font-semibold text-white mb-1">Epic Account ID or Public Profile URL</label>
                           <input
                             type="text"
                             value={epicInput}
                             onChange={(e) => setEpicInput(e.target.value)}
-                            placeholder="Epic Account ID"
+                            placeholder="e.g. 8aaea3405ecc4c7b8786012029e98d6a or https://store.epicgames.com/u/..."
                             className="w-full px-3 py-1.5 bg-[#0d1218] border border-steam-border rounded text-xs text-white font-mono"
                           />
                         </div>

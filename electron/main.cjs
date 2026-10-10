@@ -372,6 +372,15 @@ ipcMain.handle('store:sync', async (_event, storefrontId) => {
   }
 });
 
+ipcMain.handle('epic:fetch-achievements', async (_event, { accountId, accessToken }) => {
+  try {
+    return await storeSync.fetchEpicAchievements(accessToken, accountId);
+  } catch (err) {
+    console.warn('IPC epic:fetch-achievements warning:', err.message);
+    return {};
+  }
+});
+
 /**
  * Native Scanner for installed Steam games directly from local OS filesystem
  */

@@ -1,9 +1,10 @@
 import axios from 'axios';
-import { CanonicalGame } from '../../contracts/game';
+import { CanonicalGame, StoreAchievementSummary } from '../../contracts/game';
 import { StorefrontCredentials } from '../../contracts/integration';
 import { EPIC_USER_LIBRARY } from '../storage/storefrontLibraries';
 import { KNOWN_EPIC_APP_NAMES } from './epicCodenames';
 import { steamMatcher } from '../steam/steamMatcher';
+import { cacheUserEpicAchievements } from '../storage/knownGameAchievements';
 
 export class EpicIntegrationService {
   private getOAuthBaseUrl(): string {
@@ -18,6 +19,128 @@ export class EpicIntegrationService {
       return '/api/epic-library';
     }
     return 'https://library-service.live.use1a.on.epicgames.com';
+  }
+
+  private getGraphQLBaseUrl(): string {
+    if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+      return '/api/epic-graphql/graphql';
+    }
+    return 'https://launcher.store.epicgames.com/graphql';
+  }
+
+  /**
+   * Extracts clean 32-character Epic Account ID from a URL or raw string
+   */
+  extractEpicAccountId(input?: string): string | null {
+    if (!input) return null;
+    const clean = input.trim();
+    // Matches 32-character hex ID (e.g. from https://store.epicgames.com/u/8aaea3405ecc4c7b8786012029e98d6a)
+    const match = clean.match(/([a-f0-9]{32})/i);
+    if (match) return match[1].toLowerCase();
+    return clean;
+  }
+
+  /**
+   * Fetches user achievement progress from official launcher GraphQL service
+   */
+  async fetchUserAchievements(
+    epicAccountId: string,
+    accessToken?: string
+  ): Promise<Record<string, StoreAchievementSummary>> {
+    const cleanAccountId = this.extractEpicAccountId(epicAccountId);
+    if (!cleanAccountId) return {};
+
+    try {
+      // 1. In Electron desktop runtime, delegate to native IPC if available
+      if (typeof window !== 'undefined' && (window as any).electronAPI?.fetchEpicAchievements) {
+        const nativeMap = await (window as any).electronAPI.fetchEpicAchievements(cleanAccountId, accessToken);
+        if (nativeMap && Object.keys(nativeMap).length > 0) {
+          cacheUserEpicAchievements(nativeMap);
+          return nativeMap;
+        }
+      }
+
+      // 2. Fetch directly or via proxy
+      const query = `query playerProfile($epicAccountId: String!, $locale: String!) {
+        PlayerProfile {
+          playerProfile(epicAccountId: $epicAccountId) {
+            epicAccountId
+            displayName
+            achievementsSummaries {
+              ... on PlayerAchievementResponseSuccess {
+                data {
+                  totalUnlocked
+                  totalXP
+                  sandboxId
+                  product(locale: $locale) {
+                    name
+                    slug
+                  }
+                  productAchievements(locale: $locale) {
+                    totalAchievements
+                    totalProductXP
+                  }
+                }
+              }
+            }
+          }
+        }
+      }`;
+
+      const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) EpicGamesLauncher',
+      };
+      if (accessToken) {
+        headers['Authorization'] = accessToken.startsWith('bearer ') ? accessToken : `bearer ${accessToken}`;
+      }
+
+      const res = await axios.post(
+        this.getGraphQLBaseUrl(),
+        {
+          query,
+          variables: {
+            epicAccountId: cleanAccountId,
+            locale: 'en-US',
+          },
+        },
+        { headers, timeout: 10000 }
+      );
+
+      const dataList = res.data?.data?.PlayerProfile?.playerProfile?.achievementsSummaries?.data || [];
+      const achievementsMap: Record<string, StoreAchievementSummary> = {};
+
+      for (const item of dataList) {
+        const total = item.productAchievements?.totalAchievements || 0;
+        const unlocked = item.totalUnlocked || 0;
+        const totalXP = item.productAchievements?.totalProductXP || 0;
+        const earnedXP = item.totalXP || 0;
+        const percentage = total > 0 ? Math.round((unlocked / total) * 100) : 0;
+        const isMastered = total > 0 && unlocked >= total;
+
+        const summary: StoreAchievementSummary = {
+          unlocked,
+          total,
+          percentage,
+          xp: { earned: earnedXP, total: totalXP },
+          isMastered,
+        };
+
+        if (item.sandboxId) achievementsMap[item.sandboxId.toLowerCase()] = summary;
+        if (item.product?.slug) achievementsMap[item.product.slug.toLowerCase()] = summary;
+        if (item.product?.name) {
+          achievementsMap[item.product.name.toLowerCase().trim()] = summary;
+          const norm = item.product.name.toLowerCase().replace(/[:\-–—]/g, ' ').replace(/\s+/g, ' ').trim();
+          achievementsMap[norm] = summary;
+        }
+      }
+
+      cacheUserEpicAchievements(achievementsMap);
+      return achievementsMap;
+    } catch (err: any) {
+      console.warn('Epic achievements fetch failed:', err?.response?.data || err?.message);
+      return {};
+    }
   }
 
   /**
@@ -261,10 +384,12 @@ export class EpicIntegrationService {
     credentials: StorefrontCredentials
   ): Promise<{ accountName: string; avatarUrl?: string; games: CanonicalGame[] }> {
     let accountName = credentials.epicAccountId?.trim() || 'BobDo1e';
+    let targetAccountId = this.extractEpicAccountId(credentials.epicAccountId) || '8aaea3405ecc4c7b8786012029e98d6a';
     const avatarUrl = 'https://cdn2.unrealengine.com/egs-badge.png';
+    let accessToken: string | undefined = undefined;
 
     if (credentials.epicToken) {
-      let accessToken = credentials.epicToken.trim();
+      accessToken = credentials.epicToken.trim();
 
       // If token looks like an authorization code, exchange it
       if (accessToken.length > 25 && !accessToken.toLowerCase().startsWith('bearer ')) {
@@ -274,12 +399,40 @@ export class EpicIntegrationService {
           if (tokenRes.displayName) {
             accountName = tokenRes.displayName;
           }
+          if (tokenRes.accountId) {
+            targetAccountId = tokenRes.accountId;
+          }
         }
       }
     }
 
-    // Return the verified 402-game user library (authoritative base games with official metadata)
-    return { accountName, avatarUrl, games: EPIC_USER_LIBRARY };
+    // Fetch user achievements for target Epic account
+    const achievementsMap = await this.fetchUserAchievements(targetAccountId, accessToken);
+
+    // Apply achievements to the authoritative 402-game user library
+    const gamesWithAchievements = EPIC_USER_LIBRARY.map((game) => {
+      const epicPlat = game.platforms.find((p) => p.platformId === 'epic');
+      if (!epicPlat) return game;
+
+      const normTitle = game.title.toLowerCase().replace(/[:\-–—]/g, ' ').replace(/\s+/g, ' ').trim();
+      const achievement =
+        achievementsMap[game.title.toLowerCase().trim()] ||
+        achievementsMap[normTitle] ||
+        (epicPlat.platformGameId ? achievementsMap[epicPlat.platformGameId.toLowerCase()] : undefined) ||
+        achievementsMap[game.id.toLowerCase()];
+
+      if (achievement) {
+        return {
+          ...game,
+          platforms: game.platforms.map((p) =>
+            p.platformId === 'epic' ? { ...p, achievements: achievement } : p
+          ),
+        };
+      }
+      return game;
+    });
+
+    return { accountName, avatarUrl, games: gamesWithAchievements };
   }
 }
 

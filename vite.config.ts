@@ -137,6 +137,14 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/epic-content/, ''),
       },
+      '/api/epic-graphql': {
+        target: 'https://launcher.store.epicgames.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/epic-graphql/, ''),
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) EpicGamesLauncher',
+        },
+      },
       '/api/gog-product': {
         target: 'https://api.gog.com',
         changeOrigin: true,

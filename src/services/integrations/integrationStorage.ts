@@ -233,7 +233,21 @@ export function mergeStorefrontGames(
       const existing = merged[existingIndex];
       const hasPlatform = existing.platforms.some((p) => p.platformId === storefrontId);
       const updatedPlatforms = hasPlatform
-        ? existing.platforms
+        ? existing.platforms.map((p) =>
+            p.platformId === storefrontId
+              ? {
+                  ...p,
+                  platformGameId: platformOwnership.platformGameId || p.platformGameId,
+                  installed: platformOwnership.installed ?? p.installed,
+                  playtimeMinutes:
+                    platformOwnership.playtimeMinutes !== undefined && platformOwnership.playtimeMinutes > 0
+                      ? platformOwnership.playtimeMinutes
+                      : p.playtimeMinutes,
+                  lastPlayed: platformOwnership.lastPlayed || p.lastPlayed,
+                  achievements: platformOwnership.achievements || p.achievements,
+                }
+              : p
+          )
         : [...existing.platforms, platformOwnership];
 
       merged[existingIndex] = {
@@ -359,18 +373,24 @@ export async function connectGogIntegration(
 export async function connectEpicIntegration(
   credentials: StorefrontCredentials
 ): Promise<{ integration: StorefrontIntegration; games: CanonicalGame[] }> {
-  const { accountName, avatarUrl, games: epicGames } = await epicIntegration.connectAccount(credentials);
+  const cleanAccountId = epicIntegration.extractEpicAccountId(credentials.epicAccountId);
+  const normalizedCredentials = {
+    ...credentials,
+    epicAccountId: cleanAccountId || credentials.epicAccountId,
+  };
+  const { accountName, avatarUrl, games: epicGames } = await epicIntegration.connectAccount(normalizedCredentials);
 
   const integration: StorefrontIntegration = {
     storefrontId: 'epic',
     name: 'Epic Games Store',
     isConnected: true,
     accountName,
+    accountId: cleanAccountId || undefined,
     avatarUrl,
     gamesCount: epicGames.length,
     lastSyncedAt: new Date().toISOString(),
     authMethod: credentials.epicToken ? 'oauth' : 'public_profile',
-    credentials,
+    credentials: normalizedCredentials,
     statusMessage: `Connected as ${accountName} (${epicGames.length} Epic titles synced)`,
   };
 

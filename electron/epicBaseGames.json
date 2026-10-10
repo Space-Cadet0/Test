@@ -278,7 +278,17 @@
         "platformId": "epic",
         "platformGameId": "93f2a8c3547846eda966cb3c152a026e",
         "installed": false,
-        "playtimeMinutes": 0
+        "playtimeMinutes": 0,
+        "achievements": {
+          "unlocked": 59,
+          "total": 88,
+          "percentage": 67,
+          "xp": {
+            "earned": 830,
+            "total": 1360
+          },
+          "isMastered": false
+        }
       }
     ],
     "headerImage": "https://cdn1.epicgames.com/item/c4763f236d08423eb47b4c3008779c84/EGS_AlanWake2_RemedyEntertainment_S1_2560x1440-ec44404c0b41bc457cb94cd72cf85872",

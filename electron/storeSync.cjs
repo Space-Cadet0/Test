@@ -584,6 +584,99 @@ try {
 }
 
 /**
+ * Fetch Epic Games Player Achievements from official launcher GraphQL service
+ */
+async function fetchEpicAchievements(accessToken, accountId) {
+  if (!accountId) return {};
+  try {
+    const query = `query playerProfile($epicAccountId: String!, $locale: String!) {
+      PlayerProfile {
+        playerProfile(epicAccountId: $epicAccountId) {
+          epicAccountId
+          displayName
+          achievementsSummaries {
+            ... on PlayerAchievementResponseSuccess {
+              data {
+                totalUnlocked
+                totalXP
+                sandboxId
+                product(locale: $locale) {
+                  name
+                  slug
+                }
+                productAchievements(locale: $locale) {
+                  totalAchievements
+                  totalProductXP
+                }
+              }
+            }
+          }
+        }
+      }
+    }`;
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) EpicGamesLauncher',
+    };
+    if (accessToken) {
+      headers['Authorization'] = accessToken.startsWith('bearer ') ? accessToken : `bearer ${accessToken}`;
+    }
+
+    const res = await fetch('https://launcher.store.epicgames.com/graphql', {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        query,
+        variables: {
+          epicAccountId: accountId,
+          locale: 'en-US',
+        },
+      }),
+    });
+
+    if (!res.ok) {
+      console.warn(`Epic achievements query returned status ${res.status}`);
+      return {};
+    }
+
+    const json = await res.json();
+    const dataList = json?.data?.PlayerProfile?.playerProfile?.achievementsSummaries?.data || [];
+    const achievementsMap = {};
+
+    for (const item of dataList) {
+      const total = item.productAchievements?.totalAchievements || 0;
+      const unlocked = item.totalUnlocked || 0;
+      const totalXP = item.productAchievements?.totalProductXP || 0;
+      const earnedXP = item.totalXP || 0;
+      const percentage = total > 0 ? Math.round((unlocked / total) * 100) : 0;
+      const isMastered = total > 0 && unlocked >= total;
+
+      const summary = {
+        unlocked,
+        total,
+        percentage,
+        xp: { earned: earnedXP, total: totalXP },
+        isMastered,
+      };
+
+      if (item.sandboxId) achievementsMap[item.sandboxId.toLowerCase()] = summary;
+      if (item.product?.slug) achievementsMap[item.product.slug.toLowerCase()] = summary;
+      if (item.product?.name) {
+        achievementsMap[item.product.name.toLowerCase().trim()] = summary;
+        const norm = item.product.name.toLowerCase().replace(/[:\-–—]/g, ' ').replace(/\s+/g, ' ').trim();
+        achievementsMap[norm] = summary;
+      }
+    }
+
+    return achievementsMap;
+  } catch (err) {
+    console.warn('Epic achievements fetch warning:', err.message);
+    return {};
+  }
+}
+
+/**
  * Fetch Epic Games Owned Library & Playtime
  */
 async function fetchEpicOwnedGames(accessToken, accountId) {
@@ -619,12 +712,27 @@ async function fetchEpicOwnedGames(accessToken, accountId) {
     }
   }
 
-  // If authoritative base games catalog is available, return verified base games with live playtime
+  // 2. Fetch live achievements from Epic launcher GraphQL
+  let achievementsMap = {};
+  if (accountId) {
+    achievementsMap = await fetchEpicAchievements(accessToken, accountId);
+  }
+
+  // If authoritative base games catalog is available, return verified base games with live playtime & achievements
   if (EPIC_BASE_GAMES && EPIC_BASE_GAMES.length > 0) {
     return EPIC_BASE_GAMES.map((baseGame) => {
       const epicPlat = baseGame.platforms.find((p) => p.platformId === 'epic');
       const gameId = epicPlat?.platformGameId;
       const pt = (gameId ? (playtimeMap.get(gameId) || playtimeMap.get(gameId.toLowerCase())) : null) || {};
+
+      const titleLower = baseGame.title.toLowerCase().trim();
+      const normTitle = baseGame.title.toLowerCase().replace(/[:\-–—]/g, ' ').replace(/\s+/g, ' ').trim();
+      const gameAch =
+        achievementsMap[titleLower] ||
+        achievementsMap[normTitle] ||
+        (gameId ? achievementsMap[gameId.toLowerCase()] : null) ||
+        achievementsMap[baseGame.id.toLowerCase()];
+
       return {
         ...baseGame,
         platforms: baseGame.platforms.map((p) =>
@@ -633,6 +741,7 @@ async function fetchEpicOwnedGames(accessToken, accountId) {
                 ...p,
                 playtimeMinutes: pt.totalTime !== undefined ? pt.totalTime : p.playtimeMinutes,
                 lastPlayed: pt.lastPlayed || p.lastPlayed,
+                achievements: gameAch || p.achievements,
               }
             : p
         ),
@@ -846,6 +955,7 @@ module.exports = {
   exchangeEpicCode,
   renewEpicTokens,
   fetchEpicOwnedGames,
+  fetchEpicAchievements,
   loadSavedTokens,
   saveTokens,
 };
