@@ -30,6 +30,7 @@ export function mergeScannedSteamGames(existingGames: CanonicalGame[]): Canonica
               playtimeMinutes: Math.max(p.playtimeMinutes || 0, scannedSteam.playtimeMinutes || 0),
               lastPlayed: scannedSteam.lastPlayed || p.lastPlayed,
               installed: p.installed || scannedSteam.installed,
+              achievements: scannedSteam.achievements || p.achievements,
             };
           }
         }

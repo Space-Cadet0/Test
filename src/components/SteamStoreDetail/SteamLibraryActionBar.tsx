@@ -21,30 +21,12 @@ import {
 } from 'lucide-react';
 import { getOpenCriticData, getTierColor } from '../../services/opencritic/openCritic';
 import { parseTimestampMs, formatLastPlayedDate, formatPlaytime } from '../../utils/dateUtils';
-import { getKnownAchievementTotal, getKnownEpicAchievements } from '../../services/storage/knownGameAchievements';
+import {
+  getKnownAchievementTotal,
+  getKnownEpicAchievements,
+  getKnownSteamAchievements,
+} from '../../services/storage/knownGameAchievements';
 import { ActiveGameFilter } from '../../contracts/filter';
-
-interface SteamLibraryActionBarProps {
-  game: CanonicalGame;
-  metadata?: SteamEnrichedMetadata | null;
-  onManageCollections?: () => void;
-  onToggleInstallStatus?: () => void;
-  onApplyFilter?: (filter: ActiveGameFilter) => void;
-}
-
-// User-specific known achievements from ~/Library/Application Support/Steam/userdata/284583470/config/librarycache/achievement_progress.json
-const KNOWN_USER_ACHIEVEMENTS: Record<number, { unlocked: number; total: number; percentage: number }> = {
-  228280: { unlocked: 34, total: 129, percentage: 26.4 },
-  257350: { unlocked: 47, total: 93, percentage: 50.5 },
-  1086940: { unlocked: 28, total: 54, percentage: 51.8 },
-  1091500: { unlocked: 32, total: 44, percentage: 72.7 },
-  292030: { unlocked: 48, total: 78, percentage: 61.5 },
-  400: { unlocked: 15, total: 15, percentage: 100 },
-  620: { unlocked: 38, total: 51, percentage: 74.5 },
-  374320: { unlocked: 26, total: 43, percentage: 60.5 },
-  814380: { unlocked: 22, total: 34, percentage: 64.7 },
-  782330: { unlocked: 24, total: 33, percentage: 72.7 },
-};
 
 // Known install sizes for popular games
 const KNOWN_INSTALL_SIZES: Record<number, string> = {
@@ -84,6 +66,14 @@ const KNOWN_INSTALL_SIZES: Record<number, string> = {
   1151640: '67 GB',
   268500: '45 GB',
 };
+
+interface SteamLibraryActionBarProps {
+  game: CanonicalGame;
+  metadata?: SteamEnrichedMetadata | null;
+  onManageCollections?: () => void;
+  onToggleInstallStatus?: () => void;
+  onApplyFilter?: (filter: ActiveGameFilter) => void;
+}
 
 export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
   game,
@@ -147,9 +137,11 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
   // Multi-store achievements evaluation
   const targetSteamAppId = game.steamAppId || metadata?.appId;
   const knownTotal = getKnownAchievementTotal(targetSteamAppId, game.id, game.title);
+  const steamData = targetSteamAppId ? getKnownSteamAchievements(targetSteamAppId, game.title) : undefined;
 
-  // If metadata has achievement count, it takes highest precedence; next knownTotal from registry
+  // If verified Steam client data or metadata has achievement count, it takes precedence
   const effectiveTotal =
+    steamData?.total ??
     metadata?.achievements?.total ??
     knownTotal ??
     (metadata && !metadata.categories?.some((c) => c.id === 22) ? 0 : 0);
@@ -186,8 +178,13 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
     let unlocked = 0;
     let customXp: { earned: number; total: number } | undefined = undefined;
 
-    if (p.platformId === 'steam' && targetSteamAppId && KNOWN_USER_ACHIEVEMENTS[targetSteamAppId]) {
-      unlocked = Math.min(platTotal, KNOWN_USER_ACHIEVEMENTS[targetSteamAppId].unlocked);
+    if (p.platformId === 'steam' && targetSteamAppId) {
+      if (steamData) {
+        unlocked = steamData.unlocked;
+        if (steamData.total > 0) {
+          platTotal = steamData.total;
+        }
+      }
     } else if (p.platformId === 'gog') {
       if (targetSteamAppId === 292030) {
         // Witcher 3 on GOG verified user progress

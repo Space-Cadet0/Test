@@ -418,6 +418,84 @@ ipcMain.handle('scan:steam-installed', async () => {
 });
 
 /**
+ * Native Scanner for Steam achievements directly from local Steam client userdata
+ */
+ipcMain.handle('scan:steam-achievements', async () => {
+  try {
+    const home = os.homedir();
+    const steamUserDirs = [
+      path.join(home, 'Library/Application Support/Steam/userdata'),
+      path.join(home, '.local/share/Steam/userdata'),
+      path.join(home, '.steam/steam/userdata'),
+      'C:\\Program Files (x86)\\Steam\\userdata',
+    ];
+
+    const achievements = {};
+
+    for (const base of steamUserDirs) {
+      if (!fs.existsSync(base)) continue;
+      try {
+        const userFolders = fs.readdirSync(base);
+        for (const u of userFolders) {
+          const lcDir = path.join(base, u, 'config/librarycache');
+          if (!fs.existsSync(lcDir)) continue;
+
+          // 1. Check achievement_progress.json
+          const progressFile = path.join(lcDir, 'achievement_progress.json');
+          if (fs.existsSync(progressFile)) {
+            try {
+              const raw = JSON.parse(fs.readFileSync(progressFile, 'utf8'));
+              if (Array.isArray(raw.mapCache)) {
+                for (const [appId, data] of raw.mapCache) {
+                  if (data && typeof data.unlocked === 'number' && typeof data.total === 'number') {
+                    achievements[appId] = {
+                      unlocked: data.unlocked,
+                      total: data.total,
+                      percentage: data.total > 0 ? Math.round((data.unlocked / data.total) * 100) : 0,
+                    };
+                  }
+                }
+              }
+            } catch {}
+          }
+
+          // 2. Scan all <appId>.json in librarycache
+          const files = fs.readdirSync(lcDir);
+          for (const file of files) {
+            const m = file.match(/^(\d+)\.json$/);
+            if (!m) continue;
+            const appId = parseInt(m[1], 10);
+            try {
+              const content = fs.readFileSync(path.join(lcDir, file), 'utf8');
+              const achMatch = content.match(/"achievements"\s*,\s*\{[\s\S]*?"data"\s*:\s*\{([\s\S]*?)\}\s*\}\]/);
+              const dataBlock = achMatch ? achMatch[1] : content;
+              const mTotal = dataBlock.match(/"nTotal"\s*:\s*(\d+)/);
+              const mAchieved = dataBlock.match(/"nAchieved"\s*:\s*(\d+)/);
+              if (mTotal || mAchieved) {
+                const total = mTotal ? parseInt(mTotal[1], 10) : 0;
+                const unlocked = mAchieved ? parseInt(mAchieved[1], 10) : 0;
+                if (total > 0 || unlocked > 0) {
+                  if (!achievements[appId] || unlocked >= achievements[appId].unlocked) {
+                    achievements[appId] = {
+                      unlocked,
+                      total: total > 0 ? total : (achievements[appId]?.total || unlocked),
+                      percentage: total > 0 ? Math.round((unlocked / total) * 100) : 0,
+                    };
+                  }
+                }
+              }
+            } catch {}
+          }
+        }
+      } catch {}
+    }
+    return { success: true, achievements };
+  } catch (err) {
+    return { success: false, error: err.message, achievements: {} };
+  }
+});
+
+/**
  * Open URL in user's default external browser (e.g. YouTube trailers)
  */
 ipcMain.handle('shell:open-external', async (_event, url) => {

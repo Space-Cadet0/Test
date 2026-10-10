@@ -12,6 +12,12 @@ export const USER_SCANNED_STEAM_GAMES: CanonicalGame[] = [
         platformGameId: '1091500',
         installed: false,
         playtimeMinutes: 12452,
+        achievements: {
+          unlocked: 57,
+          total: 57,
+          percentage: 100,
+          isMastered: true,
+        },
       }
     ],
     headerImage: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/e9047d8ec47ae3d94bb8b464fb0fc9e9972b4ac7/header.jpg?t=1784714077",
@@ -264,6 +270,12 @@ export const USER_SCANNED_STEAM_GAMES: CanonicalGame[] = [
         platformGameId: '1903340',
         installed: false,
         playtimeMinutes: 3882,
+        achievements: {
+          unlocked: 55,
+          total: 55,
+          percentage: 100,
+          isMastered: true,
+        },
       }
     ],
     headerImage: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1903340/be3305b02d4db0dffa3458537118423bf2792d7e/header.jpg?t=1782830877",

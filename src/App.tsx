@@ -4,7 +4,8 @@ import { StorefrontId } from './contracts/platform';
 import { GameCollection } from './contracts/collection';
 import { mergeScannedSteamGames } from './services/storage/librarySync';
 import { loadCollections, saveCollections } from './services/storage/collectionStorage';
-import { scanLocalInstalledGames } from './services/system/localSystemScanner';
+import { scanLocalInstalledGames, scanLocalSteamAchievements } from './services/system/localSystemScanner';
+import { cacheUserSteamAchievements } from './services/storage/knownGameAchievements';
 import { TopNavBar } from './components/Navigation/TopNavBar';
 import { LibrarySidebar } from './components/Library/LibrarySidebar';
 import { SteamStorePage } from './components/SteamStoreDetail/SteamStorePage';
@@ -265,6 +266,15 @@ export function App() {
   // Synchronize installed game status against the workstation's actual file system
   useEffect(() => {
     async function syncLocalInstallations() {
+      try {
+        const steamAchs = await scanLocalSteamAchievements();
+        if (steamAchs && Object.keys(steamAchs).length > 0) {
+          cacheUserSteamAchievements(steamAchs);
+        }
+      } catch (e) {
+        console.warn('Steam achievements local scan failed:', e);
+      }
+
       const scanResult = await scanLocalInstalledGames();
       if (!scanResult) return;
       const installedSteamAppIds = new Set(scanResult.installedSteamAppIds);
@@ -396,6 +406,14 @@ export function App() {
       let currentCatalog = games;
       const initialCount = currentCatalog.length;
 
+      // 0. Steam local achievements sync
+      try {
+        const steamAchs = await scanLocalSteamAchievements();
+        if (steamAchs && Object.keys(steamAchs).length > 0) {
+          cacheUserSteamAchievements(steamAchs);
+        }
+      } catch {}
+
       // 1. Steam sync
       const steamInteg = integrations.find((i) => i.storefrontId === 'steam' && i.isConnected);
       if (steamInteg?.credentials?.steamId) {
@@ -512,6 +530,13 @@ export function App() {
     setSyncNotice(`Syncing ${selectedGame.title} from Steam...`);
 
     try {
+      try {
+        const steamAchs = await scanLocalSteamAchievements();
+        if (steamAchs && Object.keys(steamAchs).length > 0) {
+          cacheUserSteamAchievements(steamAchs);
+        }
+      } catch {}
+
       const refreshed = await steamApi.fetchGameMetadata(targetAppId);
       if (refreshed) {
         setGames((prevGames) => {
