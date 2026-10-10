@@ -21,6 +21,7 @@ import {
 } from './services/integrations/integrationStorage';
 import { steamIntegration } from './services/integrations/steamIntegration';
 import { steamMatcher } from './services/steam/steamMatcher';
+import { steamApi } from './services/steam/steamApi';
 import { sanitizeGameCatalog } from './services/integrations/catalogSanitizer';
 import { GOG_USER_LIBRARY, EPIC_USER_LIBRARY } from './services/storage/storefrontLibraries';
 import {
@@ -231,6 +232,8 @@ export function App() {
   const [selectedPlatform, setSelectedPlatform] = useState<StorefrontId | 'all'>('all');
   const [installedOnly, setInstalledOnly] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
+  const [isSyncingCurrentGame, setIsSyncingCurrentGame] = useState(false);
+  const [gameRefreshKey, setGameRefreshKey] = useState(0);
   const [syncNotice, setSyncNotice] = useState<string | null>(null);
 
   // Collections state
@@ -491,6 +494,63 @@ export function App() {
     }
   };
 
+  // Check if syncing the currently viewed game from Steam is applicable
+  const canSyncCurrentGame = useMemo(() => {
+    if (isGridView || !selectedGame) return false;
+    if (selectedGame.steamAppId) return true;
+    const matched = steamMatcher.matchGameToSteamInstant(selectedGame.title);
+    return Boolean(matched);
+  }, [isGridView, selectedGame]);
+
+  // Synchronize official Steam metadata, achievements, and media for the current game
+  const handleSyncCurrentGame = async () => {
+    if (!selectedGame || isSyncingCurrentGame) return;
+    const targetAppId = selectedGame.steamAppId || steamMatcher.matchGameToSteamInstant(selectedGame.title);
+    if (!targetAppId) return;
+
+    setIsSyncingCurrentGame(true);
+    setSyncNotice(`Syncing ${selectedGame.title} from Steam...`);
+
+    try {
+      const refreshed = await steamApi.fetchGameMetadata(targetAppId);
+      if (refreshed) {
+        setGames((prevGames) => {
+          const updated = prevGames.map((g) => {
+            if (g.id === selectedGame.id) {
+              return {
+                ...g,
+                steamAppId: targetAppId,
+                enrichedMetadata: refreshed,
+                headerImage: refreshed.headerImage || g.headerImage,
+                capsuleImage: refreshed.capsuleImage || g.capsuleImage,
+                shortDescription: refreshed.shortDescription || g.shortDescription,
+                developers: refreshed.developers?.length ? refreshed.developers : g.developers,
+                publishers: refreshed.publishers?.length ? refreshed.publishers : g.publishers,
+                genres: refreshed.genres?.length ? refreshed.genres : g.genres,
+                tags: refreshed.tags?.length ? refreshed.tags : g.tags,
+                reviewSummary: refreshed.reviewSummary || g.reviewSummary,
+              };
+            }
+            return g;
+          });
+          try {
+            saveCurrentCatalog(updated);
+          } catch {}
+          return updated;
+        });
+        setGameRefreshKey((prev) => prev + 1);
+        setSyncNotice(`Successfully synced ${selectedGame.title} from Steam!`);
+      } else {
+        setSyncNotice(`No new updates found on Steam for ${selectedGame.title}.`);
+      }
+    } catch (err: any) {
+      setSyncNotice(`Steam sync notice: ${err?.message || 'Error syncing game'}`);
+    } finally {
+      setIsSyncingCurrentGame(false);
+      setTimeout(() => setSyncNotice(null), 5000);
+    }
+  };
+
   // Collection Management Handlers
   const handleOpenManageCollections = (game?: CanonicalGame) => {
     setCollectionModalGame(game || null);
@@ -558,6 +618,10 @@ export function App() {
         onGoForward={goForward}
         forwardTitle={forwardTitle}
         connectedStorefronts={connectedStorefronts}
+        currentGameTitle={!isGridView && selectedGame ? selectedGame.title : undefined}
+        canSyncCurrentGame={canSyncCurrentGame}
+        isSyncingCurrentGame={isSyncingCurrentGame}
+        onSyncCurrentGame={handleSyncCurrentGame}
       />
 
       {/* Sync Status Banner */}
@@ -650,7 +714,7 @@ export function App() {
             />
           ) : (
             <SteamStorePage
-              key={selectedGame.id}
+              key={`${selectedGame.id}-${gameRefreshKey}`}
               game={selectedGame}
               parentGroupName={
                 activeFilter

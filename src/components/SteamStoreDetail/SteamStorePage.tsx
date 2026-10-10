@@ -16,10 +16,8 @@ import { SteamLanguagesTable } from './SteamLanguagesTable';
 import { SteamFeaturesList } from './SteamFeaturesList';
 import { SteamSidebarNotices } from './SteamSidebarNotices';
 import {
-  ExternalLink,
   Sparkles,
   ArrowLeft,
-  RefreshCw,
 } from 'lucide-react';
 import { ActiveGameFilter } from '../../contracts/filter';
 
@@ -45,9 +43,7 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
     game.enrichedMetadata || null
   );
   const [currentSteamAppId, setCurrentSteamAppId] = useState<number | undefined>(game.steamAppId);
-  const [isNonSteamExclusive, setIsNonSteamExclusive] = useState(false);
   const [isLoading, setIsLoading] = useState(!game.enrichedMetadata);
-  const [isRefreshing, setIsRefreshing] = useState(false);
   const isCooldown = steamApi.isStoreRateLimited();
 
 
@@ -91,7 +87,6 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
         if (isMounted) {
           if (liveData) {
             setMetadata(liveData);
-            setIsNonSteamExclusive(false);
           } else {
             const fallbackData = await fallbackMetadataProvider.getEnrichedMetadataForNonSteamGame(game);
             if (isMounted) setMetadata(fallbackData);
@@ -99,7 +94,6 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
         }
       } else {
         // Game does not exist on Steam (e.g. Total Annihilation: Kingdoms, Alan Wake 2, store exclusive)
-        if (isMounted) setIsNonSteamExclusive(true);
         const fallbackData = await fallbackMetadataProvider.getEnrichedMetadataForNonSteamGame(game);
         if (isMounted && fallbackData) {
           setMetadata(fallbackData);
@@ -111,24 +105,12 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
 
     setMetadata(game.enrichedMetadata || null);
     setCurrentSteamAppId(game.steamAppId);
-    setIsNonSteamExclusive(!game.steamAppId);
     loadData();
 
     return () => {
       isMounted = false;
     };
   }, [game]);
-
-  const handleRefreshFromSteam = async () => {
-    const targetAppId = currentSteamAppId || game.steamAppId;
-    if (!targetAppId || steamApi.isStoreRateLimited()) return;
-    setIsRefreshing(true);
-    const refreshed = await steamApi.fetchGameMetadata(targetAppId);
-    if (refreshed) {
-      setMetadata(refreshed);
-    }
-    setIsRefreshing(false);
-  };
 
   const screenshots = metadata?.screenshots || [];
   const movies = metadata?.movies || [];
@@ -162,7 +144,7 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
       />
 
       <div className="relative max-w-6xl mx-auto px-4 md:px-8 pt-6 space-y-6">
-        {/* Navigation Breadcrumb & Actions Bar */}
+        {/* Navigation Breadcrumb */}
         <div className="flex items-center justify-between border-b border-steam-border/40 pb-4">
           <div className="flex items-center gap-2 text-xs text-steam-subtext">
             <button
@@ -175,52 +157,6 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
             </button>
             <span>&gt;</span>
             <span className="text-white font-semibold truncate max-w-md">{game.title}</span>
-          </div>
-
-          <div className="flex items-center gap-3">
-            {(currentSteamAppId || game.steamAppId) && (
-              <button
-                onClick={handleRefreshFromSteam}
-                disabled={isRefreshing}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs text-steam-text hover:text-white bg-steam-card border border-steam-border rounded transition-colors disabled:opacity-50"
-                title="Re-scrape latest media & reviews from Steam"
-              >
-                <RefreshCw className={`w-3.5 h-3.5 ${isRefreshing ? 'animate-spin text-steam-accent' : ''}`} />
-                <span>{isRefreshing ? 'Syncing Steam...' : 'Sync from Steam'}</span>
-              </button>
-            )}
-
-            {(currentSteamAppId || game.steamAppId) ? (
-              <a
-                href={`https://store.steampowered.com/app/${currentSteamAppId || game.steamAppId}/`}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs text-steam-subtext hover:text-steam-accent bg-steam-card border border-steam-border rounded transition-colors"
-              >
-                <span>View on Steam</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
-            ) : game.platforms.some((p) => p.platformId === 'gog') ? (
-              <a
-                href={
-                  game.platforms.find((p) => p.platformId === 'gog')?.platformGameId
-                    ? `https://www.gog.com/en/game/${game.title.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '')}`
-                    : 'https://www.gog.com'
-                }
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs text-purple-300 hover:text-white bg-purple-950/40 border border-purple-800/60 rounded transition-colors"
-                title="View on GOG.com storefront"
-              >
-                <span>View on GOG.com</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
-            ) : (
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-medium text-amber-300 bg-amber-950/40 border border-amber-800/60 rounded">
-                <Sparkles className="w-3 h-3 text-amber-400" />
-                <span>{isNonSteamExclusive ? 'Store Exclusive (Direct Media)' : 'Direct Store Listing'}</span>
-              </span>
-            )}
           </div>
         </div>
 
@@ -244,7 +180,12 @@ export const SteamStorePage: React.FC<SteamStorePageProps> = ({
               <span className="text-xs uppercase tracking-wider text-steam-subtext font-semibold">
                 Owned on:
               </span>
-              <PlatformBadges platforms={game.platforms} size="md" />
+              <PlatformBadges
+                platforms={game.platforms}
+                game={game}
+                steamAppId={currentSteamAppId || game.steamAppId}
+                size="md"
+              />
             </div>
           </div>
         </div>

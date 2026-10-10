@@ -30,6 +30,10 @@ interface TopNavBarProps {
   onGoForward?: () => void;
   forwardTitle?: string | null;
   connectedStorefronts?: StorefrontId[];
+  currentGameTitle?: string;
+  canSyncCurrentGame?: boolean;
+  isSyncingCurrentGame?: boolean;
+  onSyncCurrentGame?: () => void;
 }
 
 export const TopNavBar: React.FC<TopNavBarProps> = ({
@@ -49,6 +53,10 @@ export const TopNavBar: React.FC<TopNavBarProps> = ({
   onGoForward,
   forwardTitle,
   connectedStorefronts,
+  currentGameTitle,
+  canSyncCurrentGame = false,
+  isSyncingCurrentGame = false,
+  onSyncCurrentGame,
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
@@ -184,6 +192,41 @@ export const TopNavBar: React.FC<TopNavBarProps> = ({
                     <span className="text-[10px] text-steam-accent font-semibold">Active</span>
                   )}
                 </button>
+
+                {/* Sync Current Game from Steam (Visible only when applicable) */}
+                {canSyncCurrentGame && onSyncCurrentGame && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      onSyncCurrentGame();
+                    }}
+                    disabled={isSyncingCurrentGame}
+                    className="w-full flex items-center justify-between px-3.5 py-2.5 text-xs text-steam-text hover:text-white hover:bg-[#1f2c3d] transition-colors text-left cursor-pointer disabled:opacity-50 group border-t border-steam-border/40"
+                    title={`Re-sync ${currentGameTitle || 'current game'} from Steam`}
+                  >
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <RefreshCw
+                        className={`w-4 h-4 shrink-0 ${
+                          isSyncingCurrentGame
+                            ? 'animate-spin text-steam-accent'
+                            : 'text-sky-400 group-hover:rotate-45 transition-transform'
+                        }`}
+                      />
+                      <div className="flex flex-col min-w-0">
+                        <span className="font-semibold text-white truncate">
+                          {isSyncingCurrentGame ? 'Syncing Steam...' : 'Sync from Steam'}
+                        </span>
+                        <span className="text-[10px] text-steam-subtext truncate">
+                          {currentGameTitle || 'Current game'}
+                        </span>
+                      </div>
+                    </div>
+                    {isSyncingCurrentGame && (
+                      <span className="text-[10px] text-steam-accent font-semibold ml-2 shrink-0">Active</span>
+                    )}
+                  </button>
+                )}
               </div>
             )}
           </div>

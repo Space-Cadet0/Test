@@ -55,7 +55,7 @@ export const GameCard: React.FC<GameCardProps> = ({ game, onSelect }) => {
 
         {/* Multi-Store Ownership Badges */}
         <div className="pt-2 border-t border-steam-border/40">
-          <PlatformBadges platforms={game.platforms} size="sm" />
+          <PlatformBadges platforms={game.platforms} game={game} size="sm" />
         </div>
       </div>
     </div>

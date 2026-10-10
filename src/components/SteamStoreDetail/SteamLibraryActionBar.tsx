@@ -333,7 +333,12 @@ export const SteamLibraryActionBar: React.FC<SteamLibraryActionBarProps> = ({
             </div>
             <div className="flex items-center gap-1.5 mt-1 whitespace-nowrap">
               <span className="text-[10px] font-bold uppercase tracking-wider text-[#8f98a0] whitespace-nowrap">Owned on:</span>
-              <PlatformBadges platforms={game.platforms} iconOnly />
+              <PlatformBadges
+                platforms={game.platforms}
+                game={game}
+                steamAppId={metadata?.appId || game.steamAppId}
+                iconOnly
+              />
             </div>
           </div>
         </div>
